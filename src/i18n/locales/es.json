@@ -315,7 +315,9 @@
       "shortPassword": "La contraseña debe tener al menos 6 caracteres",
       "loginFailed": "Error al iniciar sesión. Verifica tus credenciales",
       "invalidCredentials": "Correo o contraseña incorrectos",
-      "emailNotConfirmed": "Por favor, confirma tu correo electrónico"
+      "emailNotConfirmed": "Por favor, confirma tu correo electrónico",
+      "accountLocked": "Tu cuenta ha sido bloqueada temporalmente por {minutos} minutos después de {intentos} intentos fallidos. Por favor, espera antes de intentar nuevamente.",
+      "invalidCredentialsWithAttempts": "Correo o contraseña incorrectos. Te quedan {intentos} intentos antes de que tu cuenta sea bloqueada temporalmente."
     }
   },
   "resetPassword": {

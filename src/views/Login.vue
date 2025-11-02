@@ -21,6 +21,9 @@ const showPasswordResetSuccess = ref(false);
 onMounted(() => {
   console.log("🖼️ URL de imagen de fondo:", loginBg);
 
+  // Cargar datos de bloqueo
+  cargarDatosBloqueo();
+
   // Mostrar notificación si viene desde registro
   const registered = router.currentRoute.value.query.registered;
   if (registered === "true") {
@@ -79,6 +82,197 @@ const foundUserData = ref<any>(null);
 const isLoading = computed(() => authStore.loading);
 const errorMessage = ref("");
 
+// Sistema de bloqueo por intentos fallidos
+const INTENTOS_MAXIMOS = 3;
+const intentosFallidos = ref(0);
+const bloqueosAcumulados = ref(0);
+const estaBloqueado = ref(false);
+const tiempoRestanteBloqueo = ref(0);
+let intervaloTiempo: number | null = null;
+
+// Cargar datos de bloqueo desde localStorage y sessionStorage
+const cargarDatosBloqueo = () => {
+  // Intentar cargar desde localStorage primero
+  let datosGuardados = localStorage.getItem("loginBloqueo");
+  
+  // Si no hay en localStorage, intentar desde sessionStorage (navegador)
+  if (!datosGuardados) {
+    datosGuardados = sessionStorage.getItem("loginBloqueo");
+  }
+  
+  if (datosGuardados) {
+    const datos = JSON.parse(datosGuardados);
+    const ahora = Date.now();
+    
+    if (datos.tiempoDesbloqueo && ahora < datos.tiempoDesbloqueo) {
+      // Aún está bloqueado
+      estaBloqueado.value = true;
+      intentosFallidos.value = datos.intentosFallidos || 0;
+      bloqueosAcumulados.value = datos.bloqueosAcumulados || 0;
+      tiempoRestanteBloqueo.value = Math.ceil((datos.tiempoDesbloqueo - ahora) / 1000);
+      iniciarContadorBloqueo();
+    } else {
+      // El bloqueo ya expiró
+      intentosFallidos.value = datos.intentosFallidos || 0;
+      bloqueosAcumulados.value = datos.bloqueosAcumulados || 0;
+    }
+  }
+};
+
+// Guardar datos de bloqueo en localStorage y sessionStorage
+const guardarDatosBloqueo = () => {
+  const datos = {
+    intentosFallidos: intentosFallidos.value,
+    bloqueosAcumulados: bloqueosAcumulados.value,
+    tiempoDesbloqueo: estaBloqueado.value ? Date.now() + (tiempoRestanteBloqueo.value * 1000) : null,
+    // Agregar identificador de navegador para rastreo
+    browserId: generarIdentificadorNavegador()
+  };
+  
+  const datosString = JSON.stringify(datos);
+  
+  // Guardar en ambos almacenamientos para mayor persistencia
+  localStorage.setItem("loginBloqueo", datosString);
+  sessionStorage.setItem("loginBloqueo", datosString);
+  
+  // También intentar guardar en cookies como respaldo
+  try {
+    document.cookie = `loginBloqueo=${encodeURIComponent(datosString)}; max-age=${60 * 60 * 24}; path=/; SameSite=Strict`;
+  } catch (e) {
+    console.warn("No se pudo guardar cookie de bloqueo");
+  }
+};
+
+// Generar un identificador único del navegador
+const generarIdentificadorNavegador = () => {
+  // Intentar obtener identificador existente
+  let browserId = localStorage.getItem("browserId") || sessionStorage.getItem("browserId");
+  
+  if (!browserId) {
+    // Crear identificador basado en características del navegador
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const txt = 'Portal Ciudadano Manta';
+    if (ctx) {
+      ctx.textBaseline = 'top';
+      ctx.font = '14px Arial';
+      ctx.fillText(txt, 2, 2);
+    }
+    
+    const fingerprint = [
+      navigator.userAgent,
+      navigator.language,
+      new Date().getTimezoneOffset(),
+      screen.width + 'x' + screen.height,
+      screen.colorDepth,
+      canvas.toDataURL()
+    ].join('|');
+    
+    // Generar hash simple
+    let hash = 0;
+    for (let i = 0; i < fingerprint.length; i++) {
+      const char = fingerprint.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash;
+    }
+    
+    browserId = 'browser_' + Math.abs(hash).toString(36);
+    
+    // Guardar en ambos almacenamientos
+    localStorage.setItem("browserId", browserId);
+    sessionStorage.setItem("browserId", browserId);
+  }
+  
+  return browserId;
+};
+
+// Iniciar contador de tiempo de bloqueo
+const iniciarContadorBloqueo = () => {
+  if (intervaloTiempo) clearInterval(intervaloTiempo);
+  
+  intervaloTiempo = setInterval(() => {
+    tiempoRestanteBloqueo.value--;
+    
+    if (tiempoRestanteBloqueo.value <= 0) {
+      desbloquearFormulario();
+    }
+  }, 1000);
+};
+
+// Desbloquear el formulario
+const desbloquearFormulario = () => {
+  estaBloqueado.value = false;
+  tiempoRestanteBloqueo.value = 0;
+  if (intervaloTiempo) {
+    clearInterval(intervaloTiempo);
+    intervaloTiempo = null;
+  }
+  guardarDatosBloqueo();
+};
+
+// Bloquear el formulario
+const bloquearFormulario = () => {
+  bloqueosAcumulados.value++;
+  const tiempoBloqueoMinutos = bloqueosAcumulados.value * 5;
+  tiempoRestanteBloqueo.value = tiempoBloqueoMinutos * 60;
+  estaBloqueado.value = true;
+  
+  errorMessage.value = t("login.errors.accountLocked", { 
+    minutos: tiempoBloqueoMinutos,
+    intentos: INTENTOS_MAXIMOS 
+  });
+  
+  guardarDatosBloqueo();
+  iniciarContadorBloqueo();
+};
+
+// Registrar intento fallido
+const registrarIntentoFallido = () => {
+  intentosFallidos.value++;
+  
+  if (intentosFallidos.value >= INTENTOS_MAXIMOS) {
+    intentosFallidos.value = 0;
+    bloquearFormulario();
+  } else {
+    const intentosRestantes = INTENTOS_MAXIMOS - intentosFallidos.value;
+    errorMessage.value = t("login.errors.invalidCredentialsWithAttempts", { 
+      intentos: intentosRestantes 
+    });
+  }
+  
+  guardarDatosBloqueo();
+};
+
+// Resetear intentos fallidos (al login exitoso)
+const resetearIntentos = () => {
+  intentosFallidos.value = 0;
+  bloqueosAcumulados.value = 0;
+  estaBloqueado.value = false;
+  tiempoRestanteBloqueo.value = 0;
+  if (intervaloTiempo) {
+    clearInterval(intervaloTiempo);
+    intervaloTiempo = null;
+  }
+  
+  // Limpiar todos los almacenamientos
+  localStorage.removeItem("loginBloqueo");
+  sessionStorage.removeItem("loginBloqueo");
+  
+  // Limpiar cookie
+  try {
+    document.cookie = "loginBloqueo=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  } catch (e) {
+    console.warn("No se pudo limpiar cookie de bloqueo");
+  }
+};
+
+// Formatear tiempo restante
+const tiempoFormateado = computed(() => {
+  const minutos = Math.floor(tiempoRestanteBloqueo.value / 60);
+  const segundos = tiempoRestanteBloqueo.value % 60;
+  return `${minutos}:${segundos.toString().padStart(2, '0')}`;
+});
+
 // Validación del formulario
 const validateEmail = (email: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -108,6 +302,15 @@ const validateForm = (): boolean => {
 const handleLogin = async () => {
   errorMessage.value = "";
 
+  // Verificar si está bloqueado
+  if (estaBloqueado.value) {
+    errorMessage.value = t("login.errors.accountLocked", { 
+      minutos: Math.ceil(bloqueosAcumulados.value * 5),
+      intentos: INTENTOS_MAXIMOS 
+    });
+    return;
+  }
+
   if (!validateForm()) {
     return;
   }
@@ -118,14 +321,13 @@ const handleLogin = async () => {
 
     // Validación de usuario y contraseña incorrectos
     if (result?.error) {
+      // Registrar intento fallido
+      registrarIntentoFallido();
+      
       if (result.error.message?.toLowerCase().includes("user")) {
-        errorMessage.value =
-          t("login.errors.invalidUser") || "Usuario incorrecto";
         return;
       }
       if (result.error.message?.toLowerCase().includes("password")) {
-        errorMessage.value =
-          t("login.errors.invalidPassword") || "Contraseña incorrecta";
         return;
       }
       if (result.error.message?.toLowerCase().includes("credentials")) {
@@ -160,6 +362,9 @@ const handleLogin = async () => {
 
     // Si el login es exitoso, verificar si es administrador
     if (authStore.isAuthenticated()) {
+      // Resetear intentos fallidos al login exitoso
+      resetearIntentos();
+      
       // Verificar si hay una ruta guardada para redirigir después del login
       const redirectPath = sessionStorage.getItem("redirectAfterLogin");
 
@@ -201,6 +406,9 @@ const handleLogin = async () => {
       }
     }
   } catch (error: any) {
+    // Registrar intento fallido
+    registrarIntentoFallido();
+    
     // Mostrar error amigable
     if (error.message?.toLowerCase().includes("user")) {
       errorMessage.value =
@@ -261,7 +469,7 @@ const searchUserByCedula = async () => {
     // Llamar a la función RPC de Supabase (más seguro que consulta directa)
     const { data, error } = await supabase.rpc("buscar_email_por_cedula", {
       cedula_input: cedula.value,
-    });
+    } as any) as { data: any[] | null; error: any };
 
     console.log("📊 Resultado de búsqueda:", { data, error });
 
@@ -511,6 +719,50 @@ const closeForgotPasswordModal = () => {
           </div>
         </div>
 
+        <!-- Mensaje de cuenta bloqueada -->
+        <div
+          v-if="estaBloqueado"
+          class="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg shadow-sm animate-fade-in"
+          role="alert"
+          aria-live="assertive"
+        >
+          <div class="flex items-start">
+            <div class="flex-shrink-0">
+              <svg
+                class="h-6 w-6 text-red-500"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                />
+              </svg>
+            </div>
+            <div class="ml-3 flex-1">
+              <h3 class="text-sm font-bold text-red-800 mb-2">
+                🔒 Cuenta Bloqueada Temporalmente
+              </h3>
+              <p class="text-sm text-red-700 leading-relaxed mb-2">
+                Has excedido el número máximo de intentos de inicio de sesión ({{ INTENTOS_MAXIMOS }} intentos).
+              </p>
+              <div class="bg-red-100 rounded-lg p-3 mb-2">
+                <p class="text-sm font-bold text-red-900">
+                  ⏱️ Tiempo restante: <span class="text-lg font-mono">{{ tiempoFormateado }}</span>
+                </p>
+              </div>
+              <p class="text-xs text-red-600">
+                Por tu seguridad, el formulario se ha bloqueado por {{ bloqueosAcumulados * 5 }} minutos.
+                Después de este tiempo, tendrás {{ INTENTOS_MAXIMOS }} intentos más.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <!-- Mensaje de error -->
         <div
           v-if="errorMessage"
@@ -553,10 +805,11 @@ const closeForgotPasswordModal = () => {
                 type="email"
                 autocomplete="email"
                 required
+                :disabled="estaBloqueado"
                 aria-required="true"
                 aria-labelledby="email-label"
                 aria-describedby="email-desc"
-                class="appearance-none block w-full pl-12 pr-4 py-3.5 border-2 border-gray-200 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 hover:border-gray-300"
+                class="appearance-none block w-full pl-12 pr-4 py-3.5 border-2 border-gray-200 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 hover:border-gray-300 disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                 :placeholder="t('login.emailPlaceholder')"
                 @input="clearError"
               />
@@ -590,10 +843,11 @@ const closeForgotPasswordModal = () => {
                 :type="showPassword ? 'text' : 'password'"
                 autocomplete="current-password"
                 required
+                :disabled="estaBloqueado"
                 aria-required="true"
                 aria-labelledby="password-label"
                 aria-describedby="password-desc"
-                class="appearance-none block w-full pl-12 pr-12 py-3.5 border-2 border-gray-200 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 hover:border-gray-300"
+                class="appearance-none block w-full pl-12 pr-12 py-3.5 border-2 border-gray-200 rounded-xl placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 hover:border-gray-300 disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                 :placeholder="t('login.passwordPlaceholder')"
                 @input="clearError"
               />
@@ -720,7 +974,7 @@ const closeForgotPasswordModal = () => {
         <div class="pt-2">
           <button
             type="submit"
-            :disabled="isLoading"
+            :disabled="isLoading || estaBloqueado"
             class="group relative w-full flex justify-center py-3.5 px-4 border border-transparent text-sm font-bold rounded-xl text-white bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 hover:from-blue-700 hover:via-blue-800 hover:to-indigo-800 focus:outline-none focus:ring-4 focus:ring-blue-500/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0"
           >
             <span v-if="!isLoading" class="flex items-center">

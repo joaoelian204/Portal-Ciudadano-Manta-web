@@ -311,7 +311,11 @@
       "emptyFields": "Please fill in all fields",
       "invalidEmail": "The email address is not valid",
       "shortPassword": "Password must be at least 6 characters",
-      "loginFailed": "Login failed. Check your credentials"
+      "loginFailed": "Login failed. Check your credentials",
+      "invalidCredentials": "Incorrect email or password",
+      "emailNotConfirmed": "Please confirm your email address",
+      "accountLocked": "Your account has been temporarily locked for {minutos} minutes after {intentos} failed attempts. Please wait before trying again.",
+      "invalidCredentialsWithAttempts": "Incorrect email or password. You have {intentos} attempts remaining before your account is temporarily locked."
     }
   },
   "resetPassword": {

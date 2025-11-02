@@ -319,7 +319,11 @@
       "emptyFields": "Ama hina kaspa, llapan sitiukunata hunt'achiy",
       "invalidEmail": "Correo electrónico mana allinchu",
       "shortPassword": "Yaykuna rima 6 qillqakunayuq kanan tiyan",
-      "loginFailed": "Manam atinichu yaykuyta. Qhaway credencialniykikunata"
+      "loginFailed": "Manam atinichu yaykuyta. Qhaway credencialniykikunata",
+      "invalidCredentials": "Correo icha yaykuna rima mana allinchu",
+      "emailNotConfirmed": "Ama hina kaspa, correo electrónicota takyachiy",
+      "accountLocked": "Cuentayki {minutos} minutukunapaq harkasqa kachkan {intentos} mana allin yaykunakuna qhipanpi. Ama hina kaspa, suyay musuqmanta kallpachanaykipaq.",
+      "invalidCredentialsWithAttempts": "Correo icha yaykuna rima mana allinchu. {intentos} yaykunakuna qipashanki cuentayki harkasqa kananpaq."
     }
   },
   "resetPassword": {
