@@ -1,7 +1,6 @@
 import type { User } from "@supabase/supabase-js";
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { conditionalStorage } from "../lib/storage";
 import { supabase } from "../lib/supabase";
 import type { Database } from "../types/database.types";
 
@@ -288,16 +287,14 @@ export const useAuthStore = defineStore("auth", () => {
   const login = async (
     email: string,
     password: string,
-    rememberMe: boolean = true
+    _rememberMe: boolean = true
   ) => {
     loading.value = true;
     error.value = null;
 
     try {
-      // Configurar el tipo de almacenamiento ANTES de iniciar sesión
-      // true = localStorage (permanente, persiste al cerrar navegador)
-      // false = sessionStorage (temporal, se borra al cerrar navegador)
-      conditionalStorage.setPersistence(rememberMe);
+      // Nota: _rememberMe se mantiene para compatibilidad con llamadas existentes
+      // Supabase maneja la persistencia automáticamente con persistSession en la configuración del cliente
 
       const { data, error: loginError } =
         await supabase.auth.signInWithPassword({
