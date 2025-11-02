@@ -1,0 +1,677 @@
+{
+  "navbar": {
+    "title": "Portal Ciudadano Manta",
+    "subtitle": "Sistema de Gestión Ciudadana",
+    "home": "Inicio",
+    "about": "Sobre Nosotros",
+    "login": "Iniciar Sesión",
+    "register": "Registrarse",
+    "accessibility": "Accesibilidad",
+    "dashboard": "Dashboard",
+    "adminPanel": "Panel Admin",
+    "profile": "Perfil",
+    "logout": "Cerrar sesión",
+    "tools": "Herramientas",
+    "toolsMenu": {
+      "report": "Reportar Problema",
+      "surveys": "Encuestas",
+      "news": "Noticias"
+    },
+    "breadcrumb": {
+      "home": "Inicio",
+      "login": "Inicio > Iniciar Sesión",
+      "register": "Inicio > Registrarse",
+      "services": "Inicio > Servicios",
+      "procedures": "Inicio > Trámites"
+    },
+    "quick": {
+      "report": "Reportar",
+      "surveys": "Encuestas",
+      "news": "Noticias"
+    },
+    "zoom": {
+      "title": "Zoom",
+      "increase": "Aumentar (Zoom +)",
+      "decrease": "Reducir (Zoom -)",
+      "reset": "Restablecer (100%)"
+    },
+    "shortcuts": {
+      "navigation": "Navegación",
+      "goHome": "Ir a Inicio",
+      "goLogin": "Ir a Login",
+      "goRegister": "Ir a Registro"
+    }
+  },
+  "home": {
+    "search": {
+      "placeholder": "Buscar servicios, trámites...",
+      "options": {
+        "report": {
+          "title": "Reportar Problema",
+          "description": "Informa sobre problemas en tu barrio"
+        },
+        "surveys": {
+          "title": "Encuestas",
+          "description": "Participa en encuestas ciudadanas"
+        },
+        "news": {
+          "title": "Noticias",
+          "description": "Lee las últimas noticias municipales"
+        },
+        "dashboard": {
+          "title": "Dashboard",
+          "description": "Panel principal del ciudadano"
+        },
+        "profile": {
+          "title": "Mi Perfil",
+          "description": "Administra tu información personal"
+        },
+        "about": {
+          "title": "Sobre Nosotros",
+          "description": "Conoce más sobre el portal"
+        },
+        "manageNews": {
+          "title": "Gestionar Noticias",
+          "description": "Crear, editar y publicar noticias"
+        },
+        "manageSurveys": {
+          "title": "Gestionar Encuestas",
+          "description": "Crear y administrar encuestas"
+        },
+        "adminPanel": {
+          "title": "Panel de Administración",
+          "description": "Acceso al panel principal de admin"
+        }
+      }
+    },
+    "hero": {
+      "title": "Portal Ciudadano Manta",
+      "titleWord1": "Portal",
+      "titleWord2": "Ciudadano",
+      "titleWord3": "Manta",
+      "subtitle": "Donde la participación ciudadana se encuentra con la mejora continua",
+      "subtitlePart1": "Donde la",
+      "subtitlePart2": "participación ciudadana",
+      "subtitlePart3": "se encuentra con la",
+      "subtitlePart4": "mejora continua",
+      "description": "Tu acceso digital a todos los servicios municipales, gestiona trámites y accede a información de forma rápida y segura"
+    },
+    "services": {
+      "title": "Nuestros Servicios",
+      "subtitle": "Accede a todos los servicios municipales en un solo lugar",
+      "card1": {
+        "title": "La Ayuda Llega a tu Barrio",
+        "description": "Conectamos directamente con las necesidades de cada sector de Manta, llevando soluciones eficaces y oportunas a donde más se necesitan"
+      },
+      "card2": {
+        "title": "Participación Activa",
+        "description": "Tu voz importa. Facilitamos espacios digitales para que cada ciudadano pueda expresar sus ideas y ser parte del cambio positivo"
+      },
+      "card3": {
+        "title": "Mejora Continua",
+        "description": "Trabajamos incansablemente para evolucionar y mejorar nuestros servicios, garantizando un Manta próspero para las futuras generaciones"
+      }
+    }
+  },
+  "about": {
+    "hero": {
+      "badge": "Portal Ciudadano Digital",
+      "title": "Tu Ventana Digital",
+      "subtitle": "Reporta problemas urbanos, participa en encuestas y consulta información municipal desde cualquier dispositivo",
+      "quote": "Tu voz digital para mejorar Manta",
+      "cta": "Conoce Más"
+    },
+    "location": {
+      "city": "Manta, Ecuador",
+      "subtitle": "Ciudad Puerto del Pacífico"
+    },
+    "banner": {
+      "title": "Portal Ciudadano Manta",
+      "description": "Una plataforma digital que conecta a los ciudadanos con su municipio. Reporta problemas urbanos, participa en encuestas ciudadanas y accede a información municipal desde cualquier lugar, en cualquier momento. Tu opinión importa y ahora es más fácil hacerla llegar.",
+      "badge1": "Reporta Problemas",
+      "badge2": "Encuestas Ciudadanas",
+      "badge3": "Info Municipal"
+    },
+    "mission": {
+      "title": "Nuestra Misión",
+      "description": "Conectar a los ciudadanos de Manta con su municipio a través de una plataforma digital intuitiva que permite reportar problemas urbanos, participar en encuestas y acceder a información municipal en tiempo real."
+    },
+    "features": {
+      "badge": "¿Qué puedes hacer en el portal?",
+      "title": "Funcionalidades Principales",
+      "subtitle": "Herramientas intuitivas para mejorar tu experiencia ciudadana",
+      "report": {
+        "title": "Reportar Problemas Urbanos",
+        "description": "Identifica y reporta incidencias en infraestructura y servicios públicos. Completa un formulario intuitivo con tipo de problema, ubicación y descripción. El sistema valida en tiempo real y canaliza automáticamente al área responsable.",
+        "badge": "Respuesta rápida garantizada"
+      },
+      "survey": {
+        "title": "Participar en Encuestas",
+        "description": "Expresa tu opinión sobre temas relevantes de la ciudad. Visualiza encuestas activas, responde fácilmente y consulta resultados transparentes. Tu participación ayuda a tomar mejores decisiones municipales.",
+        "badge": "Tu voz cuenta"
+      },
+      "info": {
+        "title": "Información Municipal",
+        "description": "Accede a información actualizada sobre objetivos, mecanismos de participación, datos de contacto y avances de la gestión municipal. Todo en un solo lugar, con diseño responsivo para cualquier dispositivo.",
+        "badge": "Siempre actualizado"
+      }
+    },
+    "registration": {
+      "title": "Registro Seguro",
+      "subtitle": "Para reportar problemas y participar en encuestas, crea tu cuenta en minutos",
+      "step1": {
+        "title": "Completa el formulario",
+        "description": "Nombre, correo y contraseña segura"
+      },
+      "step2": {
+        "title": "Validación automática",
+        "description": "Se validan los datos de manera segura"
+      },
+      "step3": {
+        "title": "Confirma tu correo",
+        "description": "Recibe enlace de activación"
+      },
+      "step4": {
+        "title": "¡Listo para participar!",
+        "description": "Acceso completo a todas las funciones"
+      }
+    }
+  },
+  "register": {
+    "title": "Crear Cuenta",
+    "subtitle": "Únete a la comunidad de Manta",
+    "firstName": "Nombres",
+    "firstNamePlaceholder": "Ingresa tus nombres",
+    "lastName": "Apellidos",
+    "lastNamePlaceholder": "Ingresa tus apellidos",
+    "cedula": "Cédula",
+    "cedulaPlaceholder": "Ingresa tu cédula",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "correo{'@'}ejemplo.com",
+    "parroquia": "Parroquia",
+    "parroquiaPlaceholder": "Selecciona tu parroquia",
+    "barrio": "Barrio",
+    "barrioPlaceholder": "Selecciona tu barrio",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Ingresa tu contraseña",
+    "confirmPassword": "Confirmar contraseña",
+    "confirmPasswordPlaceholder": "Confirma tu contraseña",
+    "passwordRules": {
+      "length": "Al menos 8 caracteres",
+      "upper": "Al menos una letra mayúscula",
+      "number": "Al menos un número",
+      "special": "Al menos un carácter especial (ej. !@#$%)"
+    },
+    "passwordsMatch": "Las contraseñas coinciden",
+    "passwordsDoNotMatch": "Las contraseñas no coinciden",
+    "acceptTerms": "Acepto los",
+    "terms": "Términos y Condiciones",
+    "and": "y la",
+    "privacy": "Política de Privacidad",
+    "submit": "Crear Cuenta",
+    "creating": "Creando cuenta...",
+    "hasAccount": "¿Ya tienes una cuenta?",
+    "loginLink": "Inicia sesión aquí",
+    "termsText": "Al registrarte, aceptas nuestros",
+    "required": "*",
+    "errors": {
+      "emptyFields": "Por favor, completa todos los campos",
+      "invalidCedula": "Por favor, ingresa una cédula válida (10 dígitos)",
+      "invalidEmail": "Por favor, ingresa un correo electrónico válido",
+      "shortPassword": "La contraseña debe tener al menos 8 caracteres",
+      "passwordRequirements": "La contraseña debe tener al menos 8 caracteres, contener una mayúscula, un número y un carácter especial",
+      "passwordMismatch": "Las contraseñas no coinciden",
+      "termsRequired": "Debes aceptar los términos y condiciones",
+      "registerFailed": "Error al registrar la cuenta. Por favor, intenta de nuevo.",
+      "emailExists": "Este correo electrónico ya está registrado",
+      "weakPassword": "La contraseña debe tener al menos 6 caracteres"
+    }
+  },
+  "footer": {
+    "description": "Sistema oficial del Gobierno Autónomo Descentralizado Municipal del Cantón Manta",
+    "links": {
+      "about": "Sobre Nosotros",
+      "services": "Servicios",
+      "contact": "Contacto",
+      "help": "Ayuda"
+    },
+    "contact": {
+      "title": "Contacto",
+      "phone": "Teléfono",
+      "email": "Email",
+      "address": "Dirección"
+    },
+    "social": {
+      "title": "Síguenos"
+    },
+    "rights": "Todos los derechos reservados",
+    "terms": "Términos y Condiciones",
+    "privacy": "Política de Privacidad"
+  },
+  "languages": {
+    "es": "Español",
+    "en": "English",
+    "qu": "Kichwa"
+  },
+  "login": {
+    "title": "Iniciar Sesión",
+    "subtitle": "Accede a tu cuenta del Portal Ciudadano",
+    "email": "Correo Electrónico",
+    "emailPlaceholder": "correo{'@'}ejemplo.com",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Ingresa tu contraseña",
+    "rememberMe": "Recordarme",
+    "rememberMeHelp": {
+      "title": "¿Qué significa esto?",
+      "description": "Mantiene tu sesión activa en este dispositivo. No uses esta opción en computadoras compartidas o públicas por seguridad."
+    },
+    "forgotPassword": {
+      "link": "¿Olvidaste tu contraseña?",
+      "title": "Recuperar Contraseña",
+      "subtitle": "Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña",
+      "emailLabel": "Correo Electrónico",
+      "emailPlaceholder": "correo{'@'}ejemplo.com",
+      "emailHint": "Ingresa el correo registrado en tu cuenta",
+      "sendButton": "Enviar enlace de recuperación",
+      "sending": "Enviando...",
+      "success": "¡Enlace enviado exitosamente!",
+      "checkEmail": "Revisa tu correo electrónico. Si existe una cuenta con este correo, recibirás un enlace para restablecer tu contraseña.",
+      "closeButton": "Cerrar",
+      "errors": {
+        "invalidEmail": "Por favor, ingresa un correo electrónico válido",
+        "failed": "No se pudo enviar el correo. Verifica tu correo e intenta nuevamente."
+      }
+    },
+    "forgotEmail": {
+      "link": "¿Olvidaste tu correo?",
+      "title": "Recuperar Correo Electrónico",
+      "subtitle": "Ingresa tu número de cédula para buscar tu correo registrado",
+      "cedulaLabel": "Cédula",
+      "cedulaPlaceholder": "Ingresa tu cédula (10 dígitos)",
+      "cedulaHint": "Ingresa tu número de cédula sin guiones ni espacios",
+      "searchButton": "Buscar correo",
+      "searching": "Buscando...",
+      "found": "Usuario encontrado",
+      "nameLabel": "Nombre completo",
+      "emailLabel": "Correo electrónico",
+      "warning": "Si tu correo ha cambiado, por favor acércate a las oficinas municipales para actualizar tus datos.",
+      "closeButton": "Cerrar",
+      "errors": {
+        "invalidLength": "La cédula debe tener 10 dígitos",
+        "invalidCedula": "El número de cédula no es válido",
+        "notFound": "No se encontró ningún usuario con esta cédula",
+        "searchFailed": "Error al buscar el usuario. Intenta nuevamente."
+      }
+    },
+    "submit": "Iniciar Sesión",
+    "loading": "Iniciando sesión...",
+    "noAccount": "¿No tienes una cuenta?",
+    "registerLink": "Regístrate aquí",
+    "termsText": "Al iniciar sesión, aceptas nuestros",
+    "and": "y",
+    "errors": {
+      "emptyFields": "Por favor, completa todos los campos",
+      "invalidEmail": "El correo electrónico no es válido",
+      "shortPassword": "La contraseña debe tener al menos 6 caracteres",
+      "loginFailed": "Error al iniciar sesión. Verifica tus credenciales",
+      "invalidCredentials": "Correo o contraseña incorrectos",
+      "emailNotConfirmed": "Por favor, confirma tu correo electrónico"
+    }
+  },
+  "resetPassword": {
+    "title": "Restablecer Contraseña",
+    "subtitle": "Ingresa tu nueva contraseña segura",
+    "newPassword": "Nueva Contraseña",
+    "newPasswordPlaceholder": "Ingresa tu nueva contraseña",
+    "confirmPassword": "Confirmar Contraseña",
+    "confirmPasswordPlaceholder": "Confirma tu nueva contraseña",
+    "passwordsMatch": "Las contraseñas coinciden",
+    "passwordsDontMatch": "Las contraseñas no coinciden",
+    "passwordRequirements": "Requisitos de contraseña:",
+    "minLength": "Al menos 8 caracteres",
+    "upperCase": "Al menos una letra mayúscula",
+    "number": "Al menos un número",
+    "specialChar": "Al menos un carácter especial (ej. !@#$%)",
+    "submit": "Cambiar Contraseña",
+    "loading": "Cambiando contraseña...",
+    "success": "¡Contraseña cambiada exitosamente! Redirigiendo al login...",
+    "backToLogin": "Volver al inicio de sesión",
+    "errors": {
+      "noSession": "Sesión inválida. Redirigiendo al login...",
+      "invalidPassword": "Por favor, cumple con todos los requisitos de contraseña",
+      "updateFailed": "No se pudo actualizar la contraseña. Intenta nuevamente."
+    }
+  },
+  "encuestaDetalle": {
+    "loading": "Cargando encuesta...",
+    "notFound": "No se encontró la encuesta.",
+    "yourResponse": "Tu respuesta",
+    "submitResponse": "Enviar respuesta",
+    "responseSuccess": "Respuesta enviada. Gracias.",
+    "responseError": "Error: no se pudo enviar"
+  },
+  "noticiaDetalle": {
+    "loading": "Cargando noticia...",
+    "notFound": "No se encontró la noticia.",
+    "forAll": "Para todos",
+    "parish": "Parroquia"
+  },
+  "reportes": {
+    "titulo": "Reportar un Problema",
+    "descripcion": "Ayúdanos a mejorar Manta reportando problemas en tu comunidad. Tu reporte será revisado y atendido por el equipo municipal correspondiente.",
+    "informacion_problema": "Información del Problema",
+    "ubicacion_archivos": "Ubicación y Archivos",
+    "datos_contacto": "Datos de Contacto",
+    "seleccionar_categoria": "Selecciona una categoría",
+    "campos": {
+      "titulo": "Título del problema",
+      "categoria": "Categoría",
+      "descripcion": "Descripción detallada",
+      "prioridad": "Prioridad",
+      "ubicacion": "Ubicación en el mapa",
+      "direccion": "Dirección",
+      "barrio": "Barrio",
+      "sector": "Sector/Parroquia",
+      "referencias": "Referencias adicionales",
+      "archivos": "Fotos del problema",
+      "nombre": "Nombre completo",
+      "email": "Correo electrónico",
+      "telefono": "Teléfono",
+      "imagen": "Imagen del problema"
+    },
+    "placeholders": {
+      "titulo": "Ej: Bache en la calle principal",
+      "descripcion": "Describe el problema con el mayor detalle posible...",
+      "direccion": "Ej: Calle 10 de Agosto y Av. 4 de Noviembre",
+      "barrio": "Ej: Los Esteros",
+      "sector": "Ej: Tarqui",
+      "referencias": "Ej: Frente al parque central, junto a la farmacia",
+      "telefono": "Ej: 0987654321"
+    },
+    "categorias": {
+      "alumbrado": "Alumbrado público",
+      "baches": "Baches y calles",
+      "limpieza": "Limpieza y aseo",
+      "agua": "Agua potable",
+      "alcantarillado": "Alcantarillado",
+      "parques": "Parques y recreación",
+      "señalizacion": "Señalización vial",
+      "seguridad": "Seguridad ciudadana",
+      "ruido": "Contaminación sonora",
+      "otro": "Otro"
+    },
+    "prioridad": {
+      "baja": "Baja",
+      "media": "Media",
+      "alta": "Alta",
+      "urgente": "Urgente"
+    },
+    "seleccionar_archivos": "Seleccionar fotos",
+    "formatos_archivos": "JPG, PNG (máx. 5MB cada una)",
+    "enviar_reporte": "Enviar Reporte",
+    "mi_ubicacion": "Mi ubicación",
+    "seleccionar_ubicacion_mapa": "Haz clic en el mapa para seleccionar la ubicación del problema",
+    "instrucciones_mapa": "Haz clic en el mapa para marcar la ubicación exacta del problema o usa el botón 'Mi ubicación'",
+    "ubicacion_no_encontrada": "No se encontró la ubicación. Intenta con una dirección más específica.",
+    "error_busqueda": "Error al buscar la ubicación. Intenta nuevamente.",
+    "geolocalizacion_no_soportada": "Tu navegador no soporta geolocalización",
+    "error_obteniendo_ubicacion": "Error al obtener tu ubicación. Verifica los permisos del navegador.",
+    "exito_envio": "¡Reporte enviado exitosamente! Te contactaremos pronto.",
+    "error_envio": "Error al enviar el reporte. Intenta nuevamente.",
+    "completar_campos": "Por favor completa todos los campos requeridos",
+    "sin_especificar": "Sin especificar",
+    "no_especificado": "No especificado",
+    "error_desconocido": "Error desconocido",
+    "ubicacion_problema": "Ubicación del Problema",
+    "subir_imagen": "Subir imagen",
+    "o_arrastrar": "o arrastra y suelta",
+    "formato_imagen": "PNG, JPG, JPEG hasta 10MB",
+    "error_tamano_imagen": "La imagen no puede superar los 10MB",
+    "error_tipo_imagen": "Solo se permiten archivos de imagen",
+    "barrio_registrado": "Tu Barrio (Registrado)"
+  },
+  "encuestas": {
+    "title": "Encuestas Ciudadanas",
+    "subtitle": "Expresa tu opinión en encuestas activas",
+    "loading": "Cargando encuestas...",
+    "error": "Error al cargar encuestas",
+    "retry": "Reintentar",
+    "noSurveys": "No hay encuestas disponibles",
+    "noSurveysDescription": "Por el momento no hay encuestas activas. Vuelve pronto para participar.",
+    "availableSurveys": "Encuestas Disponibles",
+    "backToList": "Volver a la lista",
+    "selectOption": "Selecciona una opción:",
+    "rateFrom1to5": "Califica del 1 al 5:",
+    "yourAnswer": "Tu respuesta:",
+    "writeAnswer": "Escribe tu respuesta aquí...",
+    "cancel": "Cancelar",
+    "submit": "Enviar Respuesta",
+    "submitting": "Enviando...",
+    "type": "Tipo",
+    "ends": "Finaliza:",
+    "ratings": {
+      "veryBad": "Muy malo",
+      "bad": "Malo",
+      "regular": "Regular",
+      "good": "Bueno",
+      "excellent": "Excelente"
+    },
+    "types": {
+      "multipleChoice": "Opción Múltiple",
+      "rating": "Calificación",
+      "open": "Pregunta Abierta"
+    },
+    "participate": "Participar",
+    "viewResults": "Ver Resultados"
+  },
+  "noticias": {
+    "title": "Noticias de Manta",
+    "subtitle": "Mantente informado con las últimas noticias municipales",
+    "loading": "Cargando noticias...",
+    "error": "Error al cargar noticias",
+    "retry": "Reintentar",
+    "noNews": "No hay noticias disponibles",
+    "noNewsDescription": "Por el momento no hay noticias publicadas.",
+    "createFirst": "Comienza publicando tu primera noticia",
+    "readMore": "Leer más",
+    "close": "Cerrar",
+    "published": "Publicado el",
+    "author": "Autor"
+  },
+  "perfil": {
+    "title": "Mi Perfil",
+    "subtitle": "Administra tu información personal",
+    "personalInfo": "Información Personal",
+    "accountSettings": "Configuración de Cuenta",
+    "name": "Nombre",
+    "lastName": "Apellidos",
+    "email": "Correo Electrónico",
+    "cedula": "Cédula",
+    "parish": "Parroquia",
+    "neighborhood": "Barrio",
+    "phone": "Teléfono",
+    "userType": "Tipo de Usuario",
+    "citizen": "Ciudadano",
+    "administrator": "Administrador",
+    "accountCreated": "Cuenta creada el",
+    "lastUpdate": "Última actualización",
+    "noUserData": "No hay datos de usuario. Inicia sesión para ver tu perfil",
+    "edit": "Editar Perfil",
+    "save": "Guardar Cambios",
+    "cancel": "Cancelar",
+    "saving": "Guardando...",
+    "updateSuccess": "Perfil actualizado exitosamente",
+    "updateError": "Error al actualizar el perfil"
+  },
+  "dashboard": {
+    "greeting": "¡Hola,",
+    "welcome": "Bienvenido/a al Portal Ciudadano Manta",
+    "adminPreview": {
+      "title": "Modo Vista Previa de Administrador",
+      "description": "Estás viendo el portal como lo verían los ciudadanos. Esta es una vista de ejemplo para que puedas verificar cómo se muestran las encuestas y noticias.",
+      "backToPanel": "Volver al Panel"
+    },
+    "location": "Manta, Ecuador",
+    "sections": {
+      "surveys": {
+        "title": "Encuestas Activas",
+        "subtitle": "Participa en encuestas ciudadanas",
+        "noSurveys": "No hay encuestas activas en este momento",
+        "participate": "Participar",
+        "viewResults": "Ver Resultados",
+        "closes": "Cierra el",
+        "closed": "Cerrada"
+      },
+      "news": {
+        "title": "Últimas Noticias",
+        "subtitle": "Mantente informado sobre Manta",
+        "noNews": "No hay noticias disponibles",
+        "readMore": "Leer más",
+        "published": "Publicado el"
+      },
+      "reports": {
+        "title": "Reportar un Problema",
+        "description": "¿Ves algo que necesita atención? Ayúdanos a mejorar Manta",
+        "button": "Reportar Problema"
+      }
+    },
+    "modal": {
+      "survey": {
+        "title": "Participar en Encuesta",
+        "submit": "Enviar Respuesta",
+        "submitting": "Enviando...",
+        "close": "Cerrar",
+        "required": "Este campo es obligatorio"
+      },
+      "news": {
+        "published": "Publicado el",
+        "close": "Cerrar"
+      }
+    },
+    "notifications": {
+      "surveySuccess": "¡Gracias por participar!",
+      "surveyError": "Error al enviar tu respuesta. Intenta nuevamente."
+    }
+  },
+  "admin": {
+    "title": "Panel de Administración",
+    "subtitle": "Gestión del Portal Ciudadano",
+    "welcome": "¡Bienvenido,",
+    "welcomeMessage": "Desde aquí puedes gestionar todos los aspectos del portal ciudadano de Manta",
+    "stats": {
+      "totalSurveys": "Total Encuestas",
+      "activeSurveys": "Encuestas Activas",
+      "totalReports": "Total Reportes",
+      "pendingReports": "Reportes Pendientes",
+      "totalNews": "Total Noticias",
+      "publishedNews": "Noticias Publicadas"
+    },
+    "sections": {
+      "surveys": {
+        "title": "Gestión de Encuestas",
+        "description": "Crea y administra encuestas ciudadanas",
+        "button": "Administrar Encuestas"
+      },
+      "news": {
+        "title": "Gestión de Noticias",
+        "description": "Publica y gestiona noticias municipales",
+        "button": "Administrar Noticias"
+      },
+      "reports": {
+        "title": "Gestión de Reportes",
+        "description": "Revisa y atiende reportes ciudadanos",
+        "button": "Ver Reportes",
+        "comingSoon": "Próximamente"
+      },
+      "preview": {
+        "title": "Vista Previa Ciudadana",
+        "description": "Ve cómo los ciudadanos ven el portal",
+        "button": "Ver Vista Previa"
+      }
+    },
+    "encuestas": {
+      "title": "Gestión de Encuestas",
+      "createNew": "Crear Nueva Encuesta",
+      "editSurvey": "Editar Encuesta",
+      "deleteSurvey": "Eliminar Encuesta",
+      "confirmDelete": "¿Estás seguro de que quieres eliminar esta encuesta?",
+      "deleteWarning": "Esta acción no se puede deshacer.",
+      "viewStats": "Ver Estadísticas",
+      "noResponses": "Sin respuestas aún",
+      "responses": "respuestas",
+      "active": "Activa",
+      "inactive": "Inactiva",
+      "surveyCreated": "Encuesta creada exitosamente",
+      "surveyUpdated": "Encuesta actualizada exitosamente",
+      "surveyDeleted": "Encuesta eliminada exitosamente",
+      "errorCreating": "Error al crear la encuesta",
+      "errorUpdating": "Error al actualizar la encuesta",
+      "errorDeleting": "Error al eliminar la encuesta",
+      "formLabels": {
+        "title": "Título",
+        "description": "Descripción",
+        "type": "Tipo de encuesta",
+        "options": "Opciones",
+        "addOption": "Agregar opción",
+        "removeOption": "Eliminar",
+        "startDate": "Fecha de inicio",
+        "endDate": "Fecha de fin",
+        "isActive": "Encuesta activa"
+      }
+    },
+    "noticias": {
+      "title": "Gestión de Noticias",
+      "createNew": "Crear Nueva Noticia",
+      "editNews": "Editar Noticia",
+      "deleteNews": "Eliminar Noticia",
+      "confirmDelete": "¿Estás seguro de que quieres eliminar esta noticia?",
+      "deleteWarning": "Esta acción no se puede deshacer.",
+      "viewNews": "Ver Noticia",
+      "newsCreated": "Noticia creada exitosamente",
+      "newsUpdated": "Noticia actualizada exitosamente",
+      "newsDeleted": "Noticia eliminada exitosamente",
+      "errorCreating": "Error al crear la noticia",
+      "errorUpdating": "Error al actualizar la noticia",
+      "errorDeleting": "Error al eliminar la noticia",
+      "uploadImage": "Subir imagen",
+      "dragDropImage": "Arrastra y suelta una imagen aquí o haz clic para seleccionar",
+      "removeImage": "Eliminar imagen",
+      "uploadingImage": "Subiendo imagen...",
+      "formLabels": {
+        "title": "Título",
+        "content": "Contenido",
+        "image": "Imagen",
+        "targetAudience": "Público objetivo",
+        "global": "Global (todos los ciudadanos)",
+        "byParish": "Por parroquia",
+        "parish": "Parroquia",
+        "neighborhood": "Barrio (opcional)"
+      }
+    }
+  },
+  "common": {
+    "buscar": "Buscar",
+    "limpiar": "Limpiar",
+    "enviando": "Enviando",
+    "cargando": "Cargando",
+    "guardar": "Guardar",
+    "cancelar": "Cancelar",
+    "aceptar": "Aceptar",
+    "si": "Sí",
+    "no": "No",
+    "error": "Error",
+    "exito": "Éxito",
+    "volver": "Volver",
+    "cerrar": "Cerrar",
+    "activo": "Activo",
+    "inactivo": "Inactivo",
+    "back": "Volver",
+    "view": "Ver",
+    "yes": "Sí",
+    "inactive": "Inactivo",
+    "close": "Cerrar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "skipToMain": "Saltar al contenido principal"
+  }
+}

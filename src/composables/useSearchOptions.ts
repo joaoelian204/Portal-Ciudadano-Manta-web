@@ -1,0 +1,147 @@
+import { computed } from "vue";
+import { useI18n } from "vue-i18n";
+
+export function useSearchOptions() {
+  const { t } = useI18n();
+
+  const ciudadanoSearchOptions = computed(() => [
+    {
+      id: 1,
+      title: t("home.search.options.report.title"),
+      description: t("home.search.options.report.description"),
+      icon: "🚨",
+      bgColor: "bg-red-100",
+      route: "/reportar-problema",
+      keywords: [
+        "reportar",
+        "problema",
+        "denuncia",
+        "bache",
+        "alumbrado",
+        "limpieza",
+        "reporte",
+      ],
+      requiresAuth: true,
+    },
+    {
+      id: 2,
+      title: t("home.search.options.surveys.title"),
+      description: t("home.search.options.surveys.description"),
+      icon: "📊",
+      bgColor: "bg-blue-100",
+      route: "/encuestas",
+      keywords: [
+        "encuesta",
+        "participar",
+        "opinión",
+        "votación",
+        "participacion",
+      ],
+      requiresAuth: true,
+    },
+    {
+      id: 3,
+      title: t("home.search.options.news.title"),
+      description: t("home.search.options.news.description"),
+      icon: "📰",
+      bgColor: "bg-green-100",
+      route: "/noticias",
+      keywords: ["noticia", "información", "actualidad", "comunicado", "aviso"],
+      requiresAuth: true,
+    },
+    {
+      id: 4,
+      title: t("home.search.options.dashboard.title"),
+      description: t("home.search.options.dashboard.description"),
+      icon: "🏠",
+      bgColor: "bg-purple-100",
+      route: "/dashboard",
+      keywords: ["dashboard", "inicio", "panel", "principal", "home"],
+      requiresAuth: true,
+    },
+    {
+      id: 5,
+      title: t("home.search.options.profile.title"),
+      description: t("home.search.options.profile.description"),
+      icon: "👤",
+      bgColor: "bg-yellow-100",
+      route: "/mi-perfil",
+      keywords: [
+        "perfil",
+        "cuenta",
+        "usuario",
+        "datos",
+        "información personal",
+      ],
+      requiresAuth: true,
+    },
+    {
+      id: 6,
+      title: t("home.search.options.about.title"),
+      description: t("home.search.options.about.description"),
+      icon: "ℹ️",
+      bgColor: "bg-indigo-100",
+      route: "/sobre-nosotros",
+      keywords: ["nosotros", "información", "acerca", "sobre", "quienes somos"],
+      requiresAuth: false,
+    },
+  ]);
+
+  const adminSearchOptions = computed(() => [
+    {
+      id: 1,
+      title: t("home.search.options.manageNews.title"),
+      description: t("home.search.options.manageNews.description"),
+      icon: "📰",
+      bgColor: "bg-green-100",
+      route: "/admin/noticias",
+      keywords: [
+        "noticias",
+        "publicar",
+        "gestionar",
+        "crear",
+        "editar",
+        "noticia",
+      ],
+      requiresAuth: true,
+    },
+    {
+      id: 2,
+      title: t("home.search.options.manageSurveys.title"),
+      description: t("home.search.options.manageSurveys.description"),
+      icon: "📊",
+      bgColor: "bg-blue-100",
+      route: "/admin/encuestas",
+      keywords: [
+        "encuestas",
+        "gestionar",
+        "crear",
+        "administrar",
+        "encuesta",
+        "votación",
+      ],
+      requiresAuth: true,
+    },
+    {
+      id: 3,
+      title: t("home.search.options.adminPanel.title"),
+      description: t("home.search.options.adminPanel.description"),
+      icon: "⚙️",
+      bgColor: "bg-gray-100",
+      route: "/admin",
+      keywords: [
+        "admin",
+        "administración",
+        "panel",
+        "configuración",
+        "ajustes",
+      ],
+      requiresAuth: true,
+    },
+  ]);
+
+  return {
+    ciudadanoSearchOptions,
+    adminSearchOptions,
+  };
+}

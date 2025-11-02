@@ -1,0 +1,681 @@
+{
+  "navbar": {
+    "title": "Manta Llaqtamanta Portal",
+    "subtitle": "Runakunata Kamachinapaq Sistema",
+    "home": "Qallariy",
+    "about": "Ñuqanchikmanta",
+    "login": "Yaykuy",
+    "register": "Shutichikuy",
+    "accessibility": "Yanapay",
+    "dashboard": "Kamachiy Panel",
+    "adminPanel": "Kamachiq Panel",
+    "profile": "Ñuqapa Perfil",
+    "logout": "Llukshiy",
+    "tools": "Yanapanakuna",
+    "toolsMenu": {
+      "report": "Sasachakuyta Willay",
+      "surveys": "Tapukuykuna",
+      "news": "Willakuykuna"
+    },
+    "breadcrumb": {
+      "home": "Qallariy",
+      "login": "Qallariy > Yaykuy",
+      "register": "Qallariy > Shutichikuy",
+      "services": "Qallariy > Ruraykuna",
+      "procedures": "Qallariy > Tramitikuna"
+    },
+    "quick": {
+      "report": "Willakuy",
+      "surveys": "Tapukuykuna",
+      "news": "Willakuykuna"
+    },
+    "zoom": {
+      "title": "Hatunchay",
+      "increase": "Hatunchay (Zoom +)",
+      "decrease": "Uchuylla (Zoom -)",
+      "reset": "Kutirichiy (100%)"
+    },
+    "shortcuts": {
+      "navigation": "Purinapaq",
+      "goHome": "Qallariy riy",
+      "goLogin": "Yaykuy riy",
+      "goRegister": "Shutichikuy riy"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Manta Llaqtamanta Portal",
+      "titleWord1": "Manta",
+      "titleWord2": "Llaqtamanta",
+      "titleWord3": "Portal",
+      "subtitle": "Runakunapa yaykuynin alli kananpaq ruraykunawan tantakun",
+      "subtitlePart1": "Maypi",
+      "subtitlePart2": "runakunapa yaykuynin",
+      "subtitlePart3": "alli kananpaq",
+      "subtitlePart4": "ruraykunawan tantakun",
+      "description": "Llaqta ruraykunaman digital yaykuna, tramitekunata kamachy, usqhaylla hinaspa allinta willayta tarinapaq"
+    },
+    "search": {
+      "title": "¿Imatach kunan rurayta munankí?",
+      "subtitle": "Maskay hinaspa usqhaylla portal ruraykunaman yaykuy",
+      "placeholder": "Maskay ruraykunata, sasachakuykunata willakuy, willakuykunata qaway...",
+      "options": {
+        "report": {
+          "title": "Shuk Sasachakuyta Willakuy",
+          "description": "Willakuy hutkukunamanta, k'anchay, pichaymanta hinaspa aswan"
+        },
+        "surveys": {
+          "title": "Tapukuykunapi Yaykuy",
+          "description": "Yuyayniyki llaqtapaq chanin"
+        },
+        "news": {
+          "title": "Willakuykunata Qaway",
+          "description": "Llaqtaykimanta yachaypi qhipay"
+        },
+        "dashboard": {
+          "title": "Ñuqapa Dashboard",
+          "description": "Kikin panelaykiman yaykuy"
+        },
+        "profile": {
+          "title": "Ñuqapa Perfil",
+          "description": "Kikin willayniykikunata kamachy"
+        },
+        "about": {
+          "title": "Ñuqanchikmanta",
+          "description": "Portalmanta aswan yachay"
+        },
+        "manageNews": {
+          "title": "Willakuykunata Kamachiy",
+          "description": "Willakuykunata ruray, allichay, rikuchiy"
+        },
+        "manageSurveys": {
+          "title": "Tapukuykunata Kamachiy",
+          "description": "Tapukuykunata ruray hinaspa kamachiy"
+        },
+        "adminPanel": {
+          "title": "Kamachiq Panel",
+          "description": "Hatun kamachiq panelman yaykuy"
+        }
+      },
+      "quick": {
+        "report": "Willakuy",
+        "surveys": "Tapukuykuna",
+        "news": "Willakuykuna",
+        "dashboard": "Dashboard"
+      }
+    },
+    "services": {
+      "title": "Ñuqanchik Ruraykuna",
+      "subtitle": "Llapan llaqta ruraykunaman shuk sitiupi yaykuy",
+      "card1": {
+        "title": "Yanapay Barriuykiman Chayamun",
+        "description": "Mantapa sapa sectorninwan chiqanmanta tinkuchikuyku, maypi aswan necesitakun chayman allin solucionkunata pusaspa"
+      },
+      "card2": {
+        "title": "Activo Yaykuy",
+        "description": "Kunkayki valiun. Digital espaciukunata quyku sapa runapaq yuyayninkunata ninankupaq hinaspa allin cambiumanta kanankupaq"
+      },
+      "card3": {
+        "title": "Sapa Kuti Alliyachiy",
+        "description": "Mana samaspa llank'ayku rurayniykuta alliyachinapaq, qhipamanta wiñay runakunapaq sumaq Mantata qhawarispa"
+      }
+    }
+  },
+  "about": {
+    "hero": {
+      "badge": "Digital Llaqtamanta Portal",
+      "title": "Qanpa Digital Ventana",
+      "subtitle": "Llaqta sasachakuykunata willakuy, tapukuykunapi yaykuy hinaspa llaqta willakuykunata ima dispositivomantapas qhaway",
+      "quote": "Mantata alliyachinapaq qanpa digital kunka",
+      "cta": "Astawan Yachay"
+    },
+    "location": {
+      "city": "Manta, Ecuador",
+      "subtitle": "Pacífico Puertomanta Llaqta"
+    },
+    "banner": {
+      "title": "Manta Llaqtamanta Portal",
+      "description": "Shuk digital plataforma runakunata llaqta kamachiqninkunawan tinkuchin. Llaqta sasachakuykunata willakuy, llaqta tapukuykunapi yaykuy hinaspa llaqta willakuykunaman mayqin ladumantapas, mayqin pachamantapas yaykuy. Qanpa yuyayniyki chaninchasqa kachkan kunan aswan facil chayanapaq.",
+      "badge1": "Sasachakuykunata Willakuy",
+      "badge2": "Llaqta Tapuykuna",
+      "badge3": "Llaqta Willakuy"
+    },
+    "mission": {
+      "title": "Ñuqanchikpa Misión",
+      "description": "Mantapa runankunata llaqta kamachiqninkunawan shuk intuitivo digital plataformawan tinkuchiy, llaqta sasachakuykunata willakuyta, tapukuykunapi yaykunata hinaspa chiqan pachapi llaqta willakuykunaman yaykunata saqispa."
+    },
+    "features": {
+      "badge": "¿Imataq rurawankiman portalpi?",
+      "title": "Hatun Ruraykuna",
+      "subtitle": "Intuitivo yanapakuykuna qanpa llaqta experienciata alliyachinapaq",
+      "report": {
+        "title": "Llaqta Sasachakuykunata Willakuy",
+        "description": "Infraestructurapi hinaspa público serviciokunapí sasachakuykunata riqsichiy hinaspa willakuy. Shuk intuitivo formulariota hunt'achiy sasachakuypa laya, maypi kachkan hinaspa willaywanwan. Sistemaka chiqan pachapi validakun hinaspa kikin pachapi responsable áreaman pusan.",
+        "badge": "Usqhay kutichiy garantizasqa"
+      },
+      "survey": {
+        "title": "Tapukuykunapi Yaykuy",
+        "description": "Llaqtapa chaniyuq temasninmanta qanpa yuyayta niy. Kachkaq tapukuykunata rikuy, facil kutichiykuna hinaspa ch'uyalla resultadokunata qhaway. Qanpa yaykuyniyki yanapan aswan allin llaqta tanteaykunata rurayta.",
+        "badge": "Qanpa kunkayki yupaychasqa"
+      },
+      "info": {
+        "title": "Llaqta Willakuy",
+        "description": "Musuqyachisqa willakuykunaman yaykuy objetivokunamanta, yaykuy mecanismokunamanta, rimanakuy datoskunamanta hinaspa llaqta kamachiypa ñawpaqman puririyninmanta. Tukuy shuk sitiupi, ima dispositivopaqpas responsivo diseñowanwan.",
+        "badge": "Sapa kuti musuqyachisqa"
+      }
+    },
+    "registration": {
+      "title": "Waqaychasqa Shutichikuy",
+      "subtitle": "Sasachakuykunata willakuypaq hinaspa tapukuykunapi yaykunapaq, minutokunapí qanpa cuentaykita kamarikuy",
+      "step1": {
+        "title": "Formulariota hunt'achiy",
+        "description": "Suti, correo hinaspa waqaychasqa yaykuna rima"
+      },
+      "step2": {
+        "title": "Kikin validación",
+        "description": "Datokunaka waqaychasqalla validakun"
+      },
+      "step3": {
+        "title": "Correoykita takyachiy",
+        "description": "Activación enlaceta chaskiy"
+      },
+      "step4": {
+        "title": "¡Yaykunapaq wakichisqa!",
+        "description": "Tukuy ruraykunaman hunt'a yaykuna"
+      }
+    }
+  },
+  "register": {
+    "title": "Cuentata Kamarikuy",
+    "subtitle": "Mantapa comunidadman yaykuy",
+    "firstName": "Sutiykuna",
+    "firstNamePlaceholder": "Sutiykikunata churay",
+    "lastName": "Ayllusutiykuna",
+    "lastNamePlaceholder": "Ayllusutiykikunata churay",
+    "cedula": "Cédula",
+    "cedulaPlaceholder": "Cédulaykita churay",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "correo{'@'}ejemplo.com",
+    "parroquia": "Parroquia",
+    "parroquiaPlaceholder": "Parroquiaykita akllachiy",
+    "barrio": "Barrio",
+    "barrioPlaceholder": "Barrioykita akllachiy",
+    "password": "Yaykuna Rima",
+    "passwordPlaceholder": "Yaykuna rimaykita churay",
+    "confirmPassword": "Yaykuna Rimata Takyachiy",
+    "confirmPasswordPlaceholder": "Yaykuna rimaykita takyachiy",
+    "passwordRules": {
+      "length": "Al menos 8 caracteres",
+      "upper": "Al menos una letra mayúscula",
+      "number": "Al menos un número",
+      "special": "Al menos un carácter especial (ej. !@#$%)"
+    },
+    "passwordsMatch": "Las contraseñas coinciden",
+    "passwordsDoNotMatch": "Las contraseñas no coinciden",
+    "acceptTerms": "Chaskini",
+    "terms": "Kamachikuykunata",
+    "and": "hinaspa",
+    "privacy": "Pakaypa Kamachinta",
+    "submit": "Cuentata Kamarikuy",
+    "creating": "Cuentata kamarikuchkan...",
+    "hasAccount": "¿Cuentayuqchu kanki?",
+    "loginLink": "Kaypi yaykuy",
+    "termsText": "Shutichikuypi, chaskikunki ñuqanchikpa",
+    "required": "*",
+    "errors": {
+      "emptyFields": "Ama hina kaspa, tukuy hampʼikunata huntʼachiy",
+      "invalidCedula": "Ama hina kaspa, allin céd​ulata churay (10 yupaykuna)",
+      "invalidEmail": "Ama hina kaspa, allin correo electrónicota churay",
+      "shortPassword": "La contraseña debe tener al menos 8 caracteres",
+      "passwordRequirements": "La contraseña debe tener al menos 8 caracteres, contener una mayúscula, un número y un carácter especial",
+      "passwordMismatch": "Yaykuna rimakuna mana tupanqakuchu",
+      "termsRequired": "Kamachikuykunata chaskina kachkan",
+      "registerFailed": "Pantay cuentata shutichikuypi. Ama hina kaspa, wakmanta rurarikuy."
+    }
+  },
+  "footer": {
+    "description": "Manta Kantonpa Sapanchasqa Kikin Kamachiq Llaqta Kamachiqnimpa Sistema Oficial",
+    "links": {
+      "about": "Ñuqanchikmanta",
+      "services": "Ruraykuna",
+      "contact": "Rimanakuy",
+      "help": "Yanapay"
+    },
+    "contact": {
+      "title": "Rimanakuy",
+      "phone": "Telefono",
+      "email": "Correo",
+      "address": "Maypi"
+    },
+    "social": {
+      "title": "Qatiwayku"
+    },
+    "rights": "Llapan derechukuna waqaychasqa",
+    "terms": "Kamachiykuna",
+    "privacy": "Pakaypa Kamachiy"
+  },
+  "languages": {
+    "es": "Español",
+    "en": "English",
+    "qu": "Kichwa"
+  },
+  "login": {
+    "title": "Yaykuy",
+    "subtitle": "Llaqtamanta Portal cuentaykiman yaykuy",
+    "email": "Correo Electrónico",
+    "emailPlaceholder": "correo{'@'}ejemplo.com",
+    "password": "Yaykuna Rima",
+    "passwordPlaceholder": "Yaykuna rimata churay",
+    "rememberMe": "Yuyariway",
+    "rememberMeHelp": {
+      "title": "¿Imatak kay nishan?",
+      "description": "Kay dispositivopi sesionniykita kaqlla waqaychan. Ama kay akllanaykita rakinakushqa icha llapanpaq computadorakunapi llamk'achiychu waqaychaypaq."
+    },
+    "forgotPassword": {
+      "link": "¿Qunqarqankichu yaykuna rimata?",
+      "title": "Yaykuna Rima Kutichiy",
+      "subtitle": "Correo electrónicota churay hinaspa yaykuna rimata musuqyachinaykipaq tinkita kachasunchik",
+      "emailLabel": "Correo Electrónico",
+      "emailPlaceholder": "correo{'@'}ejemplo.com",
+      "emailHint": "Cuentaykipi shutichisqa correota churay",
+      "sendButton": "Kutichiy tinkita kachay",
+      "sending": "Kachaspa...",
+      "success": "¡Tinki allintam kachasqa!",
+      "checkEmail": "Correo electrónicota qhaway. Sichus kay correoyuq cuenta kaptinqa, yaykuna rima musuqyachinaykipaq tinkita chaskinkiman.",
+      "closeButton": "Wichqay",
+      "errors": {
+        "invalidEmail": "Ama hina kaspa, allin correo electrónicota churay",
+        "failed": "Manam atinichu correota kachayta. Correoykita qhaway hinaspa musuqmanta kallpachay."
+      }
+    },
+    "forgotEmail": {
+      "link": "¿Qunqarqankichu correo electrónicota?",
+      "title": "Correo Electrónico Kutichiy",
+      "subtitle": "Cédula yupayta churay correo shutichisqaykita maskanaykipaq",
+      "cedulaLabel": "Cédula",
+      "cedulaPlaceholder": "Cédulata churay (10 yupaykuna)",
+      "cedulaHint": "Cédula yupayta churay mana guiones nitaq ch'usaq kaqkunawan",
+      "searchButton": "Correo maskay",
+      "searching": "Maskachkan...",
+      "found": "Runa tarisqa",
+      "nameLabel": "Hunt'a suti",
+      "emailLabel": "Correo electrónico",
+      "warning": "Sichus correoyki wakmanta kaptinqa, ama hina kaspa municipalpa wasikunaman riy willaykikunata musuqyachinaykipaq.",
+      "closeButton": "Wichqay",
+      "errors": {
+        "invalidLength": "Cédula 10 yupayyuq kanan tiyan",
+        "invalidCedula": "Cédula yupay mana allinchu",
+        "notFound": "Manam tarikunchu kay cédulaykiyuq runa",
+        "searchFailed": "Pantay runata maskaykachakuspa. Musuqmanta kallpachay."
+      }
+    },
+    "submit": "Yaykuy",
+    "loading": "Yaykunapaq...",
+    "noAccount": "¿Mana cuentayuqchu kanki?",
+    "registerLink": "Kaypi shutichikuy",
+    "termsText": "Yaykuspa, munankiku",
+    "and": "hinaspa",
+    "errors": {
+      "emptyFields": "Ama hina kaspa, llapan sitiukunata hunt'achiy",
+      "invalidEmail": "Correo electrónico mana allinchu",
+      "shortPassword": "Yaykuna rima 6 qillqakunayuq kanan tiyan",
+      "loginFailed": "Manam atinichu yaykuyta. Qhaway credencialniykikunata"
+    }
+  },
+  "resetPassword": {
+    "title": "Yaykuna Rima Musuqyachiy",
+    "subtitle": "Musuq waqaychasqa yaykuna rimata churay",
+    "newPassword": "Musuq Yaykuna Rima",
+    "newPasswordPlaceholder": "Musuq yaykuna rimata churay",
+    "confirmPassword": "Yaykuna Rima Takyachiy",
+    "confirmPasswordPlaceholder": "Musuq yaykuna rimata takyachiy",
+    "passwordsMatch": "Yaykuna rimakuna tupanku",
+    "passwordsDontMatch": "Yaykuna rimakuna mana tupankuchu",
+    "passwordRequirements": "Yaykuna rimapa munasqan:",
+    "minLength": "8 qillqakunamanta aswan",
+    "upperCase": "Huk hatun qillqamanta aswan",
+    "number": "Huk yupaymanta aswan",
+    "specialChar": "Huk especial qillqamanta aswan (ej. !@#$%)",
+    "submit": "Yaykuna Rima Tikray",
+    "loading": "Yaykuna rimata tikrachkan...",
+    "success": "¡Yaykuna rima allintam tikrasqa! Yaykuyman kutirimuchkan...",
+    "backToLogin": "Yaykuyman kutiriy",
+    "errors": {
+      "noSession": "Sesión mana allinchu. Yaykuyman kutirimuchkan...",
+      "invalidPassword": "Ama hina kaspa, llapan yaykuna rimapa munasqankunata hunt'achiy",
+      "updateFailed": "Manam atinichu yaykuna rimata musuqyachiyta. Musuqmanta kallpachay."
+    }
+  },
+  "encuestaDetalle": {
+    "loading": "Tapuyta kargachkan...",
+    "notFound": "Manam tarikunchu tapuyta.",
+    "yourResponse": "Qampa kutichiy",
+    "submitResponse": "Kutichiyta kachay",
+    "responseSuccess": "Kutichiy kachasqa. Riqsikuy.",
+    "responseError": "Pantay: manam atinichu kachayta"
+  },
+  "noticiaDetalle": {
+    "loading": "Willaykunata kargashpa...",
+    "notFound": "Mana willaykunata taririshkachu.",
+    "forAll": "Tukuykunapak",
+    "parish": "Parrokya"
+  },
+  "reportes": {
+    "titulo": "Shuk Sasachakuyta Willay",
+    "descripcion": "Ñukanchik llaktapi alliyachinapak yanapay, sasachakuykunata willashpa. Kikin willakuy kaypi llank'ak kay munisipiomanta tantanakushpa k'amarichishka kanka.",
+    "informacion_problema": "Sasachakuymanta Willakuna",
+    "ubicacion_archivos": "Maypi Kashkata Rikuchina",
+    "datos_contacto": "Willarishpa Yachana",
+    "seleccionar_categoria": "Shuk kategoriata akllay",
+    "campos": {
+      "titulo": "Sasachakuymanta shutina",
+      "categoria": "Kategoría",
+      "descripcion": "Achka willakuy",
+      "prioridad": "Ñawpakman",
+      "ubicacion": "Mapapi maypi kachun",
+      "direccion": "Maypimi kashan",
+      "barrio": "Barrio",
+      "sector": "Sektormanta/Parrokya",
+      "referencias": "Yapay willakuna",
+      "archivos": "Sasachakuymanta fotos",
+      "nombre": "Tukuy shutina",
+      "email": "Korreo electrónico",
+      "telefono": "Teléfono",
+      "imagen": "Sasachakuymanta siq'i",
+      "barrio_registrado": "Kikin Barrio (Killkashka)"
+    },
+    "placeholders": {
+      "titulo": "Ejemplo: Hatun ñanpi t'uku",
+      "descripcion": "Sasachakuyta achka willakuywan willashka...",
+      "direccion": "Ejemplo: 10 de Agosto calle chaymanta 4 de Noviembre avenida",
+      "barrio": "Ejemplo: Los Esteros",
+      "sector": "Ejemplo: Tarqui",
+      "referencias": "Ejemplo: Chawpi parkipi rikurina, botikamanta kayllampi",
+      "telefono": "Ejemplo: 0987654321"
+    },
+    "categorias": {
+      "alumbrado": "Ñan k'anchay",
+      "baches": "T'ukukuna chaymanta ñankuna",
+      "limpieza": "Ch'uyanchay chaymanta mana allin",
+      "agua": "Yaku upyana",
+      "alcantarillado": "Yaku apana",
+      "parques": "Parkikuna chaymanta pukllanapak",
+      "señalizacion": "Ñan rikuchina",
+      "seguridad": "Kawsayta waqaychay",
+      "ruido": "Uyarina ch'iki",
+      "otro": "Wak"
+    },
+    "prioridad": {
+      "baja": "Mana ancha",
+      "media": "Chawpimanta",
+      "alta": "Hatun",
+      "urgente": "Usqhayllamanta"
+    },
+    "seleccionar_archivos": "Fotokuna akllay",
+    "formatos_archivos": "JPG, PNG (sapa shuk 5MB jatun)",
+    "enviar_reporte": "Willakuyta Kachay",
+    "mi_ubicacion": "Ñukapa maypi kachun",
+    "seleccionar_ubicacion_mapa": "Mapapi ñit'iy sasachakuy maypi kachun akllanaykipak",
+    "instrucciones_mapa": "Mapapi ñit'iy sasachakuymanta chiqan maypi kachun rikuchinapak icha 'Ñukapa maypi kachun' botonwan churay",
+    "ubicacion_no_encontrada": "Mana maypi kachun taririshkachu. Wak sutiywan pruebay.",
+    "error_busqueda": "Pantay maskashpa maypi kachun. Yapamanta pruebay.",
+    "geolocalizacion_no_soportada": "Navegadorniki mana geolocalización yanapanchu",
+    "error_obteniendo_ubicacion": "Pantay maypi kachun tarishpa. Navegadormanta permisokuna llanchiy.",
+    "exito_envio": "¡Willakuy allita kachashka! Pisi pachapi willarishunki.",
+    "error_envio": "Pantay willakuyta kachashpa. Yapamanta pruebay.",
+    "completar_campos": "Ama hina kaspa hunt'achiy tukuy mayllashka k'iti",
+    "sin_especificar": "Mana willashkachu",
+    "no_especificado": "Mana willashkachu",
+    "error_desconocido": "Mana rikushka pantay",
+    "ubicacion_problema": "Sasachakuy Maypi Kachun",
+    "subir_imagen": "Siq'ita wichay",
+    "o_arrastrar": "icha aysay chaymanta shitay",
+    "formato_imagen": "PNG, JPG, JPEG 10MB jatun kama",
+    "error_tamano_imagen": "Siq'i mana 10MB yapayta atinchu",
+    "error_tipo_imagen": "Siq'ikuna archivokuna-lla yuyashka"
+  },
+  "encuestas": {
+    "title": "Llaqta Tapuykuna",
+    "subtitle": "Kachkaq tapuykunapi yuyayniykita niy",
+    "loading": "Tapuykunata kargachkan...",
+    "error": "Pantay tapuykunata kargaspa",
+    "retry": "Wakmanta rurarikuy",
+    "noSurveys": "Mana tapuykuna kanchu",
+    "noSurveysDescription": "Kunan pachapiqa mana kachkaq tapuykuna kanchu. Wakmanta hamuykamuy yaykunaykipaq.",
+    "availableSurveys": "Kachkaq Tapuykuna",
+    "backToList": "Listaman kutiykuy",
+    "selectOption": "Shuk opcionta akllachiy:",
+    "rateFrom1to5": "1manta 5kama yupachay:",
+    "yourAnswer": "Qanpa kutichiyki:",
+    "writeAnswer": "Kaypi kutichiykita qillqay...",
+    "cancel": "Hichay",
+    "submit": "Kutichiyta Kachay",
+    "submitting": "Kachachkan...",
+    "type": "Laya",
+    "ends": "Tukukun:",
+    "ratings": {
+      "veryBad": "Ancha mana allin",
+      "bad": "Mana allin",
+      "regular": "Regular",
+      "good": "Allin",
+      "excellent": "Ancha allin"
+    },
+    "types": {
+      "multipleChoice": "Achka Akllana",
+      "rating": "Yupachay",
+      "open": "Kichkasqa Tapuy"
+    },
+    "participate": "Yaykuy",
+    "viewResults": "Resultadokunata Qhaway"
+  },
+  "noticias": {
+    "title": "Mantapa Willakuynin",
+    "subtitle": "Qhipa llaqta willakuykunawan yachaypi qhipay",
+    "loading": "Willakuykunata kargachkan...",
+    "error": "Pantay willakuykunata kargaspa",
+    "retry": "Wakmanta rurarikuy",
+    "noNews": "Mana willakuykuna kanchu",
+    "noNewsDescription": "Kunan pachapiqa mana willakuykuna lluqsichisqachu.",
+    "createFirst": "Qallariy ñawpaq willakuyta lluqsichispa",
+    "readMore": "Astawan ñawiriy",
+    "close": "Wichqay",
+    "published": "Lluqsichisqa",
+    "author": "Qillqaq"
+  },
+  "perfil": {
+    "title": "Ñuqapa Perfil",
+    "subtitle": "Kikin willayniykikunata kamachy",
+    "personalInfo": "Kikin Willakuy",
+    "accountSettings": "Cuenta Kamachiy",
+    "name": "Suti",
+    "lastName": "Ayllusuti",
+    "email": "Correo Electrónico",
+    "cedula": "Cédula",
+    "parish": "Parroquia",
+    "neighborhood": "Barrio",
+    "phone": "Telefono",
+    "userType": "Runa Laya",
+    "citizen": "Llaqtaruna",
+    "administrator": "Kamachiq",
+    "accountCreated": "Cuenta kamarisqa",
+    "lastUpdate": "Qhipa musuqyachiy",
+    "noUserData": "Mana runa willakuy kanchu. Yaykuy perfilniykita qhawanaykipaq",
+    "edit": "Perfil Allanchay",
+    "save": "Cambiokunata Waqaychay",
+    "cancel": "Hichay",
+    "saving": "Waqaychachkan...",
+    "updateSuccess": "Perfil allinchasqa allinlla",
+    "updateError": "Pantay perfil allinchaypi"
+  },
+  "dashboard": {
+    "greeting": "¡Napaykullayki,",
+    "welcome": "Manta Llaqtamanta Portalman allin hamumuyki",
+    "adminPreview": {
+      "title": "Kamachiqpa Ñawpaq Qhaway Modo",
+      "description": "Portal qhawachkanki imayna runakunaka qhawarinqaku chaynata. Kay shuk qhaway ejemplu kanki imayna tapuykuna hinaspa willakuykuna rikurinqaku chayta takyachinaykipaq.",
+      "backToPanel": "Panelman Kutiykuy"
+    },
+    "location": "Manta, Ecuador",
+    "sections": {
+      "surveys": {
+        "title": "Kachkaq Tapuykuna",
+        "subtitle": "Llaqta tapuykunapi yaykuy",
+        "noSurveys": "Kunan pachapiqa mana kachkaq tapuykuna kanchu",
+        "participate": "Yaykuy",
+        "viewResults": "Resultadokunata Qhaway",
+        "closes": "Wichqakun",
+        "closed": "Wichqasqa"
+      },
+      "news": {
+        "title": "Qhipa Willakuykuna",
+        "subtitle": "Mantamanta yachaykunapi qhipay",
+        "noNews": "Mana willakuykuna kanchu",
+        "readMore": "Astawan ñawiriy",
+        "published": "Lluqsichisqa"
+      },
+      "reports": {
+        "title": "Sasachakuyta Willakuy",
+        "description": "¿Imachus qhawarikunan tiyan rikunki? Yanapawayku Mantata alliyachinapaq",
+        "button": "Sasachakuyta Willakuy"
+      }
+    },
+    "modal": {
+      "survey": {
+        "title": "Tapuypi Yaykuy",
+        "submit": "Kutichiyta Kachay",
+        "submitting": "Kachachkan...",
+        "close": "Wichqay",
+        "required": "Kay sitiu necesariom kachkan"
+      },
+      "news": {
+        "published": "Lluqsichisqa",
+        "close": "Wichqay"
+      }
+    },
+    "notifications": {
+      "surveySuccess": "¡Yusulpay yayku​sqa​nkimanta!",
+      "surveyError": "Pantay kutichiyta kachaspa. Ama hina kaspa, wakmanta rurarikuy."
+    }
+  },
+  "admin": {
+    "title": "Kamachiy Panel",
+    "subtitle": "Llaqtamanta Portal Kamachinapaq",
+    "welcome": "Allin hamusqa,",
+    "welcomeMessage": "Kaypi kamachiwaq atikunki tukuy imatachus Mantapa llaqtamanta portalninpi",
+    "stats": {
+      "totalSurveys": "Tukuy Tapuykuna",
+      "activeSurveys": "Activo Tapuykuna",
+      "totalReports": "Tukuy Willakuykuna",
+      "pendingReports": "Suyasqa Willakuykuna",
+      "totalNews": "Tukuy Willaykunata",
+      "publishedNews": "Publicasqa Willaykunata"
+    },
+    "sections": {
+      "surveys": {
+        "title": "Tapuykunata Kamachinapaq",
+        "description": "Ruway hinaspa kamachinapaq llaqtakunapa tapuykunata",
+        "button": "Tapuykunata Kamachiy"
+      },
+      "news": {
+        "title": "Willaykunata Kamachinapaq",
+        "description": "Willay hinaspa kamachinapaq municipalpa willaykunata",
+        "button": "Willaykunata Kamachiy"
+      },
+      "reports": {
+        "title": "Willakuykunata Kamachinapaq",
+        "description": "Qhawariy hinaspa yanapay llaqtakunapa willakuykunata",
+        "button": "Willakuykunata Qhaway",
+        "comingSoon": "Chayamuchkanña"
+      },
+      "preview": {
+        "title": "Llaqtamanta Qhaway",
+        "description": "Qhaway imaynatachus llaqtakuna qhawanku portalninpi",
+        "button": "Qhaway"
+      }
+    },
+    "encuestas": {
+      "title": "Tapuykunata Kamachinapaq",
+      "createNew": "Musuq Tapuy Ruway",
+      "editSurvey": "Tapuyta Allichay",
+      "deleteSurvey": "Tapuyta Qhichuy",
+      "confirmDelete": "¿Chiqaqchu kay tapuyta qhichunki?",
+      "deleteWarning": "Kay ruway mana kutichisqa kanmanchu.",
+      "viewStats": "Yupaykunata Qhaway",
+      "noResponses": "Manaraqmi kanchu kutichiykuna",
+      "responses": "kutichiykuna",
+      "active": "Activo",
+      "inactive": "Inactivo",
+      "surveyCreated": "Tapuy allin ruwasqa",
+      "surveyUpdated": "Tapuy allin actualizado",
+      "surveyDeleted": "Tapuy qhichusqa",
+      "errorCreating": "Pantay tapuyta ruwaspa",
+      "errorUpdating": "Pantay tapuyta actualizaspa",
+      "errorDeleting": "Pantay tapuyta qhichuspa",
+      "formLabels": {
+        "title": "Suti",
+        "description": "Willay",
+        "type": "Tapuypa layun",
+        "options": "Akllanaykuna",
+        "addOption": "Akllanayta yapay",
+        "removeOption": "Qhichuy",
+        "startDate": "Qallariy p'unchaw",
+        "endDate": "Tukuy p'unchaw",
+        "isActive": "Tapuy activo"
+      }
+    },
+    "noticias": {
+      "title": "Willaykunata Kamachinapaq",
+      "createNew": "Musuq Willakuy Ruway",
+      "editNews": "Willakuyta Allichay",
+      "deleteNews": "Willakuyta Qhichuy",
+      "confirmDelete": "¿Chiqaqchu kay willakuyta qhichunki?",
+      "deleteWarning": "Kay ruway mana kutichisqa kanmanchu.",
+      "viewNews": "Willakuyta Qhaway",
+      "newsCreated": "Willakuy allin ruwasqa",
+      "newsUpdated": "Willakuy allin actualizado",
+      "newsDeleted": "Willakuy qhichusqa",
+      "errorCreating": "Pantay willakuyta ruwaspa",
+      "errorUpdating": "Pantay willakuyta actualizaspa",
+      "errorDeleting": "Pantay willakuyta qhichuspa",
+      "uploadImage": "Siq'ita churay",
+      "dragDropImage": "Siq'ita apamuy kaypi icha ñit'iy akllanapaq",
+      "removeImage": "Siq'ita qhichuy",
+      "uploadingImage": "Siq'ita churaspa...",
+      "formLabels": {
+        "title": "Suti",
+        "content": "Yuyay",
+        "image": "Siq'i",
+        "targetAudience": "Uyariqkuna",
+        "global": "Global (tukuy llaqtakuna)",
+        "byParish": "Parroquiamanta",
+        "parish": "Parroquia",
+        "neighborhood": "Barrio (munasqa)"
+      }
+    }
+  },
+  "common": {
+    "buscar": "Maskay",
+    "limpiar": "Pichay",
+    "enviando": "Kachachkan",
+    "cargando": "Kargachkan",
+    "guardar": "Waqaychay",
+    "cancelar": "Hichay",
+    "aceptar": "Chaskiy",
+    "si": "Arí",
+    "no": "Mana",
+    "error": "Pantay",
+    "exito": "Allin",
+    "volver": "Kutiykuy",
+    "cerrar": "Wichqay",
+    "activo": "Kachkaq",
+    "inactivo": "Mana kachkaq",
+    "back": "Kutiykuy",
+    "view": "Qhaway",
+    "yes": "Arí",
+    "inactive": "Mana kachkaq",
+    "close": "Wichqay",
+    "edit": "Allichay",
+    "delete": "Qhichuy",
+    "skipToMain": "Hatun yuyayninman phinkay"
+  }
+}
