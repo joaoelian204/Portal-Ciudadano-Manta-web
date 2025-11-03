@@ -100,7 +100,7 @@
           <!-- Tarjeta 1 -->
           <ServiceCard
             ref="card1"
-            :imageUrl="'public/img1.jpg'"
+            :imageUrl="'/img1.jpg'"
             :imageAlt="'Servicios de barrio en Manta'"
             :title="$t('home.services.card1.title')"
             :description="$t('home.services.card1.description')"
@@ -111,7 +111,7 @@
           <!-- Tarjeta 2 -->
           <ServiceCard
             ref="card2"
-            :imageUrl="'public/img2.jpg'"
+            :imageUrl="'/img2.jpg'"
             :imageAlt="'Participación ciudadana activa'"
             :title="$t('home.services.card2.title')"
             :description="$t('home.services.card2.description')"
@@ -122,7 +122,7 @@
           <!-- Tarjeta 3 -->
           <ServiceCard
             ref="card3"
-            :imageUrl="'public/img3.jpg'"
+            :imageUrl="'/img3.jpg'"
             :imageAlt="'Mejora continua de servicios'"
             :title="$t('home.services.card3.title')"
             :description="$t('home.services.card3.description')"
