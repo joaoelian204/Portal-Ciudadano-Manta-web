@@ -1,360 +1,364 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-4 sm:py-6 md:py-8">
-    <div class="w-full px-3 sm:px-4 md:px-6 lg:px-8 max-w-[1920px] mx-auto">
+  <div class="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-3 sm:py-4 md:py-6 lg:py-8">
+    <div class="w-full px-2 sm:px-3 md:px-4 lg:px-6 xl:px-8 max-w-[1920px] mx-auto">
       <!-- Header -->
-      <div class="mb-4 sm:mb-6 md:mb-8">
-        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <div class="mb-3 sm:mb-4 md:mb-6 lg:mb-8">
+        <div class="flex flex-col gap-3 sm:gap-4">
           <div>
-            <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 flex items-center gap-2 md:gap-3">
-              <span class="text-2xl sm:text-3xl md:text-4xl">📋</span>
-              <span class="break-words">{{ $t('admin.reportes.title') }}</span>
+            <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 flex items-center gap-2">
+              <span class="text-xl sm:text-2xl md:text-3xl lg:text-4xl">📋</span>
+              <span class="break-words line-clamp-2">{{ $t('admin.reportes.title') }}</span>
             </h1>
-            <p class="mt-1 sm:mt-2 text-xs sm:text-sm md:text-base text-gray-600">
+            <p class="mt-1 sm:mt-2 text-xs sm:text-sm md:text-base text-gray-600 line-clamp-2">
               {{ $t('admin.reportes.subtitle') }}
             </p>
           </div>
           
-          <!-- Estadísticas rápidas - Responsive -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 md:gap-4 w-full lg:w-auto">
-            <div class="bg-white rounded-lg shadow px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 text-center">
-              <div class="text-lg sm:text-xl md:text-2xl font-bold text-yellow-600">{{ reportesPendientes.length }}</div>
-              <div class="text-[10px] sm:text-xs md:text-sm text-gray-600">{{ $t('admin.reportes.stats.pending') }}</div>
+          <!-- Estadísticas rápidas - Completamente responsive -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 w-full">
+            <div class="bg-white rounded-lg shadow px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-3 text-center">
+              <div class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-yellow-600">{{ reportesPendientes.length }}</div>
+              <div class="text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-gray-600 truncate">{{ $t('admin.reportes.stats.pending') }}</div>
             </div>
-            <div class="bg-white rounded-lg shadow px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 text-center">
-              <div class="text-lg sm:text-xl md:text-2xl font-bold text-blue-600">{{ reportesRevision.length }}</div>
-              <div class="text-[10px] sm:text-xs md:text-sm text-gray-600">{{ $t('admin.reportes.stats.inReview') }}</div>
+            <div class="bg-white rounded-lg shadow px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-3 text-center">
+              <div class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-blue-600">{{ reportesRevision.length }}</div>
+              <div class="text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-gray-600 truncate">{{ $t('admin.reportes.stats.inReview') }}</div>
             </div>
-            <div class="bg-white rounded-lg shadow px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 text-center">
-              <div class="text-lg sm:text-xl md:text-2xl font-bold text-purple-600">{{ reportesProceso.length }}</div>
-              <div class="text-[10px] sm:text-xs md:text-sm text-gray-600">{{ $t('admin.reportes.stats.inProcess') }}</div>
+            <div class="bg-white rounded-lg shadow px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-3 text-center">
+              <div class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-purple-600">{{ reportesProceso.length }}</div>
+              <div class="text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-gray-600 truncate">{{ $t('admin.reportes.stats.inProcess') }}</div>
             </div>
-            <div class="bg-white rounded-lg shadow px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 text-center">
-              <div class="text-lg sm:text-xl md:text-2xl font-bold text-green-600">{{ reportesResueltos.length }}</div>
-              <div class="text-[10px] sm:text-xs md:text-sm text-gray-600">{{ $t('admin.reportes.stats.resolved') }}</div>
+            <div class="bg-white rounded-lg shadow px-2 sm:px-3 md:px-4 lg:px-6 py-2 sm:py-3 text-center">
+              <div class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-green-600">{{ reportesResueltos.length }}</div>
+              <div class="text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-gray-600 truncate">{{ $t('admin.reportes.stats.resolved') }}</div>
             </div>
           </div>
         </div>
 
-        <!-- Filtros - Responsive -->
-        <div class="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 items-stretch sm:items-center">
-          <div class="flex-1">
+        <!-- Filtros - Completamente responsive para móvil -->
+        <div class="mt-3 sm:mt-4 md:mt-6 space-y-2">
+          <!-- Búsqueda - Fila completa en móvil -->
+          <div class="w-full">
             <input
               v-model="filtroTexto"
               type="text"
               :placeholder="$t('admin.reportes.filters.searchPlaceholder')"
-              class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-500"
+              class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-500"
             />
           </div>
-          <select
-            v-model="filtroCategoria"
-            class="px-3 sm:px-4 py-2 sm:py-2.5 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
-          >
-            <option value="">{{ $t('admin.reportes.filters.allCategories') }}</option>
-            <option value="alumbrado">{{ $t('admin.reportes.categories.alumbrado') }}</option>
-            <option value="baches">{{ $t('admin.reportes.categories.baches') }}</option>
-            <option value="limpieza">{{ $t('admin.reportes.categories.limpieza') }}</option>
-            <option value="agua">{{ $t('admin.reportes.categories.agua') }}</option>
-            <option value="alcantarillado">{{ $t('admin.reportes.categories.alcantarillado') }}</option>
-            <option value="parques">{{ $t('admin.reportes.categories.parques') }}</option>
-            <option value="señalizacion">{{ $t('admin.reportes.categories.señalizacion') }}</option>
-            <option value="seguridad">{{ $t('admin.reportes.categories.seguridad') }}</option>
-            <option value="ruido">{{ $t('admin.reportes.categories.ruido') }}</option>
-            <option value="otro">{{ $t('admin.reportes.categories.otro') }}</option>
-          </select>
-          <select
-            v-model="filtroPrioridad"
-            class="px-3 sm:px-4 py-2 sm:py-2.5 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
-          >
-            <option value="">{{ $t('admin.reportes.filters.allPriorities') }}</option>
-            <option value="urgente">{{ $t('admin.reportes.priorities.urgente') }}</option>
-            <option value="alta">{{ $t('admin.reportes.priorities.alta') }}</option>
-            <option value="media">{{ $t('admin.reportes.priorities.media') }}</option>
-            <option value="baja">{{ $t('admin.reportes.priorities.baja') }}</option>
-          </select>
-          <button
-            @click="cargarReportes"
-            class="px-4 sm:px-6 py-2 sm:py-2.5 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 whitespace-nowrap"
-          >
-            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-            </svg>
-            <span class="hidden sm:inline">{{ $t('admin.reportes.filters.update') }}</span>
-          </button>
+          
+          <!-- Selectores y botón - Grid responsive -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <select
+              v-model="filtroCategoria"
+              class="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 text-xs sm:text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 truncate"
+            >
+              <option value="">{{ $t('admin.reportes.filters.allCategories') }}</option>
+              <option value="alumbrado">{{ $t('admin.reportes.categories.alumbrado') }}</option>
+              <option value="baches">{{ $t('admin.reportes.categories.baches') }}</option>
+              <option value="limpieza">{{ $t('admin.reportes.categories.limpieza') }}</option>
+              <option value="agua">{{ $t('admin.reportes.categories.agua') }}</option>
+              <option value="alcantarillado">{{ $t('admin.reportes.categories.alcantarillado') }}</option>
+              <option value="parques">{{ $t('admin.reportes.categories.parques') }}</option>
+              <option value="señalizacion">{{ $t('admin.reportes.categories.señalizacion') }}</option>
+              <option value="seguridad">{{ $t('admin.reportes.categories.seguridad') }}</option>
+              <option value="ruido">{{ $t('admin.reportes.categories.ruido') }}</option>
+              <option value="otro">{{ $t('admin.reportes.categories.otro') }}</option>
+            </select>
+            <select
+              v-model="filtroPrioridad"
+              class="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 text-xs sm:text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 truncate"
+            >
+              <option value="">{{ $t('admin.reportes.filters.allPriorities') }}</option>
+              <option value="urgente">{{ $t('admin.reportes.priorities.urgente') }}</option>
+              <option value="alta">{{ $t('admin.reportes.priorities.alta') }}</option>
+              <option value="media">{{ $t('admin.reportes.priorities.media') }}</option>
+              <option value="baja">{{ $t('admin.reportes.priorities.baja') }}</option>
+            </select>
+            <button
+              @click="cargarReportes"
+              class="px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 text-xs sm:text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-1 sm:gap-2 col-span-2 sm:col-span-1"
+            >
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              <span class="truncate">{{ $t('admin.reportes.filters.update') }}</span>
+            </button>
+          </div>
         </div>
       </div>
 
       <!-- Tablero Kanban - Responsive -->
       <div v-if="!cargando">
-        <!-- Vista móvil y tablet: Tabs -->
+        <!-- Vista móvil y tablet: Tabs optimizados -->
         <div class="block xl:hidden">
-          <div class="flex gap-2 mb-4 overflow-x-auto pb-2">
+          <div class="flex gap-1.5 sm:gap-2 mb-3 sm:mb-4 overflow-x-auto pb-2 -mx-2 px-2 sm:mx-0 sm:px-0 scrollbar-thin scrollbar-thumb-gray-300">
             <button
               @click="tabActivo = 'pendientes'"
-              class="px-4 py-2 rounded-lg font-semibold whitespace-nowrap transition-all text-xs sm:text-sm"
-              :class="tabActivo === 'pendientes' ? 'bg-yellow-100 text-yellow-800 ring-2 ring-yellow-400' : 'bg-gray-100 text-gray-600'"
+              class="px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-md sm:rounded-lg font-medium sm:font-semibold whitespace-nowrap transition-all text-[10px] sm:text-xs md:text-sm flex-shrink-0 min-w-0"
+              :class="tabActivo === 'pendientes' ? 'bg-yellow-100 text-yellow-800 ring-2 ring-yellow-400' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'"
             >
-              ⏳ {{ $t('admin.reportes.stats.pending') }} ({{ reportesPendientesFiltrados.length }})
+              <span class="hidden xs:inline">⏳ </span>{{ $t('admin.reportes.stats.pending') }} ({{ reportesPendientesFiltrados.length }})
             </button>
             <button
               @click="tabActivo = 'revision'"
-              class="px-4 py-2 rounded-lg font-semibold whitespace-nowrap transition-all text-xs sm:text-sm"
-              :class="tabActivo === 'revision' ? 'bg-blue-100 text-blue-800 ring-2 ring-blue-400' : 'bg-gray-100 text-gray-600'"
+              class="px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-md sm:rounded-lg font-medium sm:font-semibold whitespace-nowrap transition-all text-[10px] sm:text-xs md:text-sm flex-shrink-0 min-w-0"
+              :class="tabActivo === 'revision' ? 'bg-blue-100 text-blue-800 ring-2 ring-blue-400' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'"
             >
-              🔍 {{ $t('admin.reportes.stats.inReview') }} ({{ reportesRevisionFiltrados.length }})
+              <span class="hidden xs:inline">🔍 </span>{{ $t('admin.reportes.stats.inReview') }} ({{ reportesRevisionFiltrados.length }})
             </button>
             <button
               @click="tabActivo = 'proceso'"
-              class="px-4 py-2 rounded-lg font-semibold whitespace-nowrap transition-all text-xs sm:text-sm"
-              :class="tabActivo === 'proceso' ? 'bg-purple-100 text-purple-800 ring-2 ring-purple-400' : 'bg-gray-100 text-gray-600'"
+              class="px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-md sm:rounded-lg font-medium sm:font-semibold whitespace-nowrap transition-all text-[10px] sm:text-xs md:text-sm flex-shrink-0 min-w-0"
+              :class="tabActivo === 'proceso' ? 'bg-purple-100 text-purple-800 ring-2 ring-purple-400' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'"
             >
-              ⚙️ {{ $t('admin.reportes.stats.inProcess') }} ({{ reportesProcesoFiltrados.length }})
+              <span class="hidden xs:inline">⚙️ </span>{{ $t('admin.reportes.stats.inProcess') }} ({{ reportesProcesoFiltrados.length }})
             </button>
             <button
               @click="tabActivo = 'resueltos'"
-              class="px-4 py-2 rounded-lg font-semibold whitespace-nowrap transition-all text-xs sm:text-sm"
-              :class="tabActivo === 'resueltos' ? 'bg-green-100 text-green-800 ring-2 ring-green-400' : 'bg-gray-100 text-gray-600'"
+              class="px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-md sm:rounded-lg font-medium sm:font-semibold whitespace-nowrap transition-all text-[10px] sm:text-xs md:text-sm flex-shrink-0 min-w-0"
+              :class="tabActivo === 'resueltos' ? 'bg-green-100 text-green-800 ring-2 ring-green-400' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'"
             >
               ✅ {{ $t('admin.reportes.stats.resolved') }} ({{ reportesResueltosFiltrados.length }})
             </button>
           </div>
 
           <!-- Contenido del tab activo - Pendientes -->
-          <div v-show="tabActivo === 'pendientes'" class="bg-yellow-50 rounded-xl shadow-lg border-2 border-yellow-200">
-            <div class="bg-yellow-100 px-3 sm:px-6 py-3 sm:py-4 rounded-t-xl border-b-2 border-yellow-200">
-              <h3 class="font-bold text-yellow-800 flex items-center gap-2 text-sm sm:text-base">
-                <span class="text-xl sm:text-2xl">⏳</span>
-                {{ $t('admin.reportes.stats.pending') }}
-                <span class="ml-auto bg-yellow-200 text-yellow-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">
+          <div v-show="tabActivo === 'pendientes'" class="bg-yellow-50 rounded-lg sm:rounded-xl shadow-md sm:shadow-lg border border-yellow-200 sm:border-2">
+            <div class="bg-yellow-100 px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 rounded-t-lg sm:rounded-t-xl border-b border-yellow-200 sm:border-b-2">
+              <h3 class="font-semibold sm:font-bold text-yellow-800 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm md:text-base">
+                <span class="text-base sm:text-xl md:text-2xl">⏳</span>
+                <span class="truncate">{{ $t('admin.reportes.stats.pending') }}</span>
+                <span class="ml-auto bg-yellow-200 text-yellow-800 px-1.5 sm:px-2 md:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs md:text-sm flex-shrink-0">
                   {{ reportesPendientesFiltrados.length }}
                 </span>
               </h3>
             </div>
-            <div class="p-3 sm:p-4 space-y-3 sm:space-y-4 max-h-[60vh] overflow-y-auto">
+            <div class="p-2 sm:p-3 md:p-4 space-y-2 sm:space-y-3 md:space-y-4 max-h-[60vh] overflow-y-auto">
               <div
                 v-for="reporte in reportesPendientesFiltrados"
                 :key="reporte.id"
-                class="bg-white rounded-lg shadow-md p-3 sm:p-4 hover:shadow-xl transition-shadow cursor-pointer border-l-4"
+                class="bg-white rounded-md sm:rounded-lg shadow-sm sm:shadow-md p-2 sm:p-3 md:p-4 hover:shadow-lg sm:hover:shadow-xl transition-shadow cursor-pointer border-l-4 active:scale-[0.98]"
                 :class="getBorderColor(reporte.prioridad)"
                 @click="verDetalle(reporte)"
               >
-                <div class="flex items-start justify-between mb-2">
-                  <span class="text-[10px] sm:text-xs font-semibold px-2 py-1 rounded capitalize bg-gray-100 text-gray-700">
+                <div class="flex items-start justify-between mb-1.5 sm:mb-2 gap-1">
+                  <span class="text-[9px] sm:text-[10px] md:text-xs font-medium sm:font-semibold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded capitalize bg-gray-100 text-gray-700 truncate max-w-[60%]">
                     {{ $t(`admin.reportes.categories.${reporte.categoria}`) }}
                   </span>
-                  <span class="text-[10px] sm:text-xs font-bold px-2 py-1 rounded uppercase"
+                  <span class="text-[9px] sm:text-[10px] md:text-xs font-semibold sm:font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded uppercase flex-shrink-0"
                         :class="getPrioridadBadge(reporte.prioridad)">
                     {{ $t(`admin.reportes.priorities.${reporte.prioridad}`) }}
                   </span>
                 </div>
                 
-                <p class="text-xs sm:text-sm text-gray-700 line-clamp-3 mb-2 sm:mb-3">
+                <p class="text-[10px] sm:text-xs md:text-sm text-gray-700 line-clamp-2 sm:line-clamp-3 mb-1.5 sm:mb-2 md:mb-3 leading-snug">
                   {{ reporte.descripcion }}
                 </p>
                 
-                <div class="text-[10px] sm:text-xs text-gray-500 space-y-1 mb-2 sm:mb-3">
-                  <p><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
+                <div class="text-[9px] sm:text-[10px] md:text-xs text-gray-500 space-y-0.5 sm:space-y-1 mb-1.5 sm:mb-2 md:mb-3">
+                  <p class="truncate"><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
                   <p><strong>📅</strong> {{ formatFechaCorta(reporte.created_at) }}</p>
                 </div>
 
                 <button
                   @click.stop="cambiarEstado(reporte.id, 'en_revision')"
-                  class="w-full px-3 py-1.5 bg-blue-100 text-blue-700 rounded text-xs font-semibold hover:bg-blue-200 transition-colors"
+                  class="w-full px-2 sm:px-3 py-1 sm:py-1.5 md:py-2 bg-blue-100 text-blue-700 rounded text-[10px] sm:text-xs md:text-sm font-medium sm:font-semibold hover:bg-blue-200 active:bg-blue-300 transition-colors min-h-[36px] sm:min-h-[40px]"
                 >
                   → {{ $t('admin.reportes.actions.review') }}
                 </button>
               </div>
-              <div v-if="reportesPendientesFiltrados.length === 0" class="text-center py-8 text-gray-500 text-sm">
+              <div v-if="reportesPendientesFiltrados.length === 0" class="text-center py-6 sm:py-8 text-gray-500 text-xs sm:text-sm">
                 {{ $t('admin.reportes.empty.pending') }}
               </div>
             </div>
           </div>
 
           <!-- Contenido del tab activo - Revisión -->
-          <div v-show="tabActivo === 'revision'" class="bg-blue-50 rounded-xl shadow-lg border-2 border-blue-200">
-            <div class="bg-blue-100 px-3 sm:px-6 py-3 sm:py-4 rounded-t-xl border-b-2 border-blue-200">
-              <h3 class="font-bold text-blue-800 flex items-center gap-2 text-sm sm:text-base">
-                <span class="text-xl sm:text-2xl">🔍</span>
-                {{ $t('admin.reportes.stats.inReview') }}
-                <span class="ml-auto bg-blue-200 text-blue-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">
+          <div v-show="tabActivo === 'revision'" class="bg-blue-50 rounded-lg sm:rounded-xl shadow-md sm:shadow-lg border border-blue-200 sm:border-2">
+            <div class="bg-blue-100 px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 rounded-t-lg sm:rounded-t-xl border-b border-blue-200 sm:border-b-2">
+              <h3 class="font-semibold sm:font-bold text-blue-800 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm md:text-base">
+                <span class="text-base sm:text-xl md:text-2xl">🔍</span>
+                <span class="truncate">{{ $t('admin.reportes.stats.inReview') }}</span>
+                <span class="ml-auto bg-blue-200 text-blue-800 px-1.5 sm:px-2 md:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs md:text-sm flex-shrink-0">
                   {{ reportesRevisionFiltrados.length }}
                 </span>
               </h3>
             </div>
-            <div class="p-3 sm:p-4 space-y-3 sm:space-y-4 max-h-[60vh] overflow-y-auto">
+            <div class="p-2 sm:p-3 md:p-4 space-y-2 sm:space-y-3 md:space-y-4 max-h-[60vh] overflow-y-auto">
               <div
                 v-for="reporte in reportesRevisionFiltrados"
                 :key="reporte.id"
-                class="bg-white rounded-lg shadow-md p-3 sm:p-4 hover:shadow-xl transition-shadow cursor-pointer border-l-4"
+                class="bg-white rounded-md sm:rounded-lg shadow-sm sm:shadow-md p-2 sm:p-3 md:p-4 hover:shadow-lg sm:hover:shadow-xl transition-shadow cursor-pointer border-l-4 active:scale-[0.98]"
                 :class="getBorderColor(reporte.prioridad)"
                 @click="verDetalle(reporte)"
               >
-                <div class="flex items-start justify-between mb-2">
-                  <span class="text-[10px] sm:text-xs font-semibold px-2 py-1 rounded capitalize bg-gray-100 text-gray-700">
+                <div class="flex items-start justify-between mb-1.5 sm:mb-2 gap-1">
+                  <span class="text-[9px] sm:text-[10px] md:text-xs font-medium sm:font-semibold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded capitalize bg-gray-100 text-gray-700 truncate max-w-[60%]">
                     {{ $t(`admin.reportes.categories.${reporte.categoria}`) }}
                   </span>
-                  <span class="text-[10px] sm:text-xs font-bold px-2 py-1 rounded uppercase"
+                  <span class="text-[9px] sm:text-[10px] md:text-xs font-semibold sm:font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded uppercase flex-shrink-0"
                         :class="getPrioridadBadge(reporte.prioridad)">
                     {{ $t(`admin.reportes.priorities.${reporte.prioridad}`) }}
                   </span>
                 </div>
                 
-                <p class="text-xs sm:text-sm text-gray-700 line-clamp-3 mb-2 sm:mb-3">
+                <p class="text-[10px] sm:text-xs md:text-sm text-gray-700 line-clamp-2 sm:line-clamp-3 mb-1.5 sm:mb-2 md:mb-3 leading-snug">
                   {{ reporte.descripcion }}
                 </p>
                 
-                <div class="text-[10px] sm:text-xs text-gray-500 space-y-1 mb-2 sm:mb-3">
-                  <p><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
+                <div class="text-[9px] sm:text-[10px] md:text-xs text-gray-500 space-y-0.5 sm:space-y-1 mb-1.5 sm:mb-2 md:mb-3">
+                  <p class="truncate"><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
                   <p><strong>📅</strong> {{ formatFechaCorta(reporte.created_at) }}</p>
                 </div>
 
-                <div class="flex gap-2">
+                <div class="flex gap-1.5 sm:gap-2">
                   <button
                     @click.stop="cambiarEstado(reporte.id, 'pendiente')"
-                    class="flex-1 px-3 py-1.5 bg-yellow-100 text-yellow-700 rounded text-xs font-semibold hover:bg-yellow-200 transition-colors"
+                    class="flex-1 px-2 sm:px-3 py-1 sm:py-1.5 md:py-2 bg-yellow-100 text-yellow-700 rounded text-[10px] sm:text-xs md:text-sm font-medium sm:font-semibold hover:bg-yellow-200 active:bg-yellow-300 transition-colors min-h-[36px] sm:min-h-[40px]"
                   >
-                    ← {{ $t('admin.reportes.actions.toPending') }}
                   </button>
                   <button
                     @click.stop="cambiarEstado(reporte.id, 'en_proceso')"
-                    class="flex-1 px-3 py-1.5 bg-purple-100 text-purple-700 rounded text-xs font-semibold hover:bg-purple-200 transition-colors"
+                    class="flex-1 px-2 sm:px-3 py-1 sm:py-1.5 md:py-2 bg-purple-100 text-purple-700 rounded text-[10px] sm:text-xs md:text-sm font-medium sm:font-semibold hover:bg-purple-200 active:bg-purple-300 transition-colors min-h-[36px] sm:min-h-[40px]"
                   >
                     → {{ $t('admin.reportes.actions.process') }}
                   </button>
                 </div>
               </div>
-              <div v-if="reportesRevisionFiltrados.length === 0" class="text-center py-8 text-gray-500 text-sm">
+              <div v-if="reportesRevisionFiltrados.length === 0" class="text-center py-6 sm:py-8 text-gray-500 text-xs sm:text-sm">
                 {{ $t('admin.reportes.empty.review') }}
               </div>
             </div>
           </div>
 
           <!-- Contenido del tab activo - En Proceso -->
-          <div v-show="tabActivo === 'proceso'" class="bg-purple-50 rounded-xl shadow-lg border-2 border-purple-200">
-            <div class="bg-purple-100 px-3 sm:px-6 py-3 sm:py-4 rounded-t-xl border-b-2 border-purple-200">
-              <h3 class="font-bold text-purple-800 flex items-center gap-2 text-sm sm:text-base">
-                <span class="text-xl sm:text-2xl">⚙️</span>
-                {{ $t('admin.reportes.stats.inProcess') }}
-                <span class="ml-auto bg-purple-200 text-purple-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">
+          <div v-show="tabActivo === 'proceso'" class="bg-purple-50 rounded-lg sm:rounded-xl shadow-md sm:shadow-lg border border-purple-200 sm:border-2">
+            <div class="bg-purple-100 px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 rounded-t-lg sm:rounded-t-xl border-b border-purple-200 sm:border-b-2">
+              <h3 class="font-semibold sm:font-bold text-purple-800 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm md:text-base">
+                <span class="text-base sm:text-xl md:text-2xl">⚙️</span>
+                <span class="truncate">{{ $t('admin.reportes.stats.inProcess') }}</span>
+                <span class="ml-auto bg-purple-200 text-purple-800 px-1.5 sm:px-2 md:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs md:text-sm flex-shrink-0">
                   {{ reportesProcesoFiltrados.length }}
                 </span>
               </h3>
             </div>
-            <div class="p-3 sm:p-4 space-y-3 sm:space-y-4 max-h-[60vh] overflow-y-auto">
+            <div class="p-2 sm:p-3 md:p-4 space-y-2 sm:space-y-3 md:space-y-4 max-h-[60vh] overflow-y-auto">
               <div
                 v-for="reporte in reportesProcesoFiltrados"
                 :key="reporte.id"
-                class="bg-white rounded-lg shadow-md p-3 sm:p-4 hover:shadow-xl transition-shadow cursor-pointer border-l-4"
+                class="bg-white rounded-md sm:rounded-lg shadow-sm sm:shadow-md p-2 sm:p-3 md:p-4 hover:shadow-lg sm:hover:shadow-xl transition-shadow cursor-pointer border-l-4 active:scale-[0.98]"
                 :class="getBorderColor(reporte.prioridad)"
                 @click="verDetalle(reporte)"
               >
-                <div class="flex items-start justify-between mb-2">
-                  <span class="text-[10px] sm:text-xs font-semibold px-2 py-1 rounded capitalize bg-gray-100 text-gray-700">
+                <div class="flex items-start justify-between mb-1.5 sm:mb-2 gap-1">
+                  <span class="text-[9px] sm:text-[10px] md:text-xs font-medium sm:font-semibold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded capitalize bg-gray-100 text-gray-700 truncate max-w-[60%]">
                     {{ $t(`admin.reportes.categories.${reporte.categoria}`) }}
                   </span>
-                  <span class="text-[10px] sm:text-xs font-bold px-2 py-1 rounded uppercase"
+                  <span class="text-[9px] sm:text-[10px] md:text-xs font-semibold sm:font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded uppercase flex-shrink-0"
                         :class="getPrioridadBadge(reporte.prioridad)">
                     {{ $t(`admin.reportes.priorities.${reporte.prioridad}`) }}
                   </span>
                 </div>
                 
-                <p class="text-xs sm:text-sm text-gray-700 line-clamp-3 mb-2 sm:mb-3">
+                <p class="text-[10px] sm:text-xs md:text-sm text-gray-700 line-clamp-2 sm:line-clamp-3 mb-1.5 sm:mb-2 md:mb-3 leading-snug">
                   {{ reporte.descripcion }}
                 </p>
                 
-                <div class="text-[10px] sm:text-xs text-gray-500 space-y-1 mb-2 sm:mb-3">
-                  <p><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
+                <div class="text-[9px] sm:text-[10px] md:text-xs text-gray-500 space-y-0.5 sm:space-y-1 mb-1.5 sm:mb-2 md:mb-3">
+                  <p class="truncate"><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
                   <p><strong>📅</strong> {{ formatFechaCorta(reporte.created_at) }}</p>
                 </div>
 
-                <div class="flex gap-2">
+                <div class="flex gap-1.5 sm:gap-2">
                   <button
                     @click.stop="cambiarEstado(reporte.id, 'en_revision')"
-                    class="flex-1 px-3 py-1.5 bg-blue-100 text-blue-700 rounded text-xs font-semibold hover:bg-blue-200 transition-colors"
+                    class="flex-1 px-2 sm:px-3 py-1 sm:py-1.5 md:py-2 bg-blue-100 text-blue-700 rounded text-[10px] sm:text-xs md:text-sm font-medium sm:font-semibold hover:bg-blue-200 active:bg-blue-300 transition-colors min-h-[36px] sm:min-h-[40px]"
                   >
                     ← {{ $t('admin.reportes.actions.toReview') }}
                   </button>
                   <button
                     @click.stop="cambiarEstado(reporte.id, 'resuelto')"
-                    class="flex-1 px-3 py-1.5 bg-green-100 text-green-700 rounded text-xs font-semibold hover:bg-green-200 transition-colors"
+                    class="flex-1 px-2 sm:px-3 py-1 sm:py-1.5 md:py-2 bg-green-100 text-green-700 rounded text-[10px] sm:text-xs md:text-sm font-medium sm:font-semibold hover:bg-green-200 active:bg-green-300 transition-colors min-h-[36px] sm:min-h-[40px]"
                   >
                     → {{ $t('admin.reportes.actions.resolve') }}
                   </button>
                 </div>
               </div>
-              <div v-if="reportesProcesoFiltrados.length === 0" class="text-center py-8 text-gray-500 text-sm">
+              <div v-if="reportesProcesoFiltrados.length === 0" class="text-center py-6 sm:py-8 text-gray-500 text-xs sm:text-sm">
                 {{ $t('admin.reportes.empty.process') }}
               </div>
             </div>
           </div>
 
           <!-- Contenido del tab activo - Resueltos -->
-          <div v-show="tabActivo === 'resueltos'" class="bg-green-50 rounded-xl shadow-lg border-2 border-green-200">
-            <div class="bg-green-100 px-3 sm:px-6 py-3 sm:py-4 rounded-t-xl border-b-2 border-green-200">
-              <h3 class="font-bold text-green-800 flex items-center gap-2 text-sm sm:text-base">
-                <span class="text-xl sm:text-2xl">✅</span>
-                {{ $t('admin.reportes.stats.resolved') }}
-                <span class="ml-auto bg-green-200 text-green-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">
+          <div v-show="tabActivo === 'resueltos'" class="bg-green-50 rounded-lg sm:rounded-xl shadow-md sm:shadow-lg border border-green-200 sm:border-2">
+            <div class="bg-green-100 px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 rounded-t-lg sm:rounded-t-xl border-b border-green-200 sm:border-b-2">
+              <h3 class="font-semibold sm:font-bold text-green-800 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm md:text-base">
+                <span class="text-base sm:text-xl md:text-2xl">✅</span>
+                <span class="truncate">{{ $t('admin.reportes.stats.resolved') }}</span>
+                <span class="ml-auto bg-green-200 text-green-800 px-1.5 sm:px-2 md:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs md:text-sm flex-shrink-0">
                   {{ reportesResueltosFiltrados.length }}
                 </span>
               </h3>
             </div>
-            <div class="p-3 sm:p-4 space-y-3 sm:space-y-4 max-h-[60vh] overflow-y-auto">
+            <div class="p-2 sm:p-3 md:p-4 space-y-2 sm:space-y-3 md:space-y-4 max-h-[60vh] overflow-y-auto">
               <div
                 v-for="reporte in reportesResueltosFiltrados"
                 :key="reporte.id"
-                class="bg-white rounded-lg shadow-md p-3 sm:p-4 hover:shadow-xl transition-shadow cursor-pointer border-l-4"
+                class="bg-white rounded-md sm:rounded-lg shadow-sm sm:shadow-md p-2 sm:p-3 md:p-4 hover:shadow-lg sm:hover:shadow-xl transition-shadow cursor-pointer border-l-4 active:scale-[0.98]"
                 :class="getBorderColor(reporte.prioridad)"
                 @click="verDetalle(reporte)"
               >
-                <div class="flex items-start justify-between mb-2">
-                  <span class="text-[10px] sm:text-xs font-semibold px-2 py-1 rounded capitalize bg-gray-100 text-gray-700">
+                <div class="flex items-start justify-between mb-1.5 sm:mb-2 gap-1">
+                  <span class="text-[9px] sm:text-[10px] md:text-xs font-medium sm:font-semibold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded capitalize bg-gray-100 text-gray-700 truncate max-w-[60%]">
                     {{ $t(`admin.reportes.categories.${reporte.categoria}`) }}
                   </span>
-                  <span class="text-[10px] sm:text-xs font-bold px-2 py-1 rounded uppercase"
+                  <span class="text-[9px] sm:text-[10px] md:text-xs font-semibold sm:font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded uppercase flex-shrink-0"
                         :class="getPrioridadBadge(reporte.prioridad)">
                     {{ $t(`admin.reportes.priorities.${reporte.prioridad}`) }}
                   </span>
                 </div>
                 
-                <p class="text-xs sm:text-sm text-gray-700 line-clamp-3 mb-2 sm:mb-3">
+                <p class="text-[10px] sm:text-xs md:text-sm text-gray-700 line-clamp-2 sm:line-clamp-3 mb-1.5 sm:mb-2 md:mb-3 leading-snug">
                   {{ reporte.descripcion }}
                 </p>
                 
-                <div class="text-[10px] sm:text-xs text-gray-500 space-y-1 mb-2 sm:mb-3">
-                  <p><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
+                <div class="text-[9px] sm:text-[10px] md:text-xs text-gray-500 space-y-0.5 sm:space-y-1 mb-1.5 sm:mb-2 md:mb-3">
+                  <p class="truncate"><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
                   <p><strong>📅</strong> {{ formatFechaCorta(reporte.created_at) }}</p>
-                  <p v-if="reporte.fecha_resolucion"><strong>✓</strong> {{ $t('admin.reportes.detail.resolved') }}: {{ formatFechaCorta(reporte.fecha_resolucion) }}</p>
+                  <p v-if="reporte.fecha_resolucion" class="truncate"><strong>✓</strong> {{ $t('admin.reportes.detail.resolved') }}: {{ formatFechaCorta(reporte.fecha_resolucion) }}</p>
                 </div>
 
                 <button
                   @click.stop="cambiarEstado(reporte.id, 'en_proceso')"
-                  class="w-full px-3 py-1.5 bg-purple-100 text-purple-700 rounded text-xs font-semibold hover:bg-purple-200 transition-colors"
+                  class="w-full px-2 sm:px-3 py-1 sm:py-1.5 md:py-2 bg-purple-100 text-purple-700 rounded text-[10px] sm:text-xs md:text-sm font-medium sm:font-semibold hover:bg-purple-200 active:bg-purple-300 transition-colors min-h-[36px] sm:min-h-[40px]"
                 >
                   ← {{ $t('admin.reportes.actions.reopen') }}
                 </button>
               </div>
-              <div v-if="reportesResueltosFiltrados.length === 0" class="text-center py-8 text-gray-500 text-sm">
+              <div v-if="reportesResueltosFiltrados.length === 0" class="text-center py-6 sm:py-8 text-gray-500 text-xs sm:text-sm">
                 {{ $t('admin.reportes.empty.resolved') }}
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Vista desktop: Grid con 4 columnas y drag & drop -->
-        <div class="hidden xl:grid xl:grid-cols-4 gap-4 lg:gap-6">
+        <!-- Vista desktop/tablet: Grid adaptativo con drag & drop -->
+        <div class="hidden md:grid md:grid-cols-2 xl:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
         <!-- Columna: Pendientes -->
-        <div class="bg-yellow-50 rounded-xl shadow-lg border-2 border-yellow-200">
-          <div class="bg-yellow-100 px-6 py-4 rounded-t-xl border-b-2 border-yellow-200">
-            <h3 class="font-bold text-yellow-800 flex items-center gap-2">
-              <span class="text-2xl">⏳</span>
-              {{ $t('admin.reportes.stats.pending') }}
-              <span class="ml-auto bg-yellow-200 text-yellow-800 px-3 py-1 rounded-full text-sm">
+        <div class="bg-yellow-50 rounded-lg md:rounded-xl shadow-md md:shadow-lg border border-yellow-200 md:border-2">
+          <div class="bg-yellow-100 px-3 md:px-4 lg:px-6 py-2.5 md:py-3 lg:py-4 rounded-t-lg md:rounded-t-xl border-b border-yellow-200 md:border-b-2">
+            <h3 class="font-semibold md:font-bold text-yellow-800 flex items-center gap-1.5 md:gap-2 text-sm md:text-base">
+              <span class="text-lg md:text-xl lg:text-2xl">⏳</span>
+              <span class="truncate">{{ $t('admin.reportes.stats.pending') }}</span>
+              <span class="ml-auto bg-yellow-200 text-yellow-800 px-2 md:px-2.5 lg:px-3 py-0.5 md:py-1 rounded-full text-xs md:text-sm flex-shrink-0">
                 {{ reportesPendientesFiltrados.length }}
               </span>
             </h3>
           </div>
           <div 
-            class="p-4 space-y-4 max-h-[calc(100vh-320px)] overflow-y-auto"
+            class="p-2.5 md:p-3 lg:p-4 space-y-2.5 md:space-y-3 lg:space-y-4 max-h-[calc(100vh-320px)] overflow-y-auto"
             @dragover="onDragOver"
             @dragenter="(e) => onDragEnter(e, 'pendiente')"
             @dragleave="onDragLeave"
@@ -366,58 +370,58 @@
               draggable="true"
               @dragstart="(e) => onDragStart(e, reporte)"
               @dragend="onDragEnd"
-              class="bg-white rounded-lg shadow-md p-4 hover:shadow-xl transition-shadow cursor-move border-l-4"
+              class="bg-white rounded-md md:rounded-lg shadow-sm md:shadow-md p-2.5 md:p-3 lg:p-4 hover:shadow-lg md:hover:shadow-xl transition-shadow cursor-move border-l-4 active:scale-[0.98]"
               :class="getBorderColor(reporte.prioridad)"
               @click="verDetalle(reporte)"
             >
-              <div class="flex items-start justify-between mb-2">
-                <span class="text-xs font-semibold px-2 py-1 rounded capitalize bg-gray-100 text-gray-700">
+              <div class="flex items-start justify-between mb-1.5 md:mb-2 gap-1">
+                <span class="text-[10px] md:text-xs font-medium md:font-semibold px-1.5 md:px-2 py-0.5 md:py-1 rounded capitalize bg-gray-100 text-gray-700 truncate max-w-[55%]">
                   {{ $t(`admin.reportes.categories.${reporte.categoria}`) }}
                 </span>
-                <span class="text-xs font-bold px-2 py-1 rounded uppercase"
+                <span class="text-[10px] md:text-xs font-semibold md:font-bold px-1.5 md:px-2 py-0.5 md:py-1 rounded uppercase flex-shrink-0"
                       :class="getPrioridadBadge(reporte.prioridad)">
                   {{ $t(`admin.reportes.priorities.${reporte.prioridad}`) }}
                 </span>
               </div>
               
-              <p class="text-sm text-gray-700 line-clamp-3 mb-3">
+              <p class="text-xs md:text-sm text-gray-700 line-clamp-2 md:line-clamp-3 mb-2 md:mb-3 leading-snug">
                 {{ reporte.descripcion }}
               </p>
               
-              <div class="text-xs text-gray-500 space-y-1 mb-3">
-                <p><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
+              <div class="text-[10px] md:text-xs text-gray-500 space-y-0.5 md:space-y-1 mb-2 md:mb-3">
+                <p class="truncate"><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
                 <p><strong>📅</strong> {{ formatFechaCorta(reporte.created_at) }}</p>
               </div>
 
-              <div class="flex gap-2">
+              <div class="flex gap-1.5 md:gap-2">
                 <button
                   v-if="reporte.estado === 'pendiente'"
                   @click.stop="cambiarEstado(reporte.id, 'en_revision')"
-                  class="flex-1 px-3 py-1.5 bg-blue-100 text-blue-700 rounded text-xs font-semibold hover:bg-blue-200 transition-colors"
+                  class="flex-1 px-2 md:px-2.5 lg:px-3 py-1.5 md:py-2 bg-blue-100 text-blue-700 rounded text-[10px] md:text-xs font-medium md:font-semibold hover:bg-blue-200 active:bg-blue-300 transition-colors min-h-[36px]"
                 >
                   → {{ $t('admin.reportes.actions.review') }}
                 </button>
               </div>
             </div>
-            <div v-if="reportesPendientesFiltrados.length === 0" class="text-center py-8 text-gray-500">
+            <div v-if="reportesPendientesFiltrados.length === 0" class="text-center py-6 md:py-8 text-gray-500 text-xs md:text-sm">
               {{ $t('admin.reportes.empty.pending') }}
             </div>
           </div>
         </div>
 
         <!-- Columna: En Revisión -->
-        <div class="bg-blue-50 rounded-xl shadow-lg border-2 border-blue-200">
-          <div class="bg-blue-100 px-6 py-4 rounded-t-xl border-b-2 border-blue-200">
-            <h3 class="font-bold text-blue-800 flex items-center gap-2">
-              <span class="text-2xl">🔍</span>
-              {{ $t('admin.reportes.stats.inReview') }}
-              <span class="ml-auto bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm">
+        <div class="bg-blue-50 rounded-lg md:rounded-xl shadow-md md:shadow-lg border border-blue-200 md:border-2">
+          <div class="bg-blue-100 px-3 md:px-4 lg:px-6 py-2.5 md:py-3 lg:py-4 rounded-t-lg md:rounded-t-xl border-b border-blue-200 md:border-b-2">
+            <h3 class="font-semibold md:font-bold text-blue-800 flex items-center gap-1.5 md:gap-2 text-sm md:text-base">
+              <span class="text-lg md:text-xl lg:text-2xl">🔍</span>
+              <span class="truncate">{{ $t('admin.reportes.stats.inReview') }}</span>
+              <span class="ml-auto bg-blue-200 text-blue-800 px-2 md:px-2.5 lg:px-3 py-0.5 md:py-1 rounded-full text-xs md:text-sm flex-shrink-0">
                 {{ reportesRevisionFiltrados.length }}
               </span>
             </h3>
           </div>
           <div 
-            class="p-4 space-y-4 max-h-[calc(100vh-320px)] overflow-y-auto"
+            class="p-2.5 md:p-3 lg:p-4 space-y-2.5 md:space-y-3 lg:space-y-4 max-h-[calc(100vh-320px)] overflow-y-auto"
             @dragover="onDragOver"
             @dragenter="(e) => onDragEnter(e, 'en_revision')"
             @dragleave="onDragLeave"
@@ -429,58 +433,58 @@
               draggable="true"
               @dragstart="(e) => onDragStart(e, reporte)"
               @dragend="onDragEnd"
-              class="bg-white rounded-lg shadow-md p-4 hover:shadow-xl transition-shadow cursor-move border-l-4"
+              class="bg-white rounded-md md:rounded-lg shadow-sm md:shadow-md p-2.5 md:p-3 lg:p-4 hover:shadow-lg md:hover:shadow-xl transition-shadow cursor-move border-l-4 active:scale-[0.98]"
               :class="getBorderColor(reporte.prioridad)"
               @click="verDetalle(reporte)"
             >
-              <div class="flex items-start justify-between mb-2">
-                <span class="text-xs font-semibold px-2 py-1 rounded capitalize bg-gray-100 text-gray-700">
+              <div class="flex items-start justify-between mb-1.5 md:mb-2 gap-1">
+                <span class="text-[10px] md:text-xs font-medium md:font-semibold px-1.5 md:px-2 py-0.5 md:py-1 rounded capitalize bg-gray-100 text-gray-700 truncate max-w-[55%]">
                   {{ $t(`admin.reportes.categories.${reporte.categoria}`) }}
                 </span>
-                <span class="text-xs font-bold px-2 py-1 rounded uppercase"
+                <span class="text-[10px] md:text-xs font-semibold md:font-bold px-1.5 md:px-2 py-0.5 md:py-1 rounded uppercase flex-shrink-0"
                       :class="getPrioridadBadge(reporte.prioridad)">
                   {{ $t(`admin.reportes.priorities.${reporte.prioridad}`) }}
                 </span>
               </div>
               
-              <p class="text-sm text-gray-700 line-clamp-3 mb-3">
+              <p class="text-xs md:text-sm text-gray-700 line-clamp-2 md:line-clamp-3 mb-2 md:mb-3 leading-snug">
                 {{ reporte.descripcion }}
               </p>
               
-              <div class="text-xs text-gray-500 space-y-1 mb-3">
-                <p><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
+              <div class="text-[10px] md:text-xs text-gray-500 space-y-0.5 md:space-y-1 mb-2 md:mb-3">
+                <p class="truncate"><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
                 <p><strong>📅</strong> {{ formatFechaCorta(reporte.created_at) }}</p>
               </div>
 
-              <div class="flex gap-2">
+              <div class="flex gap-1.5 md:gap-2">
                 <button
                   v-if="reporte.estado === 'en_revision'"
                   @click.stop="cambiarEstado(reporte.id, 'en_proceso')"
-                  class="flex-1 px-3 py-1.5 bg-purple-100 text-purple-700 rounded text-xs font-semibold hover:bg-purple-200 transition-colors"
+                  class="flex-1 px-2 md:px-2.5 lg:px-3 py-1.5 md:py-2 bg-purple-100 text-purple-700 rounded text-[10px] md:text-xs font-medium md:font-semibold hover:bg-purple-200 active:bg-purple-300 transition-colors min-h-[36px]"
                 >
                   → {{ $t('admin.reportes.actions.process') }}
                 </button>
               </div>
             </div>
-            <div v-if="reportesRevisionFiltrados.length === 0" class="text-center py-8 text-gray-500">
+            <div v-if="reportesRevisionFiltrados.length === 0" class="text-center py-6 md:py-8 text-gray-500 text-xs md:text-sm">
               {{ $t('admin.reportes.empty.review') }}
             </div>
           </div>
         </div>
 
         <!-- Columna: En Proceso -->
-        <div class="bg-purple-50 rounded-xl shadow-lg border-2 border-purple-200">
-          <div class="bg-purple-100 px-6 py-4 rounded-t-xl border-b-2 border-purple-200">
-            <h3 class="font-bold text-purple-800 flex items-center gap-2">
-              <span class="text-2xl">⚙️</span>
-              {{ $t('admin.reportes.stats.inProcess') }}
-              <span class="ml-auto bg-purple-200 text-purple-800 px-3 py-1 rounded-full text-sm">
+        <div class="bg-purple-50 rounded-lg md:rounded-xl shadow-md md:shadow-lg border border-purple-200 md:border-2">
+          <div class="bg-purple-100 px-3 md:px-4 lg:px-6 py-2.5 md:py-3 lg:py-4 rounded-t-lg md:rounded-t-xl border-b border-purple-200 md:border-b-2">
+            <h3 class="font-semibold md:font-bold text-purple-800 flex items-center gap-1.5 md:gap-2 text-sm md:text-base">
+              <span class="text-lg md:text-xl lg:text-2xl">⚙️</span>
+              <span class="truncate">{{ $t('admin.reportes.stats.inProcess') }}</span>
+              <span class="ml-auto bg-purple-200 text-purple-800 px-2 md:px-2.5 lg:px-3 py-0.5 md:py-1 rounded-full text-xs md:text-sm flex-shrink-0">
                 {{ reportesProcesoFiltrados.length }}
               </span>
             </h3>
           </div>
           <div 
-            class="p-4 space-y-4 max-h-[calc(100vh-320px)] overflow-y-auto"
+            class="p-2.5 md:p-3 lg:p-4 space-y-2.5 md:space-y-3 lg:space-y-4 max-h-[calc(100vh-320px)] overflow-y-auto"
             @dragover="onDragOver"
             @dragenter="(e) => onDragEnter(e, 'en_proceso')"
             @dragleave="onDragLeave"
@@ -492,58 +496,58 @@
               draggable="true"
               @dragstart="(e) => onDragStart(e, reporte)"
               @dragend="onDragEnd"
-              class="bg-white rounded-lg shadow-md p-4 hover:shadow-xl transition-shadow cursor-move border-l-4"
+              class="bg-white rounded-md md:rounded-lg shadow-sm md:shadow-md p-2.5 md:p-3 lg:p-4 hover:shadow-lg md:hover:shadow-xl transition-shadow cursor-move border-l-4 active:scale-[0.98]"
               :class="getBorderColor(reporte.prioridad)"
               @click="verDetalle(reporte)"
             >
-              <div class="flex items-start justify-between mb-2">
-                <span class="text-xs font-semibold px-2 py-1 rounded capitalize bg-gray-100 text-gray-700">
+              <div class="flex items-start justify-between mb-1.5 md:mb-2 gap-1">
+                <span class="text-[10px] md:text-xs font-medium md:font-semibold px-1.5 md:px-2 py-0.5 md:py-1 rounded capitalize bg-gray-100 text-gray-700 truncate max-w-[55%]">
                   {{ $t(`admin.reportes.categories.${reporte.categoria}`) }}
                 </span>
-                <span class="text-xs font-bold px-2 py-1 rounded uppercase"
+                <span class="text-[10px] md:text-xs font-semibold md:font-bold px-1.5 md:px-2 py-0.5 md:py-1 rounded uppercase flex-shrink-0"
                       :class="getPrioridadBadge(reporte.prioridad)">
                   {{ $t(`admin.reportes.priorities.${reporte.prioridad}`) }}
                 </span>
               </div>
               
-              <p class="text-sm text-gray-700 line-clamp-3 mb-3">
+              <p class="text-xs md:text-sm text-gray-700 line-clamp-2 md:line-clamp-3 mb-2 md:mb-3 leading-snug">
                 {{ reporte.descripcion }}
               </p>
               
-              <div class="text-xs text-gray-500 space-y-1 mb-3">
-                <p><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
+              <div class="text-[10px] md:text-xs text-gray-500 space-y-0.5 md:space-y-1 mb-2 md:mb-3">
+                <p class="truncate"><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
                 <p><strong>📅</strong> {{ formatFechaCorta(reporte.created_at) }}</p>
               </div>
 
-              <div class="flex gap-2">
+              <div class="flex gap-1.5 md:gap-2">
                 <button
                   v-if="reporte.estado === 'en_proceso'"
                   @click.stop="cambiarEstado(reporte.id, 'resuelto')"
-                  class="flex-1 px-3 py-1.5 bg-green-100 text-green-700 rounded text-xs font-semibold hover:bg-green-200 transition-colors"
+                  class="flex-1 px-2 md:px-2.5 lg:px-3 py-1.5 md:py-2 bg-green-100 text-green-700 rounded text-[10px] md:text-xs font-medium md:font-semibold hover:bg-green-200 active:bg-green-300 transition-colors min-h-[36px]"
                 >
                   → {{ $t('admin.reportes.actions.resolve') }}
                 </button>
               </div>
             </div>
-            <div v-if="reportesProcesoFiltrados.length === 0" class="text-center py-8 text-gray-500">
+            <div v-if="reportesProcesoFiltrados.length === 0" class="text-center py-6 md:py-8 text-gray-500 text-xs md:text-sm">
               {{ $t('admin.reportes.empty.process') }}
             </div>
           </div>
         </div>
 
         <!-- Columna: Resueltos -->
-        <div class="bg-green-50 rounded-xl shadow-lg border-2 border-green-200">
-          <div class="bg-green-100 px-6 py-4 rounded-t-xl border-b-2 border-green-200">
-            <h3 class="font-bold text-green-800 flex items-center gap-2">
-              <span class="text-2xl">✅</span>
-              {{ $t('admin.reportes.stats.resolved') }}
-              <span class="ml-auto bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm">
+        <div class="bg-green-50 rounded-lg md:rounded-xl shadow-md md:shadow-lg border border-green-200 md:border-2">
+          <div class="bg-green-100 px-3 md:px-4 lg:px-6 py-2.5 md:py-3 lg:py-4 rounded-t-lg md:rounded-t-xl border-b border-green-200 md:border-b-2">
+            <h3 class="font-semibold md:font-bold text-green-800 flex items-center gap-1.5 md:gap-2 text-sm md:text-base">
+              <span class="text-lg md:text-xl lg:text-2xl">✅</span>
+              <span class="truncate">{{ $t('admin.reportes.stats.resolved') }}</span>
+              <span class="ml-auto bg-green-200 text-green-800 px-2 md:px-2.5 lg:px-3 py-0.5 md:py-1 rounded-full text-xs md:text-sm flex-shrink-0">
                 {{ reportesResueltosFiltrados.length }}
               </span>
             </h3>
           </div>
           <div 
-            class="p-4 space-y-4 max-h-[calc(100vh-320px)] overflow-y-auto"
+            class="p-2.5 md:p-3 lg:p-4 space-y-2.5 md:space-y-3 lg:space-y-4 max-h-[calc(100vh-320px)] overflow-y-auto"
             @dragover="onDragOver"
             @dragenter="(e) => onDragEnter(e, 'resuelto')"
             @dragleave="onDragLeave"
@@ -555,30 +559,30 @@
               draggable="true"
               @dragstart="(e) => onDragStart(e, reporte)"
               @dragend="onDragEnd"
-              class="bg-white rounded-lg shadow-md p-4 hover:shadow-xl transition-shadow cursor-move border-l-4"
+              class="bg-white rounded-md md:rounded-lg shadow-sm md:shadow-md p-2.5 md:p-3 lg:p-4 hover:shadow-lg md:hover:shadow-xl transition-shadow cursor-move border-l-4 active:scale-[0.98]"
               :class="getBorderColor(reporte.prioridad)"
               @click="verDetalle(reporte)"
             >
-              <div class="flex items-start justify-between mb-2">
-                <span class="text-xs font-semibold px-2 py-1 rounded capitalize bg-gray-100 text-gray-700">
+              <div class="flex items-start justify-between mb-1.5 md:mb-2 gap-1">
+                <span class="text-[10px] md:text-xs font-medium md:font-semibold px-1.5 md:px-2 py-0.5 md:py-1 rounded capitalize bg-gray-100 text-gray-700 truncate max-w-[55%]">
                   {{ $t(`admin.reportes.categories.${reporte.categoria}`) }}
                 </span>
-                <span class="text-xs font-bold px-2 py-1 rounded uppercase"
+                <span class="text-[10px] md:text-xs font-semibold md:font-bold px-1.5 md:px-2 py-0.5 md:py-1 rounded uppercase flex-shrink-0"
                       :class="getPrioridadBadge(reporte.prioridad)">
                   {{ $t(`admin.reportes.priorities.${reporte.prioridad}`) }}
                 </span>
               </div>
               
-              <p class="text-sm text-gray-700 line-clamp-3 mb-3">
+              <p class="text-xs md:text-sm text-gray-700 line-clamp-2 md:line-clamp-3 mb-2 md:mb-3 leading-snug">
                 {{ reporte.descripcion }}
               </p>
               
-              <div class="text-xs text-gray-500 space-y-1 mb-3">
-                <p><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
+              <div class="text-[10px] md:text-xs text-gray-500 space-y-0.5 md:space-y-1 mb-2 md:mb-3">
+                <p class="truncate"><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
                 <p><strong>📅</strong> {{ formatFechaCorta(reporte.created_at) }}</p>
               </div>
             </div>
-            <div v-if="reportesResueltosFiltrados.length === 0" class="text-center py-8 text-gray-500">
+            <div v-if="reportesResueltosFiltrados.length === 0" class="text-center py-6 md:py-8 text-gray-500 text-xs md:text-sm">
               {{ $t('admin.reportes.empty.resolved') }}
             </div>
           </div>
@@ -592,128 +596,128 @@
       </div>
     </div>
 
-      <!-- Modal de detalle -->
+      <!-- Modal de detalle - Optimizado para móvil -->
       <div
         v-if="reporteSeleccionado"
-        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4"
         @click.self="cerrarDetalle"
       >
-        <div class="bg-white rounded-xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-          <div class="bg-gradient-to-r from-blue-600 to-cyan-600 px-6 py-4 flex items-center justify-between">
-            <h3 class="text-xl font-bold text-white">{{ $t('admin.reportes.detail.title') }}</h3>
-            <button @click="cerrarDetalle" class="text-white hover:text-gray-200">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="bg-white rounded-lg sm:rounded-xl shadow-2xl max-w-3xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
+          <div class="bg-gradient-to-r from-blue-600 to-cyan-600 px-3 sm:px-4 md:px-6 py-2.5 sm:py-3 md:py-4 flex items-center justify-between sticky top-0 z-10">
+            <h3 class="text-sm sm:text-lg md:text-xl font-bold text-white truncate pr-2">{{ $t('admin.reportes.detail.title') }}</h3>
+            <button @click="cerrarDetalle" class="text-white hover:text-gray-200 flex-shrink-0 p-1 -mr-1">
+              <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
 
-          <div class="p-6 space-y-6">
-            <!-- Información básica -->
-            <div class="grid grid-cols-2 gap-4">
+          <div class="p-3 sm:p-4 md:p-6 space-y-3 sm:space-y-4 md:space-y-6">
+            <!-- Información básica - Grid responsive -->
+            <div class="grid grid-cols-2 gap-2 sm:gap-3 md:gap-4">
               <div>
-                <label class="text-sm font-semibold text-gray-600">{{ $t('admin.reportes.detail.category') }}</label>
-                <p class="text-lg capitalize">{{ $t(`admin.reportes.categories.${reporteSeleccionado.categoria}`) }}</p>
+                <label class="text-[10px] sm:text-xs md:text-sm font-medium sm:font-semibold text-gray-600">{{ $t('admin.reportes.detail.category') }}</label>
+                <p class="text-xs sm:text-sm md:text-lg capitalize font-medium truncate">{{ $t(`admin.reportes.categories.${reporteSeleccionado.categoria}`) }}</p>
               </div>
               <div>
-                <label class="text-sm font-semibold text-gray-600">{{ $t('admin.reportes.detail.priority') }}</label>
-                <p class="text-lg capitalize" :class="getPrioridadColor(reporteSeleccionado.prioridad)">
+                <label class="text-[10px] sm:text-xs md:text-sm font-medium sm:font-semibold text-gray-600">{{ $t('admin.reportes.detail.priority') }}</label>
+                <p class="text-xs sm:text-sm md:text-lg capitalize font-medium truncate" :class="getPrioridadColor(reporteSeleccionado.prioridad)">
                   {{ $t(`admin.reportes.priorities.${reporteSeleccionado.prioridad}`) }}
                 </p>
               </div>
               <div>
-                <label class="text-sm font-semibold text-gray-600">{{ $t('admin.reportes.detail.currentState') }}</label>
-                <p class="text-lg capitalize">{{ $t(`admin.reportes.states.${reporteSeleccionado.estado}`) }}</p>
+                <label class="text-[10px] sm:text-xs md:text-sm font-medium sm:font-semibold text-gray-600">{{ $t('admin.reportes.detail.currentState') }}</label>
+                <p class="text-xs sm:text-sm md:text-lg capitalize font-medium truncate">{{ $t(`admin.reportes.states.${reporteSeleccionado.estado}`) }}</p>
               </div>
               <div>
-                <label class="text-sm font-semibold text-gray-600">{{ $t('admin.reportes.detail.reportDate') }}</label>
-                <p class="text-lg">{{ formatFecha(reporteSeleccionado.created_at || '') }}</p>
+                <label class="text-[10px] sm:text-xs md:text-sm font-medium sm:font-semibold text-gray-600">{{ $t('admin.reportes.detail.reportDate') }}</label>
+                <p class="text-xs sm:text-sm md:text-lg truncate">{{ formatFecha(reporteSeleccionado.created_at || '') }}</p>
               </div>
             </div>
 
             <!-- Descripción -->
             <div>
-              <label class="text-sm font-semibold text-gray-600">{{ $t('admin.reportes.detail.description') }}</label>
-              <p class="mt-2 text-gray-700 bg-gray-50 p-4 rounded-lg">
+              <label class="text-[10px] sm:text-xs md:text-sm font-medium sm:font-semibold text-gray-600">{{ $t('admin.reportes.detail.description') }}</label>
+              <p class="mt-1.5 sm:mt-2 text-[11px] sm:text-xs md:text-sm text-gray-700 bg-gray-50 p-2 sm:p-3 md:p-4 rounded-md sm:rounded-lg leading-relaxed">
                 {{ reporteSeleccionado.descripcion }}
               </p>
             </div>
 
             <!-- Ubicación -->
             <div>
-              <label class="text-sm font-semibold text-gray-600">{{ $t('admin.reportes.detail.location') }}</label>
-              <div class="mt-2 bg-gray-50 p-4 rounded-lg">
-                <p><strong>{{ $t('admin.reportes.detail.parish') }}:</strong> {{ reporteSeleccionado.ubicacion_parroquia }}</p>
-                <p><strong>{{ $t('admin.reportes.detail.neighborhood') }}:</strong> {{ reporteSeleccionado.ubicacion_barrio }}</p>
-                <p><strong>{{ $t('admin.reportes.detail.address') }}:</strong> {{ reporteSeleccionado.ubicacion_direccion }}</p>
+              <label class="text-[10px] sm:text-xs md:text-sm font-medium sm:font-semibold text-gray-600">{{ $t('admin.reportes.detail.location') }}</label>
+              <div class="mt-1.5 sm:mt-2 bg-gray-50 p-2 sm:p-3 md:p-4 rounded-md sm:rounded-lg space-y-1 sm:space-y-1.5 text-[11px] sm:text-xs md:text-sm">
+                <p class="truncate"><strong>{{ $t('admin.reportes.detail.parish') }}:</strong> {{ reporteSeleccionado.ubicacion_parroquia }}</p>
+                <p class="truncate"><strong>{{ $t('admin.reportes.detail.neighborhood') }}:</strong> {{ reporteSeleccionado.ubicacion_barrio }}</p>
+                <p class="truncate"><strong>{{ $t('admin.reportes.detail.address') }}:</strong> {{ reporteSeleccionado.ubicacion_direccion }}</p>
               </div>
             </div>
 
             <!-- Imagen si existe -->
             <div v-if="reporteSeleccionado.imagen_url">
-              <label class="text-sm font-semibold text-gray-600">{{ $t('admin.reportes.detail.image') }}</label>
+              <label class="text-[10px] sm:text-xs md:text-sm font-medium sm:font-semibold text-gray-600">{{ $t('admin.reportes.detail.image') }}</label>
               <img
                 :src="reporteSeleccionado.imagen_url"
                 alt="Imagen del reporte"
-                class="mt-2 w-full rounded-lg shadow-md"
+                class="mt-1.5 sm:mt-2 w-full rounded-md sm:rounded-lg shadow-md"
               />
             </div>
 
-            <!-- Cambiar estado -->
-            <div class="border-t pt-6">
-              <label class="text-sm font-semibold text-gray-600">{{ $t('admin.reportes.detail.changeState') }}</label>
-              <div class="mt-3 grid grid-cols-4 gap-3">
+            <!-- Cambiar estado - Grid responsive -->
+            <div class="border-t pt-3 sm:pt-4 md:pt-6">
+              <label class="text-[10px] sm:text-xs md:text-sm font-medium sm:font-semibold text-gray-600 block mb-2 sm:mb-3">{{ $t('admin.reportes.detail.changeState') }}</label>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2 md:gap-3">
                 <button
                   @click="cambiarEstado(reporteSeleccionado.id, 'pendiente')"
-                  class="px-4 py-3 rounded-lg font-semibold transition-all"
+                  class="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-md sm:rounded-lg text-[10px] sm:text-xs md:text-sm font-medium sm:font-semibold transition-all min-h-[44px] sm:min-h-[48px] flex items-center justify-center"
                   :class="reporteSeleccionado.estado === 'pendiente' 
                     ? 'bg-yellow-100 text-yellow-800 border-2 border-yellow-400' 
-                    : 'bg-gray-100 text-gray-600 hover:bg-yellow-50'"
+                    : 'bg-gray-100 text-gray-600 hover:bg-yellow-50 active:bg-yellow-100'"
                 >
-                  ⏳ {{ $t('admin.reportes.stats.pending') }}
+                  <span class="hidden xs:inline">⏳ </span><span class="truncate">{{ $t('admin.reportes.stats.pending') }}</span>
                 </button>
                 <button
                   @click="cambiarEstado(reporteSeleccionado.id, 'en_revision')"
-                  class="px-4 py-3 rounded-lg font-semibold transition-all"
+                  class="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-md sm:rounded-lg text-[10px] sm:text-xs md:text-sm font-medium sm:font-semibold transition-all min-h-[44px] sm:min-h-[48px] flex items-center justify-center"
                   :class="reporteSeleccionado.estado === 'en_revision' 
                     ? 'bg-blue-100 text-blue-800 border-2 border-blue-400' 
-                    : 'bg-gray-100 text-gray-600 hover:bg-blue-50'"
+                    : 'bg-gray-100 text-gray-600 hover:bg-blue-50 active:bg-blue-100'"
                 >
-                  🔍 {{ $t('admin.reportes.stats.inReview') }}
+                  <span class="hidden xs:inline">🔍 </span><span class="truncate">{{ $t('admin.reportes.stats.inReview') }}</span>
                 </button>
                 <button
                   @click="cambiarEstado(reporteSeleccionado.id, 'en_proceso')"
-                  class="px-4 py-3 rounded-lg font-semibold transition-all"
+                  class="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-md sm:rounded-lg text-[10px] sm:text-xs md:text-sm font-medium sm:font-semibold transition-all min-h-[44px] sm:min-h-[48px] flex items-center justify-center"
                   :class="reporteSeleccionado.estado === 'en_proceso' 
                     ? 'bg-purple-100 text-purple-800 border-2 border-purple-400' 
-                    : 'bg-gray-100 text-gray-600 hover:bg-purple-50'"
+                    : 'bg-gray-100 text-gray-600 hover:bg-purple-50 active:bg-purple-100'"
                 >
-                  ⚙️ {{ $t('admin.reportes.stats.inProcess') }}
+                  <span class="hidden xs:inline">⚙️ </span><span class="truncate">{{ $t('admin.reportes.stats.inProcess') }}</span>
                 </button>
                 <button
                   @click="cambiarEstado(reporteSeleccionado.id, 'resuelto')"
-                  class="px-4 py-3 rounded-lg font-semibold transition-all"
+                  class="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 rounded-md sm:rounded-lg text-[10px] sm:text-xs md:text-sm font-medium sm:font-semibold transition-all min-h-[44px] sm:min-h-[48px] flex items-center justify-center"
                   :class="reporteSeleccionado.estado === 'resuelto' 
                     ? 'bg-green-100 text-green-800 border-2 border-green-400' 
-                    : 'bg-gray-100 text-gray-600 hover:bg-green-50'"
+                    : 'bg-gray-100 text-gray-600 hover:bg-green-50 active:bg-green-100'"
                 >
-                  ✅ {{ $t('admin.reportes.stats.resolved') }}
+                  <span class="hidden xs:inline">✅ </span><span class="truncate">{{ $t('admin.reportes.stats.resolved') }}</span>
                 </button>
               </div>
             </div>
 
             <!-- Respuesta del administrador -->
             <div>
-              <label class="text-sm font-semibold text-gray-600">{{ $t('admin.reportes.detail.adminResponse') }}</label>
+              <label class="text-[10px] sm:text-xs md:text-sm font-medium sm:font-semibold text-gray-600">{{ $t('admin.reportes.detail.adminResponse') }}</label>
               <textarea
                 v-model="reporteSeleccionado.respuesta_admin"
-                rows="4"
-                class="mt-2 w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
+                rows="3"
+                class="mt-1.5 sm:mt-2 w-full px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 border-2 border-gray-300 rounded-md sm:rounded-lg focus:ring-2 focus:ring-blue-400 text-[11px] sm:text-xs md:text-sm"
                 :placeholder="$t('admin.reportes.detail.responsePlaceholder')"
               ></textarea>
               <button
                 @click="guardarRespuesta"
-                class="mt-3 px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                class="mt-2 sm:mt-3 px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 bg-blue-600 text-white rounded-md sm:rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors text-xs sm:text-sm md:text-base font-medium min-h-[44px]"
               >
                 {{ $t('admin.reportes.detail.saveResponse') }}
               </button>

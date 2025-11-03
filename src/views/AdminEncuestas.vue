@@ -9,24 +9,24 @@
     </a>
 
     <!-- Header -->
-    <header class="bg-white shadow-md border-b-4 border-blue-600" role="banner">
-      <div class="container mx-auto px-4 py-6">
-        <div class="flex items-center justify-between">
-          <div>
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-800">
+    <header class="bg-white shadow-md border-b-4 border-blue-600 sticky top-0 z-40" role="banner">
+      <div class="container mx-auto px-3 sm:px-4 md:px-6 py-3 sm:py-4 md:py-5">
+        <div class="flex items-center justify-between gap-2 sm:gap-3">
+          <div class="min-w-0 flex-1">
+            <h1 class="text-base sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 truncate">
               {{ $t("admin.encuestas.title") }}
             </h1>
-            <p class="text-gray-600 mt-2">
+            <p class="text-gray-600 mt-0.5 sm:mt-1 text-xs sm:text-sm truncate hidden sm:block">
               {{ $t("admin.sections.surveys.description") }}
             </p>
           </div>
-          <div class="flex items-center space-x-4">
+          <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
             <router-link
               to="/admin"
-              class="inline-flex items-center px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              class="inline-flex items-center px-2 sm:px-3 py-1.5 sm:py-2 bg-gray-600 hover:bg-gray-700 active:bg-gray-800 text-white text-xs sm:text-sm font-semibold rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
             >
               <svg
-                class="w-5 h-5 mr-2"
+                class="w-4 h-4 sm:w-5 sm:h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -38,7 +38,7 @@
                   d="M15 19l-7-7 7-7"
                 ></path>
               </svg>
-              {{ $t("common.back") }}
+              <span class="hidden sm:inline ml-1">{{ $t("common.back") }}</span>
             </router-link>
           </div>
         </div>
@@ -172,18 +172,19 @@
             <span class="hidden sm:inline">Limpiar</span>
           </button>
 
-          <!-- Filtro de vista -->
-          <div class="flex items-center gap-2 bg-gray-100 p-1 rounded-lg">
+          <!-- Filtro de vista - Adaptado para móvil -->
+          <div class="flex items-center gap-0.5 bg-gray-100 p-0.5 rounded-lg">
             <button
               @click="vistaActual = 'tarjetas'"
               :class="[
-                'px-4 py-2 rounded-md font-medium text-sm transition-all',
+                'p-1.5 sm:px-3 sm:py-2 rounded-md font-medium text-xs sm:text-sm transition-all flex items-center justify-center gap-1',
                 vistaActual === 'tarjetas'
                   ? 'bg-white text-blue-600 shadow-sm'
                   : 'text-gray-600 hover:text-gray-800'
               ]"
+              :aria-label="'Vista de tarjetas'"
             >
-              <svg class="w-5 h-5 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
               </svg>
               <span class="hidden sm:inline">Tarjetas</span>
@@ -191,13 +192,14 @@
             <button
               @click="vistaActual = 'lista'"
               :class="[
-                'px-4 py-2 rounded-md font-medium text-sm transition-all',
+                'p-1.5 sm:px-3 sm:py-2 rounded-md font-medium text-xs sm:text-sm transition-all flex items-center justify-center gap-1',
                 vistaActual === 'lista'
                   ? 'bg-white text-blue-600 shadow-sm'
                   : 'text-gray-600 hover:text-gray-800'
               ]"
+              :aria-label="'Vista de lista'"
             >
-              <svg class="w-5 h-5 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
               <span class="hidden sm:inline">Lista</span>
@@ -473,101 +475,177 @@
             role="list"
             aria-label="Lista de encuestas en formato tabla"
           >
-            <!-- Header de tabla -->
-            <div class="bg-gradient-to-r from-blue-600 to-cyan-500 px-6 py-3">
-              <div class="grid grid-cols-12 gap-4 text-xs font-semibold text-white uppercase">
-                <div class="col-span-4">Título</div>
-                <div class="col-span-2">Tipo</div>
-                <div class="col-span-2">Inicio</div>
-                <div class="col-span-2">Fin</div>
-                <div class="col-span-1">Estado</div>
-                <div class="col-span-1 text-right">Acciones</div>
-              </div>
-            </div>
-
-            <!-- Filas -->
-            <div class="divide-y divide-gray-200">
+            <!-- Vista móvil: Tarjetas compactas -->
+            <div class="md:hidden divide-y divide-gray-200">
               <article
                 v-for="encuesta in encuestasFiltradas"
                 :key="encuesta.id"
-                class="px-6 py-4 hover:bg-gray-50 transition-colors"
+                class="px-3 py-3 hover:bg-gray-50 transition-colors"
                 role="listitem"
               >
-                <div class="grid grid-cols-12 gap-4 items-center">
-                  <!-- Título -->
-                  <div class="col-span-4">
-                    <h3 class="text-sm font-bold text-gray-800 mb-1">
+                <!-- Título y tipo -->
+                <div class="flex items-start justify-between gap-2 mb-2">
+                  <div class="flex-1 min-w-0">
+                    <h3 class="text-sm font-bold text-gray-800 line-clamp-1">
                       {{ encuesta.titulo }}
                     </h3>
-                    <p class="text-xs text-gray-600 line-clamp-1">
+                    <p class="text-xs text-gray-600 line-clamp-1 mt-0.5">
                       {{ encuesta.descripcion }}
                     </p>
                   </div>
+                  <span
+                    class="px-2 py-0.5 text-[10px] font-semibold rounded-full flex-shrink-0"
+                    :class="
+                      encuesta.activa
+                        ? 'bg-green-100 text-green-700'
+                        : 'bg-gray-200 text-gray-600'
+                    "
+                  >
+                    {{ encuesta.activa ? "✓" : "✕" }}
+                  </span>
+                </div>
 
-                  <!-- Tipo -->
-                  <div class="col-span-2">
-                    <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700">
-                      {{ getTipoLabel(encuesta.tipo) }}
-                    </span>
-                  </div>
+                <!-- Info adicional -->
+                <div class="flex flex-wrap items-center gap-2 mb-2">
+                  <span class="px-2 py-0.5 text-[10px] font-medium rounded-full bg-blue-100 text-blue-700">
+                    {{ getTipoLabel(encuesta.tipo) }}
+                  </span>
+                  <span class="text-[10px] text-gray-500">
+                    {{ formatDate(encuesta.fecha_inicio) }} - {{ formatDate(encuesta.fecha_fin) }}
+                  </span>
+                </div>
 
-                  <!-- Fechas -->
-                  <div class="col-span-2 text-xs text-gray-600">
-                    {{ formatDate(encuesta.fecha_inicio) }}
-                  </div>
-                  <div class="col-span-2 text-xs text-gray-600">
-                    {{ formatDate(encuesta.fecha_fin) }}
-                  </div>
-
-                  <!-- Estado -->
-                  <div class="col-span-1">
-                    <span
-                      class="px-2 py-1 text-xs font-semibold rounded-full"
-                      :class="
-                        encuesta.activa
-                          ? 'bg-green-100 text-green-700'
-                          : 'bg-gray-200 text-gray-600'
-                      "
-                    >
-                      {{ encuesta.activa ? "✓ Activa" : "✕ Inactiva" }}
-                    </span>
-                  </div>
-
-                  <!-- Acciones -->
-                  <div class="col-span-1 flex justify-end gap-1">
-                    <button
-                      @click="viewStats(encuesta)"
-                      class="p-1.5 bg-green-100 hover:bg-green-200 text-green-700 rounded transition-colors"
-                      :aria-label="`Ver estadísticas de ${encuesta.titulo}`"
-                      title="Estadísticas"
-                    >
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                      </svg>
-                    </button>
-                    <button
-                      @click="editEncuesta(encuesta)"
-                      class="p-1.5 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded transition-colors"
-                      :aria-label="`Editar ${encuesta.titulo}`"
-                      title="Editar"
-                    >
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                      </svg>
-                    </button>
-                    <button
-                      @click="confirmDelete(encuesta)"
-                      class="p-1.5 bg-red-100 hover:bg-red-200 text-red-700 rounded transition-colors"
-                      :aria-label="`Eliminar ${encuesta.titulo}`"
-                      title="Eliminar"
-                    >
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                      </svg>
-                    </button>
-                  </div>
+                <!-- Acciones -->
+                <div class="flex gap-1.5">
+                  <button
+                    @click="viewStats(encuesta)"
+                    class="flex-1 p-1.5 bg-green-100 hover:bg-green-200 active:bg-green-300 text-green-700 rounded transition-colors text-xs font-medium flex items-center justify-center gap-1"
+                    :aria-label="`Ver estadísticas de ${encuesta.titulo}`"
+                  >
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                  </button>
+                  <button
+                    @click="editEncuesta(encuesta)"
+                    class="flex-1 p-1.5 bg-blue-100 hover:bg-blue-200 active:bg-blue-300 text-blue-700 rounded transition-colors text-xs font-medium flex items-center justify-center gap-1"
+                    :aria-label="`Editar ${encuesta.titulo}`"
+                  >
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                    </svg>
+                  </button>
+                  <button
+                    @click="confirmDelete(encuesta)"
+                    class="flex-1 p-1.5 bg-red-100 hover:bg-red-200 active:bg-red-300 text-red-700 rounded transition-colors text-xs font-medium flex items-center justify-center gap-1"
+                    :aria-label="`Eliminar ${encuesta.titulo}`"
+                  >
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                  </button>
                 </div>
               </article>
+            </div>
+
+            <!-- Vista desktop: Tabla completa -->
+            <div class="hidden md:block">
+              <!-- Header de tabla -->
+              <div class="bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-3">
+                <div class="grid grid-cols-12 gap-3 text-xs font-semibold text-white uppercase">
+                  <div class="col-span-4">Título</div>
+                  <div class="col-span-2">Tipo</div>
+                  <div class="col-span-2">Inicio</div>
+                  <div class="col-span-2">Fin</div>
+                  <div class="col-span-1">Estado</div>
+                  <div class="col-span-1 text-right">Acciones</div>
+                </div>
+              </div>
+
+              <!-- Filas -->
+              <div class="divide-y divide-gray-200">
+                <article
+                  v-for="encuesta in encuestasFiltradas"
+                  :key="encuesta.id"
+                  class="px-4 py-3 hover:bg-gray-50 transition-colors"
+                  role="listitem"
+                >
+                  <div class="grid grid-cols-12 gap-3 items-center">
+                    <!-- Título -->
+                    <div class="col-span-4 min-w-0">
+                      <h3 class="text-sm font-bold text-gray-800 mb-0.5 line-clamp-1">
+                        {{ encuesta.titulo }}
+                      </h3>
+                      <p class="text-xs text-gray-600 line-clamp-1">
+                        {{ encuesta.descripcion }}
+                      </p>
+                    </div>
+
+                    <!-- Tipo -->
+                    <div class="col-span-2">
+                      <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700 inline-block">
+                        {{ getTipoLabel(encuesta.tipo) }}
+                      </span>
+                    </div>
+
+                    <!-- Fechas -->
+                    <div class="col-span-2 text-xs text-gray-600">
+                      {{ formatDate(encuesta.fecha_inicio) }}
+                    </div>
+                    <div class="col-span-2 text-xs text-gray-600">
+                      {{ formatDate(encuesta.fecha_fin) }}
+                    </div>
+
+                    <!-- Estado -->
+                    <div class="col-span-1">
+                      <span
+                        class="px-2 py-1 text-xs font-semibold rounded-full inline-block"
+                        :class="
+                          encuesta.activa
+                            ? 'bg-green-100 text-green-700'
+                            : 'bg-gray-200 text-gray-600'
+                        "
+                      >
+                        {{ encuesta.activa ? "✓" : "✕" }}
+                      </span>
+                    </div>
+
+                    <!-- Acciones -->
+                    <div class="col-span-1 flex justify-end gap-1">
+                      <button
+                        @click="viewStats(encuesta)"
+                        class="p-1.5 bg-green-100 hover:bg-green-200 text-green-700 rounded transition-colors"
+                        :aria-label="`Ver estadísticas de ${encuesta.titulo}`"
+                        title="Estadísticas"
+                      >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                      </button>
+                      <button
+                        @click="editEncuesta(encuesta)"
+                        class="p-1.5 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded transition-colors"
+                        :aria-label="`Editar ${encuesta.titulo}`"
+                        title="Editar"
+                      >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                        </svg>
+                      </button>
+                      <button
+                        @click="confirmDelete(encuesta)"
+                        class="p-1.5 bg-red-100 hover:bg-red-200 text-red-700 rounded transition-colors"
+                        :aria-label="`Eliminar ${encuesta.titulo}`"
+                        title="Eliminar"
+                      >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              </div>
             </div>
           </div>
         </div>

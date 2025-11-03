@@ -11,4 +11,11 @@ export default defineConfig({
       "@": resolve(__dirname, "src"),
     },
   },
+  // Configuración para asegurar que los archivos públicos se copien
+  publicDir: "public",
+  build: {
+    // Copiar todos los archivos de public al dist
+    copyPublicDir: true,
+    outDir: "dist",
+  },
 });

@@ -207,10 +207,10 @@ router.beforeEach(async (to, from, next) => {
     return next();
   }
 
-  // Si intenta acceder a Home sin estar autenticado, redirigir a Login
-  if (to.name === "Home" && !isAuthenticated) {
-    console.log("🔒 Router: Home sin autenticación, redirigiendo a Login");
-    return next({ name: "Login" });
+  // Permitir acceso libre a Home (página principal pública)
+  if (to.name === "Home") {
+    console.log("🏠 Router: Acceso libre a Home permitido");
+    return next();
   }
 
   // Si la ruta requiere autenticación y no está autenticado

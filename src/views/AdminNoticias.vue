@@ -10,47 +10,47 @@
 
     <!-- Header -->
     <header
-      class="bg-white shadow-md border-b-4 border-green-600"
+      class="bg-white shadow-md border-b-4 border-green-600 sticky top-0 z-40"
       role="banner"
     >
-      <div class="container mx-auto px-4 py-6">
-        <div class="flex items-center justify-between flex-wrap gap-4">
-          <div>
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-800">
+      <div class="container mx-auto px-3 sm:px-4 md:px-6 py-3 sm:py-4 md:py-5">
+        <div class="flex items-center justify-between gap-2 sm:gap-3">
+          <div class="min-w-0 flex-1">
+            <h1 class="text-base sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 truncate">
               {{ $t("admin.noticias.title") }}
             </h1>
-            <p class="text-gray-600 mt-2">
+            <p class="text-gray-600 mt-0.5 sm:mt-1 text-xs sm:text-sm truncate hidden sm:block">
               {{ $t("admin.sections.news.description") }}
             </p>
           </div>
-          <div class="flex items-center space-x-4">
-            <!-- Selector de Vista -->
-            <div class="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
+          <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+            <!-- Selector de Vista - Optimizado para móvil -->
+            <div class="flex items-center gap-0.5 bg-gray-100 rounded-lg p-0.5">
               <button
                 @click="vistaActual = 'tarjetas'"
                 :class="[
-                  'px-3 py-2 rounded-md text-sm font-medium transition-all',
+                  'p-1.5 sm:p-2 rounded transition-all',
                   vistaActual === 'tarjetas'
                     ? 'bg-white text-green-600 shadow-sm'
                     : 'text-gray-600 hover:text-gray-900'
                 ]"
                 :aria-label="$t('admin.noticias.viewCards')"
               >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                 </svg>
               </button>
               <button
                 @click="vistaActual = 'lista'"
                 :class="[
-                  'px-3 py-2 rounded-md text-sm font-medium transition-all',
+                  'p-1.5 sm:p-2 rounded transition-all',
                   vistaActual === 'lista'
                     ? 'bg-white text-green-600 shadow-sm'
                     : 'text-gray-600 hover:text-gray-900'
                 ]"
                 :aria-label="$t('admin.noticias.viewList')"
               >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               </button>
@@ -58,10 +58,10 @@
 
             <router-link
               to="/admin"
-              class="inline-flex items-center px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              class="inline-flex items-center px-2 sm:px-3 py-1.5 sm:py-2 bg-gray-600 hover:bg-gray-700 active:bg-gray-800 text-white text-xs sm:text-sm font-semibold rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
             >
               <svg
-                class="w-5 h-5 mr-2"
+                class="w-4 h-4 sm:w-5 sm:h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -73,7 +73,7 @@
                   d="M15 19l-7-7 7-7"
                 ></path>
               </svg>
-              {{ $t("common.back") }}
+              <span class="hidden sm:inline ml-1">{{ $t("common.back") }}</span>
             </router-link>
           </div>
         </div>
@@ -81,13 +81,13 @@
     </header>
 
     <!-- Main Content -->
-    <main id="main-content" class="container mx-auto px-4 py-8" role="main">
+    <main id="main-content" class="container mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8" role="main">
       <!-- Barra de Acciones Superior -->
-      <div class="mb-8 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+      <div class="mb-4 sm:mb-6 space-y-3 sm:space-y-4">
         <!-- Botón Crear Nueva Noticia -->
         <button
           @click="openCreateModal"
-          class="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transform hover:scale-105"
+          class="w-full sm:w-auto inline-flex items-center justify-center px-4 sm:px-6 py-2.5 sm:py-3 bg-green-600 hover:bg-green-700 active:bg-green-800 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transform active:scale-95"
           :aria-label="$t('admin.noticias.createNew')"
         >
           <svg
@@ -107,18 +107,18 @@
         </button>
 
         <!-- Buscador y Filtros -->
-        <div class="flex flex-wrap gap-3 w-full sm:w-auto items-center">
+        <div class="space-y-2 sm:space-y-3">
           <!-- Buscador de texto -->
-          <div class="relative flex-1 sm:flex-initial sm:w-64">
+          <div class="relative w-full">
             <input
               v-model="busqueda"
               type="text"
               placeholder="Buscar por título o contenido..."
-              class="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+              class="w-full pl-9 sm:pl-10 pr-9 sm:pr-10 py-2 sm:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-sm sm:text-base"
               :class="{ 'border-green-500 bg-green-50': busqueda }"
             />
             <svg
-              class="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 transition-colors"
+              class="w-4 h-4 sm:w-5 sm:h-5 absolute left-2.5 sm:left-3 top-1/2 transform -translate-y-1/2 transition-colors"
               :class="busqueda ? 'text-green-600' : 'text-gray-400'"
               fill="none"
               stroke="currentColor"
@@ -135,7 +135,7 @@
             <button
               v-if="busqueda"
               @click="busqueda = ''"
-              class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              class="absolute right-2.5 sm:right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 p-1"
               title="Limpiar búsqueda"
             >
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -144,85 +144,89 @@
             </button>
           </div>
 
-          <!-- Filtro por tipo de alcance -->
-          <select
-            v-model="filtroAlcance"
-            class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white transition-all"
-            :class="{ 'border-green-500 bg-green-50': filtroAlcance !== 'todas' }"
-          >
-            <option value="todas">📍 Todas las noticias</option>
-            <option value="globales">🌍 Solo globales</option>
-            <option value="parroquias">📍 Solo parroquias</option>
-            <option value="barrios">📍 Solo barrios</option>
-          </select>
+          <!-- Filtros en grid responsivo -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
+            <!-- Filtro por tipo de alcance -->
+            <select
+              v-model="filtroAlcance"
+              class="px-3 sm:px-4 py-2 sm:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white transition-all text-sm sm:text-base"
+              :class="{ 'border-green-500 bg-green-50': filtroAlcance !== 'todas' }"
+            >
+              <option value="todas">📍 Todas las noticias</option>
+              <option value="globales">🌍 Solo globales</option>
+              <option value="parroquias">📍 Solo parroquias</option>
+              <option value="barrios">📍 Solo barrios</option>
+            </select>
 
-          <!-- Filtro por parroquia específica -->
-          <select
-            v-if="filtroAlcance === 'parroquias' || filtroAlcance === 'barrios'"
-            v-model="filtroParroquia"
-            class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white transition-all"
-            :class="{ 'border-green-500 bg-green-50': filtroParroquia }"
-          >
-            <option value="">Todas las parroquias</option>
-            <option v-for="parroquia in parroquiasUnicas" :key="parroquia" :value="parroquia">
-              {{ parroquia }}
-            </option>
-          </select>
+            <!-- Filtro por parroquia específica -->
+            <select
+              v-if="filtroAlcance === 'parroquias' || filtroAlcance === 'barrios'"
+              v-model="filtroParroquia"
+              class="px-3 sm:px-4 py-2 sm:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white transition-all text-sm sm:text-base"
+              :class="{ 'border-green-500 bg-green-50': filtroParroquia }"
+            >
+              <option value="">Todas las parroquias</option>
+              <option v-for="parroquia in parroquiasUnicas" :key="parroquia" :value="parroquia">
+                {{ parroquia }}
+              </option>
+            </select>
 
-          <!-- Botón limpiar todos los filtros (solo visible si hay filtros activos) -->
-          <button
-            v-if="busqueda || filtroAlcance !== 'todas' || filtroParroquia"
-            @click="limpiarFiltros"
-            class="px-3 py-2 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 rounded-lg transition-all flex items-center gap-1.5 font-medium text-sm"
-            title="Limpiar todos los filtros"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-            <span class="hidden sm:inline">Limpiar</span>
-          </button>
+            <!-- Botón limpiar todos los filtros -->
+            <button
+              v-if="busqueda || filtroAlcance !== 'todas' || filtroParroquia"
+              @click="limpiarFiltros"
+              class="px-3 sm:px-4 py-2 sm:py-2.5 bg-red-50 hover:bg-red-100 active:bg-red-200 text-red-700 border border-red-200 rounded-lg transition-all flex items-center justify-center gap-2 font-medium text-sm sm:text-base"
+              title="Limpiar todos los filtros"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              <span>Limpiar filtros</span>
+            </button>
+          </div>
         </div>
       </div>
 
       <!-- Contador de resultados y filtros activos -->
-      <div v-if="busqueda || filtroAlcance !== 'todas' || filtroParroquia" class="mb-6">
-        <div class="flex flex-wrap items-center gap-3">
+      <div v-if="busqueda || filtroAlcance !== 'todas' || filtroParroquia" class="mb-4 sm:mb-6">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-3 sm:p-4">
           <!-- Contador -->
-          <div class="text-sm text-gray-600">
-            <span class="font-semibold text-green-600 text-lg">{{ noticiasFiltradas.length }}</span> 
+          <div class="text-xs sm:text-sm text-gray-700">
+            <span class="font-bold text-green-600 text-base sm:text-lg">{{ noticiasFiltradas.length }}</span> 
             <span class="ml-1">{{ noticiasFiltradas.length === 1 ? 'noticia encontrada' : 'noticias encontradas' }}</span>
-            <span class="text-gray-400 ml-1">de {{ noticias.length }}</span>
+            <span class="text-gray-500 ml-1">de {{ noticias.length }}</span>
           </div>
           
           <!-- Badges de filtros activos -->
-          <div class="flex flex-wrap gap-2">
+          <div class="flex flex-wrap gap-1.5 sm:gap-2">
             <!-- Badge búsqueda -->
             <span 
               v-if="busqueda"
-              class="inline-flex items-center gap-1.5 px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium"
+              class="inline-flex items-center gap-1 px-2 sm:px-2.5 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium"
             >
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
-              <span class="max-w-[150px] truncate">{{ busqueda }}</span>
+              <span class="max-w-[100px] sm:max-w-[150px] truncate">{{ busqueda }}</span>
             </span>
             
             <!-- Badge alcance -->
             <span 
               v-if="filtroAlcance !== 'todas'"
-              class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium"
+              class="inline-flex items-center gap-1 px-2 sm:px-2.5 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium"
             >
               <span v-if="filtroAlcance === 'globales'">🌍</span>
               <span v-else>📍</span>
-              {{ filtroAlcance === 'globales' ? 'Globales' : filtroAlcance === 'parroquias' ? 'Parroquias' : 'Barrios' }}
+              <span>{{ filtroAlcance === 'globales' ? 'Globales' : filtroAlcance === 'parroquias' ? 'Parroquias' : 'Barrios' }}</span>
             </span>
             
             <!-- Badge parroquia -->
             <span 
               v-if="filtroParroquia"
-              class="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-medium"
+              class="inline-flex items-center gap-1 px-2 sm:px-2.5 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-medium"
             >
-              📍 {{ filtroParroquia }}
+              <span>📍</span>
+              <span class="max-w-[80px] sm:max-w-[120px] truncate">{{ filtroParroquia }}</span>
             </span>
           </div>
         </div>
@@ -324,35 +328,35 @@
           </button>
         </div>
 
-        <!-- Noticias - Vista de Tarjetas Compactas -->
+        <!-- Noticias - Vista de Tarjetas Responsiva -->
         <div
           v-else-if="vistaActual === 'tarjetas'"
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"
           role="list"
           aria-label="Lista de noticias"
         >
           <article
             v-for="noticia in noticiasFiltradas"
             :key="noticia.id"
-            class="bg-white rounded-lg shadow hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden"
+            class="bg-white rounded-lg shadow-sm sm:shadow hover:shadow-lg sm:hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden active:scale-[0.98]"
             role="listitem"
           >
-            <!-- Imagen compacta -->
+            <!-- Imagen responsive -->
             <div
               v-if="noticia.imagen_url"
-              class="h-32 bg-cover bg-center"
+              class="h-24 sm:h-28 md:h-32 bg-cover bg-center"
               :style="{ backgroundImage: `url(${noticia.imagen_url})` }"
               role="img"
               :aria-label="`Imagen de ${noticia.titulo}`"
             ></div>
             <div
               v-else
-              class="h-32 bg-gradient-to-r from-green-50 to-emerald-50 flex items-center justify-center"
+              class="h-24 sm:h-28 md:h-32 bg-gradient-to-r from-green-50 to-emerald-50 flex items-center justify-center"
               role="img"
               aria-label="Imagen no disponible"
             >
               <svg
-                class="w-12 h-12 text-green-300"
+                class="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 text-green-300"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -366,23 +370,23 @@
               </svg>
             </div>
 
-            <!-- Content compacto -->
-            <div class="p-4">
+            <!-- Content responsive -->
+            <div class="p-2.5 sm:p-3 md:p-4">
               <!-- Título y alcance -->
-              <div class="mb-3">
-                <h3 class="text-base font-bold text-gray-800 mb-2 line-clamp-2">
+              <div class="mb-2 sm:mb-2.5 md:mb-3">
+                <h3 class="text-sm sm:text-base md:text-base font-bold text-gray-800 mb-1.5 sm:mb-2 line-clamp-2 leading-snug">
                   {{ noticia.titulo }}
                 </h3>
                 <div class="flex flex-wrap gap-1">
                   <span
                     v-if="!noticia.parroquia_destino"
-                    class="inline-block px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-800"
+                    class="inline-block px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-xs font-semibold rounded-full bg-blue-100 text-blue-800"
                   >
                     🌍 Global
                   </span>
                   <span
                     v-else
-                    class="inline-block px-2 py-0.5 text-xs font-semibold rounded-full bg-green-100 text-green-800"
+                    class="inline-block px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-xs font-semibold rounded-full bg-green-100 text-green-800 truncate max-w-[150px]"
                   >
                     📍 {{ noticia.parroquia_destino }}
                   </span>
@@ -390,14 +394,14 @@
               </div>
 
               <!-- Contenido -->
-              <p class="text-gray-700 text-sm mb-3 line-clamp-2">
+              <p class="text-gray-700 text-[11px] sm:text-xs md:text-sm mb-2 sm:mb-2.5 md:mb-3 line-clamp-2 leading-relaxed">
                 {{ noticia.contenido }}
               </p>
 
-              <!-- Fecha compacta -->
-              <div class="flex items-center text-xs text-gray-600 mb-3 pb-3 border-b border-gray-100">
+              <!-- Fecha responsive -->
+              <div class="flex items-center text-[10px] sm:text-xs text-gray-600 mb-2 sm:mb-2.5 md:mb-3 pb-2 sm:pb-2.5 md:pb-3 border-b border-gray-100">
                 <svg
-                  class="w-3.5 h-3.5 mr-1"
+                  class="w-3 sm:w-3.5 h-3 sm:h-3.5 mr-1"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -415,11 +419,97 @@
                 }) }}
               </div>
 
-              <!-- Acciones compactas -->
-              <div class="flex gap-2">
+              <!-- Acciones responsivas -->
+              <div class="flex gap-1.5 sm:gap-2">
                 <button
                   @click="viewNoticia(noticia)"
-                  class="flex-1 inline-flex items-center justify-center px-2 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  class="flex-1 inline-flex items-center justify-center px-1.5 sm:px-2 py-1.5 sm:py-2 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-[10px] sm:text-xs font-semibold rounded transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[36px]"
+                  :aria-label="`Ver ${noticia.titulo}`"
+                >
+                  <svg class="w-3 sm:w-3.5 h-3 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                  </svg>
+                </button>
+                <button
+                  @click="editNoticia(noticia)"
+                  class="flex-1 inline-flex items-center justify-center px-1.5 sm:px-2 py-1.5 sm:py-2 bg-green-600 hover:bg-green-700 active:bg-green-800 text-white text-[10px] sm:text-xs font-semibold rounded transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 min-h-[36px]"
+                  :aria-label="`${$t('common.edit')} ${noticia.titulo}`"
+                >
+                  <svg class="w-3 sm:w-3.5 h-3 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                  </svg>
+                </button>
+                <button
+                  @click="confirmDelete(noticia)"
+                  class="flex-1 inline-flex items-center justify-center px-1.5 sm:px-2 py-1.5 sm:py-2 bg-red-600 hover:bg-red-700 active:bg-red-800 text-white text-[10px] sm:text-xs font-semibold rounded transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 min-h-[36px]"
+                  :aria-label="`${$t('common.delete')} ${noticia.titulo}`"
+                >
+                  <svg class="w-3 sm:w-3.5 h-3 sm:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Noticias - Vista de Lista Responsiva -->
+        <div v-else class="bg-white rounded-lg sm:rounded-xl shadow-md sm:shadow-lg overflow-hidden">
+          <!-- Vista móvil: Tarjetas compactas -->
+          <div class="md:hidden divide-y divide-gray-200">
+            <article
+              v-for="noticia in noticiasFiltradas"
+              :key="noticia.id"
+              class="px-3 py-3 hover:bg-green-50 transition-colors"
+            >
+              <!-- Imagen y título -->
+              <div class="flex items-start gap-2 mb-2">
+                <div 
+                  v-if="noticia.imagen_url"
+                  class="w-12 h-12 rounded bg-cover bg-center flex-shrink-0"
+                  :style="{ backgroundImage: `url(${noticia.imagen_url})` }"
+                ></div>
+                <div v-else class="w-12 h-12 rounded bg-gradient-to-r from-green-50 to-emerald-50 flex items-center justify-center flex-shrink-0">
+                  <span class="text-lg">📰</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="text-sm font-bold text-gray-900 line-clamp-2 mb-1">
+                    {{ noticia.titulo }}
+                  </h3>
+                  <p class="text-xs text-gray-600 line-clamp-2">
+                    {{ noticia.contenido }}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Info adicional -->
+              <div class="flex flex-wrap items-center gap-2 mb-2">
+                <span
+                  v-if="!noticia.parroquia_destino"
+                  class="inline-block px-2 py-0.5 text-[10px] font-semibold rounded-full bg-blue-100 text-blue-800"
+                >
+                  🌍 Global
+                </span>
+                <span
+                  v-else
+                  class="inline-block px-2 py-0.5 text-[10px] font-semibold rounded-full bg-green-100 text-green-800"
+                >
+                  📍 {{ noticia.parroquia_destino }}
+                </span>
+                <span class="text-[10px] text-gray-500">
+                  {{ new Date(noticia.created_at || '').toLocaleDateString('es-EC', { 
+                    day: '2-digit', 
+                    month: 'short'
+                  }) }}
+                </span>
+              </div>
+
+              <!-- Acciones -->
+              <div class="flex gap-1.5">
+                <button
+                  @click="viewNoticia(noticia)"
+                  class="flex-1 p-1.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded transition-colors text-xs font-medium flex items-center justify-center gap-1"
                   :aria-label="`Ver ${noticia.titulo}`"
                 >
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -429,7 +519,7 @@
                 </button>
                 <button
                   @click="editNoticia(noticia)"
-                  class="flex-1 inline-flex items-center justify-center px-2 py-1.5 bg-green-600 hover:bg-green-700 text-white text-xs font-semibold rounded transition-colors focus:outline-none focus:ring-2 focus:ring-green-500"
+                  class="flex-1 p-1.5 bg-green-600 hover:bg-green-700 active:bg-green-800 text-white rounded transition-colors text-xs font-medium flex items-center justify-center gap-1"
                   :aria-label="`${$t('common.edit')} ${noticia.titulo}`"
                 >
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -438,7 +528,7 @@
                 </button>
                 <button
                   @click="confirmDelete(noticia)"
-                  class="flex-1 inline-flex items-center justify-center px-2 py-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded transition-colors focus:outline-none focus:ring-2 focus:ring-red-500"
+                  class="flex-1 p-1.5 bg-red-600 hover:bg-red-700 active:bg-red-800 text-white rounded transition-colors text-xs font-medium flex items-center justify-center gap-1"
                   :aria-label="`${$t('common.delete')} ${noticia.titulo}`"
                 >
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -446,21 +536,19 @@
                   </svg>
                 </button>
               </div>
-            </div>
-          </article>
-        </div>
+            </article>
+          </div>
 
-        <!-- Noticias - Vista de Lista -->
-        <div v-else class="bg-white rounded-xl shadow-lg overflow-hidden">
-          <div class="overflow-x-auto">
+          <!-- Vista desktop: Tabla completa -->
+          <div class="hidden md:block overflow-x-auto">
             <table class="w-full">
               <thead class="bg-gradient-to-r from-green-600 to-emerald-600 text-white">
                 <tr>
-                  <th class="px-6 py-4 text-left text-sm font-semibold">Título</th>
-                  <th class="px-6 py-4 text-left text-sm font-semibold hidden lg:table-cell">Contenido</th>
-                  <th class="px-6 py-4 text-left text-sm font-semibold hidden md:table-cell">Alcance</th>
-                  <th class="px-6 py-4 text-left text-sm font-semibold hidden sm:table-cell">Fecha</th>
-                  <th class="px-6 py-4 text-center text-sm font-semibold">Acciones</th>
+                  <th class="px-4 md:px-6 py-3 md:py-4 text-left text-xs md:text-sm font-semibold">Título</th>
+                  <th class="px-4 md:px-6 py-3 md:py-4 text-left text-xs md:text-sm font-semibold hidden lg:table-cell">Contenido</th>
+                  <th class="px-4 md:px-6 py-3 md:py-4 text-left text-xs md:text-sm font-semibold">Alcance</th>
+                  <th class="px-4 md:px-6 py-3 md:py-4 text-left text-xs md:text-sm font-semibold">Fecha</th>
+                  <th class="px-4 md:px-6 py-3 md:py-4 text-center text-xs md:text-sm font-semibold">Acciones</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200">
@@ -469,27 +557,27 @@
                   :key="noticia.id"
                   class="hover:bg-green-50 transition-colors"
                 >
-                  <td class="px-6 py-4">
-                    <div class="flex items-center gap-3">
+                  <td class="px-4 md:px-6 py-3 md:py-4">
+                    <div class="flex items-center gap-2 md:gap-3">
                       <div 
                         v-if="noticia.imagen_url"
-                        class="w-12 h-12 rounded bg-cover bg-center flex-shrink-0"
+                        class="w-10 h-10 md:w-12 md:h-12 rounded bg-cover bg-center flex-shrink-0"
                         :style="{ backgroundImage: `url(${noticia.imagen_url})` }"
                       ></div>
-                      <div v-else class="w-12 h-12 rounded bg-gradient-to-r from-green-50 to-emerald-50 flex items-center justify-center flex-shrink-0">
-                        <span class="text-xl">📰</span>
+                      <div v-else class="w-10 h-10 md:w-12 md:h-12 rounded bg-gradient-to-r from-green-50 to-emerald-50 flex items-center justify-center flex-shrink-0">
+                        <span class="text-base md:text-xl">📰</span>
                       </div>
                       <div class="min-w-0">
-                        <p class="font-semibold text-gray-900 truncate">{{ noticia.titulo }}</p>
+                        <p class="font-semibold text-gray-900 text-xs md:text-sm line-clamp-1">{{ noticia.titulo }}</p>
                       </div>
                     </div>
                   </td>
-                  <td class="px-6 py-4 hidden lg:table-cell">
-                    <p class="text-sm text-gray-600 line-clamp-2">
+                  <td class="px-4 md:px-6 py-3 md:py-4 hidden lg:table-cell">
+                    <p class="text-xs sm:text-sm text-gray-600 line-clamp-2">
                       {{ noticia.contenido }}
                     </p>
                   </td>
-                  <td class="px-6 py-4 hidden md:table-cell">
+                  <td class="px-4 md:px-6 py-3 md:py-4">
                     <span
                       v-if="!noticia.parroquia_destino"
                       class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800"
@@ -498,53 +586,61 @@
                     </span>
                     <span
                       v-else
-                      class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800"
+                      class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800 max-w-[120px] truncate"
                     >
                       📍 {{ noticia.parroquia_destino }}
                     </span>
                   </td>
-                  <td class="px-6 py-4 hidden sm:table-cell">
-                    <div class="flex items-center gap-2 text-sm text-gray-600">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <td class="px-4 md:px-6 py-3 md:py-4">
+                    <div class="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm text-gray-600">
+                      <svg class="w-3.5 md:w-4 h-3.5 md:h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                       </svg>
-                      {{ new Date(noticia.created_at || '').toLocaleDateString('es-EC', { 
-                        day: '2-digit', 
-                        month: 'short', 
-                        year: 'numeric' 
-                      }) }}
+                      <span class="hidden lg:inline">
+                        {{ new Date(noticia.created_at || '').toLocaleDateString('es-EC', { 
+                          day: '2-digit', 
+                          month: 'short', 
+                          year: 'numeric' 
+                        }) }}
+                      </span>
+                      <span class="lg:hidden">
+                        {{ new Date(noticia.created_at || '').toLocaleDateString('es-EC', { 
+                          day: '2-digit', 
+                          month: 'short'
+                        }) }}
+                      </span>
                     </div>
                   </td>
-                  <td class="px-6 py-4">
-                    <div class="flex justify-center gap-2">
+                  <td class="px-4 md:px-6 py-3 md:py-4">
+                    <div class="flex justify-center gap-1.5 md:gap-2">
                       <button
                         @click="viewNoticia(noticia)"
-                        class="p-2 bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="p-1.5 md:p-2 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
                         :aria-label="`Ver ${noticia.titulo}`"
                         title="Ver"
                       >
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-3.5 md:w-4 h-3.5 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                         </svg>
                       </button>
                       <button
                         @click="editNoticia(noticia)"
-                        class="p-2 bg-green-600 hover:bg-green-700 text-white rounded transition-colors focus:outline-none focus:ring-2 focus:ring-green-500"
+                        class="p-1.5 md:p-2 bg-green-600 hover:bg-green-700 active:bg-green-800 text-white rounded transition-colors focus:outline-none focus:ring-2 focus:ring-green-500"
                         :aria-label="`${$t('common.edit')} ${noticia.titulo}`"
                         title="Editar"
                       >
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-3.5 md:w-4 h-3.5 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                         </svg>
                       </button>
                       <button
                         @click="confirmDelete(noticia)"
-                        class="p-2 bg-red-600 hover:bg-red-700 text-white rounded transition-colors focus:outline-none focus:ring-2 focus:ring-red-500"
+                        class="p-1.5 md:p-2 bg-red-600 hover:bg-red-700 active:bg-red-800 text-white rounded transition-colors focus:outline-none focus:ring-2 focus:ring-red-500"
                         :aria-label="`${$t('common.delete')} ${noticia.titulo}`"
                         title="Eliminar"
                       >
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-3.5 md:w-4 h-3.5 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                         </svg>
                       </button>
@@ -561,19 +657,19 @@
     <!-- Modal Crear/Editar Noticia -->
     <div
       v-if="showModal"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 overflow-y-auto"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-4 z-50 overflow-y-auto"
       @click.self="closeModal"
       role="dialog"
       aria-labelledby="modal-title"
       aria-modal="true"
     >
-      <div class="bg-white rounded-2xl shadow-2xl max-w-3xl w-full my-8">
+      <div class="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow-2xl max-w-3xl w-full my-4 sm:my-8">
         <!-- Modal Header -->
         <div
-          class="bg-gradient-to-r from-green-600 to-emerald-500 p-6 rounded-t-2xl sticky top-0 z-10"
+          class="bg-gradient-to-r from-green-600 to-emerald-500 p-3 sm:p-4 md:p-6 rounded-t-lg sm:rounded-t-xl md:rounded-t-2xl sticky top-0 z-10"
         >
           <div class="flex items-center justify-between">
-            <h2 id="modal-title" class="text-2xl font-bold text-white">
+            <h2 id="modal-title" class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white">
               {{
                 isEditing
                   ? $t("admin.noticias.editNews")
@@ -582,11 +678,11 @@
             </h2>
             <button
               @click="closeModal"
-              class="text-white hover:bg-white hover:bg-opacity-20 rounded-lg p-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white"
+              class="text-white hover:bg-white hover:bg-opacity-20 rounded-lg p-1.5 sm:p-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white min-h-[36px] min-w-[36px] flex items-center justify-center"
               :aria-label="$t('common.close')"
             >
               <svg
-                class="w-6 h-6"
+                class="w-5 h-5 sm:w-6 sm:h-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -605,13 +701,13 @@
         <!-- Modal Body -->
         <form
           @submit.prevent="submitForm"
-          class="p-6 space-y-6 max-h-[calc(100vh-200px)] overflow-y-auto"
+          class="p-3 sm:p-4 md:p-6 space-y-3 sm:space-y-4 md:space-y-6 max-h-[calc(100vh-150px)] sm:max-h-[calc(100vh-200px)] overflow-y-auto"
         >
           <!-- Título -->
           <div>
             <label
               for="titulo"
-              class="block text-sm font-semibold text-gray-700 mb-2"
+              class="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2"
             >
               {{ $t("admin.noticias.formLabels.title") }} *
             </label>
@@ -621,7 +717,7 @@
               type="text"
               required
               maxlength="200"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
+              class="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-200"
               placeholder="Ej: Inauguración del nuevo parque comunitario"
               aria-required="true"
             />
@@ -631,7 +727,7 @@
           <div>
             <label
               for="contenido"
-              class="block text-sm font-semibold text-gray-700 mb-2"
+              class="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2"
             >
               {{ $t("admin.noticias.formLabels.content") }} *
             </label>
@@ -639,14 +735,14 @@
               id="contenido"
               v-model="formData.contenido"
               required
-              rows="8"
+              rows="6"
               maxlength="5000"
-              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
+              class="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200"
               placeholder="Escribe el contenido completo de la noticia..."
               aria-required="true"
               :aria-describedby="'contenido-hint'"
             ></textarea>
-            <p id="contenido-hint" class="text-sm text-gray-500 mt-1">
+            <p id="contenido-hint" class="text-xs sm:text-sm text-gray-500 mt-1">
               {{ formData.contenido.length }}/5000 caracteres
             </p>
           </div>
