@@ -998,9 +998,6 @@ const submittingRespuesta = ref(false);
 const showNoticiasModal = ref(false);
 const selectedNoticia = ref<Noticia | null>(null);
 
-// Estado para rastrear encuestas respondidas
-const encuestasRespondidas = ref<Set<string>>(new Set());
-
 // Notificaciones
 const notification = ref<{ type: "success" | "error"; message: string } | null>(
   null

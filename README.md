@@ -153,7 +153,68 @@ npm run dev
 
 # Compilar para producción
 npm run build
+
+# Vista previa de producción
+npm run preview
 ```
+
+### 🌐 Despliegue en Netlify
+
+#### Opción 1: Despliegue Automático desde GitHub
+
+1. **Conectar con GitHub**
+   - Ve a [Netlify](https://www.netlify.com)
+   - Haz clic en "Add new site" → "Import an existing project"
+   - Selecciona "GitHub" y autoriza Netlify
+   - Elige el repositorio `Portal-Ciudadano-Manta-web`
+
+2. **Configuración de Build**
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+   - Node version: `20`
+   
+3. **Variables de Entorno**
+   - Ve a "Site settings" → "Environment variables"
+   - Agrega tus variables de Supabase:
+     ```
+     VITE_SUPABASE_URL=tu_supabase_url
+     VITE_SUPABASE_ANON_KEY=tu_supabase_anon_key
+     ```
+
+4. **Deploy**
+   - Haz clic en "Deploy site"
+   - Netlify detectará automáticamente el archivo `netlify.toml`
+   - Cada push a la rama `main` desplegará automáticamente
+
+#### Opción 2: Despliegue Manual con Netlify CLI
+
+```bash
+# Instalar Netlify CLI
+npm install -g netlify-cli
+
+# Login en Netlify
+netlify login
+
+# Inicializar proyecto
+netlify init
+
+# Deploy manual
+netlify deploy --prod
+```
+
+#### Configuración Adicional en Netlify
+
+**Variables de Entorno Requeridas:**
+- `VITE_SUPABASE_URL`: URL de tu proyecto Supabase
+- `VITE_SUPABASE_ANON_KEY`: Clave anónima de Supabase
+
+**Features Habilitadas:**
+- ✅ Continuous Deployment (CD)
+- ✅ HTTPS automático
+- ✅ Redirects para SPA
+- ✅ Headers de seguridad
+- ✅ Caché optimizado
+- ✅ Deploy previews para PRs
 
 ### Configuración de Supabase
 

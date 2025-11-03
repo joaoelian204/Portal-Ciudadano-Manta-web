@@ -1,0 +1,4 @@
+# Netlify redirects file
+# Asegura que todas las rutas de Vue Router funcionen correctamente
+
+/*    /index.html   200
