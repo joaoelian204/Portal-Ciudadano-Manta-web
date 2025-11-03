@@ -1186,10 +1186,10 @@
       </div>
     </div>
 
-    <!-- Botón Flotante de Ayuda (Burbuja) -->
+    <!-- Botón Flotante de Ayuda (Burbuja) - Solo visible en desktop -->
     <button
       @click="showKeyboardShortcuts = !showKeyboardShortcuts"
-      class="fixed bottom-24 right-6 z-50 w-14 h-14 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-full shadow-2xl hover:shadow-3xl hover:scale-110 transition-all duration-300 flex items-center justify-center group"
+      class="hidden md:flex fixed bottom-24 right-6 z-50 w-14 h-14 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-full shadow-2xl hover:shadow-3xl hover:scale-110 transition-all duration-300 items-center justify-center group"
       :class="{ 'ring-4 ring-blue-300 ring-opacity-50': showKeyboardShortcuts }"
       aria-label="Ayuda de Atajos de Teclado"
       title="Atajos de Teclado (? o F1)"
