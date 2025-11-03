@@ -189,9 +189,7 @@
                 class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 :aria-label="$t('dashboard.sections.surveys.title')"
               >
-                {{ $t("dashboard.sections.surveys.participate") }} ({{
-                  encuestasActivas.length
-                }})
+                {{ $t("dashboard.sections.surveys.participate") }} ({{ encuestasActivas.length }})
               </router-link>
             </div>
           </div>
@@ -213,9 +211,7 @@
                 class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                 :aria-label="$t('dashboard.sections.news.title')"
               >
-                {{ $t("dashboard.sections.news.readMore") }} ({{
-                  noticiasStore.noticias.length
-                }})
+                {{ $t("dashboard.sections.news.readMore") }} ({{ noticiasStore.noticias.length }})
               </router-link>
             </div>
           </div>
@@ -1002,6 +998,9 @@ const submittingRespuesta = ref(false);
 const showNoticiasModal = ref(false);
 const selectedNoticia = ref<Noticia | null>(null);
 
+// Estado para rastrear encuestas respondidas
+const encuestasRespondidas = ref<Set<string>>(new Set());
+
 // Notificaciones
 const notification = ref<{ type: "success" | "error"; message: string } | null>(
   null
@@ -1018,48 +1017,23 @@ const userInitial = computed(() => {
 });
 
 const encuestasActivas = computed(() => {
-  console.log("📊 Total encuestas en store:", encuestasStore.encuestas.length);
-  console.log("📊 Encuestas:", encuestasStore.encuestas);
-
-  const activas = encuestasStore.encuestas.filter((e) => {
+  return encuestasStore.encuestas.filter((e) => {
     // Si no está activa, filtrar
-    if (!e.activa) {
-      console.log("❌ Encuesta inactiva:", e.titulo);
-      return false;
-    }
+    if (!e.activa) return false;
 
     // Si no hay fechas, considerar válida (encuesta sin límites temporales)
-    if (!e.fecha_inicio || !e.fecha_fin) {
-      console.log("✅ Encuesta sin fechas límite:", e.titulo);
-      return true;
-    }
+    if (!e.fecha_inicio || !e.fecha_fin) return true;
 
     const ahora = new Date();
     const inicio = new Date(e.fecha_inicio);
     const fin = new Date(e.fecha_fin);
 
     // Verificar si las fechas son válidas
-    if (isNaN(inicio.getTime()) || isNaN(fin.getTime())) {
-      console.log("⚠️ Fechas inválidas, incluyendo encuesta:", e.titulo);
-      return true;
-    }
+    if (isNaN(inicio.getTime()) || isNaN(fin.getTime())) return true;
 
-    const dentroDeRango = ahora >= inicio && ahora <= fin;
-
-    console.log("🔍 Evaluando encuesta:", {
-      titulo: e.titulo,
-      activa: e.activa,
-      ahora: ahora.toISOString(),
-      inicio: inicio.toISOString(),
-      fin: fin.toISOString(),
-      dentroDeRango,
-    });
-
-    return dentroDeRango;
+    // Verificar si está dentro del rango
+    return ahora >= inicio && ahora <= fin;
   });
-
-  console.log("✅ Encuestas activas filtradas:", activas.length);
-  return activas;
 });
 
 // Métodos

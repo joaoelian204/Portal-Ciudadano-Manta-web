@@ -21,7 +21,9 @@ export const useNoticiasStore = defineStore("noticias", () => {
   }) => {
     // Si ya está cargando, retornar éxito con datos actuales
     if (loading.value) {
-      console.log('⏳ Ya hay una carga en progreso (fetchNoticias), retornando datos actuales');
+      console.log(
+        "⏳ Ya hay una carga en progreso (fetchNoticias), retornando datos actuales"
+      );
       return { success: true, data: noticias.value };
     }
 
@@ -34,18 +36,37 @@ export const useNoticiasStore = defineStore("noticias", () => {
         .select("*")
         .order("created_at", { ascending: false });
 
-      // Si hay filtros, obtener noticias globales O las específicas de la ubicación
-      if (filtros?.parroquia) {
-        // Noticias globales (parroquia_destino es null) O noticias de la parroquia específica
-        query = query.or(
-          `parroquia_destino.is.null,parroquia_destino.eq.${filtros.parroquia}`
-        );
+      // Si NO hay filtros, obtener solo noticias globales
+      if (!filtros?.parroquia) {
+        console.log("🌍 Sin filtros: mostrando solo noticias globales");
+        query = query.is("parroquia_destino", null);
+      } else {
+        // Si hay filtros de ubicación, usar la misma lógica que fetchNoticiasUsuario
+        if (filtros.barrio) {
+          // Usuario tiene barrio: mostrar globales, de su parroquia sin barrio, y de su barrio específico
+          query = query.or(
+            `parroquia_destino.is.null,and(parroquia_destino.eq.${filtros.parroquia},barrio_destino.is.null),and(parroquia_destino.eq.${filtros.parroquia},barrio_destino.eq.${filtros.barrio})`
+          );
+          console.log(
+            `📍 Filtrando: Globales + Parroquia "${filtros.parroquia}" + Barrio "${filtros.barrio}"`
+          );
+        } else {
+          // Usuario solo tiene parroquia: mostrar globales y de su parroquia (sin barrio específico)
+          query = query.or(
+            `parroquia_destino.is.null,and(parroquia_destino.eq.${filtros.parroquia},barrio_destino.is.null)`
+          );
+          console.log(
+            `📍 Filtrando: Globales + Parroquia "${filtros.parroquia}"`
+          );
+        }
       }
 
       const { data, error: fetchError } = await query;
 
       if (fetchError) throw fetchError;
       noticias.value = data || [];
+
+      console.log(`✅ ${noticias.value.length} noticias cargadas`);
 
       return { success: true, data };
     } catch (err: any) {
@@ -54,13 +75,15 @@ export const useNoticiasStore = defineStore("noticias", () => {
       return { success: false, error: err.message };
     } finally {
       loading.value = false;
-      console.log('🔓 Loading liberado (fetchNoticias)');
+      console.log("🔓 Loading liberado (fetchNoticias)");
     }
   };
 
   const fetchNoticia = async (id: string) => {
+    console.log("🔍 [Store] Iniciando fetchNoticia para ID:", id);
     loading.value = true;
     error.value = null;
+    noticiaActual.value = null; // Limpiar estado anterior
 
     try {
       const { data, error: fetchError } = await supabase
@@ -69,20 +92,34 @@ export const useNoticiasStore = defineStore("noticias", () => {
         .eq("id", id)
         .single();
 
-      if (fetchError) throw fetchError;
+      if (fetchError) {
+        console.error("❌ [Store] Error de Supabase:", fetchError);
+        throw fetchError;
+      }
+
+      if (!data) {
+        console.warn("⚠️ [Store] No se encontró data para ID:", id);
+        throw new Error("Noticia no encontrada");
+      }
+
       noticiaActual.value = data;
+      console.log("✅ [Store] Noticia asignada a noticiaActual");
 
       return { success: true, data };
     } catch (err: any) {
       error.value = err.message;
-      console.error("❌ Error obteniendo noticia:", err);
+      noticiaActual.value = null;
+      console.error("❌ [Store] Error obteniendo noticia:", err);
       return { success: false, error: err.message };
     } finally {
       loading.value = false;
+      console.log("🔓 [Store] Loading liberado (fetchNoticia)");
     }
   };
 
-  const crearNoticia = async (noticia: Omit<InsertNoticia, "administrador_id">) => {
+  const crearNoticia = async (
+    noticia: Omit<InsertNoticia, "administrador_id">
+  ) => {
     loading.value = true;
     error.value = null;
 
@@ -184,19 +221,95 @@ export const useNoticiasStore = defineStore("noticias", () => {
   const fetchNoticiasUsuario = async (parroquia: string, barrio?: string) => {
     // Si ya está cargando, retornar éxito con datos actuales
     if (loading.value) {
-      console.log('⏳ Ya hay una carga en progreso (noticias), retornando datos actuales');
+      console.log(
+        "⏳ Ya hay una carga en progreso (noticias), retornando datos actuales"
+      );
       return { success: true, data: noticias.value };
     }
-    
+
     loading.value = true;
     error.value = null;
 
     try {
-      // Obtener noticias globales (sin parroquia_destino) o de la parroquia del usuario
+      console.log("🔍 Filtrando noticias para:", { parroquia, barrio });
+
+      // Construir filtros específicos según la lógica:
+      // 1. Noticias globales (parroquia_destino = null)
+      // 2. Noticias de la parroquia del usuario (parroquia_destino = parroquia AND barrio_destino = null)
+      // 3. Si tiene barrio: Noticias del barrio específico (parroquia_destino = parroquia AND barrio_destino = barrio)
+
+      let query = supabase
+        .from("noticias")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (barrio) {
+        // Usuario tiene barrio: mostrar globales, de su parroquia sin barrio, y de su barrio específico
+        query = query.or(
+          `parroquia_destino.is.null,and(parroquia_destino.eq.${parroquia},barrio_destino.is.null),and(parroquia_destino.eq.${parroquia},barrio_destino.eq.${barrio})`
+        );
+        console.log(
+          `📍 Filtrando: Globales + Parroquia "${parroquia}" + Barrio "${barrio}"`
+        );
+      } else {
+        // Usuario solo tiene parroquia: mostrar globales y de su parroquia (sin barrio específico)
+        query = query.or(
+          `parroquia_destino.is.null,and(parroquia_destino.eq.${parroquia},barrio_destino.is.null)`
+        );
+        console.log(`📍 Filtrando: Globales + Parroquia "${parroquia}"`);
+      }
+
+      const { data, error: fetchError } = await query;
+
+      if (fetchError) {
+        console.error("❌ Error de Supabase:", fetchError);
+        throw fetchError;
+      }
+
+      noticias.value = data || [];
+      console.log(
+        `✅ ${noticias.value.length} noticias cargadas para el usuario`
+      );
+
+      // Log de debug para ver qué noticias se cargaron
+      noticias.value.forEach((n) => {
+        const tipo = !n.parroquia_destino
+          ? "🌍 Global"
+          : n.barrio_destino
+          ? `📍 ${n.parroquia_destino} - ${n.barrio_destino}`
+          : `📍 ${n.parroquia_destino}`;
+        console.log(`  - ${tipo}: ${n.titulo}`);
+      });
+
+      return { success: true, data: noticias.value };
+    } catch (err: any) {
+      error.value = err.message;
+      console.error("❌ Error obteniendo noticias del usuario:", err);
+      return { success: false, error: err.message };
+    } finally {
+      loading.value = false;
+      console.log("🔓 Loading liberado (noticias)");
+    }
+  };
+
+  const fetchTodasLasNoticias = async () => {
+    // Función para administradores: obtener TODAS las noticias sin filtros
+    if (loading.value) {
+      console.log(
+        "⏳ Ya hay una carga en progreso (fetchTodasLasNoticias), retornando datos actuales"
+      );
+      return { success: true, data: noticias.value };
+    }
+
+    loading.value = true;
+    error.value = null;
+
+    try {
+      console.log("👤 Administrador: cargando TODAS las noticias sin filtros");
+
       const { data, error: fetchError } = await supabase
         .from("noticias")
         .select("*")
-        .or(`parroquia_destino.is.null,parroquia_destino.eq.${parroquia}`)
         .order("created_at", { ascending: false });
 
       if (fetchError) {
@@ -204,27 +317,29 @@ export const useNoticiasStore = defineStore("noticias", () => {
         throw fetchError;
       }
 
-      // Si hay barrio específico, filtrar también por barrio
-      let filteredData = data || [];
-      if (barrio && filteredData.length > 0) {
-        filteredData = filteredData.filter(
-          (n: Noticia) =>
-            !n.barrio_destino || // Global de parroquia
-            n.barrio_destino === barrio // Específico del barrio
-        );
-      }
+      noticias.value = data || [];
+      console.log(
+        `✅ ${noticias.value.length} noticias cargadas (TODAS - Admin)`
+      );
 
-      noticias.value = filteredData;
-      console.log(`✅ ${filteredData.length} noticias cargadas`);
+      // Log de debug para ver qué noticias se cargaron
+      noticias.value.forEach((n) => {
+        const tipo = !n.parroquia_destino
+          ? "🌍 Global"
+          : n.barrio_destino
+          ? `📍 ${n.parroquia_destino} - ${n.barrio_destino}`
+          : `📍 ${n.parroquia_destino}`;
+        console.log(`  - ${tipo}: ${n.titulo}`);
+      });
 
-      return { success: true, data: filteredData };
+      return { success: true, data: noticias.value };
     } catch (err: any) {
       error.value = err.message;
-      console.error("❌ Error obteniendo noticias del usuario:", err);
+      console.error("❌ Error obteniendo todas las noticias:", err);
       return { success: false, error: err.message };
     } finally {
       loading.value = false;
-      console.log('🔓 Loading liberado (noticias)');
+      console.log("🔓 Loading liberado (fetchTodasLasNoticias)");
     }
   };
 
@@ -241,5 +356,6 @@ export const useNoticiasStore = defineStore("noticias", () => {
     actualizarNoticia,
     eliminarNoticia,
     fetchNoticiasUsuario,
+    fetchTodasLasNoticias,
   };
 });

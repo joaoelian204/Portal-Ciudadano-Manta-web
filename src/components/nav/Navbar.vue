@@ -1500,7 +1500,7 @@ const {
   currentPage,
   userInitial,
   isAuthenticated,
-  isHome,
+  // isHome no se usa actualmente, pero se mantiene para futuras referencias
   filteredSearchOptions,
   breadcrumb,
   toggleUserMenu,

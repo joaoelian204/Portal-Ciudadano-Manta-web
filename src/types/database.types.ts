@@ -85,6 +85,8 @@ export interface EncuestasRow {
   fecha_inicio: Timestamp;
   fecha_fin: Timestamp;
   activa: boolean | null;
+  parroquia_destino: string | null;
+  barrio_destino: string | null;
   created_at: Timestamp | null;
   updated_at: Timestamp | null;
 }
@@ -96,6 +98,8 @@ export type EncuestasInsert = Omit<
   id?: UUID;
   opciones?: any | null;
   activa?: boolean;
+  parroquia_destino?: string | null;
+  barrio_destino?: string | null;
   created_at?: Timestamp | null;
   updated_at?: Timestamp | null;
 };

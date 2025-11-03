@@ -55,7 +55,7 @@
 
       <!-- Tarjetas de Estadísticas -->
       <div
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8"
       >
         <!-- Total Encuestas -->
         <div
@@ -119,15 +119,17 @@
           </div>
         </div>
 
-        <!-- Panel Activo -->
+        <!-- Total Reportes -->
         <div
-          class="bg-white rounded-lg sm:rounded-xl shadow-lg p-4 sm:p-6 border border-gray-200 hover:shadow-xl transition-shadow sm:col-span-2 lg:col-span-1"
+          class="bg-white rounded-lg sm:rounded-xl shadow-lg p-4 sm:p-6 border border-gray-200 hover:shadow-xl transition-shadow"
         >
           <div class="flex items-center justify-between">
             <div class="flex-1">
-              <p class="text-xs sm:text-sm text-gray-600 mb-1">Gestión</p>
-              <p class="text-base sm:text-lg font-semibold text-gray-800">
-                Panel Activo
+              <p class="text-xs sm:text-sm text-gray-600 mb-1">
+                {{ $t("admin.stats.totalReports") }}
+              </p>
+              <p class="text-2xl sm:text-3xl font-bold text-purple-600">
+                {{ totalReportes }}
               </p>
             </div>
             <div class="bg-purple-100 rounded-full p-2 sm:p-3">
@@ -141,13 +143,38 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                 ></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reportes Pendientes -->
+        <div
+          class="bg-white rounded-lg sm:rounded-xl shadow-lg p-4 sm:p-6 border border-gray-200 hover:shadow-xl transition-shadow"
+        >
+          <div class="flex items-center justify-between">
+            <div class="flex-1">
+              <p class="text-xs sm:text-sm text-gray-600 mb-1">
+                {{ $t("admin.stats.pendingReports") }}
+              </p>
+              <p class="text-2xl sm:text-3xl font-bold text-yellow-600">
+                {{ reportesPendientes }}
+              </p>
+            </div>
+            <div class="bg-yellow-100 rounded-full p-2 sm:p-3">
+              <svg
+                class="w-6 h-6 sm:w-8 sm:h-8 text-yellow-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                 ></path>
               </svg>
             </div>
@@ -156,7 +183,7 @@
       </div>
 
       <!-- Tarjetas de Gestión -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         <!-- Gestionar Encuestas -->
         <div
           class="bg-white rounded-xl sm:rounded-2xl shadow-xl p-6 sm:p-8 hover:shadow-2xl transition-all duration-300 border border-gray-100"
@@ -228,15 +255,52 @@
             </router-link>
           </div>
         </div>
+
+        <!-- Gestionar Reportes -->
+        <div
+          class="bg-white rounded-xl sm:rounded-2xl shadow-xl p-6 sm:p-8 hover:shadow-2xl transition-all duration-300 border border-gray-100"
+        >
+          <div class="text-center">
+            <div class="mb-4 flex justify-center" aria-hidden="true">
+              <svg
+                class="w-12 h-12 sm:w-16 sm:h-16 text-purple-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-2 sm:mb-3">
+              {{ $t("admin.sections.reports.title") }}
+            </h3>
+            <p class="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 px-2">
+              {{ $t("admin.sections.reports.description") }}
+            </p>
+            <router-link
+              to="/admin/reportes"
+              class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 text-sm sm:text-base"
+              :aria-label="$t('admin.sections.reports.title')"
+            >
+              {{ $t("admin.sections.reports.button") }}
+            </router-link>
+          </div>
+        </div>
       </div>
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useLanguage } from "../composables/useLanguage";
+import { supabase } from "../lib/supabase";
 import { useAuthStore } from "../stores/auth.store";
 import { useEncuestasStore } from "../stores/encuestas.store";
 
@@ -247,6 +311,10 @@ const router = useRouter();
 // Inicializar sistema de idiomas (para sincronización global)
 const { loadSavedLanguage } = useLanguage();
 
+// Estado para reportes
+const totalReportes = ref(0);
+const reportesPendientes = ref(0);
+
 const adminName = computed(() => {
   return authStore.usuario?.nombres || "Administrador";
 });
@@ -256,6 +324,33 @@ const encuestas = computed(() => encuestasStore.encuestas);
 const encuestasActivas = computed(() => {
   return encuestas.value.filter((e) => e.activa).length;
 });
+
+// Función para cargar estadísticas de reportes
+async function cargarEstadisticasReportes() {
+  try {
+    // Obtener total de reportes
+    const { count: total } = await (supabase as any)
+      .from('reportes')
+      .select('*', { count: 'exact', head: true });
+    
+    totalReportes.value = total || 0;
+
+    // Obtener reportes pendientes
+    const { count: pendientes } = await (supabase as any)
+      .from('reportes')
+      .select('*', { count: 'exact', head: true })
+      .eq('estado', 'pendiente');
+    
+    reportesPendientes.value = pendientes || 0;
+
+    console.log('✅ AdminPanel: Estadísticas de reportes cargadas', {
+      total: totalReportes.value,
+      pendientes: reportesPendientes.value
+    });
+  } catch (error) {
+    console.error('❌ AdminPanel: Error al cargar estadísticas de reportes:', error);
+  }
+}
 
 onMounted(async () => {
   console.log("🏠 AdminPanel: Montado", {
@@ -300,6 +395,9 @@ onMounted(async () => {
     router.push("/login");
     return;
   }
+
+  // Cargar estadísticas de reportes
+  await cargarEstadisticasReportes();
 
   // Solo cargar si no hay encuestas ya cargadas
   if (encuestasStore.encuestas.length > 0) {

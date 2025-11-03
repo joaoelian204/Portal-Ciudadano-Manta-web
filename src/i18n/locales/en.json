@@ -78,6 +78,10 @@
           "title": "Manage Surveys",
           "description": "Create and manage surveys"
         },
+        "manageReports": {
+          "title": "Manage Reports",
+          "description": "Manage and track citizen reports"
+        },
         "adminPanel": {
           "title": "Administration Panel",
           "description": "Access to main admin panel"
@@ -346,15 +350,22 @@
     "loading": "Loading survey...",
     "notFound": "Survey not found.",
     "yourResponse": "Your response",
+    "yourPreviousResponse": "Your previous response",
+    "alreadyResponded": "You have already responded to this survey",
     "submitResponse": "Submit response",
+    "submitting": "Submitting...",
     "responseSuccess": "Response submitted. Thank you.",
-    "responseError": "Error: could not submit"
+    "responseError": "Error: could not submit",
+    "placeholder": "Write your opinion here...",
+    "characters": "characters"
   },
   "noticiaDetalle": {
     "loading": "Loading news...",
     "notFound": "News not found.",
     "forAll": "For everyone",
-    "parish": "Parish"
+    "parish": "Parish",
+    "related": "More News",
+    "noRelated": "No more news"
   },
   "reportes": {
     "titulo": "Report a Problem",
@@ -449,6 +460,9 @@
     "submitting": "Submitting...",
     "type": "Type",
     "ends": "Ends:",
+    "active": "Active",
+    "participate": "Participate",
+    "viewResults": "View Results",
     "ratings": {
       "veryBad": "Very bad",
       "bad": "Bad",
@@ -460,9 +474,7 @@
       "multipleChoice": "Multiple Choice",
       "rating": "Rating",
       "open": "Open Question"
-    },
-    "participate": "Participate",
-    "viewResults": "View Results"
+    }
   },
   "noticias": {
     "title": "Manta News",
@@ -476,7 +488,8 @@
     "readMore": "Read more",
     "close": "Close",
     "published": "Published on",
-    "author": "Author"
+    "author": "Author",
+    "forAll": "For everyone"
   },
   "perfil": {
     "title": "My Profile",
@@ -647,6 +660,86 @@
         "parish": "Parish",
         "neighborhood": "Neighborhood (optional)"
       }
+    },
+    "reportes": {
+      "title": "Citizen Report Management",
+      "subtitle": "Kanban Board to manage and track reports",
+      "stats": {
+        "pending": "Pending",
+        "inReview": "In Review",
+        "inProcess": "In Process",
+        "resolved": "Resolved"
+      },
+      "filters": {
+        "searchPlaceholder": "Search by description, location, category...",
+        "allCategories": "All categories",
+        "allPriorities": "All priorities",
+        "update": "Update"
+      },
+      "categories": {
+        "alumbrado": "Street Lighting",
+        "baches": "Potholes",
+        "limpieza": "Cleaning",
+        "agua": "Water",
+        "alcantarillado": "Sewerage",
+        "parques": "Parks",
+        "señalizacion": "Signage",
+        "seguridad": "Security",
+        "ruido": "Noise",
+        "otro": "Other"
+      },
+      "priorities": {
+        "urgente": "Urgent",
+        "alta": "High",
+        "media": "Medium",
+        "baja": "Low"
+      },
+      "states": {
+        "pendiente": "Pending",
+        "en_revision": "In Review",
+        "en_proceso": "In Process",
+        "resuelto": "Resolved",
+        "rechazado": "Rejected",
+        "duplicado": "Duplicate"
+      },
+      "actions": {
+        "review": "Review",
+        "process": "Process",
+        "resolve": "Resolve",
+        "reopen": "Reopen",
+        "toPending": "Pending",
+        "toReview": "Review"
+      },
+      "empty": {
+        "pending": "No pending reports",
+        "review": "No reports in review",
+        "process": "No reports in process",
+        "resolved": "No resolved reports"
+      },
+      "detail": {
+        "title": "Report Details",
+        "category": "Category",
+        "priority": "Priority",
+        "currentState": "Current State",
+        "reportDate": "Report Date",
+        "description": "Description",
+        "location": "Location",
+        "parish": "Parish",
+        "neighborhood": "Neighborhood",
+        "address": "Address",
+        "image": "Report Image",
+        "changeState": "Change State",
+        "adminResponse": "Administrator Response",
+        "responsePlaceholder": "Write a response or comment about this report...",
+        "saveResponse": "Save Response",
+        "resolved": "Resolved",
+        "stateUpdated": "State updated successfully",
+        "responseSaved": "Response saved successfully",
+        "errorUpdating": "Error changing state",
+        "errorSaving": "Error saving response"
+      },
+      "loading": "Loading reports...",
+      "errorLoading": "Error loading reports"
     }
   },
   "common": {

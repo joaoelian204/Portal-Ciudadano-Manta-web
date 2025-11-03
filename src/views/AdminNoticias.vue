@@ -14,7 +14,7 @@
       role="banner"
     >
       <div class="container mx-auto px-4 py-6">
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between flex-wrap gap-4">
           <div>
             <h1 class="text-3xl md:text-4xl font-bold text-gray-800">
               {{ $t("admin.noticias.title") }}
@@ -24,6 +24,38 @@
             </p>
           </div>
           <div class="flex items-center space-x-4">
+            <!-- Selector de Vista -->
+            <div class="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
+              <button
+                @click="vistaActual = 'tarjetas'"
+                :class="[
+                  'px-3 py-2 rounded-md text-sm font-medium transition-all',
+                  vistaActual === 'tarjetas'
+                    ? 'bg-white text-green-600 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                ]"
+                :aria-label="$t('admin.noticias.viewCards')"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+              </button>
+              <button
+                @click="vistaActual = 'lista'"
+                :class="[
+                  'px-3 py-2 rounded-md text-sm font-medium transition-all',
+                  vistaActual === 'lista'
+                    ? 'bg-white text-green-600 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                ]"
+                :aria-label="$t('admin.noticias.viewList')"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+            </div>
+
             <router-link
               to="/admin"
               class="inline-flex items-center px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
@@ -50,8 +82,9 @@
 
     <!-- Main Content -->
     <main id="main-content" class="container mx-auto px-4 py-8" role="main">
-      <!-- Botón Crear Nueva Noticia -->
-      <div class="mb-8">
+      <!-- Barra de Acciones Superior -->
+      <div class="mb-8 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+        <!-- Botón Crear Nueva Noticia -->
         <button
           @click="openCreateModal"
           class="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transform hover:scale-105"
@@ -72,6 +105,127 @@
           </svg>
           {{ $t("admin.noticias.createNew") }}
         </button>
+
+        <!-- Buscador y Filtros -->
+        <div class="flex flex-wrap gap-3 w-full sm:w-auto items-center">
+          <!-- Buscador de texto -->
+          <div class="relative flex-1 sm:flex-initial sm:w-64">
+            <input
+              v-model="busqueda"
+              type="text"
+              placeholder="Buscar por título o contenido..."
+              class="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+              :class="{ 'border-green-500 bg-green-50': busqueda }"
+            />
+            <svg
+              class="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 transition-colors"
+              :class="busqueda ? 'text-green-600' : 'text-gray-400'"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+            <!-- Botón limpiar búsqueda -->
+            <button
+              v-if="busqueda"
+              @click="busqueda = ''"
+              class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              title="Limpiar búsqueda"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Filtro por tipo de alcance -->
+          <select
+            v-model="filtroAlcance"
+            class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white transition-all"
+            :class="{ 'border-green-500 bg-green-50': filtroAlcance !== 'todas' }"
+          >
+            <option value="todas">📍 Todas las noticias</option>
+            <option value="globales">🌍 Solo globales</option>
+            <option value="parroquias">📍 Solo parroquias</option>
+            <option value="barrios">📍 Solo barrios</option>
+          </select>
+
+          <!-- Filtro por parroquia específica -->
+          <select
+            v-if="filtroAlcance === 'parroquias' || filtroAlcance === 'barrios'"
+            v-model="filtroParroquia"
+            class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white transition-all"
+            :class="{ 'border-green-500 bg-green-50': filtroParroquia }"
+          >
+            <option value="">Todas las parroquias</option>
+            <option v-for="parroquia in parroquiasUnicas" :key="parroquia" :value="parroquia">
+              {{ parroquia }}
+            </option>
+          </select>
+
+          <!-- Botón limpiar todos los filtros (solo visible si hay filtros activos) -->
+          <button
+            v-if="busqueda || filtroAlcance !== 'todas' || filtroParroquia"
+            @click="limpiarFiltros"
+            class="px-3 py-2 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 rounded-lg transition-all flex items-center gap-1.5 font-medium text-sm"
+            title="Limpiar todos los filtros"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+            <span class="hidden sm:inline">Limpiar</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Contador de resultados y filtros activos -->
+      <div v-if="busqueda || filtroAlcance !== 'todas' || filtroParroquia" class="mb-6">
+        <div class="flex flex-wrap items-center gap-3">
+          <!-- Contador -->
+          <div class="text-sm text-gray-600">
+            <span class="font-semibold text-green-600 text-lg">{{ noticiasFiltradas.length }}</span> 
+            <span class="ml-1">{{ noticiasFiltradas.length === 1 ? 'noticia encontrada' : 'noticias encontradas' }}</span>
+            <span class="text-gray-400 ml-1">de {{ noticias.length }}</span>
+          </div>
+          
+          <!-- Badges de filtros activos -->
+          <div class="flex flex-wrap gap-2">
+            <!-- Badge búsqueda -->
+            <span 
+              v-if="busqueda"
+              class="inline-flex items-center gap-1.5 px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium"
+            >
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <span class="max-w-[150px] truncate">{{ busqueda }}</span>
+            </span>
+            
+            <!-- Badge alcance -->
+            <span 
+              v-if="filtroAlcance !== 'todas'"
+              class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium"
+            >
+              <span v-if="filtroAlcance === 'globales'">🌍</span>
+              <span v-else>📍</span>
+              {{ filtroAlcance === 'globales' ? 'Globales' : filtroAlcance === 'parroquias' ? 'Parroquias' : 'Barrios' }}
+            </span>
+            
+            <!-- Badge parroquia -->
+            <span 
+              v-if="filtroParroquia"
+              class="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-medium"
+            >
+              📍 {{ filtroParroquia }}
+            </span>
+          </div>
+        </div>
       </div>
 
       <!-- Loading State -->
@@ -114,9 +268,32 @@
 
       <!-- Noticias List -->
       <div v-else class="space-y-6">
-        <!-- Empty State -->
+        <!-- Empty State - Sin resultados de filtrado -->
         <div
-          v-if="noticias.length === 0"
+          v-if="noticiasFiltradas.length === 0 && (busqueda || filtroAlcance !== 'todas' || filtroParroquia)"
+          class="bg-white rounded-2xl shadow-xl p-12 text-center border border-gray-200"
+        >
+          <div class="text-6xl mb-4">🔍</div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-3">
+            No se encontraron resultados
+          </h3>
+          <p class="text-gray-600 mb-6">
+            No hay noticias que coincidan con los filtros seleccionados
+          </p>
+          <button
+            @click="limpiarFiltros"
+            class="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+            Limpiar filtros
+          </button>
+        </div>
+
+        <!-- Empty State - Sin noticias en el sistema -->
+        <div
+          v-else-if="noticias.length === 0"
           class="bg-white rounded-2xl shadow-xl p-12 text-center border border-gray-200"
         >
           <div class="text-6xl mb-4">📰</div>
@@ -147,35 +324,35 @@
           </button>
         </div>
 
-        <!-- Noticias Cards -->
+        <!-- Noticias - Vista de Tarjetas Compactas -->
         <div
-          v-else
-          class="grid grid-cols-1 lg:grid-cols-2 gap-6"
+          v-else-if="vistaActual === 'tarjetas'"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
           role="list"
           aria-label="Lista de noticias"
         >
           <article
-            v-for="noticia in noticias"
+            v-for="noticia in noticiasFiltradas"
             :key="noticia.id"
-            class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 overflow-hidden"
+            class="bg-white rounded-lg shadow hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden"
             role="listitem"
           >
-            <!-- Imagen (si existe) -->
+            <!-- Imagen compacta -->
             <div
               v-if="noticia.imagen_url"
-              class="h-48 bg-cover bg-center"
+              class="h-32 bg-cover bg-center"
               :style="{ backgroundImage: `url(${noticia.imagen_url})` }"
               role="img"
               :aria-label="`Imagen de ${noticia.titulo}`"
             ></div>
             <div
               v-else
-              class="h-48 bg-gradient-to-r from-green-50 to-emerald-50 flex items-center justify-center"
+              class="h-32 bg-gradient-to-r from-green-50 to-emerald-50 flex items-center justify-center"
               role="img"
               aria-label="Imagen no disponible"
             >
               <svg
-                class="w-20 h-20 text-green-300"
+                class="w-12 h-12 text-green-300"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -189,41 +366,38 @@
               </svg>
             </div>
 
-            <!-- Content -->
-            <div class="p-6">
+            <!-- Content compacto -->
+            <div class="p-4">
               <!-- Título y alcance -->
-              <div class="mb-4">
-                <h3 class="text-xl font-bold text-gray-800 mb-2">
+              <div class="mb-3">
+                <h3 class="text-base font-bold text-gray-800 mb-2 line-clamp-2">
                   {{ noticia.titulo }}
                 </h3>
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-1">
                   <span
                     v-if="!noticia.parroquia_destino"
-                    class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800"
+                    class="inline-block px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-800"
                   >
                     🌍 Global
                   </span>
                   <span
                     v-else
-                    class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800"
+                    class="inline-block px-2 py-0.5 text-xs font-semibold rounded-full bg-green-100 text-green-800"
                   >
                     📍 {{ noticia.parroquia_destino }}
-                    <span v-if="noticia.barrio_destino">
-                      - {{ noticia.barrio_destino }}</span
-                    >
                   </span>
                 </div>
               </div>
 
               <!-- Contenido -->
-              <p class="text-gray-700 mb-4 line-clamp-3">
+              <p class="text-gray-700 text-sm mb-3 line-clamp-2">
                 {{ noticia.contenido }}
               </p>
 
-              <!-- Fecha -->
-              <div class="flex items-center text-sm text-gray-600 mb-4">
+              <!-- Fecha compacta -->
+              <div class="flex items-center text-xs text-gray-600 mb-3 pb-3 border-b border-gray-100">
                 <svg
-                  class="w-4 h-4 mr-2"
+                  class="w-3.5 h-3.5 mr-1"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -235,80 +409,151 @@
                     d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                   ></path>
                 </svg>
-                {{ formatDate(noticia.created_at) }}
+                {{ new Date(noticia.created_at || '').toLocaleDateString('es-EC', { 
+                  day: '2-digit', 
+                  month: 'short'
+                }) }}
               </div>
 
-              <!-- Acciones -->
-              <div class="flex flex-wrap gap-2 pt-4 border-t border-gray-200">
+              <!-- Acciones compactas -->
+              <div class="flex gap-2">
                 <button
                   @click="viewNoticia(noticia)"
-                  class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  class="flex-1 inline-flex items-center justify-center px-2 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
                   :aria-label="`Ver ${noticia.titulo}`"
                 >
-                  <svg
-                    class="w-4 h-4 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    ></path>
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                    ></path>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                   </svg>
-                  {{ $t("common.view") }}
                 </button>
                 <button
                   @click="editNoticia(noticia)"
-                  class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                  class="flex-1 inline-flex items-center justify-center px-2 py-1.5 bg-green-600 hover:bg-green-700 text-white text-xs font-semibold rounded transition-colors focus:outline-none focus:ring-2 focus:ring-green-500"
                   :aria-label="`${$t('common.edit')} ${noticia.titulo}`"
                 >
-                  <svg
-                    class="w-4 h-4 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                    ></path>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                   </svg>
-                  {{ $t("common.edit") }}
                 </button>
                 <button
                   @click="confirmDelete(noticia)"
-                  class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                  class="flex-1 inline-flex items-center justify-center px-2 py-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded transition-colors focus:outline-none focus:ring-2 focus:ring-red-500"
                   :aria-label="`${$t('common.delete')} ${noticia.titulo}`"
                 >
-                  <svg
-                    class="w-4 h-4 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                    ></path>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                   </svg>
-                  {{ $t("common.delete") }}
                 </button>
               </div>
             </div>
           </article>
+        </div>
+
+        <!-- Noticias - Vista de Lista -->
+        <div v-else class="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-gradient-to-r from-green-600 to-emerald-600 text-white">
+                <tr>
+                  <th class="px-6 py-4 text-left text-sm font-semibold">Título</th>
+                  <th class="px-6 py-4 text-left text-sm font-semibold hidden lg:table-cell">Contenido</th>
+                  <th class="px-6 py-4 text-left text-sm font-semibold hidden md:table-cell">Alcance</th>
+                  <th class="px-6 py-4 text-left text-sm font-semibold hidden sm:table-cell">Fecha</th>
+                  <th class="px-6 py-4 text-center text-sm font-semibold">Acciones</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr
+                  v-for="noticia in noticiasFiltradas"
+                  :key="noticia.id"
+                  class="hover:bg-green-50 transition-colors"
+                >
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <div 
+                        v-if="noticia.imagen_url"
+                        class="w-12 h-12 rounded bg-cover bg-center flex-shrink-0"
+                        :style="{ backgroundImage: `url(${noticia.imagen_url})` }"
+                      ></div>
+                      <div v-else class="w-12 h-12 rounded bg-gradient-to-r from-green-50 to-emerald-50 flex items-center justify-center flex-shrink-0">
+                        <span class="text-xl">📰</span>
+                      </div>
+                      <div class="min-w-0">
+                        <p class="font-semibold text-gray-900 truncate">{{ noticia.titulo }}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 hidden lg:table-cell">
+                    <p class="text-sm text-gray-600 line-clamp-2">
+                      {{ noticia.contenido }}
+                    </p>
+                  </td>
+                  <td class="px-6 py-4 hidden md:table-cell">
+                    <span
+                      v-if="!noticia.parroquia_destino"
+                      class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800"
+                    >
+                      🌍 Global
+                    </span>
+                    <span
+                      v-else
+                      class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800"
+                    >
+                      📍 {{ noticia.parroquia_destino }}
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 hidden sm:table-cell">
+                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                      </svg>
+                      {{ new Date(noticia.created_at || '').toLocaleDateString('es-EC', { 
+                        day: '2-digit', 
+                        month: 'short', 
+                        year: 'numeric' 
+                      }) }}
+                    </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="flex justify-center gap-2">
+                      <button
+                        @click="viewNoticia(noticia)"
+                        class="p-2 bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        :aria-label="`Ver ${noticia.titulo}`"
+                        title="Ver"
+                      >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                      </button>
+                      <button
+                        @click="editNoticia(noticia)"
+                        class="p-2 bg-green-600 hover:bg-green-700 text-white rounded transition-colors focus:outline-none focus:ring-2 focus:ring-green-500"
+                        :aria-label="`${$t('common.edit')} ${noticia.titulo}`"
+                        title="Editar"
+                      >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                        </svg>
+                      </button>
+                      <button
+                        @click="confirmDelete(noticia)"
+                        class="p-2 bg-red-600 hover:bg-red-700 text-white rounded transition-colors focus:outline-none focus:ring-2 focus:ring-red-500"
+                        :aria-label="`${$t('common.delete')} ${noticia.titulo}`"
+                        title="Eliminar"
+                      >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </main>
@@ -808,7 +1053,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { supabase } from "../lib/supabase";
 import { useAuthStore } from "../stores/auth.store";
@@ -826,6 +1071,10 @@ const showModal = ref(false);
 const showViewModal = ref(false);
 const showDeleteModal = ref(false);
 const isEditing = ref(false);
+// Vista actual con persistencia en localStorage
+const vistaActual = ref<'tarjetas' | 'lista'>(
+  (localStorage.getItem('admin_noticias_vista') as 'tarjetas' | 'lista') || 'tarjetas'
+);
 const submitting = ref(false);
 const selectedNoticia = ref<Noticia | null>(null);
 const noticiaToDelete = ref<Noticia | null>(null);
@@ -851,12 +1100,74 @@ const formData = ref({
   barrio_destino: "",
 });
 
+// Estado de filtros y búsqueda
+const busqueda = ref("");
+const filtroAlcance = ref<'todas' | 'globales' | 'parroquias' | 'barrios'>('todas');
+const filtroParroquia = ref("");
+
 // Computed
 const loading = computed(() => noticiasStore.loading);
 const error = computed(() => noticiasStore.error);
 const noticias = computed(() => noticiasStore.noticias);
 
+// Obtener parroquias únicas de las noticias
+const parroquiasUnicas = computed(() => {
+  const parroquias = new Set<string>();
+  noticias.value.forEach((noticia) => {
+    if (noticia.parroquia_destino) {
+      parroquias.add(noticia.parroquia_destino);
+    }
+  });
+  return Array.from(parroquias).sort();
+});
+
+// Filtrar noticias según criterios
+const noticiasFiltradas = computed(() => {
+  let resultado = noticias.value;
+
+  // Filtro por texto de búsqueda
+  if (busqueda.value.trim()) {
+    const textoBusqueda = busqueda.value.toLowerCase().trim();
+    resultado = resultado.filter((noticia) => {
+      const titulo = noticia.titulo?.toLowerCase() || "";
+      const contenido = noticia.contenido?.toLowerCase() || "";
+      return titulo.includes(textoBusqueda) || contenido.includes(textoBusqueda);
+    });
+  }
+
+  // Filtro por tipo de alcance
+  if (filtroAlcance.value !== 'todas') {
+    resultado = resultado.filter((noticia) => {
+      switch (filtroAlcance.value) {
+        case 'globales':
+          return noticia.parroquia_destino === null || noticia.parroquia_destino === '';
+        case 'parroquias':
+          return noticia.parroquia_destino && (!noticia.barrio_destino || noticia.barrio_destino === '');
+        case 'barrios':
+          return noticia.barrio_destino && noticia.barrio_destino !== '';
+        default:
+          return true;
+      }
+    });
+  }
+
+  // Filtro por parroquia específica
+  if (filtroParroquia.value) {
+    resultado = resultado.filter((noticia) => 
+      noticia.parroquia_destino === filtroParroquia.value
+    );
+  }
+
+  return resultado;
+});
+
 // Métodos
+const limpiarFiltros = () => {
+  busqueda.value = "";
+  filtroAlcance.value = 'todas';
+  filtroParroquia.value = "";
+};
+
 const showNotification = (type: "success" | "error", message: string) => {
   notification.value = { type, message };
   setTimeout(() => {
@@ -1096,7 +1407,7 @@ const submitForm = async () => {
 
     if (result.success) {
       closeModal();
-      await noticiasStore.fetchNoticias();
+      await noticiasStore.fetchTodasLasNoticias();
     } else {
       showNotification("error", result.error || "Error al guardar la noticia");
     }
@@ -1130,7 +1441,7 @@ const deleteNoticia = async () => {
     if (result.success) {
       showNotification("success", "Noticia eliminada exitosamente");
       closeDeleteModal();
-      await noticiasStore.fetchNoticias();
+      await noticiasStore.fetchTodasLasNoticias();
     } else {
       showNotification("error", result.error || "Error al eliminar la noticia");
     }
@@ -1155,10 +1466,10 @@ onMounted(async () => {
     return;
   }
 
-  // Cargar noticias con manejo de errores
+  // Cargar TODAS las noticias (administrador puede ver todas)
   try {
-    console.log("📰 AdminNoticias: Cargando noticias...");
-    const result = await noticiasStore.fetchNoticias();
+    console.log("📰 AdminNoticias: Cargando TODAS las noticias...");
+    const result = await noticiasStore.fetchTodasLasNoticias();
 
     if (result.success) {
       console.log(
@@ -1171,6 +1482,18 @@ onMounted(async () => {
   } catch (error: any) {
     console.error("❌ AdminNoticias: Error en carga:", error);
     // Continuar - la interfaz mostrará lista vacía
+  }
+});
+
+// Guardar preferencia de vista en localStorage
+watch(vistaActual, (nuevaVista) => {
+  localStorage.setItem('admin_noticias_vista', nuevaVista);
+});
+
+// Limpiar filtro de parroquia cuando cambia el tipo de alcance
+watch(filtroAlcance, (nuevoAlcance) => {
+  if (nuevoAlcance === 'todas' || nuevoAlcance === 'globales') {
+    filtroParroquia.value = '';
   }
 });
 </script>

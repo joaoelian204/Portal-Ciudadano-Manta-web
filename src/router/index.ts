@@ -59,26 +59,26 @@ const routes = [
     path: "/encuestas",
     name: "Encuestas",
     component: () => import("../views/Encuestas.vue"),
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
   },
   {
     path: "/encuestas/:id",
     name: "EncuestaDetalle",
     component: () => import("../views/EncuestaDetalle.vue"),
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
     props: true,
   },
   {
     path: "/noticias",
     name: "Noticias",
     component: () => import("../views/Noticias.vue"),
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
   },
   {
     path: "/noticias/:id",
     name: "NoticiaDetalle",
     component: () => import("../views/NoticiaDetalle.vue"),
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
     props: true,
   },
   {
@@ -105,6 +105,12 @@ const routes = [
     name: "AdminReportes",
     component: () => import("../views/AdminReportes.vue"),
     meta: { requiresAuth: true },
+  },
+  // Ruta catch-all para 404
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    redirect: { name: "Home" },
   },
 ];
 
@@ -199,6 +205,12 @@ router.beforeEach(async (to, from, next) => {
       "🔓 Router: Permitiendo acceso a ResetPassword sin validación de auth"
     );
     return next();
+  }
+
+  // Si intenta acceder a Home sin estar autenticado, redirigir a Login
+  if (to.name === "Home" && !isAuthenticated) {
+    console.log("🔒 Router: Home sin autenticación, redirigiendo a Login");
+    return next({ name: "Login" });
   }
 
   // Si la ruta requiere autenticación y no está autenticado

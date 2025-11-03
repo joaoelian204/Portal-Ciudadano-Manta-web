@@ -34,12 +34,6 @@ export const useEncuestasStore = defineStore("encuestas", () => {
 
   // Actions
   const fetchEncuestas = async (soloActivas = true) => {
-    // Si ya está cargando, retornar éxito con datos actuales
-    if (loading.value) {
-      console.log('⏳ Ya hay una carga en progreso, retornando datos actuales');
-      return { success: true, data: encuestas.value };
-    }
-    
     loading.value = true;
     error.value = null;
 
@@ -59,7 +53,7 @@ export const useEncuestasStore = defineStore("encuestas", () => {
         console.error("❌ Error de Supabase:", fetchError);
         throw fetchError;
       }
-      
+
       encuestas.value = data || [];
       console.log(`✅ ${data?.length || 0} encuestas cargadas`);
 
@@ -70,7 +64,7 @@ export const useEncuestasStore = defineStore("encuestas", () => {
       return { success: false, error: err.message };
     } finally {
       loading.value = false;
-      console.log('🔓 Loading liberado (encuestas)');
+      console.log("🔓 Loading liberado (encuestas)");
     }
   };
 
@@ -106,7 +100,9 @@ export const useEncuestasStore = defineStore("encuestas", () => {
       // Verificar sesión antes de operación crítica
       const sessionValid = await checkSession();
       if (!sessionValid) {
-        throw new Error("Sesión expirada. Por favor, inicia sesión nuevamente.");
+        throw new Error(
+          "Sesión expirada. Por favor, inicia sesión nuevamente."
+        );
       }
 
       const { data, error: insertError } = await (
@@ -275,11 +271,39 @@ export const useEncuestasStore = defineStore("encuestas", () => {
     }
   };
 
+  const obtenerRespuestaUsuario = async (encuestaId: string) => {
+    try {
+      const authStore = useAuthStore();
+      if (!authStore.user) return null;
+
+      const { data } = await supabase
+        .from("respuestas_encuestas")
+        .select("respuesta")
+        .eq("encuesta_id", encuestaId)
+        .eq("usuario_id", authStore.user.id)
+        .single();
+
+      return (data as any)?.respuesta || null;
+    } catch (err) {
+      return null;
+    }
+  };
+
   const obtenerEstadisticas = async (encuestaId: string) => {
     loading.value = true;
     error.value = null;
 
     try {
+      // Obtener la encuesta para saber su tipo
+      const { data: encuestaData, error: encuestaError } = await supabase
+        .from("encuestas")
+        .select("tipo, opciones")
+        .eq("id", encuestaId)
+        .single();
+
+      if (encuestaError) throw encuestaError;
+
+      // Obtener respuestas
       const { data, error: fetchError } = await supabase
         .from("respuestas_encuestas")
         .select("respuesta")
@@ -287,7 +311,92 @@ export const useEncuestasStore = defineStore("encuestas", () => {
 
       if (fetchError) throw fetchError;
 
-      // Procesar estadísticas
+      // Si es opción múltiple con múltiples preguntas, procesar por pregunta
+      const encuesta = encuestaData as any;
+      if (
+        encuesta?.tipo === "opcion_multiple" &&
+        Array.isArray(encuesta.opciones)
+      ) {
+        const preguntas = encuesta.opciones as any[];
+
+        // Verificar si tiene el formato de múltiples preguntas
+        if (
+          preguntas.length > 0 &&
+          typeof preguntas[0] === "object" &&
+          "pregunta" in preguntas[0]
+        ) {
+          // Formato nuevo: múltiples preguntas
+          const estadisticasPorPregunta: Array<{
+            pregunta: string;
+            estadisticas: Record<string, number>;
+            total: number;
+          }> = [];
+
+          preguntas.forEach((preguntaObj, index) => {
+            const stats: Record<string, number> = {};
+
+            (data as any)?.forEach((resp: any) => {
+              const respuesta = resp.respuesta as any;
+              // respuesta es un array donde cada índice corresponde a una pregunta
+              if (Array.isArray(respuesta.respuestaLibre)) {
+                const opcionSeleccionada = respuesta.respuestaLibre[index];
+                if (opcionSeleccionada) {
+                  stats[opcionSeleccionada] =
+                    (stats[opcionSeleccionada] || 0) + 1;
+                }
+              }
+            });
+
+            estadisticasPorPregunta.push({
+              pregunta: preguntaObj.pregunta,
+              estadisticas: stats,
+              total: data?.length || 0,
+            });
+          });
+
+          return {
+            success: true,
+            data: estadisticasPorPregunta,
+            total: data?.length || 0,
+            tipo: "multiple_preguntas",
+          };
+        }
+      }
+
+      // Formato antiguo o tipos simples (calificación, abierta)
+
+      // Para preguntas abiertas, devolver array de respuestas
+      if (encuesta?.tipo === "abierta") {
+        const respuestasAbiertas: Array<{
+          respuesta: string;
+          fecha: string;
+        }> = [];
+
+        (data as any)?.forEach((resp: any) => {
+          const respuesta = resp.respuesta as any;
+          // Buscar el valor de respuesta (puede estar en diferentes keys)
+          const textoRespuesta =
+            respuesta.respuestaLibre ||
+            respuesta.calificacion ||
+            respuesta.opcion ||
+            Object.values(respuesta)[0];
+          if (textoRespuesta) {
+            respuestasAbiertas.push({
+              respuesta: String(textoRespuesta),
+              fecha: new Date().toISOString(), // Podrías agregar fecha real si está en la BD
+            });
+          }
+        });
+
+        return {
+          success: true,
+          data: respuestasAbiertas,
+          total: data?.length || 0,
+          tipo: "abierta",
+        };
+      }
+
+      // Para calificación y otros tipos, mantener el formato de barras
       const estadisticas: Record<string, number> = {};
       (data as any)?.forEach((resp: any) => {
         const respuesta = resp.respuesta as any;
@@ -323,6 +432,7 @@ export const useEncuestasStore = defineStore("encuestas", () => {
     responderEncuesta,
     fetchRespuestasEncuesta,
     verificarYaRespondio,
+    obtenerRespuestaUsuario,
     obtenerEstadisticas,
   };
 });

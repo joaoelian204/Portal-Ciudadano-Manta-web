@@ -78,6 +78,10 @@
           "title": "Gestionar Encuestas",
           "description": "Crear y administrar encuestas"
         },
+        "manageReports": {
+          "title": "Gestionar Reportes",
+          "description": "Administrar y dar seguimiento a reportes ciudadanos"
+        },
         "adminPanel": {
           "title": "Panel de Administración",
           "description": "Acceso al panel principal de admin"
@@ -348,15 +352,22 @@
     "loading": "Cargando encuesta...",
     "notFound": "No se encontró la encuesta.",
     "yourResponse": "Tu respuesta",
+    "yourPreviousResponse": "Tu respuesta anterior",
+    "alreadyResponded": "Ya has respondido esta encuesta",
     "submitResponse": "Enviar respuesta",
+    "submitting": "Enviando...",
     "responseSuccess": "Respuesta enviada. Gracias.",
-    "responseError": "Error: no se pudo enviar"
+    "responseError": "Error: no se pudo enviar",
+    "placeholder": "Escribe tu opinión aquí...",
+    "characters": "caracteres"
   },
   "noticiaDetalle": {
     "loading": "Cargando noticia...",
     "notFound": "No se encontró la noticia.",
     "forAll": "Para todos",
-    "parish": "Parroquia"
+    "parish": "Parroquia",
+    "related": "Más Noticias",
+    "noRelated": "No hay más noticias"
   },
   "reportes": {
     "titulo": "Reportar un Problema",
@@ -451,6 +462,9 @@
     "submitting": "Enviando...",
     "type": "Tipo",
     "ends": "Finaliza:",
+    "active": "Activa",
+    "participate": "Participar",
+    "viewResults": "Ver Resultados",
     "ratings": {
       "veryBad": "Muy malo",
       "bad": "Malo",
@@ -462,9 +476,7 @@
       "multipleChoice": "Opción Múltiple",
       "rating": "Calificación",
       "open": "Pregunta Abierta"
-    },
-    "participate": "Participar",
-    "viewResults": "Ver Resultados"
+    }
   },
   "noticias": {
     "title": "Noticias de Manta",
@@ -478,7 +490,8 @@
     "readMore": "Leer más",
     "close": "Cerrar",
     "published": "Publicado el",
-    "author": "Autor"
+    "author": "Autor",
+    "forAll": "Para todos"
   },
   "perfil": {
     "title": "Mi Perfil",
@@ -649,6 +662,86 @@
         "parish": "Parroquia",
         "neighborhood": "Barrio (opcional)"
       }
+    },
+    "reportes": {
+      "title": "Gestión de Reportes Ciudadanos",
+      "subtitle": "Tablero Kanban para gestionar y dar seguimiento a los reportes",
+      "stats": {
+        "pending": "Pendientes",
+        "inReview": "En Revisión",
+        "inProcess": "En Proceso",
+        "resolved": "Resueltos"
+      },
+      "filters": {
+        "searchPlaceholder": "Buscar por descripción, ubicación, categoría...",
+        "allCategories": "Todas las categorías",
+        "allPriorities": "Todas las prioridades",
+        "update": "Actualizar"
+      },
+      "categories": {
+        "alumbrado": "Alumbrado",
+        "baches": "Baches",
+        "limpieza": "Limpieza",
+        "agua": "Agua",
+        "alcantarillado": "Alcantarillado",
+        "parques": "Parques",
+        "señalizacion": "Señalización",
+        "seguridad": "Seguridad",
+        "ruido": "Ruido",
+        "otro": "Otro"
+      },
+      "priorities": {
+        "urgente": "Urgente",
+        "alta": "Alta",
+        "media": "Media",
+        "baja": "Baja"
+      },
+      "states": {
+        "pendiente": "Pendiente",
+        "en_revision": "En Revisión",
+        "en_proceso": "En Proceso",
+        "resuelto": "Resuelto",
+        "rechazado": "Rechazado",
+        "duplicado": "Duplicado"
+      },
+      "actions": {
+        "review": "Revisar",
+        "process": "Procesar",
+        "resolve": "Resolver",
+        "reopen": "Reabrir",
+        "toPending": "Pendiente",
+        "toReview": "Revisión"
+      },
+      "empty": {
+        "pending": "No hay reportes pendientes",
+        "review": "No hay reportes en revisión",
+        "process": "No hay reportes en proceso",
+        "resolved": "No hay reportes resueltos"
+      },
+      "detail": {
+        "title": "Detalle del Reporte",
+        "category": "Categoría",
+        "priority": "Prioridad",
+        "currentState": "Estado Actual",
+        "reportDate": "Fecha de Reporte",
+        "description": "Descripción",
+        "location": "Ubicación",
+        "parish": "Parroquia",
+        "neighborhood": "Barrio",
+        "address": "Dirección",
+        "image": "Imagen del Reporte",
+        "changeState": "Cambiar Estado",
+        "adminResponse": "Respuesta del Administrador",
+        "responsePlaceholder": "Escribe una respuesta o comentario sobre este reporte...",
+        "saveResponse": "Guardar Respuesta",
+        "resolved": "Resuelto",
+        "stateUpdated": "Estado actualizado correctamente",
+        "responseSaved": "Respuesta guardada correctamente",
+        "errorUpdating": "Error al cambiar el estado",
+        "errorSaving": "Error al guardar la respuesta"
+      },
+      "loading": "Cargando reportes...",
+      "errorLoading": "Error al cargar los reportes"
     }
   },
   "common": {

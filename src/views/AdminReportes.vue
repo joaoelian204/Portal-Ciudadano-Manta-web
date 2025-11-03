@@ -7,10 +7,10 @@
           <div>
             <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 flex items-center gap-2 md:gap-3">
               <span class="text-2xl sm:text-3xl md:text-4xl">📋</span>
-              <span class="break-words">Gestión de Reportes Ciudadanos</span>
+              <span class="break-words">{{ $t('admin.reportes.title') }}</span>
             </h1>
             <p class="mt-1 sm:mt-2 text-xs sm:text-sm md:text-base text-gray-600">
-              Tablero Kanban para gestionar y dar seguimiento a los reportes
+              {{ $t('admin.reportes.subtitle') }}
             </p>
           </div>
           
@@ -18,19 +18,19 @@
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 md:gap-4 w-full lg:w-auto">
             <div class="bg-white rounded-lg shadow px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 text-center">
               <div class="text-lg sm:text-xl md:text-2xl font-bold text-yellow-600">{{ reportesPendientes.length }}</div>
-              <div class="text-[10px] sm:text-xs md:text-sm text-gray-600">Pendientes</div>
+              <div class="text-[10px] sm:text-xs md:text-sm text-gray-600">{{ $t('admin.reportes.stats.pending') }}</div>
             </div>
             <div class="bg-white rounded-lg shadow px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 text-center">
               <div class="text-lg sm:text-xl md:text-2xl font-bold text-blue-600">{{ reportesRevision.length }}</div>
-              <div class="text-[10px] sm:text-xs md:text-sm text-gray-600">En Revisión</div>
+              <div class="text-[10px] sm:text-xs md:text-sm text-gray-600">{{ $t('admin.reportes.stats.inReview') }}</div>
             </div>
             <div class="bg-white rounded-lg shadow px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 text-center">
               <div class="text-lg sm:text-xl md:text-2xl font-bold text-purple-600">{{ reportesProceso.length }}</div>
-              <div class="text-[10px] sm:text-xs md:text-sm text-gray-600">En Proceso</div>
+              <div class="text-[10px] sm:text-xs md:text-sm text-gray-600">{{ $t('admin.reportes.stats.inProcess') }}</div>
             </div>
             <div class="bg-white rounded-lg shadow px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 text-center">
               <div class="text-lg sm:text-xl md:text-2xl font-bold text-green-600">{{ reportesResueltos.length }}</div>
-              <div class="text-[10px] sm:text-xs md:text-sm text-gray-600">Resueltos</div>
+              <div class="text-[10px] sm:text-xs md:text-sm text-gray-600">{{ $t('admin.reportes.stats.resolved') }}</div>
             </div>
           </div>
         </div>
@@ -41,7 +41,7 @@
             <input
               v-model="filtroTexto"
               type="text"
-              placeholder="Buscar por descripción, ubicación, categoría..."
+              :placeholder="$t('admin.reportes.filters.searchPlaceholder')"
               class="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-500"
             />
           </div>
@@ -49,27 +49,27 @@
             v-model="filtroCategoria"
             class="px-3 sm:px-4 py-2 sm:py-2.5 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
           >
-            <option value="">Todas las categorías</option>
-            <option value="alumbrado">Alumbrado</option>
-            <option value="baches">Baches</option>
-            <option value="limpieza">Limpieza</option>
-            <option value="agua">Agua</option>
-            <option value="alcantarillado">Alcantarillado</option>
-            <option value="parques">Parques</option>
-            <option value="señalizacion">Señalización</option>
-            <option value="seguridad">Seguridad</option>
-            <option value="ruido">Ruido</option>
-            <option value="otro">Otro</option>
+            <option value="">{{ $t('admin.reportes.filters.allCategories') }}</option>
+            <option value="alumbrado">{{ $t('admin.reportes.categories.alumbrado') }}</option>
+            <option value="baches">{{ $t('admin.reportes.categories.baches') }}</option>
+            <option value="limpieza">{{ $t('admin.reportes.categories.limpieza') }}</option>
+            <option value="agua">{{ $t('admin.reportes.categories.agua') }}</option>
+            <option value="alcantarillado">{{ $t('admin.reportes.categories.alcantarillado') }}</option>
+            <option value="parques">{{ $t('admin.reportes.categories.parques') }}</option>
+            <option value="señalizacion">{{ $t('admin.reportes.categories.señalizacion') }}</option>
+            <option value="seguridad">{{ $t('admin.reportes.categories.seguridad') }}</option>
+            <option value="ruido">{{ $t('admin.reportes.categories.ruido') }}</option>
+            <option value="otro">{{ $t('admin.reportes.categories.otro') }}</option>
           </select>
           <select
             v-model="filtroPrioridad"
             class="px-3 sm:px-4 py-2 sm:py-2.5 text-sm border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
           >
-            <option value="">Todas las prioridades</option>
-            <option value="urgente">Urgente</option>
-            <option value="alta">Alta</option>
-            <option value="media">Media</option>
-            <option value="baja">Baja</option>
+            <option value="">{{ $t('admin.reportes.filters.allPriorities') }}</option>
+            <option value="urgente">{{ $t('admin.reportes.priorities.urgente') }}</option>
+            <option value="alta">{{ $t('admin.reportes.priorities.alta') }}</option>
+            <option value="media">{{ $t('admin.reportes.priorities.media') }}</option>
+            <option value="baja">{{ $t('admin.reportes.priorities.baja') }}</option>
           </select>
           <button
             @click="cargarReportes"
@@ -78,7 +78,7 @@
             <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
             </svg>
-            <span class="hidden sm:inline">Actualizar</span>
+            <span class="hidden sm:inline">{{ $t('admin.reportes.filters.update') }}</span>
           </button>
         </div>
       </div>
@@ -93,28 +93,28 @@
               class="px-4 py-2 rounded-lg font-semibold whitespace-nowrap transition-all text-xs sm:text-sm"
               :class="tabActivo === 'pendientes' ? 'bg-yellow-100 text-yellow-800 ring-2 ring-yellow-400' : 'bg-gray-100 text-gray-600'"
             >
-              ⏳ Pendientes ({{ reportesPendientesFiltrados.length }})
+              ⏳ {{ $t('admin.reportes.stats.pending') }} ({{ reportesPendientesFiltrados.length }})
             </button>
             <button
               @click="tabActivo = 'revision'"
               class="px-4 py-2 rounded-lg font-semibold whitespace-nowrap transition-all text-xs sm:text-sm"
               :class="tabActivo === 'revision' ? 'bg-blue-100 text-blue-800 ring-2 ring-blue-400' : 'bg-gray-100 text-gray-600'"
             >
-              🔍 Revisión ({{ reportesRevisionFiltrados.length }})
+              🔍 {{ $t('admin.reportes.stats.inReview') }} ({{ reportesRevisionFiltrados.length }})
             </button>
             <button
               @click="tabActivo = 'proceso'"
               class="px-4 py-2 rounded-lg font-semibold whitespace-nowrap transition-all text-xs sm:text-sm"
               :class="tabActivo === 'proceso' ? 'bg-purple-100 text-purple-800 ring-2 ring-purple-400' : 'bg-gray-100 text-gray-600'"
             >
-              ⚙️ Proceso ({{ reportesProcesoFiltrados.length }})
+              ⚙️ {{ $t('admin.reportes.stats.inProcess') }} ({{ reportesProcesoFiltrados.length }})
             </button>
             <button
               @click="tabActivo = 'resueltos'"
               class="px-4 py-2 rounded-lg font-semibold whitespace-nowrap transition-all text-xs sm:text-sm"
               :class="tabActivo === 'resueltos' ? 'bg-green-100 text-green-800 ring-2 ring-green-400' : 'bg-gray-100 text-gray-600'"
             >
-              ✅ Resueltos ({{ reportesResueltosFiltrados.length }})
+              ✅ {{ $t('admin.reportes.stats.resolved') }} ({{ reportesResueltosFiltrados.length }})
             </button>
           </div>
 
@@ -123,7 +123,7 @@
             <div class="bg-yellow-100 px-3 sm:px-6 py-3 sm:py-4 rounded-t-xl border-b-2 border-yellow-200">
               <h3 class="font-bold text-yellow-800 flex items-center gap-2 text-sm sm:text-base">
                 <span class="text-xl sm:text-2xl">⏳</span>
-                Pendientes
+                {{ $t('admin.reportes.stats.pending') }}
                 <span class="ml-auto bg-yellow-200 text-yellow-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">
                   {{ reportesPendientesFiltrados.length }}
                 </span>
@@ -139,11 +139,11 @@
               >
                 <div class="flex items-start justify-between mb-2">
                   <span class="text-[10px] sm:text-xs font-semibold px-2 py-1 rounded capitalize bg-gray-100 text-gray-700">
-                    {{ reporte.categoria }}
+                    {{ $t(`admin.reportes.categories.${reporte.categoria}`) }}
                   </span>
                   <span class="text-[10px] sm:text-xs font-bold px-2 py-1 rounded uppercase"
                         :class="getPrioridadBadge(reporte.prioridad)">
-                    {{ reporte.prioridad }}
+                    {{ $t(`admin.reportes.priorities.${reporte.prioridad}`) }}
                   </span>
                 </div>
                 
@@ -160,11 +160,11 @@
                   @click.stop="cambiarEstado(reporte.id, 'en_revision')"
                   class="w-full px-3 py-1.5 bg-blue-100 text-blue-700 rounded text-xs font-semibold hover:bg-blue-200 transition-colors"
                 >
-                  → Revisar
+                  → {{ $t('admin.reportes.actions.review') }}
                 </button>
               </div>
               <div v-if="reportesPendientesFiltrados.length === 0" class="text-center py-8 text-gray-500 text-sm">
-                No hay reportes pendientes
+                {{ $t('admin.reportes.empty.pending') }}
               </div>
             </div>
           </div>
@@ -174,7 +174,7 @@
             <div class="bg-blue-100 px-3 sm:px-6 py-3 sm:py-4 rounded-t-xl border-b-2 border-blue-200">
               <h3 class="font-bold text-blue-800 flex items-center gap-2 text-sm sm:text-base">
                 <span class="text-xl sm:text-2xl">🔍</span>
-                En Revisión
+                {{ $t('admin.reportes.stats.inReview') }}
                 <span class="ml-auto bg-blue-200 text-blue-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">
                   {{ reportesRevisionFiltrados.length }}
                 </span>
@@ -190,11 +190,11 @@
               >
                 <div class="flex items-start justify-between mb-2">
                   <span class="text-[10px] sm:text-xs font-semibold px-2 py-1 rounded capitalize bg-gray-100 text-gray-700">
-                    {{ reporte.categoria }}
+                    {{ $t(`admin.reportes.categories.${reporte.categoria}`) }}
                   </span>
                   <span class="text-[10px] sm:text-xs font-bold px-2 py-1 rounded uppercase"
                         :class="getPrioridadBadge(reporte.prioridad)">
-                    {{ reporte.prioridad }}
+                    {{ $t(`admin.reportes.priorities.${reporte.prioridad}`) }}
                   </span>
                 </div>
                 
@@ -212,18 +212,18 @@
                     @click.stop="cambiarEstado(reporte.id, 'pendiente')"
                     class="flex-1 px-3 py-1.5 bg-yellow-100 text-yellow-700 rounded text-xs font-semibold hover:bg-yellow-200 transition-colors"
                   >
-                    ← Pendiente
+                    ← {{ $t('admin.reportes.actions.toPending') }}
                   </button>
                   <button
                     @click.stop="cambiarEstado(reporte.id, 'en_proceso')"
                     class="flex-1 px-3 py-1.5 bg-purple-100 text-purple-700 rounded text-xs font-semibold hover:bg-purple-200 transition-colors"
                   >
-                    → Procesar
+                    → {{ $t('admin.reportes.actions.process') }}
                   </button>
                 </div>
               </div>
               <div v-if="reportesRevisionFiltrados.length === 0" class="text-center py-8 text-gray-500 text-sm">
-                No hay reportes en revisión
+                {{ $t('admin.reportes.empty.review') }}
               </div>
             </div>
           </div>
@@ -233,7 +233,7 @@
             <div class="bg-purple-100 px-3 sm:px-6 py-3 sm:py-4 rounded-t-xl border-b-2 border-purple-200">
               <h3 class="font-bold text-purple-800 flex items-center gap-2 text-sm sm:text-base">
                 <span class="text-xl sm:text-2xl">⚙️</span>
-                En Proceso
+                {{ $t('admin.reportes.stats.inProcess') }}
                 <span class="ml-auto bg-purple-200 text-purple-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">
                   {{ reportesProcesoFiltrados.length }}
                 </span>
@@ -249,11 +249,11 @@
               >
                 <div class="flex items-start justify-between mb-2">
                   <span class="text-[10px] sm:text-xs font-semibold px-2 py-1 rounded capitalize bg-gray-100 text-gray-700">
-                    {{ reporte.categoria }}
+                    {{ $t(`admin.reportes.categories.${reporte.categoria}`) }}
                   </span>
                   <span class="text-[10px] sm:text-xs font-bold px-2 py-1 rounded uppercase"
                         :class="getPrioridadBadge(reporte.prioridad)">
-                    {{ reporte.prioridad }}
+                    {{ $t(`admin.reportes.priorities.${reporte.prioridad}`) }}
                   </span>
                 </div>
                 
@@ -271,18 +271,18 @@
                     @click.stop="cambiarEstado(reporte.id, 'en_revision')"
                     class="flex-1 px-3 py-1.5 bg-blue-100 text-blue-700 rounded text-xs font-semibold hover:bg-blue-200 transition-colors"
                   >
-                    ← Revisión
+                    ← {{ $t('admin.reportes.actions.toReview') }}
                   </button>
                   <button
                     @click.stop="cambiarEstado(reporte.id, 'resuelto')"
                     class="flex-1 px-3 py-1.5 bg-green-100 text-green-700 rounded text-xs font-semibold hover:bg-green-200 transition-colors"
                   >
-                    → Resolver
+                    → {{ $t('admin.reportes.actions.resolve') }}
                   </button>
                 </div>
               </div>
               <div v-if="reportesProcesoFiltrados.length === 0" class="text-center py-8 text-gray-500 text-sm">
-                No hay reportes en proceso
+                {{ $t('admin.reportes.empty.process') }}
               </div>
             </div>
           </div>
@@ -292,7 +292,7 @@
             <div class="bg-green-100 px-3 sm:px-6 py-3 sm:py-4 rounded-t-xl border-b-2 border-green-200">
               <h3 class="font-bold text-green-800 flex items-center gap-2 text-sm sm:text-base">
                 <span class="text-xl sm:text-2xl">✅</span>
-                Resueltos
+                {{ $t('admin.reportes.stats.resolved') }}
                 <span class="ml-auto bg-green-200 text-green-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">
                   {{ reportesResueltosFiltrados.length }}
                 </span>
@@ -308,11 +308,11 @@
               >
                 <div class="flex items-start justify-between mb-2">
                   <span class="text-[10px] sm:text-xs font-semibold px-2 py-1 rounded capitalize bg-gray-100 text-gray-700">
-                    {{ reporte.categoria }}
+                    {{ $t(`admin.reportes.categories.${reporte.categoria}`) }}
                   </span>
                   <span class="text-[10px] sm:text-xs font-bold px-2 py-1 rounded uppercase"
                         :class="getPrioridadBadge(reporte.prioridad)">
-                    {{ reporte.prioridad }}
+                    {{ $t(`admin.reportes.priorities.${reporte.prioridad}`) }}
                   </span>
                 </div>
                 
@@ -323,18 +323,18 @@
                 <div class="text-[10px] sm:text-xs text-gray-500 space-y-1 mb-2 sm:mb-3">
                   <p><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
                   <p><strong>📅</strong> {{ formatFechaCorta(reporte.created_at) }}</p>
-                  <p v-if="reporte.fecha_resolucion"><strong>✓</strong> Resuelto: {{ formatFechaCorta(reporte.fecha_resolucion) }}</p>
+                  <p v-if="reporte.fecha_resolucion"><strong>✓</strong> {{ $t('admin.reportes.detail.resolved') }}: {{ formatFechaCorta(reporte.fecha_resolucion) }}</p>
                 </div>
 
                 <button
                   @click.stop="cambiarEstado(reporte.id, 'en_proceso')"
                   class="w-full px-3 py-1.5 bg-purple-100 text-purple-700 rounded text-xs font-semibold hover:bg-purple-200 transition-colors"
                 >
-                  ← Reabrir
+                  ← {{ $t('admin.reportes.actions.reopen') }}
                 </button>
               </div>
               <div v-if="reportesResueltosFiltrados.length === 0" class="text-center py-8 text-gray-500 text-sm">
-                No hay reportes resueltos
+                {{ $t('admin.reportes.empty.resolved') }}
               </div>
             </div>
           </div>
@@ -347,7 +347,7 @@
           <div class="bg-yellow-100 px-6 py-4 rounded-t-xl border-b-2 border-yellow-200">
             <h3 class="font-bold text-yellow-800 flex items-center gap-2">
               <span class="text-2xl">⏳</span>
-              Pendientes
+              {{ $t('admin.reportes.stats.pending') }}
               <span class="ml-auto bg-yellow-200 text-yellow-800 px-3 py-1 rounded-full text-sm">
                 {{ reportesPendientesFiltrados.length }}
               </span>
@@ -372,11 +372,11 @@
             >
               <div class="flex items-start justify-between mb-2">
                 <span class="text-xs font-semibold px-2 py-1 rounded capitalize bg-gray-100 text-gray-700">
-                  {{ reporte.categoria }}
+                  {{ $t(`admin.reportes.categories.${reporte.categoria}`) }}
                 </span>
                 <span class="text-xs font-bold px-2 py-1 rounded uppercase"
                       :class="getPrioridadBadge(reporte.prioridad)">
-                  {{ reporte.prioridad }}
+                  {{ $t(`admin.reportes.priorities.${reporte.prioridad}`) }}
                 </span>
               </div>
               
@@ -395,12 +395,12 @@
                   @click.stop="cambiarEstado(reporte.id, 'en_revision')"
                   class="flex-1 px-3 py-1.5 bg-blue-100 text-blue-700 rounded text-xs font-semibold hover:bg-blue-200 transition-colors"
                 >
-                  → Revisar
+                  → {{ $t('admin.reportes.actions.review') }}
                 </button>
               </div>
             </div>
             <div v-if="reportesPendientesFiltrados.length === 0" class="text-center py-8 text-gray-500">
-              No hay reportes pendientes
+              {{ $t('admin.reportes.empty.pending') }}
             </div>
           </div>
         </div>
@@ -410,7 +410,7 @@
           <div class="bg-blue-100 px-6 py-4 rounded-t-xl border-b-2 border-blue-200">
             <h3 class="font-bold text-blue-800 flex items-center gap-2">
               <span class="text-2xl">🔍</span>
-              En Revisión
+              {{ $t('admin.reportes.stats.inReview') }}
               <span class="ml-auto bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm">
                 {{ reportesRevisionFiltrados.length }}
               </span>
@@ -435,11 +435,11 @@
             >
               <div class="flex items-start justify-between mb-2">
                 <span class="text-xs font-semibold px-2 py-1 rounded capitalize bg-gray-100 text-gray-700">
-                  {{ reporte.categoria }}
+                  {{ $t(`admin.reportes.categories.${reporte.categoria}`) }}
                 </span>
                 <span class="text-xs font-bold px-2 py-1 rounded uppercase"
                       :class="getPrioridadBadge(reporte.prioridad)">
-                  {{ reporte.prioridad }}
+                  {{ $t(`admin.reportes.priorities.${reporte.prioridad}`) }}
                 </span>
               </div>
               
@@ -458,12 +458,12 @@
                   @click.stop="cambiarEstado(reporte.id, 'en_proceso')"
                   class="flex-1 px-3 py-1.5 bg-purple-100 text-purple-700 rounded text-xs font-semibold hover:bg-purple-200 transition-colors"
                 >
-                  → En Proceso
+                  → {{ $t('admin.reportes.actions.process') }}
                 </button>
               </div>
             </div>
             <div v-if="reportesRevisionFiltrados.length === 0" class="text-center py-8 text-gray-500">
-              No hay reportes en revisión
+              {{ $t('admin.reportes.empty.review') }}
             </div>
           </div>
         </div>
@@ -473,7 +473,7 @@
           <div class="bg-purple-100 px-6 py-4 rounded-t-xl border-b-2 border-purple-200">
             <h3 class="font-bold text-purple-800 flex items-center gap-2">
               <span class="text-2xl">⚙️</span>
-              En Proceso
+              {{ $t('admin.reportes.stats.inProcess') }}
               <span class="ml-auto bg-purple-200 text-purple-800 px-3 py-1 rounded-full text-sm">
                 {{ reportesProcesoFiltrados.length }}
               </span>
@@ -498,11 +498,11 @@
             >
               <div class="flex items-start justify-between mb-2">
                 <span class="text-xs font-semibold px-2 py-1 rounded capitalize bg-gray-100 text-gray-700">
-                  {{ reporte.categoria }}
+                  {{ $t(`admin.reportes.categories.${reporte.categoria}`) }}
                 </span>
                 <span class="text-xs font-bold px-2 py-1 rounded uppercase"
                       :class="getPrioridadBadge(reporte.prioridad)">
-                  {{ reporte.prioridad }}
+                  {{ $t(`admin.reportes.priorities.${reporte.prioridad}`) }}
                 </span>
               </div>
               
@@ -511,7 +511,7 @@
               </p>
               
               <div class="text-xs text-gray-500 space-y-1 mb-3">
-                <p><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_barrio }}</p>
+                <p><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
                 <p><strong>📅</strong> {{ formatFechaCorta(reporte.created_at) }}</p>
               </div>
 
@@ -521,12 +521,12 @@
                   @click.stop="cambiarEstado(reporte.id, 'resuelto')"
                   class="flex-1 px-3 py-1.5 bg-green-100 text-green-700 rounded text-xs font-semibold hover:bg-green-200 transition-colors"
                 >
-                  → Resolver
+                  → {{ $t('admin.reportes.actions.resolve') }}
                 </button>
               </div>
             </div>
             <div v-if="reportesProcesoFiltrados.length === 0" class="text-center py-8 text-gray-500">
-              No hay reportes en proceso
+              {{ $t('admin.reportes.empty.process') }}
             </div>
           </div>
         </div>
@@ -536,7 +536,7 @@
           <div class="bg-green-100 px-6 py-4 rounded-t-xl border-b-2 border-green-200">
             <h3 class="font-bold text-green-800 flex items-center gap-2">
               <span class="text-2xl">✅</span>
-              Resueltos
+              {{ $t('admin.reportes.stats.resolved') }}
               <span class="ml-auto bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm">
                 {{ reportesResueltosFiltrados.length }}
               </span>
@@ -561,11 +561,11 @@
             >
               <div class="flex items-start justify-between mb-2">
                 <span class="text-xs font-semibold px-2 py-1 rounded capitalize bg-gray-100 text-gray-700">
-                  {{ reporte.categoria }}
+                  {{ $t(`admin.reportes.categories.${reporte.categoria}`) }}
                 </span>
                 <span class="text-xs font-bold px-2 py-1 rounded uppercase"
                       :class="getPrioridadBadge(reporte.prioridad)">
-                  {{ reporte.prioridad }}
+                  {{ $t(`admin.reportes.priorities.${reporte.prioridad}`) }}
                 </span>
               </div>
               
@@ -579,7 +579,7 @@
               </div>
             </div>
             <div v-if="reportesResueltosFiltrados.length === 0" class="text-center py-8 text-gray-500">
-              No hay reportes resueltos
+              {{ $t('admin.reportes.empty.resolved') }}
             </div>
           </div>
         </div>
@@ -600,7 +600,7 @@
       >
         <div class="bg-white rounded-xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
           <div class="bg-gradient-to-r from-blue-600 to-cyan-600 px-6 py-4 flex items-center justify-between">
-            <h3 class="text-xl font-bold text-white">Detalle del Reporte</h3>
+            <h3 class="text-xl font-bold text-white">{{ $t('admin.reportes.detail.title') }}</h3>
             <button @click="cerrarDetalle" class="text-white hover:text-gray-200">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -612,28 +612,28 @@
             <!-- Información básica -->
             <div class="grid grid-cols-2 gap-4">
               <div>
-                <label class="text-sm font-semibold text-gray-600">Categoría</label>
-                <p class="text-lg capitalize">{{ reporteSeleccionado.categoria }}</p>
+                <label class="text-sm font-semibold text-gray-600">{{ $t('admin.reportes.detail.category') }}</label>
+                <p class="text-lg capitalize">{{ $t(`admin.reportes.categories.${reporteSeleccionado.categoria}`) }}</p>
               </div>
               <div>
-                <label class="text-sm font-semibold text-gray-600">Prioridad</label>
+                <label class="text-sm font-semibold text-gray-600">{{ $t('admin.reportes.detail.priority') }}</label>
                 <p class="text-lg capitalize" :class="getPrioridadColor(reporteSeleccionado.prioridad)">
-                  {{ reporteSeleccionado.prioridad }}
+                  {{ $t(`admin.reportes.priorities.${reporteSeleccionado.prioridad}`) }}
                 </p>
               </div>
               <div>
-                <label class="text-sm font-semibold text-gray-600">Estado Actual</label>
-                <p class="text-lg capitalize">{{ getEstadoLabel(reporteSeleccionado.estado) }}</p>
+                <label class="text-sm font-semibold text-gray-600">{{ $t('admin.reportes.detail.currentState') }}</label>
+                <p class="text-lg capitalize">{{ $t(`admin.reportes.states.${reporteSeleccionado.estado}`) }}</p>
               </div>
               <div>
-                <label class="text-sm font-semibold text-gray-600">Fecha de Reporte</label>
+                <label class="text-sm font-semibold text-gray-600">{{ $t('admin.reportes.detail.reportDate') }}</label>
                 <p class="text-lg">{{ formatFecha(reporteSeleccionado.created_at || '') }}</p>
               </div>
             </div>
 
             <!-- Descripción -->
             <div>
-              <label class="text-sm font-semibold text-gray-600">Descripción</label>
+              <label class="text-sm font-semibold text-gray-600">{{ $t('admin.reportes.detail.description') }}</label>
               <p class="mt-2 text-gray-700 bg-gray-50 p-4 rounded-lg">
                 {{ reporteSeleccionado.descripcion }}
               </p>
@@ -641,17 +641,17 @@
 
             <!-- Ubicación -->
             <div>
-              <label class="text-sm font-semibold text-gray-600">Ubicación</label>
+              <label class="text-sm font-semibold text-gray-600">{{ $t('admin.reportes.detail.location') }}</label>
               <div class="mt-2 bg-gray-50 p-4 rounded-lg">
-                <p><strong>Parroquia:</strong> {{ reporteSeleccionado.ubicacion_parroquia }}</p>
-                <p><strong>Barrio:</strong> {{ reporteSeleccionado.ubicacion_barrio }}</p>
-                <p><strong>Dirección:</strong> {{ reporteSeleccionado.ubicacion_direccion }}</p>
+                <p><strong>{{ $t('admin.reportes.detail.parish') }}:</strong> {{ reporteSeleccionado.ubicacion_parroquia }}</p>
+                <p><strong>{{ $t('admin.reportes.detail.neighborhood') }}:</strong> {{ reporteSeleccionado.ubicacion_barrio }}</p>
+                <p><strong>{{ $t('admin.reportes.detail.address') }}:</strong> {{ reporteSeleccionado.ubicacion_direccion }}</p>
               </div>
             </div>
 
             <!-- Imagen si existe -->
             <div v-if="reporteSeleccionado.imagen_url">
-              <label class="text-sm font-semibold text-gray-600">Imagen del Reporte</label>
+              <label class="text-sm font-semibold text-gray-600">{{ $t('admin.reportes.detail.image') }}</label>
               <img
                 :src="reporteSeleccionado.imagen_url"
                 alt="Imagen del reporte"
@@ -661,7 +661,7 @@
 
             <!-- Cambiar estado -->
             <div class="border-t pt-6">
-              <label class="text-sm font-semibold text-gray-600">Cambiar Estado</label>
+              <label class="text-sm font-semibold text-gray-600">{{ $t('admin.reportes.detail.changeState') }}</label>
               <div class="mt-3 grid grid-cols-4 gap-3">
                 <button
                   @click="cambiarEstado(reporteSeleccionado.id, 'pendiente')"
@@ -670,7 +670,7 @@
                     ? 'bg-yellow-100 text-yellow-800 border-2 border-yellow-400' 
                     : 'bg-gray-100 text-gray-600 hover:bg-yellow-50'"
                 >
-                  ⏳ Pendiente
+                  ⏳ {{ $t('admin.reportes.stats.pending') }}
                 </button>
                 <button
                   @click="cambiarEstado(reporteSeleccionado.id, 'en_revision')"
@@ -679,7 +679,7 @@
                     ? 'bg-blue-100 text-blue-800 border-2 border-blue-400' 
                     : 'bg-gray-100 text-gray-600 hover:bg-blue-50'"
                 >
-                  🔍 Revisión
+                  🔍 {{ $t('admin.reportes.stats.inReview') }}
                 </button>
                 <button
                   @click="cambiarEstado(reporteSeleccionado.id, 'en_proceso')"
@@ -688,7 +688,7 @@
                     ? 'bg-purple-100 text-purple-800 border-2 border-purple-400' 
                     : 'bg-gray-100 text-gray-600 hover:bg-purple-50'"
                 >
-                  ⚙️ Proceso
+                  ⚙️ {{ $t('admin.reportes.stats.inProcess') }}
                 </button>
                 <button
                   @click="cambiarEstado(reporteSeleccionado.id, 'resuelto')"
@@ -697,25 +697,25 @@
                     ? 'bg-green-100 text-green-800 border-2 border-green-400' 
                     : 'bg-gray-100 text-gray-600 hover:bg-green-50'"
                 >
-                  ✅ Resuelto
+                  ✅ {{ $t('admin.reportes.stats.resolved') }}
                 </button>
               </div>
             </div>
 
             <!-- Respuesta del administrador -->
             <div>
-              <label class="text-sm font-semibold text-gray-600">Respuesta del Administrador</label>
+              <label class="text-sm font-semibold text-gray-600">{{ $t('admin.reportes.detail.adminResponse') }}</label>
               <textarea
                 v-model="reporteSeleccionado.respuesta_admin"
                 rows="4"
                 class="mt-2 w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
-                placeholder="Escribe una respuesta o comentario sobre este reporte..."
+                :placeholder="$t('admin.reportes.detail.responsePlaceholder')"
               ></textarea>
               <button
                 @click="guardarRespuesta"
                 class="mt-3 px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
-                Guardar Respuesta
+                {{ $t('admin.reportes.detail.saveResponse') }}
               </button>
             </div>
           </div>
@@ -725,9 +725,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
 import { supabase } from '@/lib/supabase';
 import type { ReportesRow } from '@/types/database.types';
+import { computed, onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 type Reporte = ReportesRow;
 
@@ -805,7 +808,7 @@ async function cargarReportes() {
     }));
   } catch (error) {
     console.error('Error al cargar reportes:', error);
-    alert('Error al cargar los reportes: ' + (error as any).message);
+    alert(t('admin.reportes.errorLoading') + ': ' + (error as any).message);
   } finally {
     cargando.value = false;
   }
@@ -854,11 +857,11 @@ async function cambiarEstado(reporteId: string, nuevoEstado: string, mostrarAler
     }
 
     if (mostrarAlerta) {
-      alert('Estado actualizado correctamente');
+      alert(t('admin.reportes.detail.stateUpdated'));
     }
   } catch (error) {
     console.error('Error al cambiar estado:', error);
-    alert('Error al cambiar el estado');
+    alert(t('admin.reportes.detail.errorUpdating'));
   }
 }
 
@@ -889,10 +892,10 @@ async function guardarRespuesta() {
       reportes.value[index].updated_at = updateData.updated_at;
     }
 
-    alert('Respuesta guardada correctamente');
+    alert(t('admin.reportes.detail.responseSaved'));
   } catch (error) {
     console.error('Error al guardar respuesta:', error);
-    alert('Error al guardar la respuesta');
+    alert(t('admin.reportes.detail.errorSaving'));
   }
 }
 
@@ -902,18 +905,6 @@ function verDetalle(reporte: Reporte) {
 
 function cerrarDetalle() {
   reporteSeleccionado.value = null;
-}
-
-function getEstadoLabel(estado: string): string {
-  const labels: Record<string, string> = {
-    pendiente: 'Pendiente',
-    en_revision: 'En Revisión',
-    en_proceso: 'En Proceso',
-    resuelto: 'Resuelto',
-    rechazado: 'Rechazado',
-    duplicado: 'Duplicado'
-  };
-  return labels[estado] || estado;
 }
 
 function getPrioridadColor(prioridad: string): string {

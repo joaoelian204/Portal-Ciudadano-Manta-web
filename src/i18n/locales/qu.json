@@ -92,6 +92,10 @@
           "title": "Tapukuykunata Kamachiy",
           "description": "Tapukuykunata ruray hinaspa kamachiy"
         },
+        "manageReports": {
+          "title": "Willakuykunata Kamachiy",
+          "description": "Runakunapa willakuykunata kamachiy hinaspa qatiy"
+        },
         "adminPanel": {
           "title": "Kamachiq Panel",
           "description": "Hatun kamachiq panelman yaykuy"
@@ -354,15 +358,22 @@
     "loading": "Tapuyta kargachkan...",
     "notFound": "Manam tarikunchu tapuyta.",
     "yourResponse": "Qampa kutichiy",
+    "yourPreviousResponse": "Qampa ñawpaq kutichiy",
+    "alreadyResponded": "Ñam kay tapuyta kutichirqanki",
     "submitResponse": "Kutichiyta kachay",
+    "submitting": "Kachaspa...",
     "responseSuccess": "Kutichiy kachasqa. Riqsikuy.",
-    "responseError": "Pantay: manam atinichu kachayta"
+    "responseError": "Pantay: manam atinichu kachayta",
+    "placeholder": "Qampa yuyayta qillqay kaypi...",
+    "characters": "qillqakuna"
   },
   "noticiaDetalle": {
     "loading": "Willaykunata kargashpa...",
     "notFound": "Mana willaykunata taririshkachu.",
     "forAll": "Tukuykunapak",
-    "parish": "Parrokya"
+    "parish": "Parrokya",
+    "related": "Astawan Willakuykuna",
+    "noRelated": "Mana astawan willakuykuna"
   },
   "reportes": {
     "titulo": "Shuk Sasachakuyta Willay",
@@ -457,6 +468,9 @@
     "submitting": "Kachachkan...",
     "type": "Laya",
     "ends": "Tukukun:",
+    "active": "Rurasqa",
+    "participate": "Yaykuy",
+    "viewResults": "Resultadokunata Qhaway",
     "ratings": {
       "veryBad": "Ancha mana allin",
       "bad": "Mana allin",
@@ -468,9 +482,7 @@
       "multipleChoice": "Achka Akllana",
       "rating": "Yupachay",
       "open": "Kichkasqa Tapuy"
-    },
-    "participate": "Yaykuy",
-    "viewResults": "Resultadokunata Qhaway"
+    }
   },
   "noticias": {
     "title": "Mantapa Willakuynin",
@@ -484,7 +496,8 @@
     "readMore": "Astawan ñawiriy",
     "close": "Wichqay",
     "published": "Lluqsichisqa",
-    "author": "Qillqaq"
+    "author": "Qillqaq",
+    "forAll": "Tukuypaq"
   },
   "perfil": {
     "title": "Ñuqapa Perfil",
@@ -655,6 +668,86 @@
         "parish": "Parroquia",
         "neighborhood": "Barrio (munasqa)"
       }
+    },
+    "reportes": {
+      "title": "Llaqta Willaykunata Kamachiy",
+      "subtitle": "Tablero Kanban willaykunata kamachiy hinaspa qhatinapaq",
+      "stats": {
+        "pending": "Suyaqkuna",
+        "inReview": "Qhawasqapi",
+        "inProcess": "Ruwasqapi",
+        "resolved": "Allichasqa"
+      },
+      "filters": {
+        "searchPlaceholder": "Maskay willaypi, maypi kashqanpi, categoríapi...",
+        "allCategories": "Tukuy categoríakuna",
+        "allPriorities": "Tukuy prioridadkuna",
+        "update": "Musuqyachiy"
+      },
+      "categories": {
+        "alumbrado": "K'anchay",
+        "baches": "Huch'uykuna",
+        "limpieza": "Pichay",
+        "agua": "Yaku",
+        "alcantarillado": "Desagüe",
+        "parques": "Parquekuna",
+        "señalizacion": "Señalkuna",
+        "seguridad": "Waqaychay",
+        "ruido": "T'uqyay",
+        "otro": "Huk"
+      },
+      "priorities": {
+        "urgente": "Utqaylla",
+        "alta": "Hatun",
+        "media": "Chawpi",
+        "baja": "Pisi"
+      },
+      "states": {
+        "pendiente": "Suyaqpi",
+        "en_revision": "Qhawasqapi",
+        "en_proceso": "Ruwasqapi",
+        "resuelto": "Allichasqa",
+        "rechazado": "Mana chaskisqa",
+        "duplicado": "Iskay kaq"
+      },
+      "actions": {
+        "review": "Qhaway",
+        "process": "Ruway",
+        "resolve": "Allichay",
+        "reopen": "Yapamanta kichariy",
+        "toPending": "Suyaqpi",
+        "toReview": "Qhawaypi"
+      },
+      "empty": {
+        "pending": "Mana suyaq willakuykunachu",
+        "review": "Mana qhawasqapi willakuykunachu",
+        "process": "Mana ruwasqapi willakuykunachu",
+        "resolved": "Mana allichasqa willakuykunachu"
+      },
+      "detail": {
+        "title": "Willaypa Detallenin",
+        "category": "Categoría",
+        "priority": "Prioridad",
+        "currentState": "Kunan Estado",
+        "reportDate": "Willay P'unchaw",
+        "description": "Willakuy",
+        "location": "Maypi",
+        "parish": "Parroquia",
+        "neighborhood": "Barrio",
+        "address": "Dirección",
+        "image": "Willaypa Siq'in",
+        "changeState": "Estadota Tikray",
+        "adminResponse": "Kamachiqpa Kutichiyninmi",
+        "responsePlaceholder": "Qillqay huk kutichiyta icha yuyayta kay willaypi...",
+        "saveResponse": "Kutichiyta Waqaychay",
+        "resolved": "Allichasqa",
+        "stateUpdated": "Estado allin musuqyachasqa",
+        "responseSaved": "Kutichiy allin waqaychasqa",
+        "errorUpdating": "Pantay estadota tikraspa",
+        "errorSaving": "Pantay kutichiyta waqaychaspa"
+      },
+      "loading": "Willakuykunata kargaspa...",
+      "errorLoading": "Pantay willakuykunata kargaspa"
     }
   },
   "common": {

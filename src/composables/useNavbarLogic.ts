@@ -60,8 +60,10 @@ export function useNavbarLogic() {
   // Opciones de búsqueda computadas
   const searchOptions = computed(() => {
     if (authStore.isAdministrador()) {
-      return [...adminSearchOptions.value, ...ciudadanoSearchOptions.value];
+      // Admin solo ve opciones de admin
+      return adminSearchOptions.value;
     }
+    // Ciudadano solo ve opciones de ciudadano
     return ciudadanoSearchOptions.value;
   });
 
