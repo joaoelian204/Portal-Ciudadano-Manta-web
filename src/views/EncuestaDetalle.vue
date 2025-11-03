@@ -30,7 +30,7 @@
               <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold text-white leading-tight break-words text-balance">
                 {{ encuesta.titulo }}
               </h1>
-              <p class="text-blue-50 text-xs sm:text-sm mt-1 line-clamp-3 text-pretty">
+              <p class="text-blue-50 text-xs sm:text-sm mt-1 text-pretty leading-relaxed">
                 {{ encuesta.descripcion }}
               </p>
             </div>
