@@ -42,11 +42,15 @@ const isValidPassword = computed(
 
 // Verificar si hay una sesión de recuperación válida
 onMounted(async () => {
+  // Esperar a que Supabase procese el hash de la URL (token de recuperación)
+  // Esto es necesario porque el token viene en el #access_token de la URL
+  await new Promise(resolve => setTimeout(resolve, 1500));
+  
   const {
     data: { session },
   } = await supabase.auth.getSession();
 
-  // Si no hay sesión o no es una sesión de recuperación, redirigir al login
+  // Si no hay sesión después de procesar el token, redirigir al login
   if (!session) {
     errorMessage.value = t("resetPassword.errors.noSession");
     setTimeout(() => {
