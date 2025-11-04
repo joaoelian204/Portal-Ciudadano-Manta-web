@@ -16,6 +16,8 @@ const showConfirmPassword = ref(false);
 const isLoading = ref(false);
 const errorMessage = ref("");
 const successMessage = ref("");
+const showForm = ref(false); // Controla si se muestra el formulario
+const recoveryCode = ref(""); // Código de recuperación de la URL
 
 // Validaciones de contraseña
 const hasMinLength = computed(() => newPassword.value.length >= 8);
@@ -40,7 +42,7 @@ const isValidPassword = computed(
     passwordsMatch.value
 );
 
-// Verificar si hay una sesión de recuperación válida
+// Verificar si hay un código de recuperación válido en la URL
 onMounted(async () => {
   try {
     // Verificar si hay un código de recuperación en la URL
@@ -48,41 +50,20 @@ onMounted(async () => {
     const code = urlParams.get('code');
     
     if (code) {
-      console.log('🔑 Código de recuperación detectado, intercambiando por sesión...');
-      
-      // Intercambiar el código por una sesión usando PKCE
-      const { data, error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
-      
-      if (exchangeError) {
-        console.error('❌ Error al intercambiar código:', exchangeError);
-        errorMessage.value = t("resetPassword.errors.noSession");
-        setTimeout(() => {
-          router.push({ name: "Login" });
-        }, 3000);
-        return;
-      }
-      
-      if (data?.session) {
-        console.log('✅ Sesión establecida correctamente');
-        // La sesión ya está lista, el usuario puede cambiar su contraseña
-        return;
-      }
-    }
-    
-    // Si no hay código en la URL, verificar si ya hay una sesión activa
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-
-    // Si no hay sesión, redirigir al login
-    if (!session) {
+      console.log('🔑 Código de recuperación detectado en URL');
+      // Guardar el código sin establecer sesión
+      recoveryCode.value = code;
+      // Mostrar el formulario inmediatamente
+      showForm.value = true;
+    } else {
+      // Si no hay código, error
       errorMessage.value = t("resetPassword.errors.noSession");
       setTimeout(() => {
         router.push({ name: "Login" });
       }, 3000);
     }
   } catch (error) {
-    console.error('❌ Error al verificar sesión de recuperación:', error);
+    console.error('❌ Error al verificar código de recuperación:', error);
     errorMessage.value = t("resetPassword.errors.noSession");
     setTimeout(() => {
       router.push({ name: "Login" });
@@ -90,7 +71,7 @@ onMounted(async () => {
   }
 });
 
-// Restablecer contraseña
+// Restablecer contraseña usando el código de recuperación
 const handleResetPassword = async () => {
   errorMessage.value = "";
   successMessage.value = "";
@@ -100,27 +81,49 @@ const handleResetPassword = async () => {
     return;
   }
 
+  if (!recoveryCode.value) {
+    errorMessage.value = t("resetPassword.errors.noSession");
+    return;
+  }
+
   isLoading.value = true;
 
   try {
-    const { error } = await supabase.auth.updateUser({
-      password: newPassword.value,
+    // Primero verificar el código de recuperación e intercambiarlo por una sesión temporal
+    const { error: verifyError } = await supabase.auth.verifyOtp({
+      token_hash: recoveryCode.value,
+      type: 'recovery',
     });
 
-    if (error) {
+    if (verifyError) {
+      console.error('❌ Error al verificar código:', verifyError);
       errorMessage.value = t("resetPassword.errors.updateFailed");
       return;
     }
 
-    // Éxito - cerrar sesión y redirigir al login
+    // Ahora actualizar la contraseña
+    const { error: updateError } = await supabase.auth.updateUser({
+      password: newPassword.value,
+    });
+
+    if (updateError) {
+      console.error('❌ Error al actualizar contraseña:', updateError);
+      errorMessage.value = t("resetPassword.errors.updateFailed");
+      return;
+    }
+
+    // Éxito - cerrar sesión inmediatamente y redirigir al login
     successMessage.value = t("resetPassword.success");
 
-    // Esperar 2 segundos y cerrar sesión
-    setTimeout(async () => {
-      await supabase.auth.signOut();
+    // Cerrar sesión inmediatamente para no quedar autenticado
+    await supabase.auth.signOut();
+    
+    // Redirigir al login después de 2 segundos
+    setTimeout(() => {
       router.push({ name: "Login", query: { passwordReset: "true" } });
     }, 2000);
   } catch (error) {
+    console.error('❌ Error general:', error);
     errorMessage.value = t("resetPassword.errors.updateFailed");
   } finally {
     isLoading.value = false;
@@ -143,7 +146,7 @@ const handleResetPassword = async () => {
     </div>
 
     <!-- Contenido del formulario -->
-    <div class="relative z-10 max-w-md w-full space-y-6">
+    <div v-if="showForm" class="relative z-10 max-w-md w-full space-y-6">
       <!-- Formulario -->
       <form
         class="space-y-5 bg-white/95 backdrop-blur-xl p-8 rounded-2xl shadow-2xl border border-white/20"
