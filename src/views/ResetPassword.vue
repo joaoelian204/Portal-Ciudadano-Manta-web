@@ -164,10 +164,18 @@ const handleResetPassword = async () => {
       ></div>
     </div>
 
-    <!-- Contenido del formulario -->
-    <div v-if="showForm" class="relative z-10 max-w-md w-full space-y-6">
-      <!-- Formulario -->
+    <!-- Contenido del formulario o mensaje de carga -->
+    <div class="relative z-10 max-w-md w-full space-y-6">
+      
+      <!-- Mensaje de carga mientras se verifica -->
+      <div v-if="!showForm && !errorMessage" class="bg-white/95 backdrop-blur-xl p-8 rounded-2xl shadow-2xl border border-white/20 text-center">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-4 border-blue-600 mx-auto mb-4"></div>
+        <p class="text-gray-700">Verificando enlace de recuperación...</p>
+      </div>
+
+      <!-- Formulario de reset -->
       <form
+        v-if="showForm"
         class="space-y-5 bg-white/95 backdrop-blur-xl p-8 rounded-2xl shadow-2xl border border-white/20"
         @submit.prevent="handleResetPassword"
       >
