@@ -48,19 +48,33 @@ onMounted(async () => {
     const code = urlParams.get('code');
     
     if (code) {
-      // Si hay un código, Supabase lo procesará automáticamente
-      // Esperar a que se procese el código y se establezca la sesión
-      await new Promise(resolve => setTimeout(resolve, 2000));
-    } else {
-      // Si no hay código, verificar si hay hash token
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      console.log('🔑 Código de recuperación detectado, intercambiando por sesión...');
+      
+      // Intercambiar el código por una sesión usando PKCE
+      const { data, error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
+      
+      if (exchangeError) {
+        console.error('❌ Error al intercambiar código:', exchangeError);
+        errorMessage.value = t("resetPassword.errors.noSession");
+        setTimeout(() => {
+          router.push({ name: "Login" });
+        }, 3000);
+        return;
+      }
+      
+      if (data?.session) {
+        console.log('✅ Sesión establecida correctamente');
+        // La sesión ya está lista, el usuario puede cambiar su contraseña
+        return;
+      }
     }
     
+    // Si no hay código en la URL, verificar si ya hay una sesión activa
     const {
       data: { session },
     } = await supabase.auth.getSession();
 
-    // Si no hay sesión después de procesar el token, redirigir al login
+    // Si no hay sesión, redirigir al login
     if (!session) {
       errorMessage.value = t("resetPassword.errors.noSession");
       setTimeout(() => {
@@ -68,7 +82,7 @@ onMounted(async () => {
       }, 3000);
     }
   } catch (error) {
-    console.error('Error al verificar sesión de recuperación:', error);
+    console.error('❌ Error al verificar sesión de recuperación:', error);
     errorMessage.value = t("resetPassword.errors.noSession");
     setTimeout(() => {
       router.push({ name: "Login" });
