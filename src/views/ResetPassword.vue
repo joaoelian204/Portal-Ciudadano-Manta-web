@@ -49,14 +49,20 @@ onMounted(async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
     
+    console.log('🔍 URL completa:', window.location.href);
+    console.log('🔍 Parámetros URL:', Object.fromEntries(urlParams));
+    console.log('🔍 Código extraído:', code);
+    
     if (code) {
-      console.log('🔑 Código de recuperación detectado en URL');
-      // Guardar el código sin establecer sesión
+      console.log('✅ Código de recuperación detectado en URL');
+      // Guardar el código
       recoveryCode.value = code;
       // Mostrar el formulario inmediatamente
       showForm.value = true;
+      console.log('✅ Formulario habilitado, showForm:', showForm.value);
     } else {
       // Si no hay código, error
+      console.log('❌ No se encontró código en la URL');
       errorMessage.value = t("resetPassword.errors.noSession");
       setTimeout(() => {
         router.push({ name: "Login" });
@@ -89,17 +95,24 @@ const handleResetPassword = async () => {
   isLoading.value = true;
 
   try {
-    // Primero verificar el código de recuperación e intercambiarlo por una sesión temporal
-    const { error: verifyError } = await supabase.auth.verifyOtp({
-      token_hash: recoveryCode.value,
-      type: 'recovery',
-    });
+    console.log('🔄 Intercambiando código por sesión temporal...');
+    
+    // Intercambiar el código por una sesión SOLO al momento de cambiar la contraseña
+    const { data, error: exchangeError } = await supabase.auth.exchangeCodeForSession(recoveryCode.value);
 
-    if (verifyError) {
-      console.error('❌ Error al verificar código:', verifyError);
+    if (exchangeError) {
+      console.error('❌ Error al intercambiar código:', exchangeError);
       errorMessage.value = t("resetPassword.errors.updateFailed");
       return;
     }
+
+    if (!data?.session) {
+      console.error('❌ No se pudo establecer sesión temporal');
+      errorMessage.value = t("resetPassword.errors.updateFailed");
+      return;
+    }
+
+    console.log('✅ Sesión temporal establecida, actualizando contraseña...');
 
     // Ahora actualizar la contraseña
     const { error: updateError } = await supabase.auth.updateUser({
@@ -109,14 +122,20 @@ const handleResetPassword = async () => {
     if (updateError) {
       console.error('❌ Error al actualizar contraseña:', updateError);
       errorMessage.value = t("resetPassword.errors.updateFailed");
+      // Cerrar sesión incluso si falla
+      await supabase.auth.signOut();
       return;
     }
 
-    // Éxito - cerrar sesión inmediatamente y redirigir al login
+    console.log('✅ Contraseña actualizada correctamente');
+
+    // Éxito - mostrar mensaje
     successMessage.value = t("resetPassword.success");
 
-    // Cerrar sesión inmediatamente para no quedar autenticado
+    // Cerrar sesión INMEDIATAMENTE para no quedar autenticado
+    console.log('🔒 Cerrando sesión...');
     await supabase.auth.signOut();
+    console.log('✅ Sesión cerrada correctamente');
     
     // Redirigir al login después de 2 segundos
     setTimeout(() => {
