@@ -201,10 +201,10 @@ const handleResetPassword = async () => {
             </div>
           </div>
           <h2 class="text-3xl font-extrabold text-gray-900">
-            {{ t("resetPassword.title") }}
+            Restablecer Contraseña
           </h2>
           <p class="mt-2 text-sm text-gray-600">
-            {{ t("resetPassword.subtitle") }}
+            Ingresa tu nueva contraseña segura
           </p>
         </div>
 
