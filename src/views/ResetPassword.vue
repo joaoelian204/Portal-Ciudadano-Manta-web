@@ -42,16 +42,33 @@ const isValidPassword = computed(
 
 // Verificar si hay una sesión de recuperación válida
 onMounted(async () => {
-  // Esperar a que Supabase procese el hash de la URL (token de recuperación)
-  // Esto es necesario porque el token viene en el #access_token de la URL
-  await new Promise(resolve => setTimeout(resolve, 1500));
-  
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  try {
+    // Verificar si hay un código de recuperación en la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    
+    if (code) {
+      // Si hay un código, Supabase lo procesará automáticamente
+      // Esperar a que se procese el código y se establezca la sesión
+      await new Promise(resolve => setTimeout(resolve, 2000));
+    } else {
+      // Si no hay código, verificar si hay hash token
+      await new Promise(resolve => setTimeout(resolve, 1500));
+    }
+    
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
 
-  // Si no hay sesión después de procesar el token, redirigir al login
-  if (!session) {
+    // Si no hay sesión después de procesar el token, redirigir al login
+    if (!session) {
+      errorMessage.value = t("resetPassword.errors.noSession");
+      setTimeout(() => {
+        router.push({ name: "Login" });
+      }, 3000);
+    }
+  } catch (error) {
+    console.error('Error al verificar sesión de recuperación:', error);
     errorMessage.value = t("resetPassword.errors.noSession");
     setTimeout(() => {
       router.push({ name: "Login" });
