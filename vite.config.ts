@@ -17,5 +17,28 @@ export default defineConfig({
     // Copiar todos los archivos de public al dist
     copyPublicDir: true,
     outDir: "dist",
+    // Mejorar el chunking para producción
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vue-vendor': ['vue', 'vue-router', 'pinia'],
+          'i18n': ['vue-i18n'],
+          'supabase': ['@supabase/supabase-js'],
+          'leaflet': ['leaflet', 'vue3-leaflet'],
+        },
+      },
+    },
+    // Aumentar el límite de advertencia de tamaño
+    chunkSizeWarningLimit: 1000,
+    // Asegurar que los source maps se generen para debugging
+    sourcemap: false,
+    // Minificar para producción
+    minify: 'esbuild',
+    // Optimizar dependencias
+    target: 'es2015',
+  },
+  // Optimizar dependencias
+  optimizeDeps: {
+    include: ['vue', 'vue-router', 'pinia', 'vue-i18n', '@supabase/supabase-js'],
   },
 });

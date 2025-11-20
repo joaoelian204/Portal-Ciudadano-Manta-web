@@ -1,0 +1,15 @@
+# Vercel ignore patterns
+node_modules
+.git
+.env.local
+.env.*.local
+*.log
+.DS_Store
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.cache
+dist-ssr
+coverage
