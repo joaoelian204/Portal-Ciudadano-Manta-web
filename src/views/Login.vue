@@ -589,7 +589,7 @@ const closeForgotPasswordModal = () => {
 <template>
   <!-- Sidebar eliminado: no se muestra en Login -->
   <div
-    class="relative flex items-center justify-center py-6 sm:py-12 px-3 sm:px-4 lg:px-8 min-h-[600px]"
+    class="relative flex items-center justify-center min-h-screen py-4 px-4 sm:py-6 sm:px-6 lg:px-8"
   >
     <!-- Imagen de fondo con overlay gradiente elegante -->
     <div
@@ -603,7 +603,7 @@ const closeForgotPasswordModal = () => {
     </div>
 
     <!-- Contenido del formulario -->
-    <div class="relative z-10 max-w-md w-full space-y-4 sm:space-y-6">
+    <div class="relative z-10 w-full max-w-md space-y-3 sm:space-y-4 md:space-y-6">
       <!-- Formulario-->
       <form
         class="space-y-4 sm:space-y-5 bg-white/95 backdrop-blur-xl p-5 sm:p-8 rounded-2xl shadow-2xl border border-white/20"

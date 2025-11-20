@@ -1,6 +1,6 @@
 <template>
   <!-- Navbar Principal con ISO 9241-11 y 9241-210 -->
-  <nav class="bg-white shadow-lg sticky top-0 z-50 border-b border-gray-100">
+  <nav class="bg-white shadow-lg sticky top-0 z-[100] border-b border-gray-100">
     <!-- Barra Superior -->
     <div class="w-full px-3 sm:px-4 md:px-6 lg:px-8 max-w-[1920px] mx-auto">
       <div

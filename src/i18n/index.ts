@@ -26,19 +26,31 @@ const i18n = createI18n({
 
   // 🚫❗ DESACTIVAR PARSER DE LINKED MESSAGES
   messageResolver: (obj: unknown, path: string) => {
-    if (typeof obj === "object" && obj !== null) {
-      return (obj as Record<string, any>)[path] ?? null;
+    // Dividir el path por puntos y navegar por el objeto anidado
+    const keys = path.split('.');
+    let result: any = obj;
+
+    for (const key of keys) {
+      if (result && typeof result === 'object' && key in result) {
+        result = result[key];
+      } else {
+        return null;
+      }
     }
-    return null;
+
+    return result;
   },
 
   // 🚫❗ Desactivar modificadores como @.upper o @.lower
   modifiers: {},
 
-  // Opcional: desactivar warnings molestos
-  warnHtmlMessage: false,
+  // Opcional: desactivar warnings y compilación de mensajes
+  warnHtmlMessage: 'off',
   missingWarn: false,
   fallbackWarn: false,
+
+  // Desactivar compilación de mensajes para evitar errores con @ en emails
+  warnHtmlInMessage: 'off',
 
   // Mensajes
   messages: {
