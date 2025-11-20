@@ -3,7 +3,7 @@ import { watch } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
 import { useAuthStore } from "../stores/auth.store";
 import Home from "../views/Home.vue";
-import Login from "../views/Login.vue";
+
 
 const routes = [
   {
@@ -15,13 +15,13 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: Login,
+    component: () => import("@/views/Login.vue"),
     meta: { requiresAuth: false },
   },
   {
     path: "/register",
     name: "Register",
-    component: () => import("../views/Register.vue"),
+    component: () => import("@/views/Register.vue"),
     meta: { requiresAuth: false },
   },
   {
