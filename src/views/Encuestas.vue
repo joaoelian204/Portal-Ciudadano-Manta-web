@@ -1,7 +1,6 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-8">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Header -->
       <div class="mb-8">
         <button 
           @click="volver" 
@@ -23,7 +22,6 @@
               </div>
             </div>
 
-            <!-- Selector de Vista -->
             <div class="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
               <button
                 @click="vistaActual = 'tarjetas'"
@@ -56,144 +54,146 @@
         </div>
       </div>
 
-      <!-- Loading State -->
       <div v-if="loading" class="flex flex-col items-center justify-center py-20">
         <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-blue-600 mb-4"></div>
         <p class="text-gray-600 text-lg">{{ $t("encuestas.loading") }}</p>
       </div>
 
-      <!-- Empty State -->
-      <div 
-        v-else-if="encuestas.length === 0" 
-        class="bg-white rounded-xl shadow-lg p-12 text-center"
-      >
-        <div class="text-6xl mb-4">📋</div>
-        <p class="text-gray-600 text-lg">{{ $t("encuestas.noSurveysDescription") }}</p>
+      <div v-else-if="encuestas.length === 0" class="flex flex-col items-center justify-center py-16 bg-white rounded-xl shadow-sm">
+        <span class="text-6xl mb-4">📭</span>
+        <h3 class="text-xl font-medium text-gray-900">No hay encuestas disponibles</h3>
+        <p class="text-gray-500 mt-2">No se encontraron encuestas para tu ubicación actual.</p>
       </div>
 
-      <!-- Encuestas - Vista de Tarjetas (Compactas) -->
-      <div v-else-if="vistaActual === 'tarjetas'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <article
-          v-for="encuesta in encuestas"
-          :key="encuesta.id"
-          class="bg-white rounded-lg shadow hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group overflow-hidden"
-        >
-          <!-- Header compacto -->
-          <div class="relative bg-gradient-to-r from-blue-500 to-cyan-500 p-4">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <span class="text-2xl">📊</span>
-                <span class="px-2 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-semibold text-white">
+      <div v-else>
+        
+        <div v-if="vistaActual === 'tarjetas'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <article 
+            v-for="encuesta in encuestas" 
+            :key="encuesta.id"
+            class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden border border-gray-100"
+          >
+            <!-- Header con imagen de fondo -->
+            <div class="relative h-40 bg-gradient-to-br from-blue-500 to-blue-700 overflow-hidden">
+              <!-- Imagen de fondo -->
+              <img 
+                :src="encuestaImage" 
+                alt=""
+                class="absolute inset-0 w-full h-full object-cover"
+                aria-hidden="true"
+              />
+              <!-- Overlay gradiente más sutil -->
+              <div class="absolute inset-0 bg-gradient-to-br from-blue-600/40 to-blue-800/50"></div>
+              <div class="relative h-full flex items-start justify-between p-4 z-10">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center backdrop-blur-sm">
+                    <span class="text-lg">📊</span>
+                  </div>
+                </div>
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-500/90 text-white backdrop-blur-sm shadow-sm">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
                   {{ $t("encuestas.active") }}
                 </span>
               </div>
             </div>
-          </div>
-
-          <!-- Contenido compacto -->
-          <div class="p-4">
-            <h2 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
-              {{ encuesta.titulo }}
-            </h2>
             
-            <p class="text-gray-600 text-sm line-clamp-2 mb-3">
-              {{ encuesta.descripcion }}
-            </p>
-
-            <!-- Metadata compacta -->
-            <div class="flex items-center gap-2 text-xs text-gray-500 mb-3 pb-3 border-b border-gray-100">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <span>
-                {{ new Date(encuesta.created_at || '').toLocaleDateString('es-EC', { 
-                  day: '2-digit', 
-                  month: 'short'
-                }) }}
-              </span>
+            <!-- Contenido -->
+            <div class="p-6 flex flex-col flex-grow">
+              <h3 class="text-xl font-bold text-gray-900 mb-2 line-clamp-2">{{ encuesta.titulo }}</h3>
+              <p class="text-gray-600 text-sm mb-4 line-clamp-3 flex-grow">{{ encuesta.descripcion }}</p>
+              
+              <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+                <span class="text-xs text-gray-500 flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  {{ new Date(encuesta.created_at || '').toLocaleDateString('es-EC', { day: '2-digit', month: 'short', year: 'numeric' }) }}
+                </span>
+                <button
+                  @click="openEncuesta(encuesta.id)"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition-all shadow hover:shadow-lg"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                  </svg>
+                  {{ $t("encuestas.participate") }}
+                </button>
+              </div>
             </div>
-
-            <!-- Botón compacto -->
-            <button
-              @click="openEncuesta(encuesta.id)"
-              class="w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition-all shadow hover:shadow-lg"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-              </svg>
-              {{ $t("encuestas.participate") }}
-            </button>
-          </div>
-        </article>
-      </div>
-
-      <!-- Encuestas - Vista de Lista -->
-      <div v-else class="bg-white rounded-xl shadow-lg overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="w-full">
-            <thead class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white">
-              <tr>
-                <th class="px-6 py-4 text-left text-sm font-semibold">Título</th>
-                <th class="px-6 py-4 text-left text-sm font-semibold hidden md:table-cell">Descripción</th>
-                <th class="px-6 py-4 text-left text-sm font-semibold hidden sm:table-cell">Fecha</th>
-                <th class="px-6 py-4 text-center text-sm font-semibold">Acción</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200">
-              <tr
-                v-for="encuesta in encuestas"
-                :key="encuesta.id"
-                class="hover:bg-blue-50 transition-colors"
-              >
-                <td class="px-6 py-4">
-                  <div class="flex items-center gap-3">
-                    <span class="text-2xl">📊</span>
-                    <div>
-                      <p class="font-semibold text-gray-900">{{ encuesta.titulo }}</p>
-                      <span class="inline-block px-2 py-0.5 bg-green-100 text-green-800 rounded-full text-xs font-medium mt-1">
-                        {{ $t("encuestas.active") }}
-                      </span>
-                    </div>
-                  </div>
-                </td>
-                <td class="px-6 py-4 hidden md:table-cell">
-                  <p class="text-sm text-gray-600 line-clamp-2">
-                    {{ encuesta.descripcion }}
-                  </p>
-                </td>
-                <td class="px-6 py-4 hidden sm:table-cell">
-                  <div class="flex items-center gap-2 text-sm text-gray-600">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    {{ new Date(encuesta.created_at || '').toLocaleDateString('es-EC', { 
-                      day: '2-digit', 
-                      month: 'short', 
-                      year: 'numeric' 
-                    }) }}
-                  </div>
-                </td>
-                <td class="px-6 py-4 text-center">
-                  <button
-                    @click="openEncuesta(encuesta.id)"
-                    class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition-all shadow hover:shadow-lg"
-                  >
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                    </svg>
-                    <span class="hidden sm:inline">{{ $t("encuestas.participate") }}</span>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          </article>
         </div>
+
+        <div v-else class="bg-white rounded-xl shadow-md overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Título</th>
+                  <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600 hidden md:table-cell">Descripción</th>
+                  <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600 hidden sm:table-cell">Fecha</th>
+                  <th class="px-6 py-4 text-center text-sm font-semibold text-gray-600">Acción</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr
+                  v-for="encuesta in encuestas"
+                  :key="encuesta.id"
+                  class="hover:bg-blue-50 transition-colors"
+                >
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <span class="text-2xl">📊</span>
+                      <div>
+                        <p class="font-semibold text-gray-900">{{ encuesta.titulo }}</p>
+                        <span class="inline-block px-2 py-0.5 bg-green-100 text-green-800 rounded-full text-xs font-medium mt-1">
+                          {{ $t("encuestas.active") }}
+                        </span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 hidden md:table-cell max-w-xs">
+                    <p class="text-sm text-gray-600 line-clamp-2">
+                      {{ encuesta.descripcion }}
+                    </p>
+                  </td>
+                  <td class="px-6 py-4 hidden sm:table-cell whitespace-nowrap">
+                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      {{ new Date(encuesta.created_at || '').toLocaleDateString('es-EC', { 
+                        day: '2-digit', 
+                        month: 'short', 
+                        year: 'numeric' 
+                      }) }}
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-center whitespace-nowrap">
+                    <button
+                      @click="openEncuesta(encuesta.id)"
+                      class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition-all shadow hover:shadow-lg"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                      </svg>
+                      <span class="hidden sm:inline">{{ $t("encuestas.participate") }}</span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import encuestaImage from "@/assets/encuenta/encuesta.jpg";
 import { useAuthStore } from "@/stores/auth.store";
 import { useEncuestasStore } from "@/stores/encuestas.store";
 import { computed, onMounted, ref, watch } from "vue";
