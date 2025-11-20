@@ -335,7 +335,7 @@
     "minLength": "At least 8 characters",
     "upperCase": "At least one uppercase letter",
     "number": "At least one number",
-    "specialChar": "At least one special character (e.g. !@#$%)",
+    "specialChar": "At least one special character (e.g. !{'@'}#$%)",
     "submit": "Change Password",
     "loading": "Changing password...",
     "success": "Password changed successfully! Redirecting to login...",

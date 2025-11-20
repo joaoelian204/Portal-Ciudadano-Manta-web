@@ -337,7 +337,7 @@
     "minLength": "Al menos 8 caracteres",
     "upperCase": "Al menos una letra mayúscula",
     "number": "Al menos un número",
-    "specialChar": "Al menos un carácter especial (ej. !@#$%)",
+    "specialChar": "Al menos un carácter especial (ej. !{'@'}#$%)",
     "submit": "Cambiar Contraseña",
     "loading": "Cambiando contraseña...",
     "success": "¡Contraseña cambiada exitosamente! Redirigiendo al login...",

@@ -555,8 +555,10 @@ const recoverPassword = async () => {
   isRecoveringPassword.value = true;
 
   try {
+    console.log("🔑 Iniciando recuperación de contraseña para:", recoveryEmail.value);
+    
     // Usar Supabase para enviar email de recuperación
-    const { error } = await supabase.auth.resetPasswordForEmail(
+    const { data, error } = await supabase.auth.resetPasswordForEmail(
       recoveryEmail.value,
       {
         redirectTo: `${window.location.origin}/reset-password`,
@@ -564,14 +566,31 @@ const recoverPassword = async () => {
     );
 
     if (error) {
-      passwordRecoveryError.value = t("login.forgotPassword.errors.failed");
+      console.error("❌ Error en resetPasswordForEmail:", error);
+      console.error("Error code:", error.code);
+      console.error("Error message:", error.message);
+      console.error("Error status:", error.status);
+      
+      // Mostrar mensaje de error más específico
+      if (error.message.includes("rate limit")) {
+        passwordRecoveryError.value = "Has solicitado demasiados correos. Por favor, espera unos minutos e intenta de nuevo.";
+      } else if (error.message.includes("not found") || error.message.includes("User not found")) {
+        // No revelar si el email existe o no por seguridad
+        passwordRecoverySuccess.value = true;
+      } else {
+        passwordRecoveryError.value = t("login.forgotPassword.errors.failed") + ` (${error.message})`;
+      }
       return;
     }
 
-    // Éxito
+    console.log("✅ Solicitud de recuperación enviada exitosamente");
+    console.log("Data:", data);
+    
+    // Éxito - Siempre mostrar éxito por seguridad (no revelar si el email existe)
     passwordRecoverySuccess.value = true;
-  } catch (error) {
-    passwordRecoveryError.value = t("login.forgotPassword.errors.failed");
+  } catch (error: any) {
+    console.error("❌ Error inesperado en recuperación de contraseña:", error);
+    passwordRecoveryError.value = t("login.forgotPassword.errors.failed") + ` (${error?.message || 'Error desconocido'})`;
   } finally {
     isRecoveringPassword.value = false;
   }
