@@ -2,8 +2,7 @@
 import loginBg from "@/assets/login/login.jpg";
 import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/stores/auth.store";
-// @ts-ignore - ec-docs-validator no tiene tipos exportados correctamente
-import validator from "ec-docs-validator";
+
 import { computed, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
@@ -435,10 +434,45 @@ const clearError = () => {
   }
 };
 
-// Validar cédula ecuatoriana (10 dígitos)
+// Función de validación de cédula local
+const validarCedulaEcuatoriana = (cedula: string): boolean => {
+  if (cedula.length !== 10) return false;
+  const digitoRegion = Number(cedula.substring(0, 2));
+  if (digitoRegion < 1 || digitoRegion > 24) return false;
+  const ultimoDigito = Number(cedula.substring(9, 10));
+  const pares =
+    Number(cedula.substring(1, 2)) +
+    Number(cedula.substring(3, 4)) +
+    Number(cedula.substring(5, 6)) +
+    Number(cedula.substring(7, 8));
+  let numeroUno: any = cedula.substring(0, 1);
+  let numeroUno1 = Number(numeroUno) * 2;
+  if (numeroUno1 > 9) numeroUno1 -= 9;
+  let numeroTres: any = cedula.substring(2, 3);
+  let numeroTres1 = Number(numeroTres) * 2;
+  if (numeroTres1 > 9) numeroTres1 -= 9;
+  let numeroCinco: any = cedula.substring(4, 5);
+  let numeroCinco1 = Number(numeroCinco) * 2;
+  if (numeroCinco1 > 9) numeroCinco1 -= 9;
+  let numeroSiete: any = cedula.substring(6, 7);
+  let numeroSiete1 = Number(numeroSiete) * 2;
+  if (numeroSiete1 > 9) numeroSiete1 -= 9;
+  let numeroNueve: any = cedula.substring(8, 9);
+  let numeroNueve1 = Number(numeroNueve) * 2;
+  if (numeroNueve1 > 9) numeroNueve1 -= 9;
+  const impares =
+    numeroUno1 + numeroTres1 + numeroCinco1 + numeroSiete1 + numeroNueve1;
+  const sumaTotal = pares + impares;
+  const primerDigitoSuma = String(sumaTotal).substring(0, 1);
+  const decena = (Number(primerDigitoSuma) + 1) * 10;
+  let digitoValidador = decena - sumaTotal;
+  if (digitoValidador === 10) digitoValidador = 0;
+  return digitoValidador === ultimoDigito;
+};
+
 const validateCedula = (cedula: string): boolean => {
   try {
-    return validator.ci(cedula);
+    return validarCedulaEcuatoriana(cedula);
   } catch (error) {
     return false;
   }
