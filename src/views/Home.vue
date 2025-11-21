@@ -98,37 +98,55 @@
           role="list"
         >
           <!-- Tarjeta 1 -->
-          <ServiceCard
-            ref="card1"
-            :imageUrl="'/img1.jpg'"
-            :imageAlt="'Servicios de barrio en Manta'"
-            :title="$t('home.services.card1.title')"
-            :description="$t('home.services.card1.description')"
-            gradientColor="blue"
-            :isVisible="cardVisibility.card1"
-          />
+          <div
+            ref="card1Wrapper"
+            class="scroll-fade-in"
+            :class="{ 'is-visible': cardVisibility.card1 }"
+          >
+            <ServiceCard
+              ref="card1"
+              :imageUrl="'/img1.jpg'"
+              :imageAlt="'Servicios de barrio en Manta'"
+              :title="$t('home.services.card1.title')"
+              :description="$t('home.services.card1.description')"
+              gradientColor="blue"
+              :isVisible="cardVisibility.card1"
+            />
+          </div>
 
           <!-- Tarjeta 2 -->
-          <ServiceCard
-            ref="card2"
-            :imageUrl="'/img2.jpg'"
-            :imageAlt="'Participación ciudadana activa'"
-            :title="$t('home.services.card2.title')"
-            :description="$t('home.services.card2.description')"
-            gradientColor="green"
-            :isVisible="cardVisibility.card2"
-          />
+          <div
+            ref="card2Wrapper"
+            class="scroll-fade-in"
+            :class="{ 'is-visible': cardVisibility.card2 }"
+          >
+            <ServiceCard
+              ref="card2"
+              :imageUrl="'/img2.jpg'"
+              :imageAlt="'Participación ciudadana activa'"
+              :title="$t('home.services.card2.title')"
+              :description="$t('home.services.card2.description')"
+              gradientColor="green"
+              :isVisible="cardVisibility.card2"
+            />
+          </div>
 
           <!-- Tarjeta 3 -->
-          <ServiceCard
-            ref="card3"
-            :imageUrl="'/img3.jpg'"
-            :imageAlt="'Mejora continua de servicios'"
-            :title="$t('home.services.card3.title')"
-            :description="$t('home.services.card3.description')"
-            gradientColor="purple"
-            :isVisible="cardVisibility.card3"
-          />
+          <div
+            ref="card3Wrapper"
+            class="scroll-fade-in"
+            :class="{ 'is-visible': cardVisibility.card3 }"
+          >
+            <ServiceCard
+              ref="card3"
+              :imageUrl="'/img3.jpg'"
+              :imageAlt="'Mejora continua de servicios'"
+              :title="$t('home.services.card3.title')"
+              :description="$t('home.services.card3.description')"
+              gradientColor="purple"
+              :isVisible="cardVisibility.card3"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -148,12 +166,18 @@ const card1 = ref<any>(null);
 const card2 = ref<any>(null);
 const card3 = ref<any>(null);
 
+// Referencias para los wrappers de las tarjetas
+const card1Wrapper = ref<HTMLElement | null>(null);
+const card2Wrapper = ref<HTMLElement | null>(null);
+const card3Wrapper = ref<HTMLElement | null>(null);
+
 // Estado de visibilidad de las tarjetas
 const cardVisibility = reactive({
   card1: false,
   card2: false,
   card3: false,
 });
+
 
 // Configuración de partículas
 const particles = ref([{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]);
@@ -170,6 +194,7 @@ const handleImageError = (event: Event) => {
   console.warn("Error cargando imagen de Manta, usando imagen de respaldo");
 };
 
+
 // Intersection Observer para animaciones al scroll
 const setupScrollAnimations = () => {
   const observer = new IntersectionObserver(
@@ -177,34 +202,44 @@ const setupScrollAnimations = () => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const element = entry.target as HTMLElement;
+          
           // Identificar qué tarjeta es y actualizar su visibilidad
-          if (element === card1.value?.$el) {
+          if (element === card1Wrapper.value) {
             cardVisibility.card1 = true;
-          } else if (element === card2.value?.$el) {
+          } else if (element === card2Wrapper.value) {
             cardVisibility.card2 = true;
-          } else if (element === card3.value?.$el) {
+          } else if (element === card3Wrapper.value) {
             cardVisibility.card3 = true;
           }
+          
+          // Agregar clase para animar imágenes dentro de las tarjetas
+          const images = element.querySelectorAll("img");
+          images.forEach((img, index) => {
+            setTimeout(() => {
+              img.classList.add("image-visible");
+            }, index * 100);
+          });
         }
       });
     },
     {
-      threshold: 0.2,
-      rootMargin: "0px 0px -50px 0px",
+      threshold: 0.15,
+      rootMargin: "0px 0px -80px 0px",
     }
   );
 
+  // Observar los wrappers de las tarjetas
   setTimeout(() => {
-    if (card1.value?.$el) observer.observe(card1.value.$el);
+    if (card1Wrapper.value) observer.observe(card1Wrapper.value);
   }, 100);
 
   setTimeout(() => {
-    if (card2.value?.$el) observer.observe(card2.value.$el);
-  }, 300);
+    if (card2Wrapper.value) observer.observe(card2Wrapper.value);
+  }, 200);
 
   setTimeout(() => {
-    if (card3.value?.$el) observer.observe(card3.value.$el);
-  }, 500);
+    if (card3Wrapper.value) observer.observe(card3Wrapper.value);
+  }, 300);
 
   return observer;
 };
@@ -212,6 +247,13 @@ const setupScrollAnimations = () => {
 let observer: IntersectionObserver | null = null;
 
 onMounted(() => {
+  // Scroll al inicio de la página al cargar
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  
+  // También asegurar que el scroll esté en el top
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+
   // Animación inicial de la página
   console.log("Portal Ciudadano Manta - Experiencia mejorada cargada ✨");
 
@@ -360,4 +402,103 @@ img[src=""] {
 img {
   transition: opacity 0.3s ease-in-out;
 }
+
+/* Animaciones de scroll para contenido */
+.scroll-fade-in {
+  opacity: 0;
+  transform: translateY(50px) scale(0.95);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Animación escalonada para las tarjetas */
+.scroll-fade-in:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.scroll-fade-in:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.scroll-fade-in:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+/* Animaciones para imágenes dentro de las tarjetas */
+.scroll-fade-in img {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 0.2s;
+}
+
+.scroll-fade-in.is-visible img.image-visible,
+.scroll-fade-in.is-visible img {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Efecto de hover mejorado para las tarjetas */
+.scroll-fade-in.is-visible:hover {
+  transform: translateY(-8px) scale(1.02);
+  transition: all 0.3s ease-out;
+}
+
+/* Animación para el contenido de texto dentro de las tarjetas */
+.scroll-fade-in h3,
+.scroll-fade-in p {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+.scroll-fade-in.is-visible h3 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.3s;
+}
+
+.scroll-fade-in.is-visible p {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.4s;
+}
+
+/* Responsive para animaciones */
+@media (max-width: 768px) {
+  .scroll-fade-in {
+    transform: translateY(30px) scale(0.98);
+  }
+
+  .scroll-fade-in.is-visible {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Respetar preferencias de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-fade-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .scroll-fade-in img {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .scroll-fade-in h3,
+  .scroll-fade-in p {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 </style>
