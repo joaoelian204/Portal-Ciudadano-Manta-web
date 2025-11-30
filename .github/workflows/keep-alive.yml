@@ -1,0 +1,18 @@
+name: Keep Supabase Alive
+
+on:
+  schedule:
+    # Se ejecuta a las 00:00 UTC cada 2 días
+    - cron: '0 0 */2 * *'
+  workflow_dispatch:
+
+jobs:
+  ping_supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Database via REST API
+        run: |
+          # Se hace una petición a la tabla 'noticias' para despertar la base de datos
+          curl -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/noticias?select=*&limit=1" \
+          -H "apikey: ${{ secrets.SUPABASE_KEY }}" \
+          -H "Authorization: Bearer ${{ secrets.SUPABASE_KEY }}"
