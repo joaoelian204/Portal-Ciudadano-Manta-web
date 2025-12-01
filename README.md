@@ -10,7 +10,7 @@ Sistema de Gestión Ciudadana del GAD Municipal de Manta, Ecuador.
 
 ---
 
-## 📋 Descripción
+## 📋 Descripción hola
 
 Portal web moderno y accesible que facilita la interacción entre la ciudadanía y el Gobierno Autónomo Descentralizado de Manta, cumpliendo con estándares internacionales de usabilidad ISO 9241-11 y diseño centrado en el usuario ISO 9241-210.
 
