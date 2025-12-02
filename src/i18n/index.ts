@@ -1,6 +1,6 @@
 import { createI18n } from "vue-i18n";
 
-// Importar los mensajes de traducción
+// Importar los mensajes de traducción ..
 import enJson from "./locales/en.json";
 import esJson from "./locales/es.json";
 import quJson from "./locales/qu.json";
