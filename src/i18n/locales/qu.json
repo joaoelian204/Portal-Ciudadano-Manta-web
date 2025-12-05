@@ -447,7 +447,11 @@
     "o_arrastrar": "icha aysay chaymanta shitay",
     "formato_imagen": "PNG, JPG, JPEG 10MB jatun kama",
     "error_tamano_imagen": "Siq'i mana 10MB yapayta atinchu",
-    "error_tipo_imagen": "Siq'ikuna archivokuna-lla yuyashka"
+    "error_tipo_imagen": "Siq'ikuna archivokuna-lla yuyashka",
+    "progreso_formulario": "Formularioq ñan purishqan",
+    "paso_problema": "Sasachakuy",
+    "paso_contacto": "Willana",
+    "paso_ubicacion": "Maypi"
   },
   "encuestas": {
     "title": "Llaqta Tapuykuna",

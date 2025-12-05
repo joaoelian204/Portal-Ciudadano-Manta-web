@@ -441,7 +441,11 @@
     "formato_imagen": "PNG, JPG, JPEG hasta 10MB",
     "error_tamano_imagen": "La imagen no puede superar los 10MB",
     "error_tipo_imagen": "Solo se permiten archivos de imagen",
-    "barrio_registrado": "Tu Barrio (Registrado)"
+    "barrio_registrado": "Tu Barrio (Registrado)",
+    "progreso_formulario": "Progreso del formulario",
+    "paso_problema": "Problema",
+    "paso_contacto": "Contacto",
+    "paso_ubicacion": "Ubicación"
   },
   "encuestas": {
     "title": "Encuestas Ciudadanas",

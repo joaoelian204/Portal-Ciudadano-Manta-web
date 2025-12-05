@@ -439,7 +439,11 @@
     "o_arrastrar": "or drag and drop",
     "formato_imagen": "PNG, JPG, JPEG up to 10MB",
     "error_tamano_imagen": "Image cannot exceed 10MB",
-    "error_tipo_imagen": "Only image files are allowed"
+    "error_tipo_imagen": "Only image files are allowed",
+    "progreso_formulario": "Form progress",
+    "paso_problema": "Problem",
+    "paso_contacto": "Contact",
+    "paso_ubicacion": "Location"
   },
   "encuestas": {
     "title": "Citizen Surveys",

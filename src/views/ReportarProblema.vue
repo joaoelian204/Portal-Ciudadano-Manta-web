@@ -9,6 +9,83 @@
         <p class="text-sm sm:text-base text-gray-600">
           {{ $t("reportes.descripcion") }}
         </p>
+
+        <!-- Barra de Progreso -->
+        <div class="mt-6">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-sm font-medium text-gray-700">
+              {{ $t("reportes.progreso_formulario") || "Progreso del formulario" }}
+            </span>
+            <span class="text-sm font-semibold" :class="progressColorClass">
+              {{ progressPercentage }}%
+            </span>
+          </div>
+          
+          <!-- Barra de progreso visual -->
+          <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+            <div
+              class="h-3 rounded-full transition-all duration-500 ease-out"
+              :class="progressBarClass"
+              :style="{ width: progressPercentage + '%' }"
+            ></div>
+          </div>
+
+          <!-- Indicadores de pasos -->
+          <div class="flex justify-between mt-4">
+            <div class="flex flex-col items-center">
+              <div
+                class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300"
+                :class="step1Complete ? 'bg-green-500 text-white' : step1Partial ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-600'"
+              >
+                <svg v-if="step1Complete" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span v-else>1</span>
+              </div>
+              <span class="text-xs mt-1 text-center" :class="step1Complete ? 'text-green-600 font-medium' : 'text-gray-500'">
+                {{ $t("reportes.paso_problema") || "Problema" }}
+              </span>
+            </div>
+
+            <div class="flex-1 flex items-center px-2">
+              <div class="h-1 w-full rounded" :class="step1Complete ? 'bg-green-400' : 'bg-gray-300'"></div>
+            </div>
+
+            <div class="flex flex-col items-center">
+              <div
+                class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300"
+                :class="step2Complete ? 'bg-green-500 text-white' : step2Partial ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-600'"
+              >
+                <svg v-if="step2Complete" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span v-else>2</span>
+              </div>
+              <span class="text-xs mt-1 text-center" :class="step2Complete ? 'text-green-600 font-medium' : 'text-gray-500'">
+                {{ $t("reportes.paso_contacto") || "Contacto" }}
+              </span>
+            </div>
+
+            <div class="flex-1 flex items-center px-2">
+              <div class="h-1 w-full rounded" :class="step2Complete ? 'bg-green-400' : 'bg-gray-300'"></div>
+            </div>
+
+            <div class="flex flex-col items-center">
+              <div
+                class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300"
+                :class="step3Complete ? 'bg-green-500 text-white' : step3Partial ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-600'"
+              >
+                <svg v-if="step3Complete" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span v-else>3</span>
+              </div>
+              <span class="text-xs mt-1 text-center" :class="step3Complete ? 'text-green-600 font-medium' : 'text-gray-500'">
+                {{ $t("reportes.paso_ubicacion") || "Ubicación" }}
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Formulario -->
@@ -541,6 +618,72 @@ const isFormValid = computed(() => {
     form.categoria !== "" &&
     form.ubicacion.direccion.trim() !== ""
   );
+});
+
+// === LÓGICA DE BARRA DE PROGRESO ===
+
+// Paso 1: Información del problema (título, categoría, descripción)
+const step1Progress = computed(() => {
+  let progress = 0;
+  if (formData.value.titulo.trim()) progress += 33;
+  if (formData.value.categoria) progress += 33;
+  if (formData.value.descripcion.trim()) progress += 34;
+  return progress;
+});
+
+const step1Complete = computed(() => step1Progress.value === 100);
+const step1Partial = computed(() => step1Progress.value > 0 && step1Progress.value < 100);
+
+// Paso 2: Datos de contacto (nombre, email están prellenados automáticamente)
+const step2Progress = computed(() => {
+  let progress = 0;
+  if (formData.value.ciudadanoNombre.trim()) progress += 50;
+  if (formData.value.ciudadanoEmail.trim()) progress += 50;
+  return progress;
+});
+
+const step2Complete = computed(() => step2Progress.value === 100);
+const step2Partial = computed(() => step2Progress.value > 0 && step2Progress.value < 100);
+
+// Paso 3: Ubicación (dirección es requerida, referencias opcional)
+const step3Progress = computed(() => {
+  let progress = 0;
+  // La dirección es lo más importante
+  if (formData.value.ubicacion.direccion.trim()) progress += 70;
+  // Referencias es opcional pero suma puntos
+  if (formData.value.ubicacion.referencias?.trim()) progress += 30;
+  return Math.min(progress, 100);
+});
+
+const step3Complete = computed(() => formData.value.ubicacion.direccion.trim() !== "");
+const step3Partial = computed(() => {
+  return (
+    (formData.value.ubicacion.latitud !== -0.9536 || 
+     formData.value.ubicacion.longitud !== -80.7217) &&
+    !step3Complete.value
+  );
+});
+
+// Porcentaje total de progreso
+const progressPercentage = computed(() => {
+  const total = (step1Progress.value + step2Progress.value + step3Progress.value) / 3;
+  return Math.round(total);
+});
+
+// Clase de color para el porcentaje
+const progressColorClass = computed(() => {
+  if (progressPercentage.value >= 100) return "text-green-600";
+  if (progressPercentage.value >= 66) return "text-blue-600";
+  if (progressPercentage.value >= 33) return "text-yellow-600";
+  return "text-gray-600";
+});
+
+// Clase de color para la barra de progreso
+const progressBarClass = computed(() => {
+  if (progressPercentage.value >= 100) return "bg-green-500";
+  if (progressPercentage.value >= 66) return "bg-blue-500";
+  if (progressPercentage.value >= 33) return "bg-yellow-500";
+  return "bg-gray-400";
 });
 
 // Inicializar datos del usuario
