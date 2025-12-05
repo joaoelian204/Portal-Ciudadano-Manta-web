@@ -345,7 +345,9 @@
     "errors": {
       "noSession": "Sesión inválida. Redirigiendo al login...",
       "invalidPassword": "Por favor, cumple con todos los requisitos de contraseña",
-      "updateFailed": "No se pudo actualizar la contraseña. Intenta nuevamente."
+      "updateFailed": "No se pudo actualizar la contraseña. Intenta nuevamente.",
+      "differentBrowser": "Por favor, abre el enlace de recuperación en el mismo navegador donde solicitaste el cambio de contraseña.",
+      "invalidLink": "El enlace de recuperación es inválido o ha expirado. Por favor, solicita uno nuevo."
     }
   },
   "encuestaDetalle": {

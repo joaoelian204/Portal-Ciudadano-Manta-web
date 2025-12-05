@@ -351,7 +351,9 @@
     "errors": {
       "noSession": "Sesión mana allinchu. Yaykuyman kutirimuchkan...",
       "invalidPassword": "Ama hina kaspa, llapan yaykuna rimapa munasqankunata hunt'achiy",
-      "updateFailed": "Manam atinichu yaykuna rimata musuqyachiyta. Musuqmanta kallpachay."
+      "updateFailed": "Manam atinichu yaykuna rimata musuqyachiyta. Musuqmanta kallpachay.",
+      "differentBrowser": "Ama hina kaspa, kutichiy t'inkita kikin navegadorpi kichay maypichus yaykuna rimata mañarqanki.",
+      "invalidLink": "Kutichiy t'inki mana allinchu utaq tukukurqanña. Ama hina kaspa, musuqta mañakuy."
     }
   },
   "encuestaDetalle": {

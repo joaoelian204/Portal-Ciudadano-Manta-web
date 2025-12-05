@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import loginBg from "@/assets/login/login.jpg";
 import { supabase } from "@/lib/supabase";
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 
@@ -17,7 +17,10 @@ const isLoading = ref(false);
 const errorMessage = ref("");
 const successMessage = ref("");
 const showForm = ref(false); // Controla si se muestra el formulario
-const recoveryCode = ref(""); // Código de recuperación de la URL
+const hasValidSession = ref(false); // Indica si tenemos una sesión válida para recovery
+
+// Para limpiar el listener
+let authListener: { data: { subscription: { unsubscribe: () => void } } } | null = null;
 
 // Validaciones de contraseña
 const hasMinLength = computed(() => newPassword.value.length >= 8);
@@ -45,28 +48,95 @@ const isValidPassword = computed(
 // Verificar si hay un código de recuperación válido en la URL
 onMounted(async () => {
   try {
-    // Verificar si hay un código de recuperación en la URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    
     console.log('🔍 URL completa:', window.location.href);
-    console.log('🔍 Parámetros URL:', Object.fromEntries(urlParams));
-    console.log('🔍 Código extraído:', code);
     
+    // Verificar parámetros en la URL (pueden venir como query params o en el hash)
+    const urlParams = new URLSearchParams(window.location.search);
+    const hashParams = new URLSearchParams(window.location.hash.replace('#', '?'));
+    
+    const code = urlParams.get('code');
+    const accessToken = hashParams.get('access_token') || urlParams.get('access_token');
+    const type = hashParams.get('type') || urlParams.get('type');
+    
+    console.log('🔍 Código:', code);
+    console.log('🔍 Access Token:', accessToken ? 'presente' : 'no presente');
+    console.log('🔍 Type:', type);
+
+    // Configurar listener para eventos de autenticación
+    authListener = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log('🔐 Auth event:', event);
+      
+      if (event === 'PASSWORD_RECOVERY') {
+        console.log('✅ Evento PASSWORD_RECOVERY detectado');
+        hasValidSession.value = true;
+        showForm.value = true;
+      } else if (event === 'SIGNED_IN' && session) {
+        // Si llegamos aquí con una sesión válida (puede ser por el token de recovery)
+        console.log('✅ Sesión establecida');
+        hasValidSession.value = true;
+        showForm.value = true;
+      }
+    });
+
+    // Si hay un código en la URL, intentar intercambiarlo
     if (code) {
-      console.log('✅ Código de recuperación detectado en URL');
-      // Guardar el código
-      recoveryCode.value = code;
-      // Mostrar el formulario inmediatamente
-      showForm.value = true;
-      console.log('✅ Formulario habilitado, showForm:', showForm.value);
+      console.log('🔄 Intentando intercambiar código por sesión...');
+      
+      // Supabase maneja automáticamente el PKCE si el code_verifier está en el storage
+      const { data, error } = await supabase.auth.exchangeCodeForSession(code);
+      
+      if (error) {
+        console.error('❌ Error al intercambiar código:', error);
+        
+        // Si falla el PKCE, puede ser porque el usuario abrió el enlace en otro navegador
+        // En ese caso, mostramos un mensaje específico
+        if (error.message.includes('code verifier')) {
+          errorMessage.value = t("resetPassword.errors.differentBrowser") || 
+            "Por favor, abre el enlace de recuperación en el mismo navegador donde solicitaste el cambio de contraseña.";
+        } else {
+          errorMessage.value = t("resetPassword.errors.invalidLink") || 
+            "El enlace de recuperación es inválido o ha expirado. Por favor, solicita uno nuevo.";
+        }
+        
+        setTimeout(() => {
+          router.push({ name: "Login" });
+        }, 5000);
+        return;
+      }
+      
+      if (data?.session) {
+        console.log('✅ Sesión establecida desde código');
+        hasValidSession.value = true;
+        showForm.value = true;
+      }
+    } else if (accessToken) {
+      // Si hay access_token directamente (flujo implícito legacy)
+      console.log('🔄 Detectado access_token, estableciendo sesión...');
+      const { data, error } = await supabase.auth.setSession({
+        access_token: accessToken,
+        refresh_token: hashParams.get('refresh_token') || ''
+      });
+      
+      if (!error && data?.session) {
+        console.log('✅ Sesión establecida desde token');
+        hasValidSession.value = true;
+        showForm.value = true;
+      }
     } else {
-      // Si no hay código, error
-      console.log('❌ No se encontró código en la URL');
-      errorMessage.value = t("resetPassword.errors.noSession");
-      setTimeout(() => {
-        router.push({ name: "Login" });
-      }, 3000);
+      // Verificar si ya hay una sesión activa (por si Supabase ya procesó el token)
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (session) {
+        console.log('✅ Sesión existente detectada');
+        hasValidSession.value = true;
+        showForm.value = true;
+      } else {
+        console.log('❌ No se encontró código ni sesión válida');
+        errorMessage.value = t("resetPassword.errors.noSession");
+        setTimeout(() => {
+          router.push({ name: "Login" });
+        }, 3000);
+      }
     }
   } catch (error) {
     console.error('❌ Error al verificar código de recuperación:', error);
@@ -77,7 +147,14 @@ onMounted(async () => {
   }
 });
 
-// Restablecer contraseña usando el código de recuperación
+// Limpiar listener al desmontar
+onUnmounted(() => {
+  if (authListener) {
+    authListener.data.subscription.unsubscribe();
+  }
+});
+
+// Restablecer contraseña usando la sesión actual
 const handleResetPassword = async () => {
   errorMessage.value = "";
   successMessage.value = "";
@@ -87,7 +164,7 @@ const handleResetPassword = async () => {
     return;
   }
 
-  if (!recoveryCode.value) {
+  if (!hasValidSession.value) {
     errorMessage.value = t("resetPassword.errors.noSession");
     return;
   }
@@ -95,26 +172,9 @@ const handleResetPassword = async () => {
   isLoading.value = true;
 
   try {
-    console.log('🔄 Intercambiando código por sesión temporal...');
-    
-    // Intercambiar el código por una sesión SOLO al momento de cambiar la contraseña
-    const { data, error: exchangeError } = await supabase.auth.exchangeCodeForSession(recoveryCode.value);
+    console.log('🔄 Actualizando contraseña...');
 
-    if (exchangeError) {
-      console.error('❌ Error al intercambiar código:', exchangeError);
-      errorMessage.value = t("resetPassword.errors.updateFailed");
-      return;
-    }
-
-    if (!data?.session) {
-      console.error('❌ No se pudo establecer sesión temporal');
-      errorMessage.value = t("resetPassword.errors.updateFailed");
-      return;
-    }
-
-    console.log('✅ Sesión temporal establecida, actualizando contraseña...');
-
-    // Ahora actualizar la contraseña
+    // Actualizar la contraseña directamente (ya tenemos sesión establecida)
     const { error: updateError } = await supabase.auth.updateUser({
       password: newPassword.value,
     });
@@ -122,8 +182,6 @@ const handleResetPassword = async () => {
     if (updateError) {
       console.error('❌ Error al actualizar contraseña:', updateError);
       errorMessage.value = t("resetPassword.errors.updateFailed");
-      // Cerrar sesión incluso si falla
-      await supabase.auth.signOut();
       return;
     }
 
