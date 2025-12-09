@@ -554,6 +554,25 @@
         "button": "Report Issue"
       }
     },
+    "reports": {
+      "title": "Report History",
+      "subtitle": "Check the status of your citizen reports",
+      "refresh": "Refresh",
+      "loading": "Loading reports...",
+      "noReports": "You haven't made any reports yet",
+      "createFirst": "Create my first report",
+      "adminResponse": "Administrator Response",
+      "resolvedOn": "Resolved on",
+      "states": {
+        "pendiente": "Pending",
+        "en_revision": "Under Review",
+        "aceptado": "Accepted",
+        "en_proceso": "In Progress",
+        "resuelto": "Resolved",
+        "rechazado": "Rejected",
+        "duplicado": "Duplicate"
+      }
+    },
     "modal": {
       "survey": {
         "title": "Participate in Survey",
@@ -600,6 +619,8 @@
         "title": "Report Management",
         "description": "Review and address citizen reports",
         "button": "View Reports",
+        "downloadPDF": "Download PDF Report",
+        "generating": "Generating PDF...",
         "comingSoon": "Coming Soon"
       },
       "preview": {

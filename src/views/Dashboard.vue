@@ -217,6 +217,208 @@
           </div>
         </div>
 
+        <!-- Historial de Reportes del Usuario -->
+        <div
+          class="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-8 border-t-4 border-yellow-500"
+        >
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h2 class="text-3xl font-bold text-gray-800 mb-2">
+                📊 {{ $t("dashboard.reports.title") }}
+              </h2>
+              <p class="text-gray-600">
+                {{ $t("dashboard.reports.subtitle") }}
+              </p>
+            </div>
+            <button
+              @click="cargarReportesUsuario"
+              :disabled="loadingReportes"
+              class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
+              :aria-label="$t('dashboard.reports.refresh')"
+            >
+              <svg
+                :class="['w-5 h-5', { 'animate-spin': loadingReportes }]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                ></path>
+              </svg>
+              <span class="hidden sm:inline">{{ $t("dashboard.reports.refresh") }}</span>
+            </button>
+          </div>
+
+          <!-- Loading State -->
+          <div
+            v-if="loadingReportes"
+            class="text-center py-12"
+            role="status"
+            aria-live="polite"
+          >
+            <div class="flex justify-center mb-4">
+              <div
+                class="animate-spin rounded-full h-12 w-12 border-b-4 border-blue-600"
+              ></div>
+            </div>
+            <p class="text-gray-600">{{ $t("dashboard.reports.loading") }}</p>
+          </div>
+
+          <!-- No Reports -->
+          <div
+            v-else-if="misReportes.length === 0"
+            class="text-center py-12"
+          >
+            <div class="text-6xl mb-4">📝</div>
+            <p class="text-xl text-gray-600 mb-4">
+              {{ $t("dashboard.reports.noReports") }}
+            </p>
+            <router-link
+              to="/reportar-problema"
+              class="inline-block bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
+            >
+              {{ $t("dashboard.reports.createFirst") }}
+            </router-link>
+          </div>
+
+          <!-- Reports Grid -->
+          <div v-else>
+            <!-- Estadísticas Resumen -->
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 mb-6">
+              <div
+                class="bg-gray-50 rounded-lg p-4 text-center border-2 border-gray-200"
+              >
+                <p class="text-2xl font-bold text-gray-700">{{ conteoEstados.pendiente }}</p>
+                <p class="text-xs text-gray-600 mt-1">{{ $t("dashboard.reports.states.pendiente") }}</p>
+              </div>
+              <div
+                class="bg-blue-50 rounded-lg p-4 text-center border-2 border-blue-200"
+              >
+                <p class="text-2xl font-bold text-blue-700">{{ conteoEstados.en_revision }}</p>
+                <p class="text-xs text-blue-600 mt-1">{{ $t("dashboard.reports.states.en_revision") }}</p>
+              </div>
+              <div
+                class="bg-cyan-50 rounded-lg p-4 text-center border-2 border-cyan-200"
+              >
+                <p class="text-2xl font-bold text-cyan-700">{{ conteoEstados.aceptado }}</p>
+                <p class="text-xs text-cyan-600 mt-1">{{ $t("dashboard.reports.states.aceptado") }}</p>
+              </div>
+              <div
+                class="bg-yellow-50 rounded-lg p-4 text-center border-2 border-yellow-200"
+              >
+                <p class="text-2xl font-bold text-yellow-700">{{ conteoEstados.en_proceso }}</p>
+                <p class="text-xs text-yellow-600 mt-1">{{ $t("dashboard.reports.states.en_proceso") }}</p>
+              </div>
+              <div
+                class="bg-green-50 rounded-lg p-4 text-center border-2 border-green-200"
+              >
+                <p class="text-2xl font-bold text-green-700">{{ conteoEstados.resuelto }}</p>
+                <p class="text-xs text-green-600 mt-1">{{ $t("dashboard.reports.states.resuelto") }}</p>
+              </div>
+              <div
+                class="bg-red-50 rounded-lg p-4 text-center border-2 border-red-200"
+              >
+                <p class="text-2xl font-bold text-red-700">{{ conteoEstados.rechazado }}</p>
+                <p class="text-xs text-red-600 mt-1">{{ $t("dashboard.reports.states.rechazado") }}</p>
+              </div>
+              <div
+                class="bg-purple-50 rounded-lg p-4 text-center border-2 border-purple-200"
+              >
+                <p class="text-2xl font-bold text-purple-700">{{ conteoEstados.duplicado }}</p>
+                <p class="text-xs text-purple-600 mt-1">{{ $t("dashboard.reports.states.duplicado") }}</p>
+              </div>
+            </div>
+
+            <!-- Lista de Reportes -->
+            <div class="space-y-4">
+              <div
+                v-for="reporte in misReportes"
+                :key="reporte.id"
+                class="border-2 rounded-xl p-5 hover:shadow-lg transition-all duration-200"
+                :class="getEstadoBorderClass(reporte.estado)"
+              >
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                  <!-- Información del Reporte -->
+                  <div class="flex-1">
+                    <div class="flex items-start gap-3 mb-3">
+                      <div
+                        class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
+                        :class="getEstadoBgClass(reporte.estado)"
+                      >
+                        <span class="text-xl">{{ getCategoriaIcon(reporte.categoria) }}</span>
+                      </div>
+                      <div class="flex-1">
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">
+                          {{ getCategoriaTexto(reporte.categoria) }}
+                        </h3>
+                        <p class="text-sm text-gray-600 line-clamp-2">
+                          {{ reporte.descripcion }}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3 text-sm text-gray-600">
+                      <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span>{{ reporte.ubicacion_parroquia }}, {{ reporte.ubicacion_barrio }}</span>
+                      </div>
+                      <div class="flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>{{ formatearFecha(reporte.created_at) }}</span>
+                      </div>
+                      <div class="flex items-center gap-1">
+                        <span
+                          class="px-2 py-1 rounded-full text-xs font-semibold"
+                          :class="getPrioridadClass(reporte.prioridad)"
+                        >
+                          {{ getPrioridadTexto(reporte.prioridad) }}
+                        </span>
+                      </div>
+                    </div>
+
+                    <!-- Respuesta del Admin (si existe) -->
+                    <div
+                      v-if="reporte.respuesta_admin"
+                      class="mt-3 bg-blue-50 border-l-4 border-blue-500 p-3 rounded"
+                    >
+                      <p class="text-sm font-semibold text-blue-800 mb-1">
+                        {{ $t("dashboard.reports.adminResponse") }}:
+                      </p>
+                      <p class="text-sm text-blue-700">{{ reporte.respuesta_admin }}</p>
+                    </div>
+                  </div>
+
+                  <!-- Estado del Reporte -->
+                  <div class="flex-shrink-0 text-center md:text-right">
+                    <div
+                      class="inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold text-sm"
+                      :class="getEstadoClass(reporte.estado)"
+                    >
+                      <span>{{ getEstadoIcon(reporte.estado) }}</span>
+                      <span>{{ getEstadoTexto(reporte.estado) }}</span>
+                    </div>
+                    <div
+                      v-if="reporte.fecha_resolucion"
+                      class="text-xs text-gray-500 mt-2"
+                    >
+                      {{ $t("dashboard.reports.resolvedOn") }}: {{ formatearFecha(reporte.fecha_resolucion) }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Mensaje de Bienvenida -->
         <div
           class="bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl shadow-xl p-8 text-white text-center"
@@ -972,6 +1174,7 @@
 import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useLanguage } from "../composables/useLanguage";
+import { useReportes } from "../composables/useReportes";
 import { useAuthStore } from "../stores/auth.store";
 import { useEncuestasStore } from "../stores/encuestas.store";
 import { useNoticiasStore } from "../stores/noticias.store";
@@ -979,10 +1182,12 @@ import type { Database } from "../types/database.types";
 
 type Encuesta = Database["public"]["Tables"]["encuestas"]["Row"];
 type Noticia = Database["public"]["Tables"]["noticias"]["Row"];
+type Reporte = Database["public"]["Tables"]["reportes"]["Row"];
 
 const authStore = useAuthStore();
 const encuestasStore = useEncuestasStore();
 const noticiasStore = useNoticiasStore();
+const { obtenerReportesUsuario, contarPorEstado } = useReportes();
 const router = useRouter();
 
 // Inicializar sistema de idiomas (para sincronización global)
@@ -997,6 +1202,10 @@ const submittingRespuesta = ref(false);
 // Estado de Noticias
 const showNoticiasModal = ref(false);
 const selectedNoticia = ref<Noticia | null>(null);
+
+// Estado de Reportes
+const misReportes = ref<Reporte[]>([]);
+const loadingReportes = ref(false);
 
 // Notificaciones
 const notification = ref<{ type: "success" | "error"; message: string } | null>(
@@ -1031,6 +1240,11 @@ const encuestasActivas = computed(() => {
     // Verificar si está dentro del rango
     return ahora >= inicio && ahora <= fin;
   });
+});
+
+// Computed para conteo de estados
+const conteoEstados = computed(() => {
+  return contarPorEstado(misReportes.value);
 });
 
 // Métodos
@@ -1239,6 +1453,157 @@ const getTipoLabel = (tipo: string) => {
   return labels[tipo] || tipo;
 };
 
+// Funciones para Reportes
+async function cargarReportesUsuario() {
+  if (!authStore.usuario?.id) {
+    console.error('❌ No hay usuario autenticado');
+    return;
+  }
+
+  loadingReportes.value = true;
+  try {
+    const reportes = await obtenerReportesUsuario(authStore.usuario.id);
+    misReportes.value = reportes;
+    console.log('✅ Reportes del usuario cargados:', reportes.length);
+  } catch (error) {
+    console.error('❌ Error al cargar reportes del usuario:', error);
+    showNotification('error', 'Error al cargar tus reportes');
+  } finally {
+    loadingReportes.value = false;
+  }
+}
+
+function formatearFecha(fecha: string | null): string {
+  if (!fecha) return 'N/A';
+  try {
+    const date = new Date(fecha);
+    return date.toLocaleDateString('es-EC', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
+  } catch {
+    return 'N/A';
+  }
+}
+
+function getEstadoTexto(estado: string): string {
+  const textos: Record<string, string> = {
+    pendiente: 'Pendiente',
+    en_revision: 'En Revisión',
+    aceptado: 'Aceptado',
+    en_proceso: 'En Proceso',
+    resuelto: 'Resuelto',
+    rechazado: 'Rechazado',
+    duplicado: 'Duplicado',
+  };
+  return textos[estado] || estado;
+}
+
+function getEstadoIcon(estado: string): string {
+  const iconos: Record<string, string> = {
+    pendiente: '⏳',
+    en_revision: '👀',
+    aceptado: '✅',
+    en_proceso: '🔧',
+    resuelto: '✔️',
+    rechazado: '❌',
+    duplicado: '🔁',
+  };
+  return iconos[estado] || '📝';
+}
+
+function getEstadoClass(estado: string): string {
+  const clases: Record<string, string> = {
+    pendiente: 'bg-gray-100 text-gray-800',
+    en_revision: 'bg-blue-100 text-blue-800',
+    aceptado: 'bg-cyan-100 text-cyan-800',
+    en_proceso: 'bg-yellow-100 text-yellow-800',
+    resuelto: 'bg-green-100 text-green-800',
+    rechazado: 'bg-red-100 text-red-800',
+    duplicado: 'bg-purple-100 text-purple-800',
+  };
+  return clases[estado] || 'bg-gray-100 text-gray-800';
+}
+
+function getEstadoBorderClass(estado: string): string {
+  const clases: Record<string, string> = {
+    pendiente: 'border-gray-300',
+    en_revision: 'border-blue-300',
+    aceptado: 'border-cyan-300',
+    en_proceso: 'border-yellow-300',
+    resuelto: 'border-green-300',
+    rechazado: 'border-red-300',
+    duplicado: 'border-purple-300',
+  };
+  return clases[estado] || 'border-gray-300';
+}
+
+function getEstadoBgClass(estado: string): string {
+  const clases: Record<string, string> = {
+    pendiente: 'bg-gray-100',
+    en_revision: 'bg-blue-100',
+    aceptado: 'bg-cyan-100',
+    en_proceso: 'bg-yellow-100',
+    resuelto: 'bg-green-100',
+    rechazado: 'bg-red-100',
+    duplicado: 'bg-purple-100',
+  };
+  return clases[estado] || 'bg-gray-100';
+}
+
+function getCategoriaTexto(categoria: string): string {
+  const textos: Record<string, string> = {
+    alumbrado: 'Alumbrado Público',
+    baches: 'Baches',
+    limpieza: 'Limpieza',
+    agua: 'Agua Potable',
+    alcantarillado: 'Alcantarillado',
+    parques: 'Parques y Jardines',
+    señalizacion: 'Señalización',
+    seguridad: 'Seguridad',
+    ruido: 'Contaminación Sonora',
+    otro: 'Otro',
+  };
+  return textos[categoria] || categoria;
+}
+
+function getCategoriaIcon(categoria: string): string {
+  const iconos: Record<string, string> = {
+    alumbrado: '💡',
+    baches: '🕳️',
+    limpieza: '🧹',
+    agua: '💧',
+    alcantarillado: '🚰',
+    parques: '🌳',
+    señalizacion: '🚦',
+    seguridad: '🔒',
+    ruido: '🔊',
+    otro: '📌',
+  };
+  return iconos[categoria] || '📝';
+}
+
+function getPrioridadTexto(prioridad: string): string {
+  const textos: Record<string, string> = {
+    baja: 'Baja',
+    media: 'Media',
+    alta: 'Alta',
+    urgente: 'Urgente',
+  };
+  return textos[prioridad] || prioridad;
+}
+
+function getPrioridadClass(prioridad: string): string {
+  const clases: Record<string, string> = {
+    baja: 'bg-green-100 text-green-800',
+    media: 'bg-yellow-100 text-yellow-800',
+    alta: 'bg-orange-100 text-orange-800',
+    urgente: 'bg-red-100 text-red-800',
+  };
+  return clases[prioridad] || 'bg-gray-100 text-gray-800';
+}
+
 // Verificar autenticación al montar
 onMounted(async () => {
   console.log("🚀 Dashboard montado");
@@ -1276,6 +1641,10 @@ onMounted(async () => {
     "📰 Noticias en store después de cargar:",
     noticiasStore.noticias
   );
+
+  // Cargar reportes del usuario
+  console.log("📊 Iniciando carga de reportes del usuario...");
+  await cargarReportesUsuario();
 });
 </script>
 

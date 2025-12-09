@@ -556,6 +556,25 @@
         "button": "Reportar Problema"
       }
     },
+    "reports": {
+      "title": "Historial de Reportes",
+      "subtitle": "Revisa el estado de tus reportes ciudadanos",
+      "refresh": "Actualizar",
+      "loading": "Cargando reportes...",
+      "noReports": "No has realizado ningún reporte aún",
+      "createFirst": "Crear mi primer reporte",
+      "adminResponse": "Respuesta del Administrador",
+      "resolvedOn": "Resuelto el",
+      "states": {
+        "pendiente": "Pendiente",
+        "en_revision": "En Revisión",
+        "aceptado": "Aceptado",
+        "en_proceso": "En Proceso",
+        "resuelto": "Resuelto",
+        "rechazado": "Rechazado",
+        "duplicado": "Duplicado"
+      }
+    },
     "modal": {
       "survey": {
         "title": "Participar en Encuesta",
@@ -602,6 +621,8 @@
         "title": "Gestión de Reportes",
         "description": "Revisa y atiende reportes ciudadanos",
         "button": "Ver Reportes",
+        "downloadPDF": "Descargar Informe PDF",
+        "generating": "Generando PDF...",
         "comingSoon": "Próximamente"
       },
       "preview": {

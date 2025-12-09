@@ -562,6 +562,25 @@
         "button": "Sasachakuyta Willakuy"
       }
     },
+    "reports": {
+      "title": "Willakuykunapa Historianmanta",
+      "subtitle": "Qhaway imaynapitaq kachkan willakuyniykikuna",
+      "refresh": "Musuqyachiy",
+      "loading": "Willakuykunata kargachkan...",
+      "noReports": "Manaraqmi wakin willakuyta rurarqanki",
+      "createFirst": "Ñawpaq willakuyta ruray",
+      "adminResponse": "Kamachiqpa Kutichinmi",
+      "resolvedOn": "Allichasqa",
+      "states": {
+        "pendiente": "Suyasqa",
+        "en_revision": "Qhawarichkanmi",
+        "aceptado": "Chaskisqa",
+        "en_proceso": "Rurarichkan",
+        "resuelto": "Allichasqa",
+        "rechazado": "Mana Chaskisqa",
+        "duplicado": "Iskay Kuti"
+      }
+    },
     "modal": {
       "survey": {
         "title": "Tapuypi Yaykuy",
@@ -608,6 +627,8 @@
         "title": "Willakuykunata Kamachinapaq",
         "description": "Qhawariy hinaspa yanapay llaqtakunapa willakuykunata",
         "button": "Willakuykunata Qhaway",
+        "downloadPDF": "PDF Willakuy Uraykachiy",
+        "generating": "PDF nisqata rurachkan...",
         "comingSoon": "Chayamuchkanña"
       },
       "preview": {

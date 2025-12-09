@@ -282,13 +282,58 @@
             <p class="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 px-2">
               {{ $t("admin.sections.reports.description") }}
             </p>
-            <router-link
-              to="/admin/reportes"
-              class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 text-sm sm:text-base"
-              :aria-label="$t('admin.sections.reports.title')"
-            >
-              {{ $t("admin.sections.reports.button") }}
-            </router-link>
+            <div class="flex flex-col gap-3">
+              <router-link
+                to="/admin/reportes"
+                class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 text-sm sm:text-base"
+                :aria-label="$t('admin.sections.reports.title')"
+              >
+                {{ $t("admin.sections.reports.button") }}
+              </router-link>
+              
+              <button
+                @click="descargarInformePDF"
+                :disabled="generandoPDF"
+                class="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 text-sm sm:text-base"
+                :aria-label="$t('admin.sections.reports.downloadPDF')"
+              >
+                <svg
+                  v-if="!generandoPDF"
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  ></path>
+                </svg>
+                <svg
+                  v-else
+                  class="w-5 h-5 animate-spin"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    class="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4"
+                  ></circle>
+                  <path
+                    class="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+                <span>{{ generandoPDF ? $t('admin.sections.reports.generating') : $t('admin.sections.reports.downloadPDF') }}</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -300,6 +345,7 @@
 import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useLanguage } from "../composables/useLanguage";
+import { useReportePDF } from "../composables/useReportePDF";
 import { supabase } from "../lib/supabase";
 import { useAuthStore } from "../stores/auth.store";
 import { useEncuestasStore } from "../stores/encuestas.store";
@@ -307,6 +353,7 @@ import { useEncuestasStore } from "../stores/encuestas.store";
 const authStore = useAuthStore();
 const encuestasStore = useEncuestasStore();
 const router = useRouter();
+const { generarInformePDF } = useReportePDF();
 
 // Inicializar sistema de idiomas (para sincronización global)
 const { loadSavedLanguage } = useLanguage();
@@ -314,6 +361,7 @@ const { loadSavedLanguage } = useLanguage();
 // Estado para reportes
 const totalReportes = ref(0);
 const reportesPendientes = ref(0);
+const generandoPDF = ref(false);
 
 const adminName = computed(() => {
   return authStore.usuario?.nombres || "Administrador";
@@ -349,6 +397,25 @@ async function cargarEstadisticasReportes() {
     });
   } catch (error) {
     console.error('❌ AdminPanel: Error al cargar estadísticas de reportes:', error);
+  }
+}
+
+// Función para descargar el informe PDF
+async function descargarInformePDF() {
+  try {
+    generandoPDF.value = true;
+    console.log('📄 Generando informe PDF...');
+    
+    const resultado = await generarInformePDF();
+    
+    if (resultado) {
+      console.log('✅ Informe PDF descargado exitosamente');
+    }
+  } catch (error) {
+    console.error('❌ Error al generar informe PDF:', error);
+    alert('Error al generar el informe. Por favor, intente nuevamente.');
+  } finally {
+    generandoPDF.value = false;
   }
 }
 
