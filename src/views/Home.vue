@@ -161,12 +161,7 @@ import ServiceCard from "../components/cards/ServiceCard.vue";
 const imageSrc = ref("/manta.jpg");
 const isImageLoaded = ref(false);
 
-// Referencias para las tarjetas
-const card1 = ref<any>(null);
-const card2 = ref<any>(null);
-const card3 = ref<any>(null);
-
-// Referencias para los wrappers de las tarjetas
+// Referencias para los wrappers de las tarjetas (card1, card2, card3 removidos - no utilizados)
 const card1Wrapper = ref<HTMLElement | null>(null);
 const card2Wrapper = ref<HTMLElement | null>(null);
 const card3Wrapper = ref<HTMLElement | null>(null);

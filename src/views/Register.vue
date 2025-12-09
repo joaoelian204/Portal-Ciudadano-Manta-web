@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import loginBg from "@/assets/login/login.jpg";
 import { useAuthStore } from "@/stores/auth.store";
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 
+const loginBg = new URL('@/assets/login/login.jpg', import.meta.url).href;
 
 const router = useRouter();
 const { t } = useI18n();

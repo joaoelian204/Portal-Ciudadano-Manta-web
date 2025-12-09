@@ -193,11 +193,12 @@
 </template>
 
 <script setup lang="ts">
-import encuestaImage from "@/assets/encuenta/encuesta.jpg";
 import { useAuthStore } from "@/stores/auth.store";
 import { useEncuestasStore } from "@/stores/encuestas.store";
 import { computed, onMounted, ref, watch } from "vue";
 import { useRouter } from "vue-router";
+
+const encuestaImage = new URL('@/assets/encuenta/encuesta.jpg', import.meta.url).href;
 
 const encuestasStore = useEncuestasStore();
 const authStore = useAuthStore();

@@ -1491,7 +1491,6 @@ const {
   searchQuery,
   showSearchSuggestions,
   isSearchExpanded,
-  searchInput,
   currentLanguage,
   languages,
   zoomLevel,
