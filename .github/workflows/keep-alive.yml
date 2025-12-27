@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Ping Database via REST API
         run: |
-          # Se hace una petición a la tabla 'noticias' para despertar la base de datos
-          curl -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/noticias?select=*&limit=1" \
+          # Se hace una petición a la tabla 'usuarios' solicitando solo el campo 'nombres'
+          curl -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/usuarios?select=nombres&limit=1" \
           -H "apikey: ${{ secrets.SUPABASE_KEY }}" \
           -H "Authorization: Bearer ${{ secrets.SUPABASE_KEY }}"
