@@ -6,7 +6,10 @@
         <div class="flex flex-col gap-3 sm:gap-4">
           <div>
             <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 flex items-center gap-2">
-              <span class="text-xl sm:text-2xl md:text-3xl lg:text-4xl">📋</span>
+              <svg class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
+              </svg>
               <span class="break-words line-clamp-2">{{ $t('admin.reportes.title') }}</span>
             </h1>
             <p class="mt-1 sm:mt-2 text-xs sm:text-sm md:text-base text-gray-600 line-clamp-2">
@@ -105,21 +108,31 @@
               class="px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-md sm:rounded-lg font-medium sm:font-semibold whitespace-nowrap transition-all text-[10px] sm:text-xs md:text-sm flex-shrink-0 min-w-0"
               :class="tabActivo === 'revision' ? 'bg-blue-100 text-blue-800 ring-2 ring-blue-400' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'"
             >
-              <span class="hidden xs:inline">🔍 </span>{{ $t('admin.reportes.stats.inReview') }} ({{ reportesRevisionFiltrados.length }})
+              <svg class="w-3 h-3 sm:w-4 sm:h-4 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 9a2 2 0 114 0 2 2 0 01-4 0z"></path>
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a4 4 0 00-3.446 6.032l-2.261 2.26a1 1 0 101.414 1.415l2.261-2.261A4 4 0 1011 5z" clip-rule="evenodd"></path>
+              </svg>
+              {{ $t('admin.reportes.stats.inReview') }} ({{ reportesRevisionFiltrados.length }})
             </button>
             <button
               @click="tabActivo = 'proceso'"
               class="px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-md sm:rounded-lg font-medium sm:font-semibold whitespace-nowrap transition-all text-[10px] sm:text-xs md:text-sm flex-shrink-0 min-w-0"
               :class="tabActivo === 'proceso' ? 'bg-purple-100 text-purple-800 ring-2 ring-purple-400' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'"
             >
-              <span class="hidden xs:inline">⚙️ </span>{{ $t('admin.reportes.stats.inProcess') }} ({{ reportesProcesoFiltrados.length }})
+              <svg class="w-3 h-3 sm:w-4 sm:h-4 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+              </svg>
+              {{ $t('admin.reportes.stats.inProcess') }} ({{ reportesProcesoFiltrados.length }})
             </button>
             <button
               @click="tabActivo = 'resueltos'"
               class="px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-md sm:rounded-lg font-medium sm:font-semibold whitespace-nowrap transition-all text-[10px] sm:text-xs md:text-sm flex-shrink-0 min-w-0"
               :class="tabActivo === 'resueltos' ? 'bg-green-100 text-green-800 ring-2 ring-green-400' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'"
             >
-              ✅ {{ $t('admin.reportes.stats.resolved') }} ({{ reportesResueltosFiltrados.length }})
+              <svg class="w-3 h-3 sm:w-4 sm:h-4 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              {{ $t('admin.reportes.stats.resolved') }} ({{ reportesResueltosFiltrados.length }})
             </button>
           </div>
 
@@ -157,8 +170,18 @@
                 </p>
                 
                 <div class="text-[9px] sm:text-[10px] md:text-xs text-gray-500 space-y-0.5 sm:space-y-1 mb-1.5 sm:mb-2 md:mb-3">
-                  <p class="truncate"><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
-                  <p><strong>📅</strong> {{ formatFechaCorta(reporte.created_at) }}</p>
+                  <p class="truncate flex items-center gap-1">
+                    <svg class="w-3 h-3 text-red-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>{{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</span>
+                  </p>
+                  <p class="flex items-center gap-1">
+                    <svg class="w-3 h-3 text-gray-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>{{ formatFechaCorta(reporte.created_at) }}</span>
+                  </p>
                 </div>
 
                 <button
@@ -178,7 +201,10 @@
           <div v-show="tabActivo === 'revision'" class="bg-blue-50 rounded-lg sm:rounded-xl shadow-md sm:shadow-lg border border-blue-200 sm:border-2">
             <div class="bg-blue-100 px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 rounded-t-lg sm:rounded-t-xl border-b border-blue-200 sm:border-b-2">
               <h3 class="font-semibold sm:font-bold text-blue-800 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm md:text-base">
-                <span class="text-base sm:text-xl md:text-2xl">🔍</span>
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 9a2 2 0 114 0 2 2 0 01-4 0z"></path>
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a4 4 0 00-3.446 6.032l-2.261 2.26a1 1 0 101.414 1.415l2.261-2.261A4 4 0 1011 5z" clip-rule="evenodd"></path>
+                </svg>
                 <span class="truncate">{{ $t('admin.reportes.stats.inReview') }}</span>
                 <span class="ml-auto bg-blue-200 text-blue-800 px-1.5 sm:px-2 md:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs md:text-sm flex-shrink-0">
                   {{ reportesRevisionFiltrados.length }}
@@ -208,8 +234,18 @@
                 </p>
                 
                 <div class="text-[9px] sm:text-[10px] md:text-xs text-gray-500 space-y-0.5 sm:space-y-1 mb-1.5 sm:mb-2 md:mb-3">
-                  <p class="truncate"><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
-                  <p><strong>📅</strong> {{ formatFechaCorta(reporte.created_at) }}</p>
+                  <p class="truncate flex items-center gap-1">
+                    <svg class="w-3 h-3 text-red-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>{{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</span>
+                  </p>
+                  <p class="flex items-center gap-1">
+                    <svg class="w-3 h-3 text-gray-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>{{ formatFechaCorta(reporte.created_at) }}</span>
+                  </p>
                 </div>
 
                 <div class="flex gap-1.5 sm:gap-2">
@@ -236,7 +272,9 @@
           <div v-show="tabActivo === 'proceso'" class="bg-purple-50 rounded-lg sm:rounded-xl shadow-md sm:shadow-lg border border-purple-200 sm:border-2">
             <div class="bg-purple-100 px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 rounded-t-lg sm:rounded-t-xl border-b border-purple-200 sm:border-b-2">
               <h3 class="font-semibold sm:font-bold text-purple-800 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm md:text-base">
-                <span class="text-base sm:text-xl md:text-2xl">⚙️</span>
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+                </svg>
                 <span class="truncate">{{ $t('admin.reportes.stats.inProcess') }}</span>
                 <span class="ml-auto bg-purple-200 text-purple-800 px-1.5 sm:px-2 md:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs md:text-sm flex-shrink-0">
                   {{ reportesProcesoFiltrados.length }}
@@ -266,8 +304,18 @@
                 </p>
                 
                 <div class="text-[9px] sm:text-[10px] md:text-xs text-gray-500 space-y-0.5 sm:space-y-1 mb-1.5 sm:mb-2 md:mb-3">
-                  <p class="truncate"><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
-                  <p><strong>📅</strong> {{ formatFechaCorta(reporte.created_at) }}</p>
+                  <p class="truncate flex items-center gap-1">
+                    <svg class="w-3 h-3 text-red-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>{{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</span>
+                  </p>
+                  <p class="flex items-center gap-1">
+                    <svg class="w-3 h-3 text-gray-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>{{ formatFechaCorta(reporte.created_at) }}</span>
+                  </p>
                 </div>
 
                 <div class="flex gap-1.5 sm:gap-2">
@@ -295,7 +343,9 @@
           <div v-show="tabActivo === 'resueltos'" class="bg-green-50 rounded-lg sm:rounded-xl shadow-md sm:shadow-lg border border-green-200 sm:border-2">
             <div class="bg-green-100 px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 rounded-t-lg sm:rounded-t-xl border-b border-green-200 sm:border-b-2">
               <h3 class="font-semibold sm:font-bold text-green-800 flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm md:text-base">
-                <span class="text-base sm:text-xl md:text-2xl">✅</span>
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
                 <span class="truncate">{{ $t('admin.reportes.stats.resolved') }}</span>
                 <span class="ml-auto bg-green-200 text-green-800 px-1.5 sm:px-2 md:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs md:text-sm flex-shrink-0">
                   {{ reportesResueltosFiltrados.length }}
@@ -325,8 +375,18 @@
                 </p>
                 
                 <div class="text-[9px] sm:text-[10px] md:text-xs text-gray-500 space-y-0.5 sm:space-y-1 mb-1.5 sm:mb-2 md:mb-3">
-                  <p class="truncate"><strong>📍</strong> {{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</p>
-                  <p><strong>📅</strong> {{ formatFechaCorta(reporte.created_at) }}</p>
+                  <p class="truncate flex items-center gap-1">
+                    <svg class="w-3 h-3 text-red-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>{{ reporte.ubicacion_barrio }}, {{ reporte.ubicacion_parroquia }}</span>
+                  </p>
+                  <p class="flex items-center gap-1">
+                    <svg class="w-3 h-3 text-gray-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>{{ formatFechaCorta(reporte.created_at) }}</span>
+                  </p>
                   <p v-if="reporte.fecha_resolucion" class="truncate"><strong>✓</strong> {{ $t('admin.reportes.detail.resolved') }}: {{ formatFechaCorta(reporte.fecha_resolucion) }}</p>
                 </div>
 
@@ -413,7 +473,10 @@
         <div class="bg-blue-50 rounded-lg md:rounded-xl shadow-md md:shadow-lg border border-blue-200 md:border-2">
           <div class="bg-blue-100 px-3 md:px-4 lg:px-6 py-2.5 md:py-3 lg:py-4 rounded-t-lg md:rounded-t-xl border-b border-blue-200 md:border-b-2">
             <h3 class="font-semibold md:font-bold text-blue-800 flex items-center gap-1.5 md:gap-2 text-sm md:text-base">
-              <span class="text-lg md:text-xl lg:text-2xl">🔍</span>
+              <svg class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 9a2 2 0 114 0 2 2 0 01-4 0z"></path>
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a4 4 0 00-3.446 6.032l-2.261 2.26a1 1 0 101.414 1.415l2.261-2.261A4 4 0 1011 5z" clip-rule="evenodd"></path>
+              </svg>
               <span class="truncate">{{ $t('admin.reportes.stats.inReview') }}</span>
               <span class="ml-auto bg-blue-200 text-blue-800 px-2 md:px-2.5 lg:px-3 py-0.5 md:py-1 rounded-full text-xs md:text-sm flex-shrink-0">
                 {{ reportesRevisionFiltrados.length }}
@@ -476,7 +539,9 @@
         <div class="bg-purple-50 rounded-lg md:rounded-xl shadow-md md:shadow-lg border border-purple-200 md:border-2">
           <div class="bg-purple-100 px-3 md:px-4 lg:px-6 py-2.5 md:py-3 lg:py-4 rounded-t-lg md:rounded-t-xl border-b border-purple-200 md:border-b-2">
             <h3 class="font-semibold md:font-bold text-purple-800 flex items-center gap-1.5 md:gap-2 text-sm md:text-base">
-              <span class="text-lg md:text-xl lg:text-2xl">⚙️</span>
+              <svg class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+              </svg>
               <span class="truncate">{{ $t('admin.reportes.stats.inProcess') }}</span>
               <span class="ml-auto bg-purple-200 text-purple-800 px-2 md:px-2.5 lg:px-3 py-0.5 md:py-1 rounded-full text-xs md:text-sm flex-shrink-0">
                 {{ reportesProcesoFiltrados.length }}
@@ -539,7 +604,9 @@
         <div class="bg-green-50 rounded-lg md:rounded-xl shadow-md md:shadow-lg border border-green-200 md:border-2">
           <div class="bg-green-100 px-3 md:px-4 lg:px-6 py-2.5 md:py-3 lg:py-4 rounded-t-lg md:rounded-t-xl border-b border-green-200 md:border-b-2">
             <h3 class="font-semibold md:font-bold text-green-800 flex items-center gap-1.5 md:gap-2 text-sm md:text-base">
-              <span class="text-lg md:text-xl lg:text-2xl">✅</span>
+              <svg class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
               <span class="truncate">{{ $t('admin.reportes.stats.resolved') }}</span>
               <span class="ml-auto bg-green-200 text-green-800 px-2 md:px-2.5 lg:px-3 py-0.5 md:py-1 rounded-full text-xs md:text-sm flex-shrink-0">
                 {{ reportesResueltosFiltrados.length }}
@@ -599,7 +666,7 @@
       <!-- Modal de detalle - Optimizado para móvil -->
       <div
         v-if="reporteSeleccionado"
-        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4"
+        class="fixed inset-0 backdrop-blur-sm bg-white/10 flex items-center justify-center z-[110] p-2 sm:p-4 pt-24"
         @click.self="cerrarDetalle"
       >
         <div class="bg-white rounded-lg sm:rounded-xl shadow-2xl max-w-3xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
@@ -683,7 +750,11 @@
                     ? 'bg-blue-100 text-blue-800 border-2 border-blue-400' 
                     : 'bg-gray-100 text-gray-600 hover:bg-blue-50 active:bg-blue-100'"
                 >
-                  <span class="hidden xs:inline">🔍 </span><span class="truncate">{{ $t('admin.reportes.stats.inReview') }}</span>
+                  <svg class="w-3 h-3 sm:w-4 sm:h-4 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 9a2 2 0 114 0 2 2 0 01-4 0z"></path>
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a4 4 0 00-3.446 6.032l-2.261 2.26a1 1 0 101.414 1.415l2.261-2.261A4 4 0 1011 5z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="truncate">{{ $t('admin.reportes.stats.inReview') }}</span>
                 </button>
                 <button
                   @click="cambiarEstado(reporteSeleccionado.id, 'en_proceso')"
@@ -692,7 +763,10 @@
                     ? 'bg-purple-100 text-purple-800 border-2 border-purple-400' 
                     : 'bg-gray-100 text-gray-600 hover:bg-purple-50 active:bg-purple-100'"
                 >
-                  <span class="hidden xs:inline">⚙️ </span><span class="truncate">{{ $t('admin.reportes.stats.inProcess') }}</span>
+                  <svg class="w-3 h-3 sm:w-4 sm:h-4 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="truncate">{{ $t('admin.reportes.stats.inProcess') }}</span>
                 </button>
                 <button
                   @click="cambiarEstado(reporteSeleccionado.id, 'resuelto')"
@@ -701,7 +775,10 @@
                     ? 'bg-green-100 text-green-800 border-2 border-green-400' 
                     : 'bg-gray-100 text-gray-600 hover:bg-green-50 active:bg-green-100'"
                 >
-                  <span class="hidden xs:inline">✅ </span><span class="truncate">{{ $t('admin.reportes.stats.resolved') }}</span>
+                  <svg class="w-3 h-3 sm:w-4 sm:h-4 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="truncate">{{ $t('admin.reportes.stats.resolved') }}</span>
                 </button>
               </div>
             </div>

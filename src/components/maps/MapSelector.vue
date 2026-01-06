@@ -22,17 +22,24 @@
           type="button"
           @click="getCurrentLocation"
           :disabled="loadingLocation"
-          class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed"
+          class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
         >
-          <span v-if="loadingLocation">📍</span>
-          <span v-else>🎯</span>
+          <svg v-if="loadingLocation" class="w-4 h-4 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+          </svg>
+          <svg v-else class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+          </svg>
           {{ $t('reportes.mi_ubicacion') }}
         </button>
       </div>
       
       <!-- Mensaje de ubicación actual -->
-      <div v-if="currentAddress" class="mt-2 text-sm text-gray-600">
-        📍 {{ currentAddress }}
+      <div v-if="currentAddress" class="mt-2 text-sm text-gray-600 flex items-center gap-2">
+        <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+        </svg>
+        {{ currentAddress }}
       </div>
     </div>
 
@@ -97,14 +104,17 @@
       
       <!-- Overlay de selección -->
       <div v-if="!marker" class="absolute inset-0 flex items-center justify-center pointer-events-none z-[998]">
-        <div class="bg-black bg-opacity-70 text-white px-3 py-2 rounded-lg text-sm">
-          👆 Haz clic en el mapa para seleccionar ubicación
+        <div class="bg-blue-600/80 backdrop-blur-sm text-white px-3 py-2 rounded-lg text-sm shadow-lg flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path>
+          </svg>
+          Haz clic en el mapa para seleccionar ubicación
         </div>
       </div>
     </div>
 
     <!-- Modal de pantalla completa -->
-    <div v-if="isFullscreen" class="fixed inset-0 z-[9999] bg-black bg-opacity-50 flex items-center justify-center p-4">
+    <div v-if="isFullscreen" class="fixed inset-0 z-[9999] backdrop-blur-sm bg-white/10 flex items-center justify-center p-4 pt-24">
       <div class="bg-white rounded-lg w-full h-full max-w-6xl max-h-[90vh] flex flex-col">
         <!-- Header del modal -->
         <div class="flex items-center justify-between p-4 border-b">
@@ -129,11 +139,17 @@
         <div class="p-4 border-t bg-gray-50">
           <div class="flex items-center justify-between">
             <div class="text-sm text-gray-600">
-              <span v-if="currentAddress" class="flex items-center">
-                📍 {{ currentAddress }}
+              <span v-if="currentAddress" class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                </svg>
+                {{ currentAddress }}
               </span>
-              <span v-else-if="ubicacion.latitud && ubicacion.longitud" class="flex items-center">
-                📍 Lat: {{ ubicacion.latitud.toFixed(6) }}, Lng: {{ ubicacion.longitud.toFixed(6) }}
+              <span v-else-if="ubicacion.latitud && ubicacion.longitud" class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                </svg>
+                Lat: {{ ubicacion.latitud.toFixed(6) }}, Lng: {{ ubicacion.longitud.toFixed(6) }}
               </span>
               <span v-else>
                 Selecciona una ubicación en el mapa
@@ -169,8 +185,11 @@
     </div>
 
     <!-- Instrucciones -->
-    <div class="mt-2 text-sm text-gray-600">
-      💡 {{ $t('reportes.instrucciones_mapa') }}
+    <div class="mt-2 text-sm text-gray-600 flex items-start gap-2">
+      <svg class="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+      </svg>
+      <span>{{ $t('reportes.instrucciones_mapa') }}</span>
     </div>
   </div>
 </template>

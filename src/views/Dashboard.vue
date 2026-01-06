@@ -50,7 +50,11 @@
               <h3
                 class="text-white font-bold text-lg mb-1 flex items-center gap-2"
               >
-                <span>👁️</span> {{ $t("dashboard.adminPreview.title") }}
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                  <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
+                </svg>
+                {{ $t("dashboard.adminPreview.title") }}
               </h3>
               <p class="text-white/90 text-sm">
                 {{ $t("dashboard.adminPreview.description") }}
@@ -155,7 +159,9 @@
             class="bg-white rounded-2xl shadow-xl p-6 hover:shadow-2xl transition-all duration-300 border border-gray-100"
           >
             <div class="text-center">
-              <div class="text-5xl mb-4" aria-hidden="true">📢</div>
+              <svg class="w-16 h-16 mb-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z"></path>
+              </svg>
               <h3 class="text-xl font-bold text-gray-800 mb-3">
                 {{ $t("dashboard.sections.reports.title") }}
               </h3>
@@ -177,7 +183,10 @@
             class="bg-white rounded-2xl shadow-xl p-6 hover:shadow-2xl transition-all duration-300 border border-gray-100"
           >
             <div class="text-center">
-              <div class="text-5xl mb-4" aria-hidden="true">📋</div>
+              <svg class="w-16 h-16 mb-4 text-green-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
+              </svg>
               <h3 class="text-xl font-bold text-gray-800 mb-3">
                 {{ $t("dashboard.sections.surveys.title") }}
               </h3>
@@ -224,7 +233,10 @@
           <div class="flex items-center justify-between mb-6">
             <div>
               <h2 class="text-3xl font-bold text-gray-800 mb-2">
-                📊 {{ $t("dashboard.reports.title") }}
+                <svg class="w-5 h-5 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+                </svg>
+                {{ $t("dashboard.reports.title") }}
               </h2>
               <p class="text-gray-600">
                 {{ $t("dashboard.reports.subtitle") }}
@@ -273,7 +285,9 @@
             v-else-if="misReportes.length === 0"
             class="text-center py-12"
           >
-            <div class="text-6xl mb-4">📝</div>
+            <svg class="w-20 h-20 mb-4 text-purple-600 mx-auto" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
+            </svg>
             <p class="text-xl text-gray-600 mb-4">
               {{ $t("dashboard.reports.noReports") }}
             </p>
@@ -425,7 +439,9 @@
           role="complementary"
           aria-label="Mensaje de bienvenida"
         >
-          <div class="text-6xl mb-4" aria-hidden="true">🏛️</div>
+          <svg class="w-20 h-20 mb-4 text-cyan-600 mx-auto" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd"></path>
+          </svg>
           <h2 class="text-2xl md:text-3xl font-bold mb-3">
             Tu voz, tu ciudad, tu futuro
           </h2>
@@ -440,7 +456,7 @@
     <!-- Modal Encuestas -->
     <div
       v-if="showEncuestasModal"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+      class="fixed inset-0 backdrop-blur-sm bg-white/10 flex items-center justify-center p-4 pt-24 z-[110]"
       @click.self="closeEncuestasModal"
       role="dialog"
       aria-labelledby="encuestas-modal-title"
@@ -743,7 +759,10 @@
           <div v-else>
             <!-- Empty State -->
             <div v-if="encuestasActivas.length === 0" class="text-center py-12">
-              <div class="text-6xl mb-4">📋</div>
+              <svg class="w-20 h-20 mb-4 text-blue-600 mx-auto" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
+              </svg>
               <h3 class="text-xl font-bold text-gray-800 mb-3">
                 No hay encuestas disponibles
               </h3>
@@ -815,7 +834,7 @@
     <!-- Modal Noticias -->
     <div
       v-if="showNoticiasModal"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+      class="fixed inset-0 backdrop-blur-sm bg-white/10 flex items-center justify-center p-4 pt-24 z-[110]"
       @click.self="closeNoticiasModal"
       role="dialog"
       aria-labelledby="noticias-modal-title"

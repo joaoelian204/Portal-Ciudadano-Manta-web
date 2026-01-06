@@ -152,10 +152,10 @@
               class="px-3 sm:px-4 py-2 sm:py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white transition-all text-sm sm:text-base"
               :class="{ 'border-green-500 bg-green-50': filtroAlcance !== 'todas' }"
             >
-              <option value="todas">📍 Todas las noticias</option>
+              <option value="todas">Todas las noticias</option>
               <option value="globales">🌍 Solo globales</option>
-              <option value="parroquias">📍 Solo parroquias</option>
-              <option value="barrios">📍 Solo barrios</option>
+              <option value="parroquias">Solo parroquias</option>
+              <option value="barrios">Solo barrios</option>
             </select>
 
             <!-- Filtro por parroquia específica -->
@@ -215,8 +215,12 @@
               v-if="filtroAlcance !== 'todas'"
               class="inline-flex items-center gap-1 px-2 sm:px-2.5 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium"
             >
-              <span v-if="filtroAlcance === 'globales'">🌍</span>
-              <span v-else>📍</span>
+              <svg v-if="filtroAlcance === 'globales'" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clip-rule="evenodd"></path>
+              </svg>
+              <svg v-else class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+              </svg>
               <span>{{ filtroAlcance === 'globales' ? 'Globales' : filtroAlcance === 'parroquias' ? 'Parroquias' : 'Barrios' }}</span>
             </span>
             
@@ -225,7 +229,9 @@
               v-if="filtroParroquia"
               class="inline-flex items-center gap-1 px-2 sm:px-2.5 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-medium"
             >
-              <span>📍</span>
+              <svg class="w-3 h-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+              </svg>
               <span class="max-w-[80px] sm:max-w-[120px] truncate">{{ filtroParroquia }}</span>
             </span>
           </div>
@@ -277,7 +283,10 @@
           v-if="noticiasFiltradas.length === 0 && (busqueda || filtroAlcance !== 'todas' || filtroParroquia)"
           class="bg-white rounded-2xl shadow-xl p-12 text-center border border-gray-200"
         >
-          <div class="text-6xl mb-4">🔍</div>
+          <svg class="w-20 h-20 mb-4 text-gray-400 mx-auto" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9 9a2 2 0 114 0 2 2 0 01-4 0z"></path>
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a4 4 0 00-3.446 6.032l-2.261 2.26a1 1 0 101.414 1.415l2.261-2.261A4 4 0 1011 5z" clip-rule="evenodd"></path>
+          </svg>
           <h3 class="text-2xl font-bold text-gray-800 mb-3">
             No se encontraron resultados
           </h3>
@@ -388,7 +397,10 @@
                     v-else
                     class="inline-block px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-xs font-semibold rounded-full bg-green-100 text-green-800 truncate max-w-[150px]"
                   >
-                    📍 {{ noticia.parroquia_destino }}
+                    <svg class="w-3 h-3 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                    </svg>
+                    {{ noticia.parroquia_destino }}
                   </span>
                 </div>
               </div>
@@ -657,7 +669,7 @@
     <!-- Modal Crear/Editar Noticia -->
     <div
       v-if="showModal"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-4 z-50 overflow-y-auto"
+      class="fixed inset-0 backdrop-blur-sm bg-white/10 flex items-center justify-center p-2 sm:p-4 pt-24 z-[110] overflow-y-auto"
       @click.self="closeModal"
       role="dialog"
       aria-labelledby="modal-title"
@@ -840,8 +852,11 @@
                   ></path>
                 </svg>
               </button>
-              <p v-if="imageError" class="p-4 text-sm text-red-600 bg-red-50">
-                ⚠️ No se pudo cargar la imagen.
+              <p v-if="imageError" class="p-4 text-sm text-red-600 bg-red-50 flex items-center gap-2">
+                <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                </svg>
+                No se pudo cargar la imagen.
               </p>
             </div>
           </div>
@@ -948,7 +963,7 @@
     <!-- Modal Ver Noticia -->
     <div
       v-if="showViewModal"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 overflow-y-auto"
+      class="fixed inset-0 backdrop-blur-sm bg-white/10 flex items-center justify-center p-4 pt-24 z-[110] overflow-y-auto"
       @click.self="closeViewModal"
       role="dialog"
       aria-labelledby="view-modal-title"
@@ -1014,7 +1029,10 @@
               v-else
               class="inline-block px-3 py-1 text-sm font-semibold rounded-full bg-green-100 text-green-800"
             >
-              📍 {{ selectedNoticia.parroquia_destino }}
+              <svg class="w-4 h-4 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+              </svg>
+              {{ selectedNoticia.parroquia_destino }}
               <span v-if="selectedNoticia.barrio_destino">
                 - {{ selectedNoticia.barrio_destino }}</span
               >
@@ -1022,7 +1040,10 @@
             <span
               class="inline-block px-3 py-1 text-sm font-semibold rounded-full bg-gray-100 text-gray-700"
             >
-              📅 {{ formatDate(selectedNoticia.created_at) }}
+              <svg class="w-4 h-4 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+              </svg>
+              {{ formatDate(selectedNoticia.created_at) }}
             </span>
           </div>
 
@@ -1046,7 +1067,7 @@
     <!-- Modal Confirmación Eliminar -->
     <div
       v-if="showDeleteModal"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+      class="fixed inset-0 backdrop-blur-sm bg-white/10 flex items-center justify-center p-4 pt-24 z-[110]"
       @click.self="closeDeleteModal"
       role="alertdialog"
       aria-labelledby="delete-modal-title"

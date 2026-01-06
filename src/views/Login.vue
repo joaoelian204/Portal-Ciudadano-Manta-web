@@ -1099,7 +1099,7 @@ const closeForgotPasswordModal = () => {
   <Transition name="modal">
     <div
       v-if="showForgotPasswordModal"
-      class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-sm"
+      class="fixed inset-0 z-[110] flex items-center justify-center p-3 sm:p-4 pt-24 backdrop-blur-sm bg-white/10"
       @click.self="closeForgotPasswordModal"
     >
       <div
@@ -1324,7 +1324,7 @@ const closeForgotPasswordModal = () => {
   <Transition name="modal">
     <div
       v-if="showForgotEmailModal"
-      class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-sm"
+      class="fixed inset-0 z-[110] flex items-center justify-center p-3 sm:p-4 pt-24 backdrop-blur-sm bg-white/10"
       @click.self="closeForgotEmailModal"
     >
       <div

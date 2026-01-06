@@ -115,11 +115,11 @@
             class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white transition-all"
             :class="{ 'border-blue-500 bg-blue-50': filtroEstado !== 'todas' }"
           >
-            <option value="todas">� Todas las encuestas</option>
-            <option value="activas">✅ Activas</option>
-            <option value="proximas">⏳ Próximas</option>
-            <option value="finalizadas">🏁 Finalizadas</option>
-            <option value="inactivas">❌ Inactivas</option>
+            <option value="todas">Todas las encuestas</option>
+            <option value="activas">Activas</option>
+            <option value="proximas">Próximas</option>
+            <option value="finalizadas">Finalizadas</option>
+            <option value="inactivas">Inactivas</option>
           </select>
 
           <!-- Filtro por tipo -->
@@ -128,10 +128,10 @@
             class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white transition-all"
             :class="{ 'border-blue-500 bg-blue-50': filtroTipo !== 'todas' }"
           >
-            <option value="todas">🎯 Todos los tipos</option>
-            <option value="opcion_multiple">☑️ Opción múltiple</option>
-            <option value="calificacion">⭐ Calificación</option>
-            <option value="abierta">💬 Pregunta abierta</option>
+            <option value="todas">Todos los tipos</option>
+            <option value="opcion_multiple">Opción múltiple</option>
+            <option value="calificacion">Calificación</option>
+            <option value="abierta">Pregunta abierta</option>
           </select>
 
           <!-- Filtro por alcance -->
@@ -140,10 +140,10 @@
             class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white transition-all"
             :class="{ 'border-blue-500 bg-blue-50': filtroAlcance !== 'todas' }"
           >
-            <option value="todas">📍 Todos los alcances</option>
-            <option value="globales">🌍 Solo globales</option>
-            <option value="parroquias">📍 Solo parroquias</option>
-            <option value="barrios">📍 Solo barrios</option>
+            <option value="todas">Todos los alcances</option>
+            <option value="globales">Solo globales</option>
+            <option value="parroquias">Solo parroquias</option>
+            <option value="barrios">Solo barrios</option>
           </select>
 
           <!-- Filtro por parroquia específica -->
@@ -259,8 +259,12 @@
               v-if="filtroAlcance !== 'todas'"
               class="inline-flex items-center gap-1.5 px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-xs font-medium"
             >
-              <span v-if="filtroAlcance === 'globales'">🌍</span>
-              <span v-else>📍</span>
+              <svg v-if="filtroAlcance === 'globales'" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clip-rule="evenodd"></path>
+              </svg>
+              <svg v-else class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+              </svg>
               {{ filtroAlcance === 'globales' ? 'Globales' : filtroAlcance === 'parroquias' ? 'Parroquias' : 'Barrios' }}
             </span>
             
@@ -269,7 +273,10 @@
               v-if="filtroParroquia"
               class="inline-flex items-center gap-1.5 px-3 py-1 bg-teal-100 text-teal-800 rounded-full text-xs font-medium"
             >
-              📍 {{ filtroParroquia }}
+              <svg class="w-3 h-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+              </svg>
+              {{ filtroParroquia }}
             </span>
           </div>
         </div>
@@ -320,7 +327,10 @@
           v-if="encuestasFiltradas.length === 0 && (busqueda || filtroEstado !== 'todas' || filtroTipo !== 'todas' || filtroAlcance !== 'todas' || filtroParroquia)"
           class="bg-white rounded-2xl shadow-xl p-12 text-center border border-gray-200"
         >
-          <div class="text-6xl mb-4">🔍</div>
+          <svg class="w-20 h-20 mb-4 text-gray-400 mx-auto" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9 9a2 2 0 114 0 2 2 0 01-4 0z"></path>
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a4 4 0 00-3.446 6.032l-2.261 2.26a1 1 0 101.414 1.415l2.261-2.261A4 4 0 1011 5z" clip-rule="evenodd"></path>
+          </svg>
           <h3 class="text-2xl font-bold text-gray-800 mb-3">
             No se encontraron resultados
           </h3>
@@ -343,7 +353,10 @@
           v-else-if="encuestas.length === 0"
           class="bg-white rounded-2xl shadow-xl p-12 text-center border border-gray-200"
         >
-          <div class="text-6xl mb-4">📋</div>
+          <svg class="w-20 h-20 mb-4 text-gray-400 mx-auto" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
+          </svg>
           <h3 class="text-2xl font-bold text-gray-800 mb-3">
             No hay encuestas creadas
           </h3>
@@ -655,7 +668,7 @@
     <!-- Modal Crear/Editar Encuesta -->
     <div
       v-if="showModal"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+      class="fixed inset-0 backdrop-blur-sm bg-white/10 flex items-center justify-center p-4 pt-24 z-[110]"
       @click.self="closeModal"
       role="dialog"
       aria-labelledby="modal-title"
@@ -768,9 +781,9 @@
                 aria-required="true"
                 @change="handleTipoChange"
               >
-                <option value="opcion_multiple">📋 Opción Múltiple</option>
-                <option value="calificacion">⭐ Calificación (1-5)</option>
-                <option value="abierta">✍️ Respuesta Abierta</option>
+                <option value="opcion_multiple">Opción Múltiple</option>
+                <option value="calificacion">Calificación (1-5)</option>
+                <option value="abierta">Respuesta Abierta</option>
               </select>
             </div>
             <div>
@@ -809,7 +822,12 @@
 
           <!-- Ubicación - Parroquia y Barrio -->
           <div class="bg-purple-50 rounded-lg p-4 border-2 border-purple-200 space-y-4">
-            <h3 class="text-sm font-semibold text-gray-700 mb-3">📍 Alcance Geográfico</h3>
+            <h3 class="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+              <svg class="w-4 h-4 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+              </svg>
+              Alcance Geográfico
+            </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label
@@ -1036,7 +1054,7 @@
     <!-- Modal Estadísticas -->
     <div
       v-if="showStatsModal"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+      class="fixed inset-0 backdrop-blur-sm bg-white/10 flex items-center justify-center p-4 pt-24 z-[110]"
       @click.self="closeStatsModal"
       role="dialog"
       aria-labelledby="stats-modal-title"
@@ -1237,7 +1255,7 @@
     <!-- Modal Confirmación Eliminar -->
     <div
       v-if="showDeleteModal"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+      class="fixed inset-0 backdrop-blur-sm bg-white/10 flex items-center justify-center p-4 pt-24 z-[110]"
       @click.self="closeDeleteModal"
       role="alertdialog"
       aria-labelledby="delete-modal-title"
