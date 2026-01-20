@@ -22,8 +22,8 @@
 
       <!-- Survey Content -->
       <div v-else-if="encuesta" class="bg-white rounded-xl shadow-lg overflow-hidden">
-        <!-- Header compacto y responsive -->
-        <div class="relative bg-gradient-to-r from-blue-500 to-cyan-500 p-4 sm:p-6">
+        <!-- Header compacto y responsive - FIJO al hacer scroll -->
+        <div class="sticky top-0 z-50 relative bg-gradient-to-r from-blue-500 to-cyan-500 p-4 sm:p-6 shadow-lg">
           <div class="flex items-start sm:items-center gap-3">
             <span class="text-3xl sm:text-4xl flex-shrink-0">📊</span>
             <div class="flex-1 min-w-0">
@@ -34,8 +34,11 @@
                 {{ encuesta.descripcion }}
               </p>
             </div>
-            <span class="px-2 sm:px-3 py-1 bg-white/20 backdrop-blur-sm text-white rounded-full text-xs font-semibold flex-shrink-0 whitespace-nowrap">
-              {{ $t("encuestas.active") }}
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-green-500 text-white rounded-full text-xs font-bold shadow-lg animate-pulse flex-shrink-0">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              ACTIVA
             </span>
           </div>
         </div>

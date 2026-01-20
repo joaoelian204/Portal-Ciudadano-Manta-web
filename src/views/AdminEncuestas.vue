@@ -1034,8 +1034,9 @@
             </button>
             <button
               type="submit"
-              :disabled="submitting"
-              class="flex-1 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold rounded-lg transition-all shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              :disabled="submitting || !isEncuestaFormValid"
+              class="flex-1 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              :title="!isEncuestaFormValid ? 'Completa todos los campos requeridos' : ''"
             >
               <span v-if="submitting" class="flex items-center justify-center gap-2">
                 <svg class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
@@ -1043,6 +1044,12 @@
                   <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
                 Guardando...
+              </span>
+              <span v-else-if="!isEncuestaFormValid" class="flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                </svg>
+                Formulario incompleto
               </span>
               <span v-else>{{ isEditing ? "Actualizar" : "Crear Encuesta" }}</span>
             </button>
@@ -1428,6 +1435,30 @@ const filtroEstado = ref<'todas' | 'activas' | 'inactivas' | 'proximas' | 'final
 const filtroTipo = ref<'todas' | 'opcion_multiple' | 'calificacion' | 'abierta'>('todas');
 const filtroAlcance = ref<'todas' | 'globales' | 'parroquias' | 'barrios'>('todas');
 const filtroParroquia = ref("");
+
+// Validación del formulario
+const isEncuestaFormValid = computed(() => {
+  const tituloValido = formData.value.titulo.trim().length > 0;
+  const descripcionValida = formData.value.descripcion.trim().length > 0;
+  const fechasValidas = formData.value.fecha_inicio && formData.value.fecha_fin;
+  
+  if (formData.value.tipo === 'opcion_multiple') {
+    const preguntasValidas = formData.value.preguntas.every(p => 
+      p.pregunta.trim().length > 0 && p.opciones.filter(o => o.trim().length > 0).length >= 2
+    );
+    return tituloValido && descripcionValida && fechasValidas && preguntasValidas;
+  }
+  
+  if (formData.value.tipo === 'calificacion') {
+    return tituloValido && descripcionValida && fechasValidas && formData.value.preguntaCalificacion.trim().length > 0;
+  }
+  
+  if (formData.value.tipo === 'abierta') {
+    return tituloValido && descripcionValida && fechasValidas && formData.value.preguntaAbierta.trim().length > 0;
+  }
+  
+  return tituloValido && descripcionValida && fechasValidas;
+});
 
 // Computed
 const loading = computed(() => encuestasStore.loading);

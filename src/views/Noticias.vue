@@ -18,8 +18,39 @@
             <span class="text-4xl">📰</span>
             <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">{{ $t("noticias.title") }}</h1>
           </div>
-          <p class="text-gray-600 text-lg">{{ $t("noticias.subtitle") }}</p>
+          <p class="text-gray-600 text-lg mb-6">{{ $t("noticias.subtitle") }}</p>
+          
+          <!-- Barra de Búsqueda -->
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+            <input
+              v-model="searchQuery"
+              type="text"
+              placeholder="Buscar noticias por título o contenido..."
+              class="w-full pl-12 pr-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+            />
+            <button
+              v-if="searchQuery"
+              @click="searchQuery = ''"
+              class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600"
+            >
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
         </div>
+      </div>
+
+      <!-- Resultados de Búsqueda -->
+      <div v-if="searchQuery && noticiasFiltradas.length === 0 && !loading" class="bg-white rounded-xl shadow-lg p-12 text-center mb-6">
+        <div class="text-6xl mb-4">🔍</div>
+        <p class="text-gray-600 text-lg font-semibold">No se encontraron noticias</p>
+        <p class="text-gray-500 mt-2">Intenta con otras palabras clave</p>
       </div>
 
       <!-- Loading State -->
@@ -40,13 +71,13 @@
       <!-- Noticias Grid -->
       <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <article
-          v-for="n in noticias"
+          v-for="n in noticiasFiltradas"
           :key="n.id"
           class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer group"
           @click="openNoticia(n.id)"
         >
           <!-- Imagen -->
-          <div class="relative h-48 bg-gradient-to-br from-blue-100 to-cyan-100 overflow-hidden">
+          <div class="relative h-40 sm:h-48 bg-gradient-to-br from-blue-100 to-cyan-100 overflow-hidden">
             <img
               v-if="n.imagen_url"
               :src="n.imagen_url"
@@ -71,18 +102,18 @@
           </div>
 
           <!-- Contenido -->
-          <div class="p-5">
-            <h2 class="text-xl font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+          <div class="p-4 sm:p-5">
+            <h2 class="text-lg sm:text-xl font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
               {{ n.titulo }}
             </h2>
             
-            <p class="text-gray-600 text-sm line-clamp-3 mb-4">
+            <p class="text-gray-700 text-sm sm:text-base line-clamp-2 sm:line-clamp-3 mb-3 sm:mb-4 leading-relaxed">
               {{ n.contenido }}
             </p>
 
             <!-- Footer con botón -->
             <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-              <span class="text-xs text-gray-400">
+              <span class="text-sm text-gray-600 font-semibold">
                 {{ new Date(n.created_at || '').toLocaleDateString('es-EC', { 
                   day: '2-digit', 
                   month: 'short', 
@@ -110,7 +141,7 @@
 <script setup lang="ts">
 import { useAuthStore } from "@/stores/auth.store";
 import { useNoticiasStore } from "@/stores/noticias.store";
-import { computed, onMounted } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 
 const noticiasStore = useNoticiasStore();
@@ -119,9 +150,25 @@ const router = useRouter();
 
 const volver = () => router.back();
 
+// Estado de búsqueda
+const searchQuery = ref("");
+
 // Hacer reactivos los valores con computed
 const noticias = computed(() => noticiasStore.noticias);
 const loading = computed(() => noticiasStore.loading);
+
+// Filtrar noticias según búsqueda
+const noticiasFiltradas = computed(() => {
+  if (!searchQuery.value.trim()) {
+    return noticias.value;
+  }
+  
+  const query = searchQuery.value.toLowerCase();
+  return noticias.value.filter(noticia => 
+    noticia.titulo.toLowerCase().includes(query) ||
+    noticia.contenido.toLowerCase().includes(query)
+  );
+});
 
 onMounted(async () => {
   console.log('🎯 Noticias.vue montado');

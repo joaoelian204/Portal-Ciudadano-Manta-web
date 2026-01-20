@@ -301,49 +301,53 @@
 
           <!-- Reports Grid -->
           <div v-else>
-            <!-- Estadísticas Resumen -->
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 mb-6">
+            <!-- Estadísticas Resumen - Simplificadas a 5 estados (ISO/IEC 25010) -->
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
               <div
-                class="bg-gray-50 rounded-lg p-4 text-center border-2 border-gray-200"
+                class="bg-gray-50 rounded-lg p-4 text-center border-2 border-gray-200 transition-shadow"
               >
+                <svg class="w-8 h-8 mx-auto mb-2 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                </svg>
                 <p class="text-2xl font-bold text-gray-700">{{ conteoEstados.pendiente }}</p>
-                <p class="text-xs text-gray-600 mt-1">{{ $t("dashboard.reports.states.pendiente") }}</p>
+                <p class="text-xs text-gray-600 mt-1">Pendiente</p>
               </div>
               <div
-                class="bg-blue-50 rounded-lg p-4 text-center border-2 border-blue-200"
+                class="bg-blue-50 rounded-lg p-4 text-center border-2 border-blue-200 transition-shadow"
               >
+                <svg class="w-8 h-8 mx-auto mb-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 9a2 2 0 114 0 2 2 0 01-4 0z"></path>
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a4 4 0 00-3.446 6.032l-2.261 2.26a1 1 0 101.414 1.415l2.261-2.261A4 4 0 1011 5z" clip-rule="evenodd"></path>
+                </svg>
                 <p class="text-2xl font-bold text-blue-700">{{ conteoEstados.en_revision }}</p>
-                <p class="text-xs text-blue-600 mt-1">{{ $t("dashboard.reports.states.en_revision") }}</p>
+                <p class="text-xs text-blue-600 mt-1">En Revisión</p>
               </div>
               <div
-                class="bg-cyan-50 rounded-lg p-4 text-center border-2 border-cyan-200"
+                class="bg-yellow-50 rounded-lg p-4 text-center border-2 border-yellow-200 transition-shadow"
               >
-                <p class="text-2xl font-bold text-cyan-700">{{ conteoEstados.aceptado }}</p>
-                <p class="text-xs text-cyan-600 mt-1">{{ $t("dashboard.reports.states.aceptado") }}</p>
-              </div>
-              <div
-                class="bg-yellow-50 rounded-lg p-4 text-center border-2 border-yellow-200"
-              >
+                <svg class="w-8 h-8 mx-auto mb-2 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+                </svg>
                 <p class="text-2xl font-bold text-yellow-700">{{ conteoEstados.en_proceso }}</p>
-                <p class="text-xs text-yellow-600 mt-1">{{ $t("dashboard.reports.states.en_proceso") }}</p>
+                <p class="text-xs text-yellow-600 mt-1">En Proceso</p>
               </div>
               <div
-                class="bg-green-50 rounded-lg p-4 text-center border-2 border-green-200"
+                class="bg-green-50 rounded-lg p-4 text-center border-2 border-green-200 transition-shadow"
               >
+                <svg class="w-8 h-8 mx-auto mb-2 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
                 <p class="text-2xl font-bold text-green-700">{{ conteoEstados.resuelto }}</p>
-                <p class="text-xs text-green-600 mt-1">{{ $t("dashboard.reports.states.resuelto") }}</p>
+                <p class="text-xs text-green-600 mt-1">Resuelto</p>
               </div>
               <div
-                class="bg-red-50 rounded-lg p-4 text-center border-2 border-red-200"
+                class="bg-red-50 rounded-lg p-4 text-center border-2 border-red-200 transition-shadow"
               >
+                <svg class="w-8 h-8 mx-auto mb-2 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                </svg>
                 <p class="text-2xl font-bold text-red-700">{{ conteoEstados.rechazado }}</p>
-                <p class="text-xs text-red-600 mt-1">{{ $t("dashboard.reports.states.rechazado") }}</p>
-              </div>
-              <div
-                class="bg-purple-50 rounded-lg p-4 text-center border-2 border-purple-200"
-              >
-                <p class="text-2xl font-bold text-purple-700">{{ conteoEstados.duplicado }}</p>
-                <p class="text-xs text-purple-600 mt-1">{{ $t("dashboard.reports.states.duplicado") }}</p>
+                <p class="text-xs text-red-600 mt-1">Rechazado</p>
               </div>
             </div>
 
@@ -1510,50 +1514,36 @@ function getEstadoTexto(estado: string): string {
   const textos: Record<string, string> = {
     pendiente: 'Pendiente',
     en_revision: 'En Revisión',
-    aceptado: 'Aceptado',
     en_proceso: 'En Proceso',
     resuelto: 'Resuelto',
     rechazado: 'Rechazado',
-    duplicado: 'Duplicado',
   };
   return textos[estado] || estado;
 }
 
 function getEstadoIcon(estado: string): string {
-  const iconos: Record<string, string> = {
-    pendiente: '⏳',
-    en_revision: '👀',
-    aceptado: '✅',
-    en_proceso: '🔧',
-    resuelto: '✔️',
-    rechazado: '❌',
-    duplicado: '🔁',
-  };
-  return iconos[estado] || '📝';
+  // Usar iconos SVG en lugar de emojis
+  return ''; // Los iconos SVG se manejan en el template
 }
 
 function getEstadoClass(estado: string): string {
   const clases: Record<string, string> = {
-    pendiente: 'bg-gray-100 text-gray-800',
-    en_revision: 'bg-blue-100 text-blue-800',
-    aceptado: 'bg-cyan-100 text-cyan-800',
-    en_proceso: 'bg-yellow-100 text-yellow-800',
-    resuelto: 'bg-green-100 text-green-800',
-    rechazado: 'bg-red-100 text-red-800',
-    duplicado: 'bg-purple-100 text-purple-800',
+    pendiente: 'bg-gray-100 text-gray-800 border-gray-300',
+    en_revision: 'bg-blue-100 text-blue-800 border-blue-300',
+    en_proceso: 'bg-yellow-100 text-yellow-800 border-yellow-300',
+    resuelto: 'bg-green-100 text-green-800 border-green-300',
+    rechazado: 'bg-red-100 text-red-800 border-red-300',
   };
-  return clases[estado] || 'bg-gray-100 text-gray-800';
+  return clases[estado] || 'bg-gray-100 text-gray-800 border-gray-300';
 }
 
 function getEstadoBorderClass(estado: string): string {
   const clases: Record<string, string> = {
     pendiente: 'border-gray-300',
     en_revision: 'border-blue-300',
-    aceptado: 'border-cyan-300',
     en_proceso: 'border-yellow-300',
     resuelto: 'border-green-300',
     rechazado: 'border-red-300',
-    duplicado: 'border-purple-300',
   };
   return clases[estado] || 'border-gray-300';
 }

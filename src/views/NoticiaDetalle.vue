@@ -199,8 +199,8 @@
 
             <!-- Contenido -->
             <div class="flex-1 mb-6 sm:mb-8">
-              <div class="prose prose-sm sm:prose-base lg:prose-lg max-w-none">
-                <p class="text-gray-700 leading-relaxed whitespace-pre-line text-justify text-sm sm:text-base lg:text-lg hyphens-auto" lang="es">
+              <div class="prose prose-base sm:prose-lg lg:prose-xl max-w-none">
+                <p class="text-gray-700 leading-relaxed whitespace-pre-line text-justify text-base sm:text-lg lg:text-xl hyphens-auto" lang="es">
                   {{ noticia.contenido }}
                 </p>
               </div>

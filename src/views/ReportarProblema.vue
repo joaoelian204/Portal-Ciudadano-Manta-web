@@ -3,12 +3,28 @@
     <div class="max-w-4xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
       <!-- Header -->
       <div class="bg-white rounded-lg shadow-sm p-4 sm:p-6 mb-4 sm:mb-6">
-        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
           {{ $t("reportes.titulo") }}
         </h1>
-        <p class="text-sm sm:text-base text-gray-600">
+        <p class="text-sm sm:text-base text-gray-600 mb-2">
           {{ $t("reportes.descripcion") }}
         </p>
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-3 sm:p-4 mt-4">
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+            </svg>
+            <div>
+              <h3 class="text-sm sm:text-base font-semibold text-blue-900 mb-1">¿Cómo funciona?</h3>
+              <ul class="text-xs sm:text-sm text-blue-800 space-y-1">
+                <li>1. Describe el problema con al menos 20 caracteres</li>
+                <li>2. Selecciona la ubicación exacta en el mapa</li>
+                <li>3. Agrega una foto para mejor comprensión (opcional)</li>
+                <li>4. Recibe actualizaciones del estado en tu Dashboard</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
         <!-- Barra de Progreso -->
         <div class="mt-6">
@@ -188,15 +204,22 @@
               >
                 {{ $t("reportes.campos.descripcion") }}
                 <span class="text-red-500">*</span>
+                <span class="text-gray-500 text-xs ml-2">(Mínimo 20 caracteres)</span>
               </label>
               <textarea
                 id="descripcion"
                 v-model="formData.descripcion"
                 required
+                minlength="20"
                 rows="4"
                 class="w-full px-3 py-2 sm:py-2.5 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 :placeholder="$t('reportes.placeholders.descripcion')"
+                :class="{ 'border-red-500': formData.descripcion.length > 0 && formData.descripcion.length < 20 }"
               ></textarea>
+              <p v-if="formData.descripcion.length > 0" class="mt-1 text-xs" :class="formData.descripcion.length >= 20 ? 'text-green-600' : 'text-red-600'">
+                {{ formData.descripcion.length }} / 20 caracteres
+                <span v-if="formData.descripcion.length < 20">(Faltan {{ 20 - formData.descripcion.length }})</span>
+              </p>
             </div>
 
             <!-- Prioridad -->
@@ -517,23 +540,29 @@
           </div>
         </div>
 
-        <!-- Botones de acción -->
+        <!-- Botones de acción - Patrón Z (lectura natural) -->
         <div
-          class="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-end"
+          class="mt-6 sm:mt-8 flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 sm:justify-end"
         >
           <button
             type="button"
             @click="resetForm"
-            class="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500"
+            class="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-all"
           >
             {{ $t("common.limpiar") }}
           </button>
           <button
             type="submit"
             :disabled="loading || !isFormValid"
-            class="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-2 text-sm sm:text-base bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            class="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed font-semibold shadow-lg transition-all"
           >
-            <span v-if="loading">{{ $t("common.enviando") }}...</span>
+            <span v-if="loading" class="flex items-center justify-center gap-2">
+              <svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              {{ $t("common.enviando") }}
+            </span>
             <span v-else>{{ $t("reportes.enviar_reporte") }}</span>
           </button>
         </div>

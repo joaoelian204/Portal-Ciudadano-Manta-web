@@ -618,7 +618,7 @@ const closeForgotPasswordModal = () => {
     >
       <!-- Overlay gradiente para mejor contraste -->
       <div
-        class="absolute inset-0 bg-gradient-to-br from-blue-900/35 via-indigo-900/25 to-purple-900/35"
+        class="absolute inset-0 bg-gradient-to-br from-gray-900/30 via-gray-800/20 to-gray-900/30"
       ></div>
     </div>
 
@@ -1029,7 +1029,7 @@ const closeForgotPasswordModal = () => {
           <button
             type="submit"
             :disabled="isLoading || estaBloqueado"
-            class="group relative w-full flex justify-center py-3.5 px-4 border border-transparent text-sm font-bold rounded-xl text-white bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 hover:from-blue-700 hover:via-blue-800 hover:to-indigo-800 focus:outline-none focus:ring-4 focus:ring-blue-500/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0"
+            class="group relative w-full flex justify-center py-3.5 px-4 border border-transparent text-sm font-bold rounded-xl text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0"
           >
             <span v-if="!isLoading" class="flex items-center">
               <i class="fas fa-sign-in-alt mr-2"></i>
@@ -1273,7 +1273,7 @@ const closeForgotPasswordModal = () => {
           <button
             @click="recoverPassword"
             :disabled="isRecoveringPassword || !recoveryEmail"
-            class="w-full flex items-center justify-center gap-2 py-2.5 sm:py-3 px-4 text-sm sm:text-base bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+            class="w-full flex items-center justify-center gap-2 py-2.5 sm:py-3 px-4 text-sm sm:text-base bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
           >
             <svg
               v-if="!isRecoveringPassword"
@@ -1445,7 +1445,7 @@ const closeForgotPasswordModal = () => {
           <button
             @click="searchUserByCedula"
             :disabled="isSearchingEmail || cedula.length !== 10"
-            class="w-full flex items-center justify-center gap-2 py-2.5 sm:py-3 px-4 text-sm sm:text-base bg-gradient-to-r from-purple-600 to-purple-700 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+            class="w-full flex items-center justify-center gap-2 py-2.5 sm:py-3 px-4 text-sm sm:text-base bg-gray-600 text-white font-semibold rounded-xl hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-300 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
           >
             <svg
               v-if="!isSearchingEmail"

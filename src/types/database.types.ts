@@ -14,14 +14,13 @@ export type ReporteCategoria =
   | "seguridad"
   | "ruido"
   | "otro";
+// Estados simplificados según ISO/IEC 25010: máximo 5 estados
 export type ReporteEstado =
-  | "pendiente"
-  | "en_revision"
-  | "aceptado"
-  | "en_proceso"
-  | "resuelto"
-  | "rechazado"
-  | "duplicado";
+  | "pendiente"      // Estado inicial
+  | "en_revision"    // Admin está evaluando
+  | "en_proceso"     // Aceptado y en resolución
+  | "resuelto"       // Completado exitosamente
+  | "rechazado";     // No procede o duplicado
 export type ReportePrioridad = "baja" | "media" | "alta" | "urgente";
 export type UsuarioTipo = "ciudadano" | "administrador";
 
