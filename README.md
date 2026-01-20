@@ -1,4 +1,4 @@
-# 🏛️ Portal Ciudadano Manta ... 
+# 🏛️ Portal Ciudadano Manta
 
 Sistema de Gestión Ciudadana del GAD Municipal de Manta, Ecuador.
 
