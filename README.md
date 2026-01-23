@@ -1,127 +1,86 @@
 # 🏛️ Portal Ciudadano Manta
 
-Sistema de Gestión Ciudadana del GAD Municipal de Manta, Ecuador.
+**Plataforma de Gestión y Participación Ciudadana del GAD Municipal de Manta**
 
-[![ISO 9241-11](https://img.shields.io/badge/ISO-9241--11-blue)](https://www.iso.org/standard/63500.html)
-[![ISO 9241-210](https://img.shields.io/badge/ISO-9241--210-blue)](https://www.iso.org/standard/77520.html)
-[![Vue 3](https://img.shields.io/badge/Vue-3.x-green)](https://vuejs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-cyan)](https://tailwindcss.com/)
+[![Vue 3](https://img.shields.io/badge/Vue-3.x-4FC08D?logo=vue.js&logoColor=white)](https://vuejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Supabase](https://img.shields.io/badge/Supabase-Backend-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com/)
+[![Vite](https://img.shields.io/badge/Vite-Build-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 
 ---
 
 ## 📋 Descripción
 
-Portal web moderno y accesible que facilita la interacción entre la ciudadanía y el Gobierno Autónomo Descentralizado de Manta, cumpliendo con estándares internacionales de usabilidad ISO 9241-11 y diseño centrado en el usuario ISO 9241-210.
+Portal Ciudadano Manta es una plataforma web moderna, accesible e interactiva diseñada para fortalecer la comunicación entre la ciudadanía y el Gobierno Autónomo Descentralizado (GAD) Municipal de Manta, Ecuador. 
+
+La plataforma permite a los ciudadanos:
+- 📰 **Consultar noticias** y comunicados oficiales del municipio
+- 📝 **Participar en encuestas** ciudadanas con geolocalización
+- 🚨 **Reportar problemas** urbanos con ubicación en mapa
+- 👤 **Gestionar su perfil** y seguir el estado de sus reportes
+
+Cumple con estándares internacionales de usabilidad **ISO 9241-11** y diseño centrado en el usuario **ISO 9241-210**.
+
+---
+
+## 🛠️ Stack Tecnológico
+
+### Frontend
+| Tecnología | Versión | Descripción |
+|------------|---------|-------------|
+| **Vue.js** | 3.x | Framework progresivo con Composition API |
+| **TypeScript** | 5.x | Tipado estático para JavaScript |
+| **Vite** | 6.x | Build tool ultrarrápido con HMR |
+| **Tailwind CSS** | 4.x | Framework CSS utility-first |
+| **Vue Router** | 4.x | Enrutamiento SPA oficial |
+| **Pinia** | 2.x | Gestión de estado global |
+| **Vue I18n** | 9.x | Internacionalización (ES/EN/QU) |
+| **Leaflet** | 1.x | Mapas interactivos |
+
+### Backend & Base de Datos
+| Tecnología | Descripción |
+|------------|-------------|
+| **Supabase** | Backend as a Service (BaaS) |
+| **PostgreSQL** | Base de datos relacional |
+| **Row Level Security** | Seguridad a nivel de fila |
+| **Supabase Storage** | Almacenamiento de archivos |
+| **Supabase Auth** | Autenticación y autorización |
+
+### Herramientas de Desarrollo
+| Herramienta | Uso |
+|-------------|-----|
+| **ESLint** | Linting de código |
+| **Prettier** | Formateo de código |
+| **Git** | Control de versiones |
+| **Vercel/Netlify** | Despliegue continuo |
 
 ---
 
 ## ✨ Características Principales
 
-### 🎯 Cumplimiento ISO 9241-11 (Usabilidad)
-- **Eficiencia**: Acceso rápido mediante búsqueda inteligente y atajos
-- **Eficacia**: Navegación clara con breadcrumbs e indicadores visuales
-- **Satisfacción**: Diseño moderno, responsive y personalizable
+### 🎯 Módulos del Sistema
+- **🏠 Home**: Panel principal con servicios y accesos rápidos
+- **📰 Noticias**: Sistema de noticias con vista detallada
+- **📊 Encuestas**: Participación ciudadana con geolocalización
+- **🚨 Reportes**: Reporte de problemas con ubicación en mapa
+- **👤 Mi Perfil**: Gestión de cuenta de usuario
+- **⚙️ Panel Admin**: Gestión de contenido (noticias, encuestas, reportes)
 
-### 👥 Cumplimiento ISO 9241-210 (Diseño Centrado en Usuario)
-- Interfaz intuitiva basada en necesidades reales
-- Feedback visual inmediato
-- Ayuda contextual
-- Flujos de trabajo optimizados
-
-### ♿ Accesibilidad Web
-- Modo de accesibilidad integrado
-- Navegación por teclado (ARIA compliant)
-- Contraste WCAG AA
+### ♿ Accesibilidad Web (WCAG AA)
+- Navegación por teclado completa
+- Soporte para lectores de pantalla
+- Alto contraste y textos legibles
 - Textos alternativos en imágenes
-- Soporte de lectores de pantalla
 
 ### 🌐 Multilingüe
-- Español (ES)
-- English (EN)
-- Kichwa (QU)
+- 🇪🇸 Español (ES)
+- 🇺🇸 English (EN)  
+- 🇪🇨 Kichwa (QU)
 
-### 📱 Responsive Design
+### 📱 Diseño Responsive
 - Optimizado para móviles, tablets y desktop
-- Menu hamburguesa en dispositivos móviles
-- Grids adaptables
-
----
-
-## 🏗️ Arquitectura del Sistema
-
-### Componentes Principales
-
-```
-src/
-├── components/
-│   ├── Navbar.vue          # Cabecera con búsqueda, idioma, accesibilidad
-│   ├── Sidebar.vue         # Menú lateral expandible con submenús
-│   ├── Footer.vue          # Pie de página institucional
-│   └── ServiceCard.vue     # Tarjetas de servicios
-├── views/
-│   └── Home.vue            # Vista principal
-├── interfaces/
-│   ├── IApi.ts
-│   ├── IEncuesta.ts
-│   ├── IPortal.ts
-│   ├── IReporte.ts
-│   └── IUsuario.ts
-└── App.vue                 # Componente raíz
-```
-
-### Funcionalidades Implementadas
-
-#### ✅ 1. Formulario Principal (INICIO)
-
-**Cabecera (Navbar)**
-- Logo institucional con enlace a inicio
-- Nombre del sistema
-- Barra de búsqueda inteligente
-- Selector de idioma (ES/EN/QU)
-- Botón de accesibilidad
-- Breadcrumb de ubicación
-- Navegación responsive
-
-**Menú Lateral (Sidebar)**
-- Menú expandible/contraíble
-- Iconos representativos
-- Submenús contextuales:
-  - Panel Principal
-  - Servicios (Trámites, Pagos, Certificados)
-  - Reportes (Nuevo, Mis reportes, Seguimiento)
-  - Participación (Encuestas, Foros, Propuestas)
-  - Mi Perfil
-  - Ayuda
-- Atajos rápidos
-- Indicador de sección activa
-
-**Pie de Página (Footer)**
-- Información institucional
-- Enlaces rápidos
-- Soporte y contacto
-- Políticas y términos de uso
-- Redes sociales
-
-#### 🚧 2. Formulario Usuarios (EN DESARROLLO)
-- Inicio de sesión
-- Registro de nuevos usuarios
-- Gestión de perfiles
-- Recuperación de contraseña
-- Bloqueo temporal de sesión
-- Términos de uso
-- Tema dinámico (claro/oscuro)
-
-#### 🚧 3. Formulario Registro Tabla Maestra (PLANEADO)
-- Entrada de datos validada
-- Combobox y listas desplegables
-- Validación en tiempo real
-- Autocompletado inteligente
-- Botones: Nuevo, Actualizar, Filtrar, Limpiar
-- Historial de cambios
-- Filtros dinámicos
-- Navegación por teclado
-- Sistema de notificaciones
+- Menú adaptable según dispositivo
 
 ---
 
