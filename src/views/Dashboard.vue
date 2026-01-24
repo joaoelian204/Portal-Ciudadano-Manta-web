@@ -1521,7 +1521,7 @@ function getEstadoTexto(estado: string): string {
   return textos[estado] || estado;
 }
 
-function getEstadoIcon(estado: string): string {
+function getEstadoIcon(): string {
   // Usar iconos SVG en lugar de emojis
   return ''; // Los iconos SVG se manejan en el template
 }
